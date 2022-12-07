@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Inter', sans-serif;
+        line-height: normal;
+        color: #343434;
+        letter-spacing: 0.02em;
+    }
+  }
+  .anime {
+  @apply motion-safe:transition duration-[0.15s] ease-in-out ;
+  }
+  .input-med {
+  @apply bg-white w-full p-2 border-[2px]  rounded-[5px]  focus:outline-none ;
+  
+  }
+.input-new {
+  @apply w-full  bg-transparent px-2 py-3 border-[1px] text-sm border-main rounded-md   focus:border-[#8a8a8a];
+}
+
+.label-new {
+  @apply absolute -top-2 left-1.5 text-xs bg-[#F9F9F9] text-main px-1 ;
+}
+
+input{
+ padding: 14px 12px;
+ }
+
+*:focus{
+    outline: none !important;
+}
+
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+  
+
+
+
+/* .layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.3s;
+}
+.layout-enter,
+.layout-leave-active {
+  opacity: 0;
+} */

@@ -1,0 +1,12 @@
+query GET_BIOMATERIALS_QL{
+  biomaterialies{
+    data{
+      id
+      attributes{
+        Name
+        Price
+        DataAdd
+      }
+    }
+  }
+}

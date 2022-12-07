@@ -1,0 +1,36 @@
+query GET_ME($ID: ID) {
+  usersPermissionsUser(id: $ID) {
+    data {
+      attributes {
+        FIO_user
+        zakazies {
+          data {
+            id
+            attributes {
+              Status
+              StatusOplata
+              SummOrder
+               analizies{
+                data{
+                  id
+                  attributes{
+                    TimeDone
+                  }
+                }
+              }
+              Result {
+                data {
+                  attributes {
+                    url
+                    name
+                  }
+                }
+              }
+              createdAt
+            }
+          }
+        }
+      }
+    }
+  }
+}

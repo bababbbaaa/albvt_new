@@ -1,0 +1,15 @@
+mutation CREATE_ZAPROS($SUMM: Long, $UID: String, $DOCTOR_ID: ID, $ZAKAZIES: [ID]) {
+  createZaprosyVrachej(
+    data: {
+      Summ: $SUMM
+      UID: $UID
+      Done: false
+      users_permissions_user: $DOCTOR_ID
+      zakazies: $ZAKAZIES
+    }
+  ) {
+    data {
+      id
+    }
+  }
+}

@@ -1,0 +1,37 @@
+query PRODUCTS_CAT($ID_CAT: String) {
+  analizies(pagination: { pageSize: 25 },
+  filters: {sub_cat : {URL: { eq: $ID_CAT}}}) {
+    meta{
+      pagination{
+        page
+        pageCount
+        pageSize
+        total
+      }
+    }
+    data{
+      id
+      attributes{
+        Name
+        Art
+        Price
+        TimeDone
+        Complecs
+        DopAnalizes{
+          data{
+            id
+          }
+        }
+        biomaterialies{
+          data{
+            id
+            attributes{
+              Price
+              Name
+            }
+          }
+        }
+      }
+    }
+  }
+}

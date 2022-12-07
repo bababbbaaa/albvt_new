@@ -1,0 +1,26 @@
+query SEARCH_ANALIZES($S_VALUE : String!) {
+  search (query : $S_VALUE){
+    analizies {
+      data{
+          id
+        attributes{
+          Name
+          Art
+          TimeDone
+          Price
+          Complecs
+          Active
+          sub_cat{
+            data{
+              attributes{
+                Name
+                URL
+                CatIdURL
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

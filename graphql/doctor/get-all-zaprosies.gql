@@ -1,0 +1,33 @@
+query ZAPROSY_DONE {
+  usersPermissionsUser(id: 11) {
+    data {
+      attributes {
+        FIO_user
+        zaprosy_vrachejs {
+          data {
+            id
+            attributes {
+              UID
+              createdAt
+              zakazies {
+                data {
+                  id
+                  attributes {
+                    user {
+                      data {
+                        attributes {
+                          FIO_user
+                        }
+                      }
+                    }
+                    SummOrder
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

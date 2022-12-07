@@ -1,0 +1,13 @@
+query ME_DOCTOR($ID: ID){
+  usersPermissionsUser (id: $ID) {
+    data{
+      attributes{
+        FIO_user
+        Phone
+        email
+        DataRozgdeniya
+        Promo
+      }
+    }
+  }
+}

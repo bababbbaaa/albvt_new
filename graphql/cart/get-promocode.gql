@@ -1,0 +1,27 @@
+query GET_PROMOCODE($PROMO: String) {
+  usersPermissionsUsers (filters: {
+    RoleUser: {
+      eq: "Vrach"
+      
+    }
+    and : {
+      Promo : {
+        eq: $PROMO
+      }
+    }
+  }){
+    data{
+      id
+      attributes{
+        FIO_user
+        RoleUser
+        Promo
+        Pacientis {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
+}

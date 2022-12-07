@@ -1,0 +1,10 @@
+query GET_SITIES{
+  sityesInvitros{
+    data{
+      id
+      attributes{
+        Name
+      }
+    }
+  }
+}

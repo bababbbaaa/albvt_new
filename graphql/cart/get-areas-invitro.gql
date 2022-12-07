@@ -1,0 +1,30 @@
+query GET_SITY_ID($ID : ID) {
+  sityesInvitro(id: $ID) {
+    data {
+      id
+      attributes {
+        Name
+        area_invitros {
+          data {
+            id
+            attributes {
+              Name
+              goroda_invitros {
+                data {
+                  id
+                  attributes {
+                    Name
+                    PnPt
+                    SbVs
+                    Phone
+                    Coords
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

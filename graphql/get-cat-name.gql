@@ -1,0 +1,9 @@
+query GET_CAT_NAME($ID: String) {
+  subCats(filters: {URL : {eq: $ID}}) {
+    data{
+      attributes{
+        Name
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+query PACIENT_DOCTOR($ID: ID){
+  usersPermissionsUser (id: $ID) {
+      data {
+      attributes {
+        FIO_user
+        Phone
+        email
+        DataRozgdeniya
+        users_permissions_users{
+          data{
+            attributes{
+              Stavka
+            }
+          }
+        }
+        zakazies {
+          data {
+            id
+            attributes {
+              Status
+              SummOrder
+              createdAt
+             
+              Result{
+                data{
+                  id
+                  attributes{
+                    name
+                    url
+                  }
+                }
+              }
+              analizies {
+                data {
+                  id
+                  attributes{
+                    Name
+                    Price
+                    Art
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,318 @@
+query search {
+  products(first: 30, where: {search: "хочу"}) {
+    edges {
+      node {
+        name
+        sku
+        attributes {
+          edges {
+            node {
+              name
+              options
+            }
+          }
+        }
+        allPaSku {
+          nodes {
+            name
+          }
+        }
+        databaseId
+        ... on SimpleProduct {
+          price(format: RAW)
+          crossSell(first: 1) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+        productCategories {
+          edges {
+            node {
+              databaseId
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query search2 {
+  products(first: 10, where: {search: "VIP-обследование для мужчин"}) {
+    edges {
+      node {
+        ... on SimpleProduct {
+          id
+          name
+          allPaSku {
+            nodes {
+              name
+            }
+          }
+          crossSell(first: 1) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query allProducts {
+  products {
+    edges {
+      node {
+        id
+        name
+        sku
+        attributes {
+          edges {
+            node {
+              name
+              options
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query allProdSearch {
+  products(first: 20) {
+    edges {
+      node {
+        name
+        sku
+        databaseId
+        ... on SimpleProduct {
+          price(format: RAW)
+          databaseId
+        }
+      }
+    }
+  }
+}
+
+mutation createOrder {
+  addCartItems(
+    input: {clientMutationId: "", items: {productId: 11600, quantity: 1}}
+  ) {
+    clientMutationId
+  }
+}
+
+query getClient {
+  user(id: "admin", idType: USERNAME) {
+    client_data {
+      dataRozhdeniya
+      dataSdachiAnalizov
+      gorod
+      kvartira
+      nomerDoma
+      nomerTelefona
+      otchestvo
+      pasport
+    }
+  }
+}
+
+mutation loginUser {
+  login(input: {password: "Dropestroke0013!", username: "admin"}) {
+    authToken
+    refreshToken
+    user {
+      id
+      name
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation registerGQ {
+  registerCustomer(
+    input: {firstName: "testUserGQL", email: "test2@gmail.com", lastName: "testUserFamily2", password: "Dropestroke0013!", username: "+79623146619ov"}
+  ) {
+    customer {
+      databaseId
+      firstName
+      email
+      jwtAuthToken
+      jwtRefreshToken
+      lastName
+      username
+    }
+  }
+  createPaType2(input: {name: ""})
+}
+
+query GET_ANALIZES_CAT {
+  productCategories(first: 100, where: {parent: 2822}) {
+    edges {
+      node {
+        databaseId
+        name
+        slug
+        parentDatabaseId
+        children(first: 20) {
+          edges {
+            node {
+              name
+              databaseId
+              slug
+              children(first: 20) {
+                edges {
+                  node {
+                    name
+                    databaseId
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query GET_COMPLECS_CAT {
+  productCategories(first: 100, where: {parent: 2823}) {
+    edges {
+      node {
+        databaseId
+        name
+        slug
+        parentDatabaseId
+      }
+    }
+  }
+}
+
+query GET_ALL_PRODUCTS {
+  products(first: 20) {
+    edges {
+      node {
+        databaseId
+        name
+        productCategories {
+          edges {
+            node {
+              databaseId
+              slug
+            }
+          }
+        }
+        ... on SimpleProduct {
+          name
+          attributes {
+            edges {
+              node {
+                name
+                options
+              }
+            }
+          }
+          upsell {
+            edges {
+              node {
+                databaseId
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query GET_ALL_PRODUCTS_GRAPH($categoryId: Int = 2850) {
+  products(first: 7, where: {categoryId: $categoryId}) {
+    edges {
+      node {
+        databaseId
+        name
+        sku
+        attributes {
+          edges {
+            node {
+              name
+              options
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query getclientOrders($customerId: Int = 2) {
+  orders(where: {customerId: $customerId}) {
+    edges {
+      node {
+        databaseId
+        status
+        total(format: RAW)
+        date
+        billing {
+          lastName
+          firstName
+        }
+      }
+    }
+  }
+}
+
+query GetClientInfo {
+  customer {
+    email
+    username
+    id
+    role
+    jwtRefreshToken
+    firstName
+    lastName
+    databaseId
+  }
+}
+
+mutation GQUSer {
+  registerUser(
+    input: {username: "+79623146619", email: "va.four2016@gmail.com", password: "Dropestroke0013!"}
+  ) {
+    user {
+      id
+      email
+      databaseId
+    }
+  }
+}
+
+query SearchToArt {
+  products(where: {taxonomyFilter: {filters: {taxonomy: PASKU, terms: "346смж"}}}) {
+    edges {
+      node {
+        name
+        sku
+        allPaSku {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

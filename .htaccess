@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteCond %{SERVER_PORT} 443
+
+RewriteRule ^index.php(.*) 188.225.44.247:80/$1 [P,L]
+
+RewriteRule (.*) 188.225.44.247:80/$1 [P,L]

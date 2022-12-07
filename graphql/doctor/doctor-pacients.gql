@@ -1,0 +1,64 @@
+query DOCTOR_PACIENTS($ID: ID) {
+  usersPermissionsUser(id: $ID) {
+    data {
+      attributes {
+        FIO_user
+        Pacientis {
+          data {
+            id
+            attributes {
+              FIO_user
+              zakazies {
+                data {
+                  id
+                  attributes {
+                    SummOrder
+                    Status
+                    ZaprosVivod
+                    createdAt
+                    zaprosy_vrachej{
+                      data{
+                        id
+                      }
+                    }
+                    analizies {
+                      data {
+                        id
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        zaprosy_vrachejs {
+          data {
+            id
+            attributes {
+              UID
+              Done
+              createdAt
+              zakazies {
+                data {
+                  id
+                  attributes {
+                    Status
+                    user {
+                      data {
+                        attributes {
+                          FIO_user
+                        }
+                      }
+                    }
+                    SummOrder
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
