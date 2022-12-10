@@ -42,13 +42,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxt/postcss8',
-    '@nuxtjs/google-fonts',
-    
-    
-    
-  ],
+  buildModules: ['@nuxt/postcss8', '@nuxtjs/google-fonts'],
   auth: {
     strategies: {
       graphql: {
@@ -59,14 +53,13 @@ export default {
       login: '/login',
       logout: '/login',
       callback: false,
-      home: '/',
+      home: '/'
     }
   },
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:1337/graphql',
-
+        httpEndpoint: 'http://api.albvt.ru:1337/graphql'
       }
     },
     defaultOptions: {
@@ -75,8 +68,7 @@ export default {
       }
     }
   },
-  axios: {
-  },
+  axios: {},
   googleFonts: {
     display: 'swap',
     preconnect: true,
@@ -102,6 +94,9 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
     '@nuxtjs/auth-next',
+    ['nuxt-validate', {
+      lang: 'ru'
+    }]
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -113,7 +108,5 @@ export default {
       }
     },
     transpile: ['vue-agile']
-  },
-
-
+  }
 }

@@ -121,12 +121,15 @@
           </div>
           <button
             v-else
-            @click="productInCart(item.id)"
+            @click="productInCart(item)"
             class="bg-main/20   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
           >
             <img src="/img/icons/add-to-cart.svg" alt="" />
             <span class="text-[12px] sm:text-[16px]"
-              >{{ parseInt(item.attributes.Price).toLocaleString('ru-RU') }} ₽</span
+              >{{
+                parseInt(item.attributes.Price).toLocaleString('ru-RU')
+              }}
+              ₽</span
             >
           </button>
         </li>
@@ -157,7 +160,6 @@
 import { mapActions, mapGetters } from 'vuex'
 import SEARCH_ANALIZES from '~/graphql/search-analizes.gql'
 
-
 export default {
   data () {
     return {
@@ -183,7 +185,7 @@ export default {
         item =>
           item.attributes.Name.toLowerCase().includes(inputSearhValue) ||
           item.attributes.Name.toLowerCase().includes(inputSearhValueEn) ||
-          item.attributes.Art.toLowerCase().includes(inputSearhValue)||
+          item.attributes.Art.toLowerCase().includes(inputSearhValue) ||
           item.attributes.Art.toLowerCase().includes(inputSearhValueEn)
       )
 
@@ -193,8 +195,10 @@ export default {
         var nameA = a.attributes.Name.toLowerCase()
         var nameB = b.attributes.Name.toLowerCase()
 
-        return nameA.split(' ').includes(inputSearhValue) || nameA.split(' ').includes(inputSearhValueEn) <
-          nameB.split(' ').includes(inputSearhValue) || nameB.split(' ').includes(inputSearhValueEn)
+        return nameA.split(' ').includes(inputSearhValue) ||
+          nameA.split(' ').includes(inputSearhValueEn) <
+            nameB.split(' ').includes(inputSearhValue) ||
+          nameB.split(' ').includes(inputSearhValueEn)
           ? 1
           : -1
       }
@@ -346,23 +350,8 @@ export default {
 
       return str, (this.EnSearch = str)
     },
-    async productInCart (id) {
-      this.showSearch = false
-      const searchProductsApi = await this.$axios.$get(
-        'https://foxsis.ru/alvd/wp-json/wc/v3/products/' + id,
-        {
-          auth: {
-            username: 'ck_85e44e8735261d45a19d8f7aaf012f8d640c2dac',
-            password: 'cs_4261bb639f4e9a18c146851361d6317804a816fc'
-          }
-        }
-      )
-      console.log(searchProductsApi)
-      return (
-        { searchProductsApi },
-        this.inCart.push(searchProductsApi),
-        this.ADD_TO_CART(searchProductsApi)
-      )
+    productInCart (item) {
+      this.ADD_TO_CART(item)
     }
   }
 }

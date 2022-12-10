@@ -1,0 +1,14 @@
+query GET_BOLNIT_FALSE {
+  gorodaInvitros(filters: { Invitro: { eq: false } }) {
+    data {
+      id
+      attributes {
+        Invitro
+        GegimRaboty
+        Name
+        Phone
+        Coords
+      }
+    }
+  }
+}

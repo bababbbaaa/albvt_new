@@ -1,5 +1,5 @@
 query GET_BIOMATERIALS_QL{
-  biomaterialies{
+  biomaterialies(pagination: { pageSize: 20 }){
     data{
       id
       attributes{

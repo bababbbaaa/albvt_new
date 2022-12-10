@@ -3,13 +3,14 @@ query GET_ME($ID: ID) {
     data {
       attributes {
         FIO_user
-        zakazies {
+        zakazies(pagination: { limit: 100 }) {
           data {
             id
             attributes {
               Status
               StatusOplata
               SummOrder
+              UID
                analizies{
                 data{
                   id

@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     CurentInOrder () {
-      this.id = this.$route.query.order
+      this.id = this.$route.query.id
     }
   },
   created () {

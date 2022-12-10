@@ -1,21 +1,22 @@
 query GET_SITY_ID($ID : ID) {
   sityesInvitro(id: $ID) {
-    data {
+      data {
       id
       attributes {
         Name
-        area_invitros {
+        area_invitros(filters: { Invitro: { eq: true } }) {
           data {
             id
             attributes {
+              Invitro
               Name
-              goroda_invitros {
+              goroda_invitros(filters: { Invitro: { eq: true } }) {
                 data {
                   id
                   attributes {
+                    Invitro
                     Name
-                    PnPt
-                    SbVs
+                   GegimRaboty
                     Phone
                     Coords
                   }

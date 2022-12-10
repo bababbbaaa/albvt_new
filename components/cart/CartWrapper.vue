@@ -13,7 +13,7 @@
       </span>
       <!-- max-h-[180px] sm:max-h-[380px]  -->
       <div
-      v-if="CART.length >= 1"
+        v-if="CART.length >= 1"
         class="scrollbar-cart flex flex-col gap-4 list-disc list-outside px-[24px] h-full max-h-auto  sm:max-h-[180px] lg:max-h-[260px]  overflow-y-auto "
       >
         <cart-item
@@ -23,14 +23,16 @@
           @deleteFromCart="deleteFromCart(index)"
         />
         <div class="flex flex-col gap-4 ">
-          <span class="w-full py-2  border-b-2 border-[#DDEEF6]">Взятие биоматериала</span>
+          <span class="w-full py-2  border-b-2 border-[#DDEEF6]"
+            >Взятие биоматериала</span
+          >
           <div class="flex flex-col gap-2 ">
-             <cart-item-bio v-for="(item, i) in bioMaterialsComplete" 
-          :key="i"
-          :bio_data="item"
-           />
+            <cart-item-bio
+              v-for="item in bioMaterialsComplete"
+              :key="item.id"
+              :bio_data="item"
+            />
           </div>
-         
         </div>
       </div>
       <!-- dop to price -->
@@ -91,9 +93,7 @@ export default {
   components: { CartItem },
   data () {
     return {
-      dopTest: [],
       totalCartPrice: null,
-      prePrice: null,
       preMaterial: []
     }
   },
@@ -121,38 +121,44 @@ export default {
     //   return activeItem
     // },
     bioMaterialsComplete: function () {
-      let chars = this.dopTest
-      let uniqueChars = []
-      chars.forEach(element => {
-        element.forEach(subelement => {
-          if (!uniqueChars.includes(subelement)) {
-            uniqueChars.push(subelement)
+      const allBio = []
+      this.CART.forEach(cart => {
+        cart.attributes.biomaterialies.data.forEach(x => {
+          const biomaterial = {
+            id: x.id,
+            name: x.attributes.Name,
+            price: x.attributes.Price
           }
+          allBio.push(biomaterial)
         })
       })
 
-      return uniqueChars, (this.preMaterial = uniqueChars)
+      let biomaterialsFiltered = allBio.reduce(
+        (acc, item) =>
+          acc.map[item.id]
+            ? acc
+            : ((acc.map[item.id] = true), acc.biomaterialsFiltered.push(item), acc),
+        {
+          map: {},
+          biomaterialsFiltered: []
+        }
+      ).biomaterialsFiltered
+
+      return biomaterialsFiltered
     },
     totalPriceInCart: function () {
       let result = this.CART.reduce((prev, item) => {
         return prev + parseInt(item.attributes.Price)
       }, 0)
-      this.prePrice = result
-      let totalPriceInCartReduce = this.preMaterial.reduce((prev, item) => {
-        return prev + parseInt(item.attributes.Price)
-      }, this.prePrice)
+
+      let totalPriceInCartReduce = this.bioMaterialsComplete.reduce((prev, item) => {
+        return prev + parseInt(item.price)
+      }, result)
+
       return totalPriceInCartReduce
     }
   },
-  mounted () {
-    this.CART.forEach(element => {
-      element.attributes.biomaterialies.data.forEach(element => {
-        this.dopTest.push(
-          this.GET_ALL_BIOMATERIALS.filter(item => item.id == element.id)
-        )
-      })
-    })
-  }
+  mounted () {}
 }
 </script>
 

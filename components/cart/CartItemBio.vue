@@ -7,12 +7,12 @@
         <div class="flex justify-between items-center gap-2  w-full">
           <span
             class="text-[12px] sm:text-[14px] w-4/6  cursor-pointer anime test-text3 "
-            :title="bio_data.attributes.Name"
-            >{{ bio_data.attributes.Name }}</span
+            :title="bio_data.name"
+            >{{ bio_data.name }}</span
           >
 
           <span class="text-[12px] sm:text-[14px] text-right w-2/6 text-[#717171] font-medium"
-            >{{ parseInt(bio_data.attributes.Price).toLocaleString('ru-RU') }} руб.</span
+            >{{ parseInt(bio_data.price).toLocaleString('ru-RU') }} руб.</span
           >
         </div>
       </div>

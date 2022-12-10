@@ -10,6 +10,20 @@ query SEARCH_ANALIZES($S_VALUE : String!) {
           Price
           Complecs
           Active
+          DopAnalizes{
+          data{
+            id
+          }
+        }
+        biomaterialies{
+          data{
+            id
+            attributes{
+              Price
+              Name
+            }
+          }
+        }
           sub_cat{
             data{
               attributes{

@@ -276,135 +276,8 @@
       >
         <span class="text-[20px] font-semibold">Регистрация</span>
         <!-- шан 2 -->
-        <div class="flex justify-center gap-[20px] items-center w-full ">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="sm:col-span-2 flex flex-col gap-2">
-              <span class="w-full text-center">Ваш пол</span>
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue
-                typeI="text"
-                placeholderI="test"
-                label="Фамилия"
-                v-on:getValue="test"
-              />
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue typeI="text" placeholderI="test" label="Имя" />
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <input-blue typeI="text" placeholderI="test" label="Отчество" />
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue
-                typeI="text"
-                placeholderI="test"
-                label="Дата рождения"
-              />
-              <div
-                class="flex items-center gap-4 mt-2 flex-wrap sm:flex-nowrap"
-              >
-                <div class="flex items-center gap-2 w-full sm:w-1/2 ">
-                  <input
-                    type="radio"
-                    checked="checked"
-                    value="male"
-                    v-model="formZakaz.gender"
-                    id="gender1"
-                    name="gender1"
-                    class="cursor-pointer"
-                  />
-                  <label for="gender1" class="text-[14px] cursor-pointer"
-                    >Мужчина</label
-                  >
-                </div>
-                <div class="flex items-center gap-2 w-full sm:w-1/2 ">
-                  <input
-                    type="radio"
-                    value="female"
-                    v-model="formZakaz.gender"
-                    id="gender2"
-                    name="gender2"
-                    class="cursor-pointer"
-                  />
-                  <label for="gender2" class="text-[14px] cursor-pointer"
-                    >Женщина</label
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue
-                typeI="text"
-                placeholderI="test"
-                label="Паспорт (серия/номер)"
-              />
-            </div>
-            <div></div>
-            <div class="flex flex-col gap-1">
-              <input-blue typeI="text" placeholderI="test" label="E-mail" />
-
-              <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
-                <span class="text-[12px] text-[#343434]/70"
-                  >На эту почту будут отправлены результаты анализов</span
-                >
-              </div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue-phone
-                typeI="text"
-                placeholderI="test"
-                label="Телефон"
-              />
-              <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
-                <span class="text-[12px] text-[#343434]/70"
-                  >Используйте в качестве логина для входа</span
-                >
-              </div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue typeI="text" placeholderI="test" label="Пароль" />
-
-              <div
-                class="mt-1 flex flex-col gap-1 rounded-md shadow-sm relative"
-              >
-                <span class="text-[12px] text-[#343434]/70"
-                  >Пароль должен состоять из 8 и более символов</span
-                >
-              </div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <input-blue
-                typeI="text"
-                placeholderI="test"
-                label="Повторите пароль"
-              />
-            </div>
-          </div>
-        </div>
-        <button
-          @click="RegisterUser()"
-          :class="[
-            formCreate.phone.length == 16 &&
-            formCreate.password.length >= 8 &&
-            formCreate.password == formCreate.ConfPassword &&
-            formCreate.family.length > 1 &&
-            formCreate.name.length > 1 &&
-            formCreate.otchestvo.length > 1 &&
-            formCreate.passportSeriya.length == 11
-              ? ' cursor-pointer opacity-100 '
-              : 'cursor-not-allowed opacity-30'
-          ]"
-          class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
-        >
-          Зарегистрироваться
-        </button>
-        <span class="" v-if="succesRegister == null">Введите данные</span>
-        <span class="text-[green]" v-if="succesRegister == true">Успешно!</span>
-        <span class="text-[#A75F4F]" v-if="succesRegister == false"
-          >Попробуйте еще раз!</span
-        >
+        <create-user/>
+        
       </div>
     </div>
 
@@ -453,7 +326,7 @@
             <div v-if="sityesInvitros">
               <div v-if="formZakaz.mesto == 'ofis_my'">
                 <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
-                  <div>tut</div>
+                  <gb-list/>
                 </div>
               </div>
               <div v-if="formZakaz.mesto == 'ofic'" class="flex flex-col gap-4">
@@ -612,12 +485,7 @@
                       {{ activeClinicInfo.Name }}</span
                     >
                     <div class="text-[#343434]">
-                      <span class="text-[#76BB32]">Пн-Пт</span>
-                      {{ activeClinicInfo.PnPt }}
-                    </div>
-                    <div class="text-[#343434]">
-                      <span class="text-[#76BB32]">Сб-Вс</span>
-                      {{ activeClinicInfo.SbVs }}
+                      <span v-html="activeClinicInfo.GegimRaboty"></span>
                     </div>
                     <div class="mt-4 ">
                       <span class="text-[#76BB32]">Телефон</span>
@@ -864,13 +732,14 @@ import { mapActions, mapGetters } from 'vuex'
 import CartItem from '~/components/cart/CartItem.vue'
 import TabLogin from '~/components/tabs/tab-login.vue'
 import tabsLogin from '~/components/tabs/tabs-login.vue'
-import InputBlue from '~/components/elements/inputBlue.vue'
-import InputBluePhone from '~/components/elements/inputBluePhone.vue'
+
 import GET_SITIES from '~/graphql/cart/get-all-invitro.gql'
 import GET_SITY_ID from '~/graphql/cart/get-areas-invitro.gql'
 import HandlerPromocode from '~/components/cart/HandlerPromocode.vue'
 import SET_USER_TO_VRACH from '~/graphql/cart/SET_USER_TO_VRACH.gql'
 import CREATE_ORDER_CART from '~/graphql/cart/CREATE_ORDER_CART.gql'
+import GbList from '~/components/cart/gb-list.vue'
+import CreateUser from '../../components/cart/create-user.vue'
 
 export default {
   layout: 'MainLayout',
@@ -878,9 +747,9 @@ export default {
     CartItem,
     tabsLogin,
     TabLogin,
-    InputBlue,
-    InputBluePhone,
-    HandlerPromocode
+    HandlerPromocode,
+    GbList,
+    CreateUser
   },
   apollo: {
     sityesInvitros: {
@@ -901,10 +770,8 @@ export default {
     return {
       typePassword: 'password',
       start: 0,
-      step: 1,
-      form: {
-        gender: 'male'
-      },
+      step: 0,
+
       sityIdActive: 1,
       sityNameActive: 'Ростов-н/Д',
       sityIdSelect: false,
@@ -922,16 +789,7 @@ export default {
       formZakaz: {
         mesto: 'ofic'
       },
-      formCreate: {
-        family: '',
-        name: '',
-        otchestvo: '',
-        passportSeriya: '',
-        email: '',
-        phone: '',
-        password: '',
-        ConfPassword: ''
-      },
+      
       dopTest: [],
       totalCartPrice: null,
       prePrice: null,
@@ -1017,15 +875,40 @@ export default {
     },
 
     createOrder () {
+      const UID = Math.floor(Math.random() * 1000)
+      const UID2 = Math.floor(Math.random() * 1000)
+      const UID3 = this.$auth.user.id
+        .concat(UID)
+        .concat(UID2)
+        .toString()
+
+      const allAnalizies = this.CART.map(item => item.id)
+
+      const order = {
+        SummOrder: this.totalpriceInCART,
+        UID: UID3,
+        analizies: allAnalizies,
+        user: this.$auth.user.id,
+        office: this.selectClinicId
+      }
+
       this.$apollo
-        .query({
-          query: SET_USER_TO_VRACH,
+        .mutate({
+          mutation: CREATE_ORDER_CART,
           variables: {
-            ID_VRACH: promo
+            UID: order.UID,
+            ANALIZES: order.analizies,
+            USER: order.user,
+            SUMM: order.SummOrder,
+            OFFICE: order.office
           }
         })
         .then(({ data }) => {
-          console.log(data);
+          this.$router.push({
+            path: '/cart/thanks',
+            query: { id: data.createOrder.data.attributes.UID }
+          })
+          this.RESET_CART()
         })
     },
 
@@ -1083,10 +966,12 @@ export default {
       let result = this.CART.reduce((prev, item) => {
         return prev + parseInt(item.attributes.Price)
       }, 0)
-      this.prePrice = result
-      let totalPriceInCartReduce = this.preMaterial.reduce((prev, item) => {
-        return prev + parseInt(item.attributes.Price)
-      }, this.prePrice)
+      let totalPriceInCartReduce = this.bioMaterialsComplete.reduce(
+        (prev, item) => {
+          return prev + parseInt(item.price)
+        },
+        result
+      )
       this.totalpriceInCART =
         this.promocode !== null
           ? totalPriceInCartReduce - (totalPriceInCartReduce / 100) * 10
@@ -1105,17 +990,32 @@ export default {
       return data
     },
     bioMaterialsComplete: function () {
-      let chars = this.dopTest
-      let uniqueChars = []
-      chars.forEach(element => {
-        element.forEach(subelement => {
-          if (!uniqueChars.includes(subelement)) {
-            uniqueChars.push(subelement)
+      const allBio = []
+      this.CART.forEach(cart => {
+        cart.attributes.biomaterialies.data.forEach(x => {
+          const biomaterial = {
+            id: x.id,
+            name: x.attributes.Name,
+            price: x.attributes.Price
           }
+          allBio.push(biomaterial)
         })
       })
 
-      return uniqueChars, (this.preMaterial = uniqueChars)
+      let biomaterialsFiltered = allBio.reduce(
+        (acc, item) =>
+          acc.map[item.id]
+            ? acc
+            : ((acc.map[item.id] = true),
+              acc.biomaterialsFiltered.push(item),
+              acc),
+        {
+          map: {},
+          biomaterialsFiltered: []
+        }
+      ).biomaterialsFiltered
+
+      return biomaterialsFiltered
     }
   },
   mounted () {

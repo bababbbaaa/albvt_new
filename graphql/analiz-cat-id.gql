@@ -17,11 +17,21 @@ query PRODUCTS_CAT($ID_CAT: String) {
         Price
         TimeDone
         Complecs
+        Active
         DopAnalizes{
           data{
             id
           }
         }
+        sub_cat{
+            data{
+              attributes{
+                Name
+                URL
+                CatIdURL
+              }
+            }
+          }
         biomaterialies{
           data{
             id

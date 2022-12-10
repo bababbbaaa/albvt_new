@@ -5,7 +5,7 @@
     <div class="grid grid-cols-3 items-center">
       <!-- {{ order_data }} -->
       <span class="text-main text-sm font-semibold col-span-1"
-        >№ {{ order_data.id }}
+        >№ {{ order_data.attributes.UID }}
       </span>
       <div class="flex items-center gap-1 col-span-1">
         <img src="/img/icons/time.svg" alt="" />

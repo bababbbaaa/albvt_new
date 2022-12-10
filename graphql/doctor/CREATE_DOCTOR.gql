@@ -1,0 +1,33 @@
+mutation CREATE_DOCTOR(
+    $USERNAME: String!
+    $EMAIL: String!
+    $FIO: String
+    $PHONE: String
+    $DATAROZHDENIYA: String
+    $PROMO: String
+    $PASSWORD: String
+) {
+  createUsersPermissionsUser(
+    data: {
+      username: $USERNAME
+      email: $EMAIL
+      FIO_user: $FIO
+      RoleUser: "Vrach"
+      Phone: $PHONE
+      DataRozgdeniya: $DATAROZHDENIYA
+      Promo: $PROMO
+      password: $PASSWORD
+      blocked: true
+    }
+  ) {
+    data {
+      id
+      attributes {
+        FIO_user
+        email
+        Promo
+        blocked
+      }
+    }
+  }
+}
