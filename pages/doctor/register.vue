@@ -306,16 +306,16 @@ export default {
   },
   data () {
     return {
-      step: 2,
+      step: 1,
       errors: '',
-      idUser: '31',
+      idUser: '',
       speczialnostsSelect: '1',
       speczialnostsSelectView: false,
       speczialnostsSelectName: 'Выберите',
       gorodaInvitrosSelect: '1',
       gorodaInvitrosSelectView: false,
       gorodaInvitrosSelectName: 'Выберите',
-      usernameUser: '+79879879879',
+      usernameUser: '',
       registerData: {
         sity: '',
         adress: '',
