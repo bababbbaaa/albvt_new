@@ -59,7 +59,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://api.albvt.ru:1337/graphql'
+        httpEndpoint: 'https://api.albvt.ru:1337/graphql'
       }
     },
     defaultOptions: {
