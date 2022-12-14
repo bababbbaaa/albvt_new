@@ -33,14 +33,14 @@
                 value="ofis_my"
                 v-model="credentials.password"
                 @input="(evt) => (credentials.password = evt.target.value)"
-                class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a] password-area"
+                class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-md  password-area"
                 id="passHeader"
               />
-              <div @click="show_hide_password()" class="absolute right-[14px] top-[14px]">
+              <div @click="show_hide_password()" class="absolute right-[14px] top-[15px]">
                 <svg
                   v-if="typePassword == 'password'"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-[#343434]/70"
+                  class="h-4 w-4 text-[#343434]/70"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -60,7 +60,7 @@
                 <svg
                   v-else
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-[#343434]/70"
+                  class="h-4 w-4 text-[#343434]/70"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -135,14 +135,14 @@
                 placeholder="Пароль"
                 v-model="credentials2.password"
                 @input="(evt) => (credentials2.password = evt.target.value)"
-                class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
+                class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
                 id="pass2"
               />
-              <div @click="show_hide_password()" class="absolute right-[14px] top-[14px]">
+              <div @click="show_hide_password()" class="absolute right-[14px] top-[15px]">
                 <svg
                   v-if="typePassword == 'password'"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-[#343434]/70"
+                  class="h-4 w-4 text-[#343434]/70"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -162,7 +162,7 @@
                 <svg
                   v-else
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-[#343434]/70"
+                  class="h-4 w-4 text-[#343434]/70"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -284,27 +284,6 @@ export default {
         console.log(errors);
       }
     },
-    // async handleLoginSubmit2() {
-    //   const emailUser = this.credentials2.identifier;
-    //   this.formBusy = true;
-    //   try {
-    //     await this.$auth.loginWith("graphql", {
-    //       identifier: emailUser,
-    //       password: this.credentials2.password,
-    //     });
-    //     // console.log(localStorage["auth._token.graphql"]);
-    //     this.formBusy = false;
-    //     this.loginError = false;
-    //     // setTimeout(() => {
-    //     //   this.$nuxt.$router.replace({ path: "/my-account" });
-    //     // }, 1000);
-    //   } catch (errors) {
-    //     this.formBusy = false;
-    //     this.loginError = true;
-    //     this.dataErrors = errors;
-    //     console.log(errors);
-    //   }
-    // },
     async onLogout() {
       await this.$apolloHelpers.onLogout();
       this.isAuthenticated = false;

@@ -1,0 +1,10 @@
+query SPEC {
+  speczialnosts(pagination: { limit: 100 }) {
+    data {
+      id
+      attributes {
+        Name
+      }
+    }
+  }
+}

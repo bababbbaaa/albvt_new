@@ -1,0 +1,8 @@
+mutation REGISTER_USER_FIRST($USERNAME: String!, $EMAIL: String!, $PASS: String!) {
+  register(input: { username: $USERNAME, email: $EMAIL, password: $PASS }) {
+    user {
+      id
+      username
+    }
+  }
+}

@@ -22,7 +22,7 @@
 }
 
 .label-new {
-  @apply absolute -top-2 left-1.5 text-xs bg-[#F9F9F9] text-main px-1 ;
+  @apply absolute -top-2 left-1.5 text-xs bg-[#F9F9F9] text-main px-1 font-light;
 }
 
 input{

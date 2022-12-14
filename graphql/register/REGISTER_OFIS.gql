@@ -1,0 +1,23 @@
+query REGISTER_OFIS {
+  gorodaInvitros(pagination: { limit: 1000 }) {
+    data {
+      id
+      attributes {
+        Name
+        area_invitro {
+          data {
+            attributes {
+              sityes_invitros {
+                data {
+                  attributes {
+                    Name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+mutation UPDATE_USER_FIRST(
+    $ID: ID!,
+    $FIO: String,
+    $PHONE: String,
+    $DATA: String,
+    $GEN: Boolean,
+    $PASSPORT: String,
+) {
+  updateUsersPermissionsUser(
+    id: $ID
+    data: {
+      FIO_user: $FIO,
+      RoleUser: "Pacient",
+      Phone: $PHONE,
+      DataRozgdeniya: $DATA,
+      Gender: $GEN,
+      Passport: $PASSPORT
+    }
+  ) {
+    data {
+      attributes {
+        FIO_user
+        username
+        
+      }
+    }
+  }
+}

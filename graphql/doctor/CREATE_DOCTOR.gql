@@ -1,23 +1,25 @@
 mutation CREATE_DOCTOR(
-    $USERNAME: String!
-    $EMAIL: String!
+    $ID: ID!
     $FIO: String
     $PHONE: String
     $DATAROZHDENIYA: String
+    $GENDER: Boolean
     $PROMO: String
-    $PASSWORD: String
+    $SPEC: [ID]
+    $OFIC: [ID]
 ) {
-  createUsersPermissionsUser(
+  updateUsersPermissionsUser(
+    id: $ID
     data: {
-      username: $USERNAME
-      email: $EMAIL
       FIO_user: $FIO
       RoleUser: "Vrach"
       Phone: $PHONE
       DataRozgdeniya: $DATAROZHDENIYA
       Promo: $PROMO
-      password: $PASSWORD
+      Gender: $GENDER
       blocked: true
+      speczialnosts :  $SPEC
+      ofisies: $OFIC
     }
   ) {
     data {

@@ -23,7 +23,7 @@
             class=""
             :class="[
               register == true || register == null
-                ? 'underline underline-offset-2 text-[#A75F4F]'
+                ? 'underline underline-offset-2 text-main'
                 : ''
             ]"
           >
@@ -35,7 +35,7 @@
             class=""
             :class="[
               register == false || register == null
-                ? 'underline underline-offset-2 text-[#A75F4F]'
+                ? 'underline underline-offset-2 text-main'
                 : ''
             ]"
           >
@@ -85,17 +85,17 @@
                     placeholder="Пароль"
                     value="ofis_my"
                     v-model="credentials.password"
-                    class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
+                    class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
                     id="pass"
                   />
                   <div
                     @click="show_hide_password()"
-                    class="absolute right-[14px] top-[14px]"
+                    class="absolute right-[14px] top-[15px]"
                   >
                     <svg
                       v-if="typePassword == 'password'"
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-[#343434]/70"
+                      class="h-4 w-4 text-[#343434]/70"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -115,7 +115,7 @@
                     <svg
                       v-else
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-[#343434]/70"
+                      class="h-4 w-4 text-[#343434]/70"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -300,23 +300,23 @@
             <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
               <div class="grid grid-cols-2 grid-rows-2 gap-4 ">
                 <div
-                  class="col-span-2 flex items-center justify-center gap-4  w-full  shadow-md p-4 rounded-md border-4 cursor-pointer"
+                  class="col-span-2 flex items-center justify-center gap-4  w-full overflow-hidden   p-3 rounded cursor-pointer"
                   @click="formZakaz.mesto = 'ofic'"
                   :class="[
                     formZakaz.mesto == 'ofic'
-                      ? 'border-main/50 box-border bg-main/10'
-                      : ' border-white bg-white'
+                      ? ' bg-main text-white '
+                      : 'border-[1px] border-[#343434]/30  bg-white'
                   ]"
                 >
                   <span class="w-full text-center">В офисе ИНВИТРО</span>
                 </div>
                 <div
-                  class="col-span-2 flex items-center justify-center gap-4  w-full  shadow-md p-4 rounded-md border-4 cursor-pointer"
+                  class="col-span-2 flex items-center justify-center gap-4  w-full overflow-hidden   p-3 rounded cursor-pointer"
                   @click="formZakaz.mesto = 'ofis_my'"
                   :class="[
                     formZakaz.mesto == 'ofis_my'
-                      ? 'border-main/50 box-border bg-main/10'
-                      : ' border-white bg-white'
+                      ? ' bg-main text-white '
+                      : 'border-[1px] border-[#343434]/30  bg-white'
                   ]"
                 >
                   <span class="w-full text-center">В больнице</span>
@@ -430,7 +430,7 @@
                       ref="Refclinic"
                     >
                       <div
-                        class="text-sm flex justify-between items-center rounded-md border border-[#343434]/50 p-2"
+                        class="text-sm flex justify-between items-center rounded-md border border-[#343434]/10 p-2"
                       >
                         <div class="flex items-center gap-1">
                           <svg
@@ -455,7 +455,7 @@
                             {{ clinic.attributes.Name }}</span
                           >
                         </div>
-                        <button class="">На карте</button>
+                        <button class="text-xs text-[#343434]/70">На карте</button>
                       </div>
                     </div>
                   </div>
@@ -528,7 +528,7 @@
                 @deleteFromCart="deleteFromCart(index)"
               />
               <div class="flex flex-col gap-4 ">
-                <span class="w-full py-2  border-b-2 border-[#DDEEF6]"
+                <span class="w-full text-center py-2  border-b-2 border-[#DDEEF6]"
                   >Взятие биоматериала</span
                 >
                 <div class="flex flex-col gap-2 ">
@@ -544,12 +544,12 @@
                   <span class="text-[14px]">ИТОГОВАЯ СТОИМОСТЬ: </span>
                   <span
                     v-if="totalpriceInCART && priceNotDiscounted"
-                    class="text-[16px] font-bold"
+                    class="flex flex-col gap-1 justify-end items-end text-[16px] font-bold"
                   >
                     <span
                       v-if="priceNotDiscounted != totalpriceInCART"
                       class="text-[#343434]/70 !text-sm line-through !font-normal"
-                      >{{ priceNotDiscounted.toLocaleString('ru-RU') }}</span
+                      >{{ priceNotDiscounted.toLocaleString('ru-RU') }} руб.</span
                     >
                     {{ totalpriceInCART.toLocaleString('ru-RU') }} руб.</span
                   >
@@ -566,7 +566,7 @@
                     v-if="formZakaz.mesto == 'ofic'"
                     class="text-[14px]  font-bold text-[#A55B4A] underline underline-offset-2 text-right"
                   >
-                    В офисе партнера: <br />
+                    В офисе Инвитро: <br />
                     <span v-if="activeClinicInfo.Name !== null">
                       {{ activeClinicInfo.Name }}
                     </span>
@@ -584,7 +584,7 @@
 
                   <button
                     @click="addConsult()"
-                    class="rounded-md border bg-main h-[49px] hover:bg-[#4CBDEE]  anime  text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="rounded-md border bg-main h-[49px] hover:bg-main/70  anime  text-white w-full flex justify-center items-center py-2 text-[16px]"
                   >
                     Получить консультацию
                   </button>
@@ -644,7 +644,7 @@
           <img src="~/assets/icons/arrow-back.svg" alt="" class="rotate-180" />
         </button>
         <span v-else class="w-full min-w-[240px] max-w-[300px] text-danger"
-          >Выберите офис партнера</span
+          >Выберите офис Инвитро</span
         >
       </div>
       <div v-else-if="step == 2" class="w-full flex justify-start">
