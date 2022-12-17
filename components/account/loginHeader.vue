@@ -11,7 +11,10 @@
       <tabs-login>
         <tab-login title="По телефону">
           <!-- телефон -->
-          <form @submit.prevent="handleLoginSubmit()" class="flex flex-col gap-4">
+          <form
+            @submit.prevent="handleLoginSubmit()"
+            class="flex flex-col gap-4"
+          >
             <div class="flex flex-col items-start justify-start gap-2 w-full">
               <!-- <label for="login" class="text-[14px]">Логин</label> -->
               <input
@@ -20,23 +23,26 @@
                 placeholder="+7(___)___−__−__*"
                 v-facade="'+7(###)###-##-##'"
                 v-model="credentials.identifier"
-                @input="(evt) => (credentials.identifier = evt.target.value)"
                 class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
                 id="login"
               />
             </div>
-            <div class="flex flex-col items-start justify-start gap-2 w-full relative">
+            <div
+              class="flex flex-col items-start justify-start gap-2 w-full relative"
+            >
               <!-- <label for="pass" class="text-[14px]">Пароль</label> -->
               <input
                 :type="typePassword"
                 placeholder="Пароль"
                 value="ofis_my"
                 v-model="credentials.password"
-                @input="(evt) => (credentials.password = evt.target.value)"
                 class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-md  password-area"
                 id="passHeader"
               />
-              <div @click="show_hide_password()" class="absolute right-[14px] top-[15px]">
+              <div
+                @click="show_hide_password()"
+                class="absolute right-[14px] top-[15px]"
+              >
                 <svg
                   v-if="typePassword == 'password'"
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,29 +122,35 @@
         </tab-login>
         <tab-login title="По Email">
           <!-- email -->
-          <form @submit.prevent="handleLoginSubmit2()" class="flex flex-col gap-4">
+          <form
+            @submit.prevent="handleLoginSubmit2()"
+            class="flex flex-col gap-4"
+          >
             <div class="flex flex-col items-start justify-start gap-2 w-full">
               <!-- <label for="login" class="text-[14px]">Логин</label> -->
               <input
                 type="text"
                 placeholder="email"
                 v-model="credentials2.identifier"
-                @input="(evt) => (credentials2.identifier = evt.target.value)"
                 class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
                 id="login2"
               />
             </div>
-            <div class="flex flex-col items-start justify-start gap-2 w-full relative">
+            <div
+              class="flex flex-col items-start justify-start gap-2 w-full relative"
+            >
               <!-- <label for="pass" class="text-[14px]">Пароль</label> -->
               <input
                 :type="typePassword"
                 placeholder="Пароль"
                 v-model="credentials2.password"
-                @input="(evt) => (credentials2.password = evt.target.value)"
                 class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
                 id="pass2"
               />
-              <div @click="show_hide_password()" class="absolute right-[14px] top-[15px]">
+              <div
+                @click="show_hide_password()"
+                class="absolute right-[14px] top-[15px]"
+              >
                 <svg
                   v-if="typePassword == 'password'"
                   xmlns="http://www.w3.org/2000/svg"
@@ -219,80 +231,105 @@
 </template>
 
 <script>
-import TabLogin from "../tabs/tab-login.vue";
-import tabsLogin from "../tabs/tabs-login.vue";
+import TabLogin from '../tabs/tab-login.vue'
+import tabsLogin from '../tabs/tabs-login.vue'
 export default {
   components: { tabsLogin, TabLogin },
-  data() {
+  data () {
     return {
       isAuthenticated: false,
       submitting: false,
       error: null,
       credentials: {
-        identifier: "",
-        password: "",
+        identifier: '',
+        password: ''
       },
       credentials2: {
-        identifier: "",
-        password: "",
+        identifier: '',
+        password: ''
       },
       successfulData: null,
       loginError: false,
-      dataErrors: "",
-      typePassword: "password",
-    };
+      dataErrors: '',
+      typePassword: 'password'
+    }
   },
-  mounted() {
-    this.isAuthenticated = !!this.$apolloHelpers.getToken();
+  mounted () {
+    this.isAuthenticated = !!this.$apolloHelpers.getToken()
   },
   methods: {
-    show_hide_password() {
-      if (this.typePassword == "password") {
-        this.typePassword = "text";
+    show_hide_password () {
+      if (this.typePassword == 'password') {
+        this.typePassword = 'text'
       } else {
-        this.typePassword = "password";
+        this.typePassword = 'password'
       }
     },
-    async handleLoginSubmit() {
+    async handleLoginSubmit () {
       const getPhone = this.credentials.identifier
-        .replaceAll("-", "")
-        .replace("(", "")
-        .replace(")", "");
-      console.log(getPhone);
+        .replaceAll('-', '')
+        .replace('(', '')
+        .replace(')', '')
+      console.log(getPhone)
 
-      this.formBusy = true;
+      this.formBusy = true
       try {
-        await this.$auth.loginWith("graphql", {
+        await this.$auth.loginWith('graphql', {
           identifier: getPhone,
-          password: this.credentials.password,
-        });
+          password: this.credentials.password
+        })
         // console.log(localStorage["auth._token.graphql"]);
-        this.formBusy = false;
-        this.loginError = false;
+        this.formBusy = false
+        this.loginError = false
         setTimeout(() => {
           if (this.$auth.user.RoleUser == 'Vrach') {
-              this.$nuxt.$router.replace({ path: "/doctor" });
+            this.$nuxt.$router.replace({ path: '/doctor' })
+          } else {
+            this.$nuxt.$router.replace({ path: '/my-account' })
           }
-          else {
-            this.$nuxt.$router.replace({ path: "/my-account" });
-          }
-        }, 1000);
+        }, 1000)
       } catch (errors) {
-        this.formBusy = false;
-        this.loginError = true;
-        this.dataErrors = errors;
-        console.log(errors);
+        this.formBusy = false
+        this.loginError = true
+        this.dataErrors = errors
+        console.log(errors)
       }
     },
-    async onLogout() {
-      await this.$apolloHelpers.onLogout();
-      this.isAuthenticated = false;
+    async handleLoginSubmit2 () {
+      const getPhone = this.credentials2.identifier
+
+      this.formBusy = true
+      try {
+        await this.$auth.loginWith('graphql', {
+          identifier: getPhone,
+          password: this.credentials2.password
+        })
+        // console.log(localStorage["auth._token.graphql"]);
+        this.formBusy = false
+        this.loginError = false
+        setTimeout(() => {
+          if (this.$auth.user.RoleUser == 'Vrach') {
+            this.$nuxt.$router.replace({ path: '/doctor' })
+          } else {
+            this.$nuxt.$router.replace({ path: '/my-account' })
+          }
+        }, 1000)
+      } catch (errors) {
+        this.formBusy = false
+        this.loginError = true
+        this.dataErrors = errors
+        console.log(errors)
+      }
     },
-    closeLogin() {
-      this.$emit("loginView");
+    async onLogout () {
+      await this.$apolloHelpers.onLogout()
+      this.isAuthenticated = false
     },
-  },
-};
+    closeLogin () {
+      this.$emit('loginView')
+    }
+  }
+}
 </script>
 
 <style></style>

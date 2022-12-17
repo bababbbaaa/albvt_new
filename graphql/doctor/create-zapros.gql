@@ -1,4 +1,4 @@
-mutation CREATE_ZAPROS($SUMM: Long, $UID: String, $DOCTOR_ID: ID, $ZAKAZIES: [ID]) {
+mutation CREATE_ZAPROS($SUMM: Float, $UID: String, $DOCTOR_ID: ID, $ZAKAZIES: [ID]) {
   createZaprosyVrachej(
     data: {
       Summ: $SUMM

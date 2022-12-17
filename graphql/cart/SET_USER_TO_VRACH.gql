@@ -1,4 +1,4 @@
-mutation SET_USER_TO_VRACH($ID_VRACH: ID, $ID_USERS: ID){
+mutation SET_USER_TO_VRACH($ID_VRACH: ID!, $ID_USERS: [ID]){
   updateUsersPermissionsUser (id: $ID_VRACH, data: { Pacientis: $ID_USERS }) {
     data {
       attributes {

@@ -45,7 +45,7 @@
                 :order_data="order"
                 @DownloadResult="DownloadResult(order.id)"
                 @openItemInfo="openItemInfo(order.id)"
-                @oplata="oplata(order)"
+                @oplata="oplata(order, order.id)"
                 :itemID="itemID"
               />
               <!-- <lk-zakaz-desc
@@ -321,17 +321,22 @@ export default {
   },
 
   methods: {
-    oplata (total) {
+
+// DEV0AkTIRfqbepb4v404
+
+// guxNAyiYhi4WpjQ2m660
+    oplata (total, id) {
       console.log(total)
       const sum = total.attributes.SummOrder.toString()
-      const test = 'MerchantLogin:OutSum:InvId:Пароль#1'
-      var value = ('albvt:' + sum + ':1:' + 'kZqrav14Gq6afwQ7OaD5').toString()
+      const invIDValue = id
+      // const test = 'MerchantLogin:OutSum:InvId:Пароль#1'
+      var value = ('albvt:' + sum + ':' + invIDValue + ':' + 'DEV0AkTIRfqbepb4v404').toString()
+      
       var result = CryptoJS.MD5(value)
-      console.log('865  ' + result + ' / ' + sum + ' / ' + value)
       Robokassa.StartPayment({
         MerchantLogin: 'albvt',
         OutSum: sum,
-        InvId: 1,
+        InvId: id,
         Description: '',
         Culture: 'ru',
         Encoding: 'utf-8',

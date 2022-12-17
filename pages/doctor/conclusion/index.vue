@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-[#F9F9F9]">
-    <div class="pt-[47px] mt-[47px] container grid grid-cols-1 gap-8">
-      <div class="w-full py-12 text-center  font-medium">
+  <div class="bg-[#F9F9F9] min-h-screen">
+    <div class="pt-[47px] container grid grid-cols-1 gap-8">
+      <div class="w-full py-8 text-center  font-medium">
         ЗАПРОС НА ВЫВОД СРЕДСТВ
       </div>
       <div
         class="flex justify-center items-center p-8 border-2 border-[#343434]/30"
       >
-        <span class="text-center"
+        <span class="text-center text-sm"
           >Вывод средств будет осуществлён в течение 2-х рабочих дней по номеру
           телефона, указанному при Вашей регистрации.</span
         >
@@ -18,21 +18,39 @@
         <span v-else>0 ₽</span>
       </div>
       <button
-      v-if="checkZapros == false"
+        v-if="checkZapros == false"
         @click="createZapros"
         class="w-full flex justify-center items-center py-3 text-white bg-main rounded-md"
       >
         Отправить запрос на вывод
       </button>
-      <span v-if="checkZapros"
-        >Ваш запрос #{{ zaprosId }} принят. Ожидайте перевода.</span
+
+      <span
+        v-if="checkZapros"
+        class="w-full flex flex-col justify-center items-center text-center"
+        ><img src="~/assets/icons/333331.png" alt="" /> Ваш запрос #{{
+          zaprosId
+        }}
+        принят. Ожидайте перевода.</span
       >
+
+      <nuxt-link to="/doctor" class="text-center w-full font-semibold"
+        >ВЕРНУТЬСЯ К НАЧАЛЬНОЙ СТРАНИЦЕ</nuxt-link
+      >
+      <button
+        @click="$router.back()"
+        class=" flex  justify-start items-center gap-1"
+      >
+        <img src="~/assets/icons/arrow-back.svg" alt="" />
+        Назад
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import CREATE_ZAPROS from '~/graphql/doctor/create-zapros.gql'
+import UPDATE_ZAPROS_ID from '~/graphql/doctor/UPDATE_ZAPROS_ID.gql'
 
 export default {
   layout: 'Doctor',
@@ -50,7 +68,7 @@ export default {
         Object.values(x)
         zakaz2.push(Number(x))
       })
-
+      const summZapros = Number(this.data.summ)
       const UID = Math.floor(Math.random() * 1000)
       const UID2 = Math.floor(Math.random() * 1000)
       const UID3 = (this.data.doctor + '-' + UID + '-' + UID2).toString()
@@ -58,7 +76,7 @@ export default {
         .mutate({
           mutation: CREATE_ZAPROS,
           variables: {
-            SUMM: this.data.summ,
+            SUMM: summZapros,
             UID: UID3,
             DOCTOR_ID: this.data.doctor,
             ZAKAZIES: zakaz2
@@ -67,11 +85,36 @@ export default {
         .then(data => {
           this.checkZapros = true
           this.zaprosId = data.data.createZaprosyVrachej.data.id
-          this.$router.replace({'query': null});
+          this.$router.replace({ query: null })
+          this.handlerStatusZapros()
         })
         .catch(error => {
           console.error(error)
         })
+      this.handlerStatusZapros()
+    },
+    handlerStatusZapros () {
+      const Zaprosies = []
+      this.data.zakaz.forEach(x => {
+        Object.values(x)
+        Zaprosies.push(Number(x))
+      })
+
+      Zaprosies.forEach(x => {
+        this.$apollo
+          .mutate({
+            mutation: UPDATE_ZAPROS_ID,
+            variables: {
+              ID: x
+            }
+          })
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      })
     }
   },
   mounted () {

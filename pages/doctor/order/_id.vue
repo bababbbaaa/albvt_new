@@ -1,5 +1,12 @@
 <template>
-  <div class="container py-2">
+  <div class="container py-2 flex flex-col gap-4">
+    <button
+        @click="$router.back()"
+        class=" flex  justify-start items-center gap-1"
+      >
+        <img src="~/assets/icons/arrow-back.svg" alt="" />
+        Назад
+      </button>
     <div v-if="order" class="flex flex-col gap-4">
       <div class="flex justify-between items-center w-full">
         <div class="flex flex-col gap-1">
@@ -12,7 +19,7 @@
           }}</span>
         </div>
         <div class="flex flex-col items-end gap-1">
-          <span class="text-main">{{ order.data.attributes.SummOrder }} ₽</span>
+          <span class="text-main font-medium">{{ order.data.attributes.SummOrder }} ₽</span>
           <span class="text-xs">{{ $auth.user.Stavka }} %</span>
         </div>
       </div>

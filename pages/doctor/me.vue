@@ -1,6 +1,9 @@
 <template>
   <div class="bg-[#F9F9F9]">
-    <div class="pt-8 mt-8 container flex flex-col gap-4"  v-if="usersPermissionsUser">
+    <div
+      class="pt-8 mt-8 container flex flex-col gap-4"
+      v-if="usersPermissionsUser"
+    >
       <div class="w-full flex items-center justify-between">
         <button
           @click="$router.back()"
@@ -90,15 +93,6 @@
           />
         </div>
         <div class="relative">
-          <label class="label-new">Текущий пароль</label>
-          <input
-            type="text"
-            placeholder="*"
-            v-model="me.password"
-            class="input-new"
-          />
-        </div>
-        <div class="relative">
           <label class="label-new">Новый пароль</label>
           <input
             type="text"
@@ -112,6 +106,7 @@
         </button>
       </div>
     </div>
+    <span v-else>Загрузка...</span>
   </div>
 </template>
 
@@ -140,6 +135,14 @@ export default {
           ID: this.$auth.user.id
         }
       }
+    }
+  },
+  mounted () {
+    if (this.usersPermissionsUser) {
+      this.me.email = this.usersPermissionsUser.data.attributes.email
+      this.me.phone = this.usersPermissionsUser.data.attributes.Phone
+      this.me.fio = this.usersPermissionsUser.data.attributes.FIO_user
+      this.me.data = this.usersPermissionsUser.data.attributes.DataRozgdeniya
     }
   },
   methods: {

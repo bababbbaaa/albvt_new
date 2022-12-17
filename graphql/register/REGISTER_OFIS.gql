@@ -1,5 +1,5 @@
 query REGISTER_OFIS {
-  gorodaInvitros(pagination: { limit: 1000 }) {
+  gorodaInvitros(pagination: { limit: 1000 } filters: { Invitro: { eq: false } }) {
     data {
       id
       attributes {

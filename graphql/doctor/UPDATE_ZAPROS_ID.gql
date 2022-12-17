@@ -1,0 +1,10 @@
+mutation UPDATE_ZAPROS_ID($ID: ID!){
+  updateOrder(id: $ID, data: { ZaprosVivod: true }) {
+    data {
+      id
+      attributes {
+        ZaprosVivod
+      }
+    }
+  }
+}

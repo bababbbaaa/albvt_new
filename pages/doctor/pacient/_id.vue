@@ -1,28 +1,16 @@
 <template>
   <div class="bg-[#F9F9F9]">
     <div
-      class="pt-8 mt-8 container flex flex-col gap-4"
+      class="pt-2 container flex flex-col gap-4"
       v-if="usersPermissionsUser"
     >
-      <div class="w-full flex items-center justify-between">
+      <div class="w-full flex items-center justify-between ">
         <button
           @click="$router.back()"
-          class=" flex  justify-start items-center"
+          class=" flex  justify-start items-center gap-1"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8 text-main"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
+         <img src="~/assets/icons/arrow-back.svg" alt="" />
+         Назад
         </button>
         <span class="py-3 text-xl">Пациент</span>
       </div>

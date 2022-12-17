@@ -48,62 +48,37 @@
 
     <!-- modile -->
 
-    <!-- <div
+    <div
       class=" flex xl:hidden flex-wrap sm:flex-nowrap gap-2 lg:gap-4 col-span-2 text-[10px] lg:text-[14px] font-normal text-[#777777]"
     >
-      <span class="w-full sm:w-auto">Код: {{ item.attributes[2].options[0] }}</span>
-      <div class="flex gap-2 cursor-pointer">
-        <span v-for="(material, i) in item.upsell_ids" :key="i">
-          <span v-if="material == 10387">
-            Пробоподготовка (МИК)
-            <span class="font-thin text-[10px]  sm:text-[12px]">(+200₽)</span>
-          </span>
-          <span v-if="material == 14738">
-            Пробоподготовка (КГИСТ) <span class="text-[10px]  sm:text-[12px]">(+100₽)</span>
-          </span>
-          <span v-if="material == 9838">
-            Забор биоматериала на энетеробиоз
-            <span class="text-[10px]  sm:text-[12px]">(+100₽)</span>
-          </span>
-          <span v-if="material == 9839">
-            Пробоподготовка (МИК) <span class="text-[10px]  sm:text-[12px]">(+200₽)</span>
-          </span>
-          <span v-if="material == 9840">
-            Пробоподготовка (МЭ) кровь <span class="text-[10px]  sm:text-[12px]">(+650₽)</span>
-          </span>
-          <span v-if="material == 9842">
-            Пробоподготовка (МЭ) волосы <span class="text-[10px]  sm:text-[12px]">(+650₽)</span>
-          </span>
-          <span v-if="material == 9843">
-            Пробоподготовка (МЭ) ногти <span class="text-[10px]  sm:text-[12px]">(+650₽)</span>
-          </span>
-          <span v-if="material == 9844">
-            Пробоподготовка (НПЯТ) <span class="text-[10px]  sm:text-[12px]">(+250₽)</span>
-          </span>
-          <span v-if="material == 9845">
-            Забор мазка/соскоба (буккальный эпителий)
-            <span class="text-[10px]  sm:text-[12px]">(+100₽)</span>
-          </span>
-          <span v-if="material == 9846">
-            Пробоподготовка (КЖЦ) <span class="text-[10px]  sm:text-[12px]">(+300₽)</span>
-          </span>
-          <span v-if="material == 14748">
-            Забор венозной крови <span class="text-[10px]  sm:text-[12px]">(+150₽)</span>
-          </span>
-          <span v-if="material == 9848">
-            Забор мазка/соскоба <span class="text-[10px]  sm:text-[12px]">(+250₽)</span>
-          </span>
+      <span class="w-full sm:w-auto">Код: {{ item.attributes.Art }}</span>
+      <div
+        class="flex gap-2 cursor-pointer"
+        v-if="item.attributes.biomaterialies.data.length"
+      >
+        <span
+          v-for="bio in item.attributes.biomaterialies.data"
+          :key="bio.id"
+          class="font-thin text-[10px]  sm:text-[12px]"
+        >
+          {{ bio.attributes.Name }}(+200₽)
         </span>
       </div>
 
-      <span v-if="parseInt(item.attributes[0].options[0]) == 1"
-        >{{ item.attributes[0].options[0] }} день</span
+      <span
+        v-if="parseInt(item.attributes.TimeDone) == 1"
+        class="text-[14px] text-[#9A9A9A] pt-1"
+        >{{ item.attributes.TimeDone }} день</span
       >
-      <span v-else-if="parseInt(item.attributes[0].options[0]) < 5"
-        >{{ item.attributes[0].options[0] }} дня</span
+      <span
+        v-else-if="parseInt(item.attributes.TimeDone) < 5"
+        class="text-[14px] text-[#9A9A9A] pt-1"
+        >{{ item.attributes.TimeDone }} дня</span
       >
-      <span v-else>{{ item.attributes[0].options[0] }} дней</span>
-    </div> -->
+      <span v-else class="text-[14px] text-[#9A9A9A] pt-1"
+        >{{ item.attributes.TimeDone }} дней</span
+      >
+    </div>
 
     <!-- end modile -->
 

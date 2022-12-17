@@ -571,14 +571,14 @@
                     v-if="formZakaz.mesto == 'ofic'"
                     class="text-xs text-[#343434]/50 "
                   >
-                    В офисе Инвитро: 
+                    В офисе Инвитро:
                     <span class="" v-if="activeClinicInfo.Name !== null">
                       {{ activeClinicInfo.Name }}
                     </span>
                   </span>
                 </div>
                 <handler-promocode @setPromocode="getPromocode" />
-
+                <button @click="AddPacientToDoctor">test pacients</button>
                 <div class="flex flex-col gap-[20px]">
                   <button
                     @click="createOrder()"
@@ -782,6 +782,7 @@ export default {
       activeClinicInfo: null,
       promocode: null,
       pacientsForDoctor: null,
+      DoctorID: null,
       totalpriceInCART: null,
       priceNotDiscounted: null,
       modalInvitro: false,
@@ -863,7 +864,6 @@ export default {
       ) {
       }
     },
-
     closeCart () {
       this.$emit('cartView')
     },
@@ -875,7 +875,6 @@ export default {
     resetCart () {
       this.RESET_CART()
     },
-
     createOrder () {
       const UID = Math.floor(Math.random() * 1000)
       const UID2 = Math.floor(Math.random() * 1000)
@@ -910,10 +909,21 @@ export default {
             path: '/cart/thanks',
             query: { id: data.createOrder.data.attributes.UID }
           })
+          this.AddPacientToDoctor()
           this.RESET_CART()
         })
     },
-
+    AddPacientToDoctor () {
+      const allPacientsOnDoctor = this.pacientsForDoctor
+      allPacientsOnDoctor.push(this.$auth.user.id)
+      this.$apollo.mutate({
+        mutation: SET_USER_TO_VRACH,
+        variables: {
+          ID_VRACH: this.DoctorID,
+          ID_USERS: allPacientsOnDoctor
+        }
+      })
+    },
     async handleLogoutZakaz () {
       this.$nuxt.$loading.start()
       await this.$auth.logout()
@@ -954,10 +964,11 @@ export default {
       this.activeClinicInfo = clinic.attributes
       this.clinicIdSelect = false
     },
-    getPromocode (pacients, promo) {
+    getPromocode (pacients, promo, id) {
       if (promo !== null) {
         this.promocode = promo
         this.pacientsForDoctor = pacients
+        this.DoctorID = id
       } else {
         this.promocode = null
         this.pacientsForDoctor = null
@@ -1034,6 +1045,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

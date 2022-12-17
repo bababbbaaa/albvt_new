@@ -2,16 +2,16 @@
   <div
     class="flex flex-col  gap-4 w-full bg-white drop-shadow-md py-3   rounded-[3px] anime cursor-pointer"
   >
-    <div @click="openUser" class=" flex gap-2 justify-between px-2">
+    <div @click="openUser" class=" flex  justify-between px-2">
       <nuxt-link prefetch :to="'/doctor/pacient/' + user_data.id"
         v-if="active == user_data.id"
-        class="flex text-[16px] font-medium   justify-start   items-center w-4/5 rounded-[3px] anime"
+        class="flex text-base font-medium   justify-start   items-center w-9/12 rounded-[3px] anime"
         :class="[active == user_data.id ? '' : 'truncate']"
         >{{ user_data.attributes.FIO_user }}</nuxt-link
       >
       <nuxt-link prefetch :to="'/doctor/pacient/' + user_data.id"
         v-else
-        class="flex text-[16px] font-medium   justify-start   items-center w-4/5 rounded-[3px] anime"
+        class="flex text-base font-medium   justify-start   items-center w-9/12 rounded-[3px] anime"
         :class="[active == user_data.id ? '' : 'truncate']"
         >{{
           user_data.attributes.FIO_user.replace(
@@ -20,13 +20,13 @@
           )
         }}</nuxt-link
       >
-      <div class="flex gap-1 items-center text-xs">
+      <div class="w-3/12 flex gap-1 items-center justify-end text-xs">
         <div
           v-if="user_data.attributes.zakazies.data.length >= 1"
           class="flex gap-1 items-center"
         >
           <span>{{ user_data.attributes.zakazies.data.length }}</span>
-          <span>заказ</span>
+          <span>заказов</span>
         </div>
         <div v-else class="flex gap-1 items-center">
           <span>0 заказов</span>

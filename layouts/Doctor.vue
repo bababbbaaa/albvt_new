@@ -1,7 +1,7 @@
 <template>
   <div class="bg-[#fcfcfc]">
-    <div class="w-full bg-main container">
-      <div class="w-full flex items-center justify-between text-white py-3">
+    <div class="w-full bg-main ">
+      <div class="container w-full flex items-center justify-between text-white py-3">
         <nuxt-link
       to="/"
       class="flex flex-col !text-white uppercase  justify-start cursor-pointer w-[122px] sm:w-[154px]"

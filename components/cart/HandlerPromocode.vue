@@ -48,25 +48,25 @@ export default {
           this.vrach = data.usersPermissionsUsers.data[0]
           const dataPromo = data.usersPermissionsUsers
 
-          this.getAllPacientisVrach(dataPromo)
+          this.getAllPacientisVrach(dataPromo, this.vrach.id)
         })
     },
 
-    getAllPacientisVrach (Pacients) {
+    getAllPacientisVrach (Pacients, id) {
       if (Pacients.data.length) {
         const dataPacients = Pacients.data[0].attributes.Pacientis.data.map(
           x => x.id
         )
-        this.getCartComplite(dataPacients, Pacients)
+        this.getCartComplite(dataPacients, Pacients, id)
       } else {
-        this.getCartComplite(null, null)
+        this.getCartComplite(null, null, null)
       }
     },
-    getCartComplite (data, pacients) {
+    getCartComplite (data, pacients,  id) {
       if (data !== null && data) {
-        this.$emit('setPromocode', data, pacients)
+        this.$emit('setPromocode', data, pacients, id)
       } else {
-        this.$emit('setPromocode', null, null)
+        this.$emit('setPromocode', null, null, null)
       }
     }
   }

@@ -16,7 +16,7 @@
       <div class="flex justify-between items-start">
         <button
           @click="$emit('openOrderResult')"
-          class="bg-main text-white flex gap-2 px-4 py-3 rounded-md"
+          class="bg-main text-white flex gap-2 px-4 py-3 rounded-md text-sm"
         >
           <div>
             <span v-if="activeResult == data_order.id"
@@ -31,7 +31,7 @@
         </button>
         <button
           @click="$emit('openOrderAnalizes')"
-          class="bg-[#343434]/10 text-[#343434] px-4 py-3 rounded-md"
+          class="bg-[#343434]/10 text-[#343434] px-4 py-3 rounded-md text-sm"
         >
           <div>
             <span v-if="activeAnalizes == data_order.id"
@@ -56,7 +56,7 @@
             class="flex gap-2 items center"
           >
             <img src="~/assets/icons/pdf.svg" class="w-[20px] h-auto" />
-            <a :href="'http://localhost:1337' + result.attributes.url" download target="_blank" class="underline underline-offset-2">{{
+            <a :href="'https://api.albvt.ru' + result.attributes.url" download target="_blank" class="underline underline-offset-2">{{
               result.attributes.name
             }}</a>
           </button>

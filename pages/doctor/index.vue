@@ -1,10 +1,8 @@
 <template>
-  <div class="bg-[#F9F9F9]">
+  <div class="bg-[#F9F9F9] min-h-screen">
     <div class="pt-2" v-if="usersPermissionsUser">
       <div class="container flex flex-col h-full justify-between gap-8">
         <div class="grid grid-cols-1  w-full gap-2">
-
-
           <div class="grid grid-cols-3  w-full gap-2">
             <button
               @click="tabsActive = 1"
@@ -40,7 +38,6 @@
               Выведено
             </button>
           </div>
-
           <div
             class="w-full border relative border-[#343434]/30 rounded-[3px] bg-white flex justify-between items-center"
           >
@@ -89,17 +86,16 @@
             </div>
           </div>
         </div>
-
         <!-- Пациенты -->
         <Transition name="fade">
-          <section v-if="tabsActive == 1 && getAllUsers.length ">
-            <div  class="flex flex-col gap-2">
+          <section v-if="tabsActive == 1 && getAllUsers.length">
+            <div class="flex flex-col gap-2">
               <a-user-view
                 v-for="user in getAllUsers"
                 :key="user.id"
                 :user_data="user"
                 :type="'allPacient'"
-              /> 
+              />
             </div>
           </section>
         </Transition>
@@ -107,12 +103,12 @@
         <Transition name="fade">
           <!-- доступно -->
           <section
-            v-if="tabsActive == 2 && getAllUsers.length"
+            v-if="tabsActive == 2 && getAllDostupno.length"
             class="flex flex-col gap-4"
           >
             <div class="flex flex-col gap-2">
               <a-dostupno-view
-                v-for="user in getAllUsers"
+                v-for="user in getAllDostupno"
                 :key="user.id"
                 :user_data="user"
                 :active="userActive"
@@ -127,26 +123,40 @@
             v-if="tabsActive == 2"
             class="flex flex-col gap-4 items-center"
           >
-            <span class="text-main text-right w-full"
+            <!-- <span class="text-main text-right w-full"
               >Всего доступно
               <span class="text-[#343434]"
                 >+{{ checkSummVidod.toLocaleString('ru-RU') }}₽</span
               >
-            </span>
-
-            <nuxt-link
-              :to="{
-                path: '/doctor/conclusion',
-                query: {
-                  summ: checkSummVidod,
-                  doctor: $auth.user.id,
-                  zakaz: checkZakazies
-                }
-              }"
-              class="bg-main text-white flex flex-col justify-center items-center gap-1 py-3 px-6 rounded-[3px] w-3/5"
-            >
-              Вывести средства
-            </nuxt-link>
+            </span> -->
+            <div class="flex flex-col gap-2 w-full">
+              <nuxt-link
+                v-if="checkSummVidod >= 500"
+                :to="{
+                  path: '/doctor/conclusion',
+                  query: {
+                    summ: checkSummVidod,
+                    doctor: $auth.user.id,
+                    zakaz: checkZakazies
+                  }
+                }"
+                class="bg-main text-white flex gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
+              >
+                Вывести средства
+                <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+              </nuxt-link>
+              
+              <span v-else-if="checkSummVidod < 500" class="text-xs w-full text-center text-[#343434]/70"
+                >Минимальная сумма вывода 500₽</span
+              >
+              <span
+                v-else
+                class="bg-main/50 text-white flex gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
+              >
+                Вывести средства
+                <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+              </span>
+            </div>
           </section>
         </Transition>
         <!-- Выведено -->
@@ -159,6 +169,8 @@
               v-for="item in getAllVivod"
               :key="item.id"
               :data_vivod="item"
+              :active="vivodActive"
+              @openVivod="openVivod(item.id)"
             />
           </section>
         </Transition>
@@ -170,8 +182,8 @@
 <script>
 import aUserView from '~/components/doctor/a-user-view.vue'
 import DOCTOR_PACIENTS from '~/graphql/doctor/doctor-pacients.gql'
-import ADostupnoView from '../../components/doctor/a-dostupno-view.vue'
-import AVivodList from '../../components/doctor/a-vivod-list.vue'
+import ADostupnoView from '~/components/doctor/a-dostupno-view.vue'
+import AVivodList from '~/components/doctor/a-vivod-list.vue'
 
 export default {
   components: { aUserView, ADostupnoView, AVivodList },
@@ -191,6 +203,7 @@ export default {
     return {
       tabsActive: 1,
       userActive: null,
+      vivodActive: null,
       searchInput: '',
       orders: [],
       summVivod: 0,
@@ -202,6 +215,11 @@ export default {
     openUser (id) {
       this.userActive == id ? (this.userActive = null) : (this.userActive = id)
     },
+    openVivod (id) {
+      this.vivodActive == id
+        ? (this.vivodActive = null)
+        : (this.vivodActive = id)
+    },
     searchPaciens (value) {
       this.search = value
       const litle = value.toLowerCase()
@@ -211,12 +229,21 @@ export default {
       )
       this.searchResult = dataP
       console.log(dataP)
-    },
-    
+    }
   },
   computed: {
     getAllUsers () {
       return this.usersPermissionsUser.data.attributes.Pacientis.data
+    },
+    getAllDostupno () {
+      const x = this.usersPermissionsUser.data.attributes.Pacientis.data
+      const x2 = x.filter(item =>
+        item.attributes.zakazies.data.some(
+          a => a.attributes.Status == true && a.attributes.ZaprosVivod == false
+        )
+      )
+      console.log(x2)
+      return x2
     },
     getAllVivod () {
       return this.usersPermissionsUser.data.attributes.zaprosy_vrachejs.data
@@ -226,7 +253,10 @@ export default {
       const iter1 = this.usersPermissionsUser.data.attributes.Pacientis.data
       iter1.forEach(x => {
         x.attributes.zakazies.data.forEach(z => {
-          if (z.attributes.Status == true) {
+          if (
+            z.attributes.Status == true &&
+            z.attributes.ZaprosVivod == false
+          ) {
             sss.push(z)
           }
         })
@@ -235,7 +265,7 @@ export default {
       let total = sss.reduce(function (accumulator, b) {
         return accumulator + b.attributes.SummOrder
       }, 0)
-      const totalStavka = (total / 100) * 20
+      const totalStavka = (total / 100) * this.$auth.user.Stavka
 
       return totalStavka
     },
@@ -244,7 +274,10 @@ export default {
       const iter1 = this.usersPermissionsUser.data.attributes.Pacientis.data
       iter1.forEach(x => {
         x.attributes.zakazies.data.forEach(z => {
-          if (z.attributes.Status == true) {
+          if (
+            z.attributes.Status == true &&
+            z.attributes.ZaprosVivod == false
+          ) {
             sss.push(z.id)
           }
         })
