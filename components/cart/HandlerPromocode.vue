@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-4">
     <div class="flex w-full flex-col gap-2 relative">
       <label for="" class=" label-new !bg-white">Введите промокод</label>
-      <input type="text" class="input-new" v-model="promocode" />
+      <input type="text" class="input-new tracking-[0.5em] font-semibold" v-model="promocode" />
       <button
         @click="getPromoCart"
         class="absolute top-0 right-0 flex justify-center items-center  bg-main text-white rounded-md text-sm h-full px-6"
@@ -28,7 +28,7 @@ import GET_PROMOCODE from '~/graphql/cart/get-promocode.gql'
 export default {
   data () {
     return {
-      promocode: 'user-2',
+      promocode: '',
       vrach: null,
       loading: false
     }

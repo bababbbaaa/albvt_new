@@ -7,12 +7,12 @@
         <div v-if="isMobile == true" class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/"
-            class="flex  justify-center cursor-pointer items-center border border-[#4CBDEE] rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/"
-            class="flex bg-[#4CBDEE] !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -20,12 +20,12 @@
         <div v-else class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/gematologicheskie-issledovaniya/2849"
-            class="flex  justify-center cursor-pointer items-center border border-[#4CBDEE] rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/1-dlya-zhenshhin/2797"
-            class="flex bg-[#4CBDEE] !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -140,7 +140,7 @@ export default {
       this.isMobile = window.innerWidth < 600
       console.log(this.$route.path);
     },
-    ...mapActions(['GET_CATEGORIES_FROM_JSON']),
+
     viewSubMenu (item) {
       console.log(item.id)
       this.viewItem = !this.viewItem
@@ -154,10 +154,7 @@ export default {
         this.viewItem = null
       }
     },
-    preFetchDataCat (item) {
-      this.GET_CATEGORIES_FROM_JSON(item)
-      console.log(item)
-    }
+   
   },
 
   mounted () {

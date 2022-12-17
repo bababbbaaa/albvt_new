@@ -45,12 +45,17 @@
           <span class="">{{ usersPermissionsUser.data.attributes.email }}</span>
         </div>
       </div>
-      <div class="w-full">Заказы: <b>2</b> шт.</div>
+      <div class="w-full">Заказы: <b>{{usersPermissionsUser.data.attributes.zakazies.data.length}}</b> шт.</div>
       <div>
         <a-user-list-orders
           :stavka="20"
           :data_orders="usersPermissionsUser.data.attributes.zakazies.data"
         />
+      </div>
+      <div class="flex justify-between items-center my-6"> 
+        <span>Сумма всех заказов:</span>
+        <span class=""> {{totalPagePrice}} ₽</span>
+       
       </div>
     </div>
     <div v-else class="w-full h-full flex bg-white justify-center items-center">
@@ -79,7 +84,15 @@ export default {
         }
       }
     }
-  }
+  },
+  computed: {
+    totalPagePrice(){
+      let total = this.usersPermissionsUser.data.attributes.zakazies.data.reduce(function (accumulator, b) {
+        return accumulator + b.attributes.SummOrder
+      }, 0)
+      return total
+    }
+  },
 }
 </script>
 

@@ -1,0 +1,22 @@
+query DOCTOR_ID_ORDER($ID: ID){
+  order(id: $ID){
+    data{
+      id
+      attributes{
+        createdAt
+        SummOrder
+        UID
+        analizies{
+          data{
+            attributes{
+              Name
+              
+              Art
+              Price
+            }
+          }
+        }
+      }
+    }
+  }
+}

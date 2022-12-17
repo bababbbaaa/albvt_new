@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <div class="flex flex-col gap-[20px] ">
-      <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+      <div id="scroll-to" class="flex flex-col sm:flex-row gap-2 sm:justify-between">
         <h1
         v-if="subCats"
           class="text-[24px] font-medium flex gap-2 items-center scroll-to"
-          id="scroll-to"
+          
         >
           <button
             @click="$router.back()"
@@ -116,12 +116,14 @@ export default {
   },
   mounted () {
     if (window.screen.width <= 600 && this.dalee == false) {
+      console.log('mobile eto');
       this.scrollToAnaliz()
     }
     this.$router.replace({ query: null })
   },
   updated () {
     if (window.screen.width <= 600 && this.dalee == false) {
+      console.log('mobile eto');
       this.scrollToAnaliz()
     }
   },

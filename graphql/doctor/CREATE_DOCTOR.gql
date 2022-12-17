@@ -17,7 +17,8 @@ mutation CREATE_DOCTOR(
       DataRozgdeniya: $DATAROZHDENIYA
       Promo: $PROMO
       Gender: $GENDER
-      blocked: true
+      blocked: false
+      Stavka: 15
       speczialnosts :  $SPEC
       ofisies: $OFIC
     }

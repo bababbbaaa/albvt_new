@@ -18,6 +18,16 @@ query PRODUCTS_CAT($ID_CAT: String) {
         TimeDone
         Complecs
         Active
+        complecsAnaliz {
+          data {
+            id
+            attributes {
+              Name
+              Price
+              Art
+            }
+          }
+        }
         DopAnalizes{
           data{
             id

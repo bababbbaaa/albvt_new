@@ -13,11 +13,11 @@
       <span class="w-full text-center text-[20px]">Оформление заказа</span>
       <div
         v-show="!this.$auth.loggedIn"
-        class=" flex justify-center items-center  tracking-widest"
+        class=" flex justify-center items-center text-center text-sm"
         :class="[register == null ? ' mt-[48px]' : 'mt-4']"
       >
         <span
-          >Для оформления заказа необходимо <br />
+          >Для оформления заказа необходимо<br />
           <button
             @click="register = false"
             class=""
@@ -272,12 +272,11 @@
       </div>
       <div
         v-if="register == true"
-        class=" remove-bg p-[24px] flex w-full mb-[24px] flex-col justify-center items-center gap-4 mt-24px"
+        class=" remove-bg flex w-full mb-[24px] flex-col justify-center items-center gap-4 mt-24px"
       >
         <span class="text-[20px] font-semibold">Регистрация</span>
         <!-- шан 2 -->
-        <create-user/>
-        
+        <create-user />
       </div>
     </div>
 
@@ -326,7 +325,7 @@
             <div v-if="sityesInvitros">
               <div v-if="formZakaz.mesto == 'ofis_my'">
                 <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
-                  <gb-list/>
+                  <gb-list />
                 </div>
               </div>
               <div v-if="formZakaz.mesto == 'ofic'" class="flex flex-col gap-4">
@@ -455,7 +454,9 @@
                             {{ clinic.attributes.Name }}</span
                           >
                         </div>
-                        <button class="text-xs text-[#343434]/70">На карте</button>
+                        <button class="text-xs text-[#343434]/70">
+                          На карте
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -528,7 +529,8 @@
                 @deleteFromCart="deleteFromCart(index)"
               />
               <div class="flex flex-col gap-4 ">
-                <span class="w-full text-center py-2  border-b-2 border-[#DDEEF6]"
+                <span
+                  class="w-full text-center py-2  border-b-2 border-[#DDEEF6]"
                   >Взятие биоматериала</span
                 >
                 <div class="flex flex-col gap-2 ">
@@ -549,12 +551,15 @@
                     <span
                       v-if="priceNotDiscounted != totalpriceInCART"
                       class="text-[#343434]/70 !text-sm line-through !font-normal"
-                      >{{ priceNotDiscounted.toLocaleString('ru-RU') }} руб.</span
+                      >{{
+                        priceNotDiscounted.toLocaleString('ru-RU')
+                      }}
+                      руб.</span
                     >
                     {{ totalpriceInCART.toLocaleString('ru-RU') }} руб.</span
                   >
                 </div>
-                <div class="flex justify-between  items-center">
+                <div class="flex flex-col justify-start items-start gap-1">
                   <span class="text-[14px]">Место сдачи анализа: </span>
                   <span
                     v-if="formZakaz.mesto == 'ofis_my'"
@@ -564,10 +569,10 @@
                   >
                   <span
                     v-if="formZakaz.mesto == 'ofic'"
-                    class="text-[14px]  font-bold text-[#A55B4A] underline underline-offset-2 text-right"
+                    class="text-xs text-[#343434]/50 "
                   >
-                    В офисе Инвитро: <br />
-                    <span v-if="activeClinicInfo.Name !== null">
+                    В офисе Инвитро: 
+                    <span class="" v-if="activeClinicInfo.Name !== null">
                       {{ activeClinicInfo.Name }}
                     </span>
                   </span>
@@ -643,9 +648,6 @@
           Дальше
           <img src="~/assets/icons/arrow-back.svg" alt="" class="rotate-180" />
         </button>
-        <span v-else class="w-full min-w-[240px] max-w-[300px] text-danger"
-          >Выберите офис Инвитро</span
-        >
       </div>
       <div v-else-if="step == 2" class="w-full flex justify-start">
         <button
@@ -789,7 +791,7 @@ export default {
       formZakaz: {
         mesto: 'ofic'
       },
-      
+
       dopTest: [],
       totalCartPrice: null,
       prePrice: null,
@@ -1032,4 +1034,6 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+
+</style>

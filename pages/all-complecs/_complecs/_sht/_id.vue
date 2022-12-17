@@ -1,8 +1,8 @@
 <template>
-  <div class="flex w-full flex-col sm:flex-row   gap-[20px]">
+  <div class="flex w-full flex-col sm:flex-row   gap-[20px]" v-if="analizy">
     <button
       @click="$router.back()"
-      class="sm:hidden flex justify-start items-center"
+      class=" flex sm:hidden justify-start items-center"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -41,10 +41,12 @@
           </svg>
         </button>
         <div class="flex flex-col gap-[8px] ">
-          <h1 class="font-medium pb-[8px] text-[24px]   block overflow-hidden">
-            {{ subcategory.name }}:
+          <h1 class="font-medium pb-[8px] text-sm  block overflow-hidden">
+            {{ analizy.attributes.sub_cat.data.attributes.Name }}:
           </h1>
-          <h3 class="font-medium pb-4  text-[13px]">{{ products.name }}</h3>
+          <h3 class="font-medium pb-4 text-2xl  ">
+            {{ analizy.attributes.Name }}
+          </h3>
         </div>
       </div>
 
@@ -54,31 +56,51 @@
             <tabs-analiz class="w-full ">
               <tab-analiz
                 title="Описание"
-                :key="products.name + '1'"
-                :data="products.description"
-                :crossel="crossel"
-                class="cursor-pointer flex flex-col gap-4"
-                v-if="products.description.length"
-              >
-                <!-- <div
-                  v-html="products.description"
-                  class="text-[14px] pt-4"
-                ></div> -->
-                
-              </tab-analiz>
+                class="cursor-pointer"
+                :key="'opisanie'"
+                :data="analizy.attributes.Desc"
+                v-if="analizy.attributes.Desc.length"
+              />
               <tab-analiz
-                :data="products.short_description"
-                title="Подготовка"
-                class="text-[14px] pt-4"
                 :key="'pogrotovka'"
-              >
-                <div
-                  
-                  v-html="products.short_description"
-                  class="text-[14px] pt-4"
-                ></div>
-              </tab-analiz>
+                title="Подготовка"
+                :data="analizy.attributes.SubDesc"
+                class="text-sm pt-4 cursor-pointer"
+                v-if="analizy.attributes.SubDesc.length"
+              />
             </tabs-analiz>
+          </div>
+          <div v-if="analizy.attributes.complecsAnaliz.data">
+            <div class="my-4">
+              <span class="text-center w-full font-medium text-[16px]"
+                >Состав комплекса:</span
+              >
+              <div class="flex flex-col gap-2 mt-4">
+                <div
+                  v-for="(item, i) in analizy.attributes.complecsAnaliz.data"
+                  :key="i"
+                  class="bg-white p-4 rounded-[5px] shadow-md  h-full grid grid-cols-5 items-center gap-4"
+                >
+                  <div
+                    class="h-full flex flex-col gap-2 col-span-5 sm:col-span-4"
+                  >
+                    <nuxt-link
+                      :to="`/all-analyzes/in-complecs/` + item.id"
+                      class="text-sm text-[#343434]]/70 hover:text-main anime"
+                      >{{ item.attributes.Name }}</nuxt-link
+                    >
+                    <span class="text-xs text-[#343434]/70">
+                      Код: {{ item.attributes.Art }}
+                    </span>
+                  </div>
+                  <div
+                    class="font-medium text-sm h-full col-span-5 sm:col-span-1 flex justify-end"
+                  >
+                    {{ item.attributes.Price }} ₽
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div></div>
         </div>
@@ -87,7 +109,7 @@
 
     <div class="w-full sm:w-1/3 order-1 sm:order-2" id="scroll-toAnaliz">
       <cart-item-analiz
-        :data="products"
+        :data="analizy"
         :bio="GET_ALL_BIOMATERIALS"
         @addToCart="addToCart"
       />
@@ -99,29 +121,20 @@
 import CartItemAnaliz from '~/components/cart/CartItemAnaliz.vue'
 import TabAnaliz from '~/components/tabs/tab-analiz.vue'
 import TabsAnaliz from '~/components/tabs/tabs-analiz.vue'
+import ANALIZ_ID from '~/graphql/analiz/ANALIZ_ID.gql'
 
 import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { CartItemAnaliz, TabAnaliz, TabsAnaliz },
-  layout: 'ComplecsWrapper',
+  layout: 'AnalizWrapper',
   head () {
     return {
-      title: this.products.name,
-
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
-        }
-      ]
+      // title: this.analizy.data.attributes.Name,
     }
   },
   data () {
     return {
       title: '',
-      crossel: [],
       addCartItem: ''
     }
   },
@@ -132,39 +145,16 @@ export default {
     },
     ...mapActions(['ADD_TO_CART', 'GET_BIOMATERIALS_FROM_API']),
     addToCart (data) {
-      this.ADD_TO_CART(data), (this.addCartItem = data.name)
-    },
-    getCrosselsProducts () {
-      const crosselProducts = this.products.cross_sell_ids
-      crosselProducts.forEach(element => {
-        this.fetchSomething(element)
-      })
-    },
-    async fetchSomething (element) {
-      const id = await this.$axios.$get(
-        `https://foxsis.ru/alvd/wp-json/wc/v3/products/` + element,
-        {
-          auth: {
-            username: 'ck_85e44e8735261d45a19d8f7aaf012f8d640c2dac',
-            password: 'cs_4261bb639f4e9a18c146851361d6317804a816fc'
-          }
-        }
-      )
-
-      this.crossel.push(id)
-      console.log(id)
+      console.log(data)
+      this.ADD_TO_CART(data)
     }
   },
   mounted () {
     this.GET_BIOMATERIALS_FROM_API()
-    this.getCrosselsProducts()
     if (window.screen.width <= 600) {
       this.scrollToAnaliz()
     }
-    this.$router.replace({'query': null});
-  },
-  computed: {
-    ...mapGetters(['GET_ALL_BIOMATERIALS'])
+    this.$router.replace({ query: null })
   },
   updated () {
     if (window.screen.width <= 600) {
@@ -178,29 +168,25 @@ export default {
       }
     }
   },
-  async asyncData ({ $axios, params }) {
-    const title = params.id
-    let products = await $axios.$get(
-      `https://foxsis.ru/alvd/wp-json/wc/v3/products/` + params.id,
-      {
-        auth: {
-          username: 'ck_85e44e8735261d45a19d8f7aaf012f8d640c2dac',
-          password: 'cs_4261bb639f4e9a18c146851361d6317804a816fc'
-        }
-      }
-    )
-    let subcategory = await $axios.$get(
-      `https://foxsis.ru/alvd/wp-json/wc/v3/products/categories/` + params.sht,
-      {
-        auth: {
-          username: 'ck_85e44e8735261d45a19d8f7aaf012f8d640c2dac',
-          password: 'cs_4261bb639f4e9a18c146851361d6317804a816fc'
-        },
-        _fields: 'id,name'
-      }
-    )
+  computed: {
+    ...mapGetters(['GET_ALL_BIOMATERIALS', 'CART_IDS'])
+  },
+  async asyncData ({ app, params }) {
+    const client = app.apolloProvider.defaultClient
+    const id = params.id
 
-    return { products, title, subcategory }
+    const res = await client.query({
+      query: ANALIZ_ID,
+      variables: {
+        ID: id
+      }
+    })
+
+    const analizy = res.data.analizy.data
+
+    return {
+      analizy
+    }
   }
 }
 </script>

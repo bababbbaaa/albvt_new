@@ -31,7 +31,8 @@ export const mutations = {
 
   // remove cart item in store
   REMOVE_FROM_CART (state, index) {
-    state.cart.splice(index, 1), state.cartID.splice(index, 1)
+    state.cart.splice(index, 1), 
+    state.cartID.splice(index, 1)
   },
   // remove cart item in store
   REMOVE_All_CART (state) {

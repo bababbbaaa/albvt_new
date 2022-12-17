@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="w-full ">
     <div class="flex justify-center gap-[20px] items-center w-full ">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         <!-- step == 1 -->
-        <div class="flex flex-col gap-1" v-if="step == 1">
+        <div class="flex flex-col gap-1 w-full" v-if="step == 1">
           <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
             <div
               class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
@@ -30,7 +30,7 @@
               />
             </div>
             <span class="text-[12px] text-[#ADACB3]"
-              >На эту почту будут отправлены результаты анализов</span
+              >На эту почту придут результаты анализов</span
             >
           </div>
         </div>
@@ -61,11 +61,7 @@
             />
           </div>
 
-          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
-            <span class="text-[12px] text-[#ADACB3]"
-              >Используйте в качестве логина для входа</span
-            >
-          </div>
+          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm"></div>
         </div>
 
         <div class="flex flex-col gap-1" v-if="step == 1">
@@ -87,7 +83,7 @@
             >
             <input
               type="password"
-              placeholder="Пароль"
+              placeholder=""
               v-model="formCreate.password"
               class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
             />
@@ -95,10 +91,8 @@
 
           <!-- password end-->
 
-          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm relative">
-            <span class="text-[12px] text-[#ADACB3]"
-              >Пароль должен состоять из 8 и более символов</span
-            >
+          <div class="flex flex-col gap-1 rounded-md shadow-sm relative">
+            <span class="text-[12px] text-[#ADACB3]">Не менее 8 символов </span>
           </div>
         </div>
         <div class="flex flex-col gap-1" v-if="step == 1">
@@ -122,7 +116,7 @@
             >
             <input
               type="password"
-              placeholder="Пароль"
+              placeholder=""
               v-model="formCreate.ConfPassword"
               class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
             />
@@ -195,61 +189,60 @@
             class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
           />
         </div>
-
-        <div
-          v-if="step == 2"
-          class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-          :class="[
-            formCreate.dataRozgdeniya.length !== 10
-              ? 'border-[#E5E4E8]'
-              : 'border-main'
-          ]"
-        >
-          <label
-            for=""
-            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+        <div class="grid grid-cols-2 gap-3" v-if="step == 2">
+          <div
+            class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
             :class="[
               formCreate.dataRozgdeniya.length !== 10
-                ? 'text-[#ADACB3]'
-                : 'text-main'
+                ? 'border-[#E5E4E8]'
+                : 'border-main'
             ]"
-            >Дата рождения</label
           >
-          <input
-            v-model="formCreate.dataRozgdeniya"
-            class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
-            placeholder="__.__.____"
-            v-facade="'##.##.####'"
-          />
-        </div>
+            <label
+              for=""
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+              :class="[
+                formCreate.dataRozgdeniya.length !== 10
+                  ? 'text-[#ADACB3]'
+                  : 'text-main'
+              ]"
+              >Дата рождения</label
+            >
+            <input
+              v-model="formCreate.dataRozgdeniya"
+              class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+              placeholder="__.__.____"
+              v-facade="'##.##.####'"
+            />
+          </div>
 
-        <div
-          v-if="step == 2"
-          class="flex items-center flex-wrap sm:flex-nowrap  overflow-hidden"
-        >
-          <span
-            @click="formCreate.gender = true"
-            for="gender1"
-            class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-l-md"
-            :class="[
-              formCreate.gender !== true
-                ? 'border-[#343434]/30 border text-[#343434]/30'
-                : 'text-[#343434] border border-main bg-main/10'
-            ]"
-            >М</span
+          <div
+            class="flex items-center flex-wrap sm:flex-nowrap  overflow-hidden"
           >
+            <span
+              @click="formCreate.gender = true"
+              for="gender1"
+              class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-l-md"
+              :class="[
+                formCreate.gender !== true
+                  ? 'border-[#343434]/30 border text-[#343434]/30'
+                  : 'text-[#343434] border border-main bg-main/10'
+              ]"
+              >М</span
+            >
 
-          <span
-            @click="formCreate.gender = false"
-            for="gender2"
-            class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-r-md"
-            :class="[
-              formCreate.gender !== false
-                ? 'border-[#343434]/30 border text-[#343434]/30'
-                : 'text-[#343434] border border-main bg-main/10'
-            ]"
-            >Ж</span
-          >
+            <span
+              @click="formCreate.gender = false"
+              for="gender2"
+              class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-r-md"
+              :class="[
+                formCreate.gender !== false
+                  ? 'border-[#343434]/30 border text-[#343434]/30'
+                  : 'text-[#343434] border border-main bg-main/10'
+              ]"
+              >Ж</span
+            >
+          </div>
         </div>
 
         <div

@@ -2,10 +2,10 @@
   <div
     class="grid grid-cols-[3fr,3fr,2fr,1fr]  lg:grid-cols-[3fr,3fr,1fr] xl:grid-cols-[2fr,13fr,2fr,3fr] grid-rows-2 xl:grid-rows-1  gap-2 xl:gap-[20px] items-center hover:bg-[#F5F5F5] p-[10px] anime border-b-[0.5px] border-b-[#e4e4e4]"
   >
-   <span class="hidden xl:block font-medium text-[14px] "
+    <span class="hidden xl:block font-medium text-[14px] "
       >{{ item.attributes.Art }}
     </span>
-     
+
     <div
       class="row-span-1 col-span-4 xl:col-span-1 flex  flex-col font-medium text-[14px]     py-2 xl:py-[20px] "
     >
@@ -18,7 +18,7 @@
         </p>
       </nuxt-link>
     </div>
-    
+
     <div class="hidden xl:flex flex-col col-span-1">
       <span
         class="text-[16px] font-semibold cursor-pointer flex items-start"
@@ -44,11 +44,9 @@
       <span v-else class="text-[14px] text-[#9A9A9A] pt-1"
         >{{ item.attributes.TimeDone }} дней</span
       >
-    </div> 
+    </div>
 
-    
     <!-- modile -->
-
 
     <!-- <div
       class=" flex xl:hidden flex-wrap sm:flex-nowrap gap-2 lg:gap-4 col-span-2 text-[10px] lg:text-[14px] font-normal text-[#777777]"
@@ -107,12 +105,10 @@
       <span v-else>{{ item.attributes[0].options[0] }} дней</span>
     </div> -->
 
-
     <!-- end modile -->
 
-
     <div
-      v-if="CART.includes(item) ||  CART_IDS.includes(item.id)"
+      v-if="CART.includes(item) || CART_IDS.includes(item.id)"
       :id="item.id"
       class="flex justify-center items-center col-span-4 sm:col-span-1   rounded-[5px] py-2 text-main gap-1    h-[40px] px-[8px] text-[14px]"
     >
@@ -157,30 +153,18 @@
 </template>
 
 <script>
-import {  mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
     item: Object
   },
   computed: {
-    ...mapGetters(['CART' , 'CART_IDS']),
-    
-  },
-  mounted () {
-    this.inCartIDProduct()
+    ...mapGetters(['CART', 'CART_IDS'])
   },
   methods: {
     addToCart (item) {
       this.$emit('addToCart', item)
-    },
-    inCartIDProduct(){
-      const inCartItems = this.CART.map(item => item.id)
-      console.log(inCartItems);
-
-      // this.CART.forEach(element => {
-      //     element.id
-      // });
     }
   }
 }

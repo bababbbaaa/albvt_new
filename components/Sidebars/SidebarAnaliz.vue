@@ -7,12 +7,12 @@
         <div v-if="isMobile == true" class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/"
-            class="flex bg-[#4CBDEE] !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/"
-            class="flex  justify-center cursor-pointer items-center border border-[#4CBDEE] rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -20,12 +20,12 @@
         <div v-else class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/gematologicheskie-issledovaniya/2849"
-            class="flex bg-[#4CBDEE] !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/1-dlya-zhenshhin/2797"
-            class="flex  justify-center cursor-pointer items-center border border-[#4CBDEE] rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -47,7 +47,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-[#4cbdee] anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -55,7 +55,7 @@
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-[#4cbdee] anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
               >
                 <nuxt-link
                   :to="
@@ -64,10 +64,9 @@
                       '/' +
                       item.node.databaseId
                   "
-                  
-                  class="w-full hover:text-[#4cbdee] anime  cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
-                  >{{ item.node.name }} </nuxt-link
-                >
+                  class="w-full hover:text-main anime  cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                  >{{ item.node.name }}
+                </nuxt-link>
               </h4>
               <transition name="fade">
                 <ul
@@ -82,7 +81,7 @@
                     <!-- с подкатегориями -->
                     <div v-if="subitem.node.children">
                       <div
-                        class="text-left flex gap-2 justify-start hover:text-[#4cbdee] anime cursor-pointer"
+                        class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span
                           class="text-left flex gap-2 justify-start items-center"
@@ -119,9 +118,7 @@
                               d="M12 4v16m8-8H4"
                             />
                           </svg>
-                          {{
-                            subitem.node.name
-                          }}
+                          {{ subitem.node.name }}
                         </span>
                       </div>
                       <ul
@@ -143,17 +140,14 @@
                                 '/' +
                                 itemSubSub.node.databaseId
                             "
-                            class="text-left flex gap-2 justify-start text-[14px] hover:text-[#4cbdee] anime cursor-pointer"
+                            class="text-left flex gap-2 justify-start text-[14px] hover:text-main anime cursor-pointer"
                           >
                             <span
                               class="text-left flex gap-2 justify-start"
                               @click="preFetchDataSubCat(itemSubSub.node)"
                             >
                               <span>-</span>
-                              {{
-                                itemSubSub.node.name
-                                  
-                              }}
+                              {{ itemSubSub.node.name }}
                             </span>
                           </nuxt-link>
                         </li>
@@ -168,17 +162,14 @@
                             '/' +
                             subitem.node.databaseId
                         "
-                        class="text-left flex gap-2 justify-start hover:text-[#4cbdee] anime cursor-pointer"
+                        class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span
                           class="text-left flex gap-2 justify-start"
                           @click="preFetchDataCat(subitem.node)"
                         >
                           <span>-</span>
-                          {{
-                            subitem.node.name
-                              
-                          }}
+                          {{ subitem.node.name }}
                         </span>
                       </nuxt-link>
                     </div>
@@ -188,8 +179,8 @@
             </li>
           </ul>
         </div>
-       <!-- desctop -->
-       <div
+        <!-- desctop -->
+        <div
           v-else-if="isMobile == false"
           class="bg-white shadow-md rounded-[5px] p-[10px] "
           :class="[viewAll ? 'h-full' : 'h-full']"
@@ -202,7 +193,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-[#4cbdee] anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -210,7 +201,7 @@
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-[#4cbdee] anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
               >
                 <nuxt-link
                   :to="
@@ -219,7 +210,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class=" w-full hover:text-[#4cbdee] anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px]"
+                  class=" w-full hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px]"
                   >{{ item.node.name }}</nuxt-link
                 >
               </h4>
@@ -236,7 +227,7 @@
                     <!-- с подкатегориями -->
                     <div v-if="subitem.node.children">
                       <div
-                        class="text-left flex gap-2 justify-start hover:text-[#4cbdee] anime cursor-pointer"
+                        class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span
                           class="text-left flex gap-2 justify-start items-center"
@@ -273,12 +264,10 @@
                               d="M12 4v16m8-8H4"
                             />
                           </svg>
-                          {{
-                            subitem.node.name
-                          }}
+                          {{ subitem.node.name }}
                         </span>
-                        
-                              <!-- .replace(/[0-9]/g, '')
+
+                        <!-- .replace(/[0-9]/g, '')
                               .replace(/\./g, '') -->
                       </div>
                       <ul
@@ -300,16 +289,14 @@
                                 '/' +
                                 itemSubSub.node.databaseId
                             "
-                            class="text-left flex gap-2 justify-start text-[14px] hover:text-[#4cbdee] anime cursor-pointer"
+                            class="text-left flex gap-2 justify-start text-[14px] hover:text-main anime cursor-pointer"
                           >
                             <span
                               class="text-left flex gap-2 justify-start"
                               @click="preFetchDataSubCat(itemSubSub.node)"
                             >
                               <span>-</span>
-                              {{
-                                itemSubSub.node.name
-                              }}
+                              {{ itemSubSub.node.name }}
                             </span>
                           </nuxt-link>
                         </li>
@@ -324,16 +311,14 @@
                             '/' +
                             subitem.node.databaseId
                         "
-                        class="text-left flex gap-2 justify-start hover:text-[#4cbdee] anime cursor-pointer"
+                        class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span
                           class="text-left flex gap-2 justify-start"
                           @click="preFetchDataCat(subitem.node)"
                         >
                           <span>-</span>
-                          {{
-                            subitem.node.name
-                          }}
+                          {{ subitem.node.name }}
                         </span>
                       </nuxt-link>
                     </div>
@@ -345,8 +330,6 @@
         </div>
         <!-- <span v-else>Выберите анализ</span> -->
       </div>
-
-    
     </div>
   </div>
 </template>
@@ -387,7 +370,7 @@ export default {
     onResize () {
       this.isMobile = window.innerWidth < 600
     },
-    ...mapActions(['GET_CATEGORIES_FROM_JSON']),
+
     viewAllAnalizesTrue () {
       this.viewAll = !this.viewAll
     },
@@ -402,17 +385,11 @@ export default {
       } else {
         this.viewItem = null
       }
-      
     },
     preFetchDataCat (item) {
-      this.GET_CATEGORIES_FROM_JSON(item.name) 
-
-      
-
-      console.log('415');
+      console.log(item)
     },
     preFetchDataSubCat (item) {
-      this.GET_CATEGORIES_FROM_JSON(item.name)
       if (this.viewSubItem == null) {
         this.viewSubItem = item.databaseId
       } else if (this.viewSubItem !== item.databaseId) {
@@ -442,5 +419,4 @@ a.nuxt-link-active {
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>

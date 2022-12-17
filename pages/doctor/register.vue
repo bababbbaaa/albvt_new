@@ -4,18 +4,24 @@
       v-if="speczialnosts && gorodaInvitros"
       class="container pt-[47px] mt-[47px] sm:mt-0 w-full max-w-[620px] h-full min-h-screen flex flex-col justify-center items-center"
     >
-    <div v-if="registerActive == true" class="w-full container  text-center flex flex-col justify-center items-center">
-      <img src="~/assets/icons/333331.png" alt="">
-      Вы успешно зарегистрировались , ожидайте звонка менеджера для активации аккаунта
-    </div>
-    <span v-else-if="registerActive == false">Заполните данные</span>
+      <div
+        v-if="registerActive == true"
+        class="w-full container  text-center flex flex-col justify-center items-center"
+      >
+        <img src="~/assets/icons/333331.png" alt="" />
+        Вы успешно зарегистрировались
+      </div>
+      <span v-else-if="registerActive == false">Заполните данные</span>
 
-      <div v-if="step == 1" class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-12">
+      <div
+        v-if="step == 1"
+        class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-12 w-full"
+      >
         <!-- step == 1 -->
         <div class="flex flex-col gap-1" v-if="step == 1">
-          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
+          <div class=" flex flex-col gap-1 rounded-md shadow-sm">
             <div
-              class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
+              class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
               :class="[
                 dataDoctor.email.length <= 6 && !dataDoctor.email.includes('@')
                   ? 'border-[#E5E4E8]'
@@ -24,7 +30,7 @@
             >
               <label
                 for=""
-                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
                 :class="[
                   dataDoctor.email.length <= 6 &&
                   !dataDoctor.email.includes('@')
@@ -38,57 +44,50 @@
                 class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
               />
             </div>
-            <span class="text-[12px] text-[#ADACB3]"
-              >На эту почту будут отправлены результаты анализов</span
-            >
           </div>
         </div>
 
         <!-- Phone -->
         <div class="flex flex-col gap-1">
           <div
-            class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
+            class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
             :class="[
-              dataDoctor.Phone.length !== 17
+              dataDoctor.Phone.length !== 18
                 ? 'border-[#E5E4E8]'
                 : 'border-main'
             ]"
           >
             <label
               for=""
-              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
               :class="[
-                dataDoctor.Phone.length !== 17 ? 'text-[#ADACB3]' : 'text-main'
+                dataDoctor.Phone.length !== 18 ? 'text-[#ADACB3]' : 'text-main'
               ]"
               >Телефон*</label
             >
             <input
               v-model="dataDoctor.Phone"
               class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
-              placeholder="+7(___) ___-__-__"
-              v-facade="'+7(###) ###-##-##'"
+              placeholder="+7"
+              v-facade="'+7 (###) ###-##-##'"
             />
           </div>
 
-          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
-            <span class="text-[12px] text-[#ADACB3]"
-              >Используйте в качестве логина для входа</span
-            >
-          </div>
+          
         </div>
 
         <div class="flex flex-col gap-1">
           <!-- password -->
 
           <div
-            class="relative border-[1px]    rounded-md px-4 py-3  shadow-sm anime"
+            class="relative border-[1px] border-[#E5E4E8]     rounded-md px-4 py-3  shadow-sm anime"
             :class="[
               dataDoctor.password.length < 8 ? 'text-[#ADACB3]' : 'text-main'
             ]"
           >
             <label
               for=""
-              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
               :class="[
                 dataDoctor.password.length < 8 ? 'text-[#ADACB3]' : 'text-main'
               ]"
@@ -96,44 +95,46 @@
             >
             <input
               type="password"
-              placeholder="Пароль"
+              placeholder=""
               v-model="dataDoctor.password"
-              class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+              class="block w-full border-0 p-0 focus:outline-none  sm:text-sm"
             />
           </div>
-
-          <!-- password end-->
-
-          <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm relative">
-            <span class="text-[12px] text-[#ADACB3]"
-              >Пароль должен состоять из 8 и более символов</span
+          <div class=" flex flex-col gap-1 rounded-md shadow-sm relative">
+            <span class="text-[12px] text-[#ADACB3] text-right"
+              >Пароль не менее 8 символов</span
             >
           </div>
         </div>
+
+        <!-- password end-->
+
         <div class="flex flex-col gap-1">
           <div
-            class="relative border-[1px]    rounded-md px-4 py-3  shadow-sm anime"
+            class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
             :class="[
-              dataDoctor.password !== dataDoctor.ConfPassword
-                ? 'text-[#ADACB3]'
-                : 'text-main'
+              dataDoctor.password == dataDoctor.ConfPassword &&
+              dataDoctor.password.length > 8
+                ? 'text-main'
+                : 'text-[#ADACB3]'
             ]"
           >
             <label
               for=""
-              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
               :class="[
-                dataDoctor.password !== dataDoctor.ConfPassword
-                  ? 'text-[#ADACB3]'
-                  : 'text-main'
+                dataDoctor.password == dataDoctor.ConfPassword &&
+                dataDoctor.password.length > 8
+                  ? 'text-main'
+                  : 'text-[#ADACB3]'
               ]"
-              >Повторите пароль</label
+              >Повторите пароль*</label
             >
             <input
               type="password"
-              placeholder="Пароль"
+              placeholder=""
               v-model="dataDoctor.ConfPassword"
-              class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+              class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
             />
           </div>
         </div>
@@ -151,15 +152,29 @@
 
       <div
         v-else-if="step == 2"
-        class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-12"
+        class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-12 w-full"
       >
         <div class="relative rounded-md shadow-sm anime w-full">
-          <label for="" class="label-new">Врачебная специальность*</label>
+          <label
+            for=""
+            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime z-[2]"
+            :class="[
+              speczialnostsSelectName == 'Выберите'
+                ? 'text-[#ADACB3]'
+                : 'text-main'
+            ]"
+            >Врачебная специальность*</label
+          >
           <div
             @click="speczialnostsSelectView = !speczialnostsSelectView"
             class="relative border border-[#E5E4E8] p-3 rounded-md bg-transparent text-sm w-full"
           >
-            <span>{{ speczialnostsSelectName }}</span>
+            <span
+              class="text-transparent"
+              v-if="speczialnostsSelectName == 'Выберите'"
+              >Выберите</span
+            >
+            <span v-else>{{ speczialnostsSelectName }}</span>
             <div
               class=" p-3 bg-white flex flex-col gap-3 absolute  w-[300px] h-[300px] overflow-y-auto top-0 left-0 z-[10] rounded-md drop-shadow-xl"
               v-if="speczialnostsSelectView"
@@ -173,15 +188,64 @@
                 {{ item.attributes.Name }}
               </div>
             </div>
+            <svg
+              v-if="speczialnostsSelectView"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4  rotate-180 absolute top-3 right-3"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4 text-main  absolute top-4 right-3"
+              :class="[
+                speczialnostsSelectName == 'Выберите'
+                  ? 'text-[#343434]/50'
+                  : 'text-main'
+              ]"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
           </div>
         </div>
         <div class="relative rounded-md shadow-sm anime w-full">
-          <label for="" class="label-new">Место работы врача*</label>
+          <label
+            for=""
+            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime z-[2]"
+            :class="[
+              gorodaInvitrosSelectName == 'Выберите'
+                ? 'text-[#ADACB3]'
+                : 'text-main'
+            ]"
+            >Место работы врача*</label
+          >
           <div
             @click="gorodaInvitrosSelectView = !gorodaInvitrosSelectView"
             class="relative border border-[#E5E4E8] p-3 rounded-md bg-transparent text-sm w-full"
           >
-            <span>{{ gorodaInvitrosSelectName }}</span>
+            <span
+              class="text-transparent"
+              v-if="gorodaInvitrosSelectName == 'Выберите'"
+              >Выберите</span
+            >
+            <span v-else>{{ gorodaInvitrosSelectName }}</span>
             <div
               class=" bg-white flex flex-col  absolute  w-[300px] h-[300px] overflow-y-auto top-0 left-0 z-[10] rounded-md drop-shadow-xl"
               v-if="gorodaInvitrosSelectView"
@@ -205,70 +269,175 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="relative rounded-md shadow-sm anime">
-          <label for="" class="label-new">Фамилия*</label>
-          <input
-            v-model.trim="dataDoctor.Family"
-            type="text"
-            name="fio"
-            class="input-new px-4 py-3"
-          />
-        </div>
-        <div class="relative rounded-md shadow-sm anime">
-          <label for="" class="label-new">Имя*</label>
-          <input
-            v-model.trim="dataDoctor.Name"
-            type="text"
-            name="name"
-            class="input-new px-4 py-3"
-          />
-        </div>
-        <div class="relative rounded-md shadow-sm anime">
-          <label for="" class="label-new">Отчество</label>
-          <input
-            v-model="dataDoctor.Otchestvo"
-            type="text"
-            class="input-new px-4 py-3"
-            name="otchestvo"
-          />
-        </div>
-        <div class="relative rounded-md shadow-sm anime">
-          <label for="" class="label-new">Дата рождения*</label>
-          <input
-            placeholder="__.__.____*"
-            v-facade="'##.##.####'"
-            v-model="dataDoctor.DataRozgdeniya"
-            type="text"
-            class="input-new px-4 py-3"
-          />
-        </div>
-        <div
-          class="flex items-center flex-wrap sm:flex-nowrap  overflow-hidden"
-        >
-          <span
-            @click="dataDoctor.gender = true"
-            for="gender1"
-            class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-l-md"
+          <svg
+            v-if="gorodaInvitrosSelectView"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4  rotate-180 absolute top-3 right-3"
             :class="[
-              dataDoctor.gender !== true
-                ? 'border-[#343434]/30 border text-[#343434]/30'
-                : 'text-[#343434] border border-main bg-main/10'
+              gorodaInvitrosSelectName !== 'Выберите'
+                ? 'text-[#343434]/50'
+                : 'text-main'
             ]"
-            >М</span
           >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 text-main  absolute top-4 right-3"
+            :class="[
+              gorodaInvitrosSelectName == 'Выберите'
+                ? 'text-[#343434]/50'
+                : 'text-main'
+            ]"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </div>
 
-          <span
-            @click="dataDoctor.gender = false"
-            for="gender2"
-            class="text-[14px] cursor-pointer w-1/2 p-4 flex justify-center items-center rounded-r-md"
+        <div class="flex flex-col gap-1">
+          <div
+            class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
             :class="[
-              dataDoctor.gender !== false
-                ? 'border-[#343434]/30 border text-[#343434]/30'
-                : 'text-[#343434] border border-main bg-main/10'
+              dataDoctor.Family.length <= 1 ? 'text-[#ADACB3]' : 'text-main'
             ]"
-            >Ж</span
           >
+            <label
+              for=""
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+              :class="[
+                dataDoctor.Family.length <= 1 ? 'text-[#ADACB3]' : 'text-main'
+              ]"
+              >Фамилия*</label
+            >
+            <input
+              placeholder=""
+              v-model="dataDoctor.Family"
+              class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <div
+            class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
+            :class="[
+              dataDoctor.Name.length <= 1 ? 'text-[#ADACB3]' : 'text-main'
+            ]"
+          >
+            <label
+              for=""
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+              :class="[
+                dataDoctor.Name.length <= 1 ? 'text-[#ADACB3]' : 'text-main'
+              ]"
+              >Имя*</label
+            >
+            <input
+              placeholder=""
+              v-model.trim="dataDoctor.Name"
+              class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <div
+            class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
+            :class="[
+              dataDoctor.Otchestvo.length <= 1 ? 'text-[#ADACB3]' : 'text-main'
+            ]"
+          >
+            <label
+              for=""
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+              :class="[
+                dataDoctor.Otchestvo.length <= 1
+                  ? 'text-[#ADACB3]'
+                  : 'text-main'
+              ]"
+              >Отчество</label
+            >
+            <input
+              placeholder=""
+              v-model.trim="dataDoctor.Otchestvo"
+              class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1">
+            <div
+              class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
+              :class="[
+                dataDoctor.DataRozgdeniya.length !== 10
+                  ? 'text-[#ADACB3]'
+                  : 'text-main'
+              ]"
+            >
+              <label
+                for=""
+                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                :class="[
+                  dataDoctor.DataRozgdeniya.length !== 10
+                    ? 'text-[#ADACB3]'
+                    : 'text-main'
+                ]"
+                >Дата рождения*</label
+              >
+              <input
+                placeholder="__.__.____*"
+                v-facade="'##.##.####'"
+                v-model.trim="dataDoctor.DataRozgdeniya"
+                class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <div
+            class="flex items-center flex-wrap sm:flex-nowrap  overflow-hidden"
+          >
+            <span
+              @click="dataDoctor.gender = true"
+              for="gender1"
+              class="text-[14px] cursor-pointer w-1/2 p-[13px] flex justify-center items-center rounded-l-md"
+              :class="[
+                dataDoctor.gender !== true
+                  ? 'border-[#343434]/30 border text-[#343434]/30'
+                  : 'text-[#343434] border border-main'
+              ]"
+              >М</span
+            >
+
+            <span
+              @click="dataDoctor.gender = false"
+              for="gender2"
+              class="text-[14px] cursor-pointer w-1/2 p-[13px] flex justify-center items-center rounded-r-md"
+              :class="[
+                dataDoctor.gender !== false
+                  ? 'border-[#343434]/30 border text-[#343434]/30'
+                  : 'text-[#343434] border border-main'
+              ]"
+              >Ж</span
+            >
+          </div>
         </div>
 
         <button
@@ -284,7 +453,6 @@
     <span class="mt-4 text-sm" v-if="errors == 'Введите корректный Email'"
       >Введите корректный Email</span
     >
-    
   </div>
 </template>
 

@@ -2,9 +2,12 @@
   <div class="">
     <div class="flex flex-col gap-[20px] ">
       <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
-        
-        <h1 class="text-[24px] font-medium flex gap-2 items-center" id="scroll-to">
-           <button
+        <h1
+        v-if="subCats"
+          class="text-[24px] font-medium flex gap-2 items-center scroll-to"
+          id="scroll-to"
+        >
+          <button
             @click="$router.back()"
             class=" flex justify-center items-center"
           >
@@ -23,10 +26,9 @@
               />
             </svg>
           </button>
-          {{ pageName }}
+           {{ subCats.data[0].attributes.Name }}
         </h1>
       </div>
-
       <div class="bg-white shadow-md rounded-[5px] ">
         <div>
           <div
@@ -36,9 +38,9 @@
             <span class="">Наименование исследования</span>
             <span class="">Цена</span>
           </div>
-          <div class="flex flex-col w-full  xl:mt-[12px]">
+          <div class="flex flex-col w-full  xl:mt-[12px]" v-if="analizies">
             <med-product
-              v-for="item in itemsSlice"
+              v-for="item in analizies.data"
               :key="item.id"
               :item="item"
               @addToCart="addToCart(item)"
@@ -47,12 +49,12 @@
         </div>
       </div>
       <div class="w-full flex justify-center">
-        <button
+        <!-- <button
           @click="getProductToParams()"
           v-if="limit !== null && products.length > 7"
         >
           Показать еще
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -60,111 +62,80 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import PopAddToCart from '~/components/elements/PopAddToCart.vue'
 import MedProduct from '~/components/med-product.vue'
+import SidebarAnaliz from '~/components/Sidebars/SidebarAnaliz.vue'
+import GET_CAT_NAME from '~/graphql/get-cat-name.gql'
+import GET_ANALIZES_CAT from '~/graphql/analiz-cat-id.gql'
 
 export default {
-  components: { MedProduct },
-  layout: 'ComplecsWrapper',
+  components: { PopAddToCart, SidebarAnaliz, MedProduct },
+  layout: 'AnalizWrapper',
   data () {
     return {
       title: '',
-      limit: 7,
-      addCartItem: '',
-      test: [],
+      // limit: 7,
+      limit: null,
       products: [],
       posts: [],
       pageName: '',
-      dalee: false
     }
   },
+  apollo: {
+    subCats: {
+      query: GET_CAT_NAME,
+      variables(){
+        return {
+          ID: this.$route.params.id
+        }
+      }
+    },
+    analizies: {
+      query: GET_ANALIZES_CAT,
+      variables(){
+        return {
+          ID_CAT: this.$route.params.id
+        }
+      }
+    }
+  },
+
   methods: {
     ...mapActions(['ADD_TO_CART']),
-     scrollToAnaliz () {
+    addToCart (item) {
+      this.ADD_TO_CART(item)
+    },
+    scrollToAnaliz () {
       var scrollDiv = document.getElementById('scroll-to').offsetTop - 90
       window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-    },
-    addToCart (item) {
-      this.ADD_TO_CART(item), (this.addCartItem = item.name)
-    },
-    preFetchData (id) {
-      console.log('tut  --  ' + id)
-    },
-    async getProductToParams () {
-      this.limit = null
-      this.dalee = true
-      const params2 = this.$route.params
-      const all_products = await this.$axios.$get(
-        'https://foxsis.ru/alvd/wp-json/wc/v3/products',
-        {
-          auth: {
-            username: 'ck_85e44e8735261d45a19d8f7aaf012f8d640c2dac',
-            password: 'cs_4261bb639f4e9a18c146851361d6317804a816fc'
-          },
-          params: {
-            category: params2.id,
-            per_page: 100, 
-            order: 'asc',
-            orderby: 'title'
-          }
-        }
-      )
-
-      return { all_products }, (this.products = all_products)
     }
   },
   computed: {
-    ...mapGetters(['CART', 'CATEGORY', 'CART_IDS']),
+    ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS']),
 
-    itemsSlice () {
-      return this.limit ? this.products.slice(0, this.limit) : this.products
-    }
-  },
-  async fetch () {
-    const category = 'category='
-    const PerPage = 'per_page='
-    const order = 'orderby=title'
-    this.products = await fetch(
-      'https://foxsis.ru/alvd/wp-json/wc/v3/products?' +
-        category +
-        this.$route.params.id +
-        '&' +
-        PerPage +
-        8 + '&' + 'order=asc&orderby=title'
-    ).then(res => res.json())
-    this.pageName = this.products[0].categories[0].name
   },
   mounted () {
-     if (window.screen.width <= 600) {
+    if (window.screen.width <= 600 && this.dalee == false) {
       this.scrollToAnaliz()
     }
-    this.$router.replace({'query': null});
+    this.$router.replace({ query: null })
   },
   updated () {
     if (window.screen.width <= 600 && this.dalee == false) {
       this.scrollToAnaliz()
     }
   },
+
   watch: {
     $route () {
       if (window.screen.width <= 600) {
-      this.scrollToAnaliz()
-    }
+        this.scrollToAnaliz()
+      }
     }
   }
 }
 </script>
 
 <style>
-/* .test-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  line-clamp: 1;
-  box-orient: vertical;
-} */
+
 </style>

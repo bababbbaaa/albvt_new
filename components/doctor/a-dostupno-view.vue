@@ -52,6 +52,7 @@
                 )
               }}</span>
             </div>
+           <nuxt-link :to="`/doctor/order/` + order.id" class="text-sm">Подробнее</nuxt-link>
             <span
               v-if="order.attributes.Status == true"
               class="text-[12px]  font-semibold"

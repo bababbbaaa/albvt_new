@@ -23,7 +23,7 @@
           @deleteFromCart="deleteFromCart(index)"
         />
         <div class="flex flex-col gap-4 ">
-          <span class="w-full py-2  border-b-2 border-[#DDEEF6]"
+          <span class="w-full py-2 text-center  border-b-2 border-[#DDEEF6]"
             >Взятие биоматериала</span
           >
           <div class="flex flex-col gap-2 ">

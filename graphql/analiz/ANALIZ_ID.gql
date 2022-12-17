@@ -1,0 +1,48 @@
+query ANALIZ_ID ($ID: ID){
+  analizy (id: $ID){
+    data{
+      id
+      attributes{
+        Name
+        Art
+        Desc
+        SubDesc
+        TimeDone
+        Price
+        Active
+        DopAnalizes{
+          data{
+            id
+          }
+        }
+        complecsAnaliz {
+          data {
+            id
+            attributes {
+              Name
+              Price
+              Art
+            }
+          }
+        }
+        biomaterialies{
+          data{
+            id
+            attributes{
+              Name
+              Price
+            }
+          }
+        }
+        sub_cat{
+          data{
+            attributes{
+              Name
+            }
+          }
+        }
+        Complecs
+      }
+    }
+  }
+}
