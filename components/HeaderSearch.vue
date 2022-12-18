@@ -53,7 +53,7 @@
             <nuxt-link
               v-if="item.attributes.Complecs == true"
               :to="'/all-complecs' + '/'"
-              class=" text-[#777777] hover:text-[#343434] anime font-semibold text-[12px] sm:text-[14px]"
+              class=" text-[#777777] hover:text-[#343434] anime font-semibold text-[12px] sm:text-sm"
               :title="item.attributes.Name"
               >{{ item.attributes.Name }}</nuxt-link
             >
@@ -61,31 +61,31 @@
             <nuxt-link
               v-else
               :to="'/all-analyzes' + '/'"
-              class="text-[#777777] hover:text-[#343434] font-semibold anime text-[12px] sm:text-[14px]"
+              class="text-[#777777] hover:text-[#343434] font-semibold anime text-[12px] sm:text-sm"
               :title="item.attributes.Name"
               >{{ item.attributes.Name }}</nuxt-link
             >
 
-            <div class="flex gap-3 flex-wrap sm:flex-nowrap">
-              <span class="text-[12px] text-[#9A9A9A] pt-1"
+            <div class="flex gap-3 items-center flex-wrap sm:flex-nowrap">
+              <span class="text-sm text-[#9A9A9A] "
                 >код: {{ item.attributes.Art }}</span
               >
               <span
                 v-if="parseInt(item.attributes.TimeDone) == 1"
-                class="text-[14px] text-[#9A9A9A] pt-1"
+                class="text-sm text-[#9A9A9A] "
                 >{{ item.attributes.TimeDone }} день</span
               >
               <span
                 v-else-if="parseInt(item.attributes.TimeDone) < 5"
-                class="text-[14px] text-[#9A9A9A] pt-1"
+                class="text-sm text-[#9A9A9A] "
                 >{{ item.attributes.TimeDone }} дня</span
               >
-              <span v-else class="text-[14px] text-[#9A9A9A] pt-1"
+              <span v-else class="text-sm text-[#9A9A9A] "
                 >{{ item.attributes.TimeDone }} дней</span
               >
               <span
                 v-if="item.attributes.Complecs == true"
-                class="text-[12px] text-[#757575] pt-1 bg-main/20 px-2 py-1 rounded-[5px]"
+                class="text-[12px] text-[#757575]  bg-main/20 px-2 py-1 rounded-[5px]"
                 >Комплекс</span
               >
             </div>
@@ -95,7 +95,7 @@
               inCart.includes(item.attributes.Name) ||
                 CART_IDS.includes(item.id)
             "
-            class="flex justify-center items-center   rounded-[5px] py-2 text-main gap-1   h-[40px] px-[8px] text-[14px]"
+            class="flex justify-center items-center   rounded-[5px] py-2 text-main gap-1   h-[40px] px-[8px] text-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -133,18 +133,10 @@
             >
           </button>
         </li>
-        <nuxt-link
-          v-if="searchResults.length != 0"
-          :to="{ path: '/search-result', query: { search: searchInput } }"
-          replace
-          class=" w-full flex justify-center items-center py-4 text-[#343434] hover:bg-[#CBCBCB] anime bg-[#E2E2E2]"
-        >
-          <span @click="closeSearch()"> Все результаты</span>
-        </nuxt-link>
         <span
           v-if="loading == true"
           class=" w-full flex justify-center items-center py-4 text-[#343434] hover:bg-[#CBCBCB] anime bg-[#E2E2E2]"
-          >Идет поиск</span
+          >Идет поиск...</span
         >
         <span
           v-if="searchResults.length < 1 && loading == false"
@@ -245,6 +237,7 @@ export default {
           const results = res.data.search.analizies.data
           this.searchResults = results
           if (results.length == 0) {
+            this.loading = true
             this.searchToEn(value)
           }
         }

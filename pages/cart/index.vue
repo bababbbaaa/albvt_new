@@ -54,39 +54,55 @@
       </div>
       <div
         v-if="register == false && !$auth.loggedIn"
-        class="capitalize remove-bg p-[24px] flex w-full mb-[24px] sm:w-1/2 flex-col justify-center items-center gap-4 mt-24px"
+        class="capitalize remove-bg p-[24px] flex w-full mb-[24px]  flex-col justify-center items-center gap-4 mt-24px"
       >
-        <span>Авторизация</span>
-        <div>
+        <span class="text-2xl font-medium">Авторизация</span>
+        <div class="w-full">
           <tabs-login>
             <tab-login title="По телефону">
               <form
                 @submit.prevent="handleLoginSubmit()"
-                class="flex flex-col gap-4"
+                class="grid grid-cols-2 gap-4"
               >
-                <div
-                  class="flex flex-col items-start justify-start gap-2 w-full relative"
-                >
-                  <input
-                    type="text"
-                    value="ofis_my"
-                    placeholder="+7(___)___−__−__*"
-                    v-facade="'+7(###)###-##-##'"
-                    v-model="credentials.identifier"
-                    class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
-                    id="login"
-                  />
+                <div class="sm:col-span-1 col-span-2 flex flex-col gap-1">
+                  <div
+                    class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
+                  >
+                    <label
+                      for=""
+                      class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                      :class="[
+                        credentials.identifier.length !== 18
+                          ? 'text-[#89888F]'
+                          : 'text-main font-medium'
+                      ]"
+                      >Телефон*</label
+                    >
+                    <input
+                      v-model="credentials.identifier"
+                      class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+                      placeholder="+7"
+                      v-facade="'+7 (###) ###-##-##'"
+                    />
+                  </div>
                 </div>
                 <div
-                  class="flex flex-col items-start justify-start gap-2 w-full relative"
+                  class="sm:col-span-1 col-span-2 relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
                 >
+                  <label
+                    for=""
+                    class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                    :class="[
+                      credentials.password.length < 8
+                        ? 'text-[#89888F]'
+                        : 'text-main font-medium'
+                    ]"
+                    >Пароль*</label
+                  >
                   <input
                     :type="typePassword"
-                    placeholder="Пароль"
-                    value="ofis_my"
                     v-model="credentials.password"
-                    class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
-                    id="pass"
+                    class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
                   />
                   <div
                     @click="show_hide_password()"
@@ -129,7 +145,7 @@
                     </svg>
                   </div>
                 </div>
-                <div class="flex flex-col items-center justify-center gap-2">
+                <div class="col-span-2 flex flex-col items-center justify-center gap-2">
                   <button
                     type="submit"
                     class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
@@ -163,38 +179,57 @@
             </tab-login>
             <tab-login title="По Email">
               <form
-                @submit.prevent="handleLoginSubmit()"
-                class="flex flex-col gap-4"
+                @submit.prevent="handleLoginSubmit2()"
+                class="grid grid-cols-2 gap-4"
               >
-                <div
-                  class="flex flex-col items-start justify-start gap-2 w-full "
-                >
-                  <input
-                    type="text"
-                    placeholder="email"
-                    v-model="credentials.identifier"
-                    class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
-                    id="login2"
-                  />
+                <div class="sm:col-span-1 col-span-2 flex flex-col gap-1">
+                  <div
+                    class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
+                  >
+                    <label
+                      for=""
+                      class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                      :class="[
+                        credentials2.identifier.length !== 18
+                          ? 'text-[#89888F]'
+                          : 'text-main font-medium'
+                      ]"
+                      >Email*</label
+                    >
+                    <input
+                      v-model="credentials2.identifier"
+                      class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+
+
+                    />
+                  </div>
                 </div>
                 <div
-                  class="flex flex-col items-start justify-start gap-2 w-full relative"
+                  class="sm:col-span-1 col-span-2 relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
                 >
+                  <label
+                    for=""
+                    class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                    :class="[
+                      credentials2.password.length < 8
+                        ? 'text-[#89888F]'
+                        : 'text-main font-medium'
+                    ]"
+                    >Пароль*</label
+                  >
                   <input
                     :type="typePassword"
-                    placeholder="Пароль"
-                    v-model="credentials.password"
-                    class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-md focus:outline-[#8a8a8a]"
-                    id="pass2"
+                    v-model="credentials2.password"
+                    class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
                   />
                   <div
                     @click="show_hide_password()"
-                    class="absolute right-[14px] top-[14px]"
+                    class="absolute right-[14px] top-[15px]"
                   >
                     <svg
                       v-if="typePassword == 'password'"
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-[#343434]/70"
+                      class="h-4 w-4 text-[#343434]/70"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -214,7 +249,7 @@
                     <svg
                       v-else
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-[#343434]/70"
+                      class="h-4 w-4 text-[#343434]/70"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -228,7 +263,7 @@
                     </svg>
                   </div>
                 </div>
-                <div class="flex flex-col items-center justify-center gap-2">
+                <div class="col-span-2 flex flex-col items-center justify-center gap-2">
                   <button
                     type="submit"
                     class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
@@ -257,13 +292,6 @@
                       >Неправильный логин или пароль</span
                     >
                   </div>
-                  <div @click="closeLogin()">
-                    <nuxt-link
-                      to="/register"
-                      class="text-[#343434] w-full text-center"
-                      >Регистрация</nuxt-link
-                    >
-                  </div>
                 </div>
               </form>
             </tab-login>
@@ -274,7 +302,7 @@
         v-if="register == true"
         class=" remove-bg flex w-full mb-[24px] flex-col justify-center items-center gap-4 mt-24px"
       >
-        <span class="text-[20px] font-semibold">Регистрация</span>
+        <span class="text-2xl font-medium">Регистрация</span>
         <!-- шан 2 -->
         <create-user />
       </div>
@@ -578,7 +606,6 @@
                   </span>
                 </div>
                 <handler-promocode @setPromocode="getPromocode" />
-                <button @click="AddPacientToDoctor">test pacients</button>
                 <div class="flex flex-col gap-[20px]">
                   <button
                     @click="createOrder()"
@@ -741,7 +768,7 @@ import HandlerPromocode from '~/components/cart/HandlerPromocode.vue'
 import SET_USER_TO_VRACH from '~/graphql/cart/SET_USER_TO_VRACH.gql'
 import CREATE_ORDER_CART from '~/graphql/cart/CREATE_ORDER_CART.gql'
 import GbList from '~/components/cart/gb-list.vue'
-import CreateUser from '../../components/cart/create-user.vue'
+import CreateUser from '~/components/cart/create-user.vue'
 
 export default {
   layout: 'MainLayout',
@@ -806,6 +833,10 @@ export default {
         identifier: '',
         password: ''
       },
+      credentials2: {
+        identifier: '',
+        password: ''
+      },
       okeyRegister: false,
       succes: '',
       succesRegister: null,
@@ -819,11 +850,27 @@ export default {
         .replaceAll('-', '')
         .replace('(', '')
         .replace(')', '')
+        .replaceAll(' ', '')
       this.formBusy = true
       try {
         await this.$auth.loginWith('graphql', {
           identifier: getPhone,
           password: this.credentials.password
+        })
+
+        this.formBusy = false
+      } catch (errors) {
+        this.formBusy = false
+        // Handle errors
+      }
+    },
+    async handleLoginSubmit2 () {
+      const getPhone = this.credentials2.identifier
+      this.formBusy = true
+      try {
+        await this.$auth.loginWith('graphql', {
+          identifier: getPhone,
+          password: this.credentials2.password
         })
 
         this.formBusy = false

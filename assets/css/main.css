@@ -34,6 +34,7 @@ button{
 
 input {
   padding: 14px 12px;
+  background: transparent;
 }
 
 *:focus {

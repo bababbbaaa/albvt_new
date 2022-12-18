@@ -3,19 +3,25 @@ import GET_BIOMATERIALS_QL from '../graphql/get-bio-ql.gql'
 export const state = () => ({
   biomaterials: [],
   cart: [],
-  cartID: []
+  cartID: [],
+  stateDoctor: 1
 })
 
 export const getters = {
   GET_ALL_BIOMATERIALS: state => state.biomaterials,
   CART: state => state.cart,
-  CART_IDS: state => state.cartID
+  CART_IDS: state => state.cartID,
+  TABDOCTOR: state => state.stateDoctor,
 }
 
 export const mutations = {
   // set biomaterials
   SET_PRODUCTS_BIOMATERIALS (state, biomaterials) {
     state.biomaterials = biomaterials
+  },
+
+  SET_DOCTOR_TAB (state, id) {
+    state.stateDoctor = id
   },
 
   // set cart ID in store
@@ -54,6 +60,11 @@ export const actions = {
   ADD_TO_CART ({ commit }, item) {
     commit('SET_CART', item)
   },
+
+  SET_TAB_DOCTOR ({ commit }, id) {
+    commit('SET_DOCTOR_TAB', id)
+  },
+
   // delete to cart item
   DELETE_FROM_CART ({ commit }, index) {
     commit('REMOVE_FROM_CART', index)

@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-[#fcfcfc]">
+  <div class=" bg-[#fcfcfc]" >
     <div
       v-if="speczialnosts && gorodaInvitros"
       class="container pt-[47px] mt-[47px] sm:mt-0 w-full max-w-[620px] h-full  flex flex-col justify-center items-center"
@@ -9,7 +9,8 @@
         class="w-full container  text-center flex flex-col justify-center items-center"
       >
         <img src="~/assets/icons/333331.png" alt="" />
-        Вы успешно зарегистрировались
+        Вы успешно зарегистрировались!<br><br>
+        Для продолжения войдите в личный кабинет.
       </div>
       <span v-else-if="registerActive == false" class="font-medium text-xl"
         >Регистрация</span
@@ -81,10 +82,7 @@
             <!-- password -->
 
             <div
-              class="relative border-[1px] border-[#E5E4E8]     rounded-md px-4 py-3  shadow-sm anime"
-              :class="[
-                dataDoctor.password.length < 8 ? 'text-[#89888F]' : 'text-main font-medium'
-              ]"
+              class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3  shadow-sm anime"
             >
               <label
                 for=""
@@ -115,12 +113,6 @@
           <div class="flex flex-col gap-1">
             <div
               class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
-              :class="[
-                dataDoctor.password == dataDoctor.ConfPassword &&
-                dataDoctor.password.length > 8
-                  ? 'text-main font-medium'
-                  : 'text-[#89888F]'
-              ]"
             >
               <label
                 for=""
@@ -149,8 +141,9 @@
         >
           Продолжить
         </button>
+
         <span class="mt-4 text-sm" v-if="errors == 'Введите корректный Email'"
-          >Введите корректный Email</span
+          >Введите корректные данные</span
         >
       </div>
 
@@ -160,7 +153,7 @@
         v-else-if="step == 2"
         class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-12 w-full"
       >
-        <div class="relative rounded-md shadow-sm anime w-full">
+        <div class="relative rounded-md shadow-sm anime w-full cursor-pointer">
           <label
             for=""
             class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime z-[2]"
@@ -182,7 +175,7 @@
             >
             <span v-else>{{ speczialnostsSelectName }}</span>
             <div
-              class=" p-3 bg-white flex flex-col gap-3 absolute  w-[300px] h-[300px] overflow-y-auto top-0 left-0 z-[10] rounded-md drop-shadow-xl"
+              class=" p-3 bg-white flex flex-col gap-3 absolute  w-[300px] h-[300px] overflow-y-auto top-2 left-0 z-[10] rounded-md drop-shadow-xl"
               v-if="speczialnostsSelectView"
             >
               <div
@@ -231,7 +224,7 @@
             </svg>
           </div>
         </div>
-        <div class="relative rounded-md shadow-sm anime w-full">
+        <div class="relative rounded-md shadow-sm anime w-full cursor-pointer">
           <label
             for=""
             class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime z-[2]"
@@ -253,7 +246,7 @@
             >
             <span v-else>{{ gorodaInvitrosSelectName }}</span>
             <div
-              class=" bg-white flex flex-col  absolute  w-[300px] h-[300px] overflow-y-auto top-0 left-0 z-[10] rounded-md drop-shadow-xl"
+              class=" bg-white flex flex-col  absolute  w-[300px] h-[300px] overflow-y-auto top-2 left-0 z-[10] rounded-md drop-shadow-xl"
               v-if="gorodaInvitrosSelectView"
             >
               <div
@@ -328,7 +321,9 @@
               for=""
               class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
               :class="[
-                dataDoctor.Family.length <= 1 ? 'text-[#89888F]' : 'text-main font-medium'
+                dataDoctor.Family.length <= 1
+                  ? 'text-[#89888F]'
+                  : 'text-main font-medium'
               ]"
               >Фамилия*</label
             >
@@ -351,7 +346,9 @@
               for=""
               class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
               :class="[
-                dataDoctor.Name.length <= 1 ? 'text-[#89888F]' : 'text-main font-medium'
+                dataDoctor.Name.length <= 1
+                  ? 'text-[#89888F]'
+                  : 'text-main font-medium'
               ]"
               >Имя*</label
             >
@@ -367,7 +364,9 @@
           <div
             class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
             :class="[
-              dataDoctor.Otchestvo.length <= 1 ? 'border-[#E5E4E8]' : 'border-main'
+              dataDoctor.Otchestvo.length <= 1
+                ? 'border-[#E5E4E8]'
+                : 'border-main'
             ]"
           >
             <label
@@ -394,7 +393,8 @@
               class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
               :class="[
                 dataDoctor.DataRozgdeniya.length !== 10
-                  ? 'border-[#E5E4E8]' : 'border-main'
+                  ? 'border-[#E5E4E8]'
+                  : 'border-main'
               ]"
             >
               <label
@@ -416,17 +416,15 @@
             </div>
           </div>
 
-          <div
-            class="flex items-center flex-wrap sm:flex-nowrap  overflow-hidden"
-          >
+          <div class="flex items-center flex-wrap sm:flex-nowrap">
             <span
               @click="dataDoctor.gender = true"
               for="gender1"
-              class="text-[14px] cursor-pointer w-1/2 p-[13px] flex justify-center items-center rounded-l-md"
+              class="text-[14px] cursor-pointer w-1/2 p-[12px] flex justify-center items-center rounded-l-md"
               :class="[
                 dataDoctor.gender !== true
                   ? 'border-[#343434]/30 border text-[#343434]/30'
-                  : 'text-[#343434] border border-main'
+                  : 'text-[#343434] border border-main bg-white drop-shadow-md font-medium'
               ]"
               >М</span
             >
@@ -434,11 +432,11 @@
             <span
               @click="dataDoctor.gender = false"
               for="gender2"
-              class="text-[14px] cursor-pointer w-1/2 p-[13px] flex justify-center items-center rounded-r-md"
+              class="text-[14px] cursor-pointer w-1/2 p-[12px] flex justify-center items-center rounded-r-md"
               :class="[
                 dataDoctor.gender !== false
                   ? 'border-[#343434]/30 border text-[#343434]/30'
-                  : 'text-[#343434] border border-main'
+                  : 'text-[#343434] border border-main bg-white drop-shadow-md font-medium'
               ]"
               >Ж</span
             >
@@ -446,7 +444,7 @@
         </div>
 
         <button
-          class="w-full bg-main text-white rounded-md py-3"
+          class="w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
           :disabled="formBusy"
           @click="updateUser()"
         >
@@ -509,6 +507,7 @@ export default {
     }
   },
   methods: {
+
     speczialnostsSelectHandler (item) {
       this.speczialnostsSelect = item.id
       this.speczialnostsSelectName = item.attributes.Name

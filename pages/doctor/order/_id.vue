@@ -1,8 +1,8 @@
 <template>
-  <div class="container py-2 flex flex-col gap-4">
+  <div class="container py-6 flex flex-col gap-4">
     <button
         @click="$router.back()"
-        class=" flex  justify-start items-center gap-1"
+        class=" flex  justify-start items-center gap-1 my-4"
       >
         <img src="~/assets/icons/arrow-back.svg" alt="" />
         Назад

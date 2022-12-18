@@ -2,12 +2,12 @@
   <div
     class="grid grid-cols-[3fr,3fr,2fr,1fr]  lg:grid-cols-[3fr,3fr,1fr] xl:grid-cols-[2fr,13fr,2fr,3fr] grid-rows-2 xl:grid-rows-1  gap-2 xl:gap-[20px] items-center hover:bg-[#F5F5F5] p-[10px] anime border-b-[0.5px] border-b-[#e4e4e4]"
   >
-    <span class="hidden xl:block font-medium text-[14px] "
+    <span class="hidden xl:block font-medium text-sm "
       >{{ item.attributes.Art }}
     </span>
 
     <div
-      class="row-span-1 col-span-4 xl:col-span-1 flex  flex-col font-medium text-[14px]     py-2 xl:py-[20px] "
+      class="row-span-1 col-span-4 xl:col-span-1 flex  flex-col font-medium text-sm     py-2 xl:py-[20px] "
     >
       <nuxt-link prefetch :to="this.$route.fullPath + '/' + item.id">
         <p
@@ -25,7 +25,7 @@
         v-tooltip.top-end="{
           content: 'Цена указана без учета забора биоматериала',
           classes: [
-            'bg-white text-[12px] lg:text-[14px] px-2 py-4 border border-[#777777] rounded-[5px]'
+            'bg-white text-xs lg:text-sm px-2 py-4 border border-[#777777] rounded-[5px]'
           ]
         }"
         >{{ parseInt(item.attributes.Price).toLocaleString('ru-RU') }} ₽
@@ -33,15 +33,15 @@
       </span>
       <span
         v-if="parseInt(item.attributes.TimeDone) == 1"
-        class="text-[14px] text-[#9A9A9A] pt-1"
+        class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} день</span
       >
       <span
         v-else-if="parseInt(item.attributes.TimeDone) < 5"
-        class="text-[14px] text-[#9A9A9A] pt-1"
+        class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} дня</span
       >
-      <span v-else class="text-[14px] text-[#9A9A9A] pt-1"
+      <span v-else class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} дней</span
       >
     </div>
@@ -49,33 +49,33 @@
     <!-- modile -->
 
     <div
-      class=" flex xl:hidden flex-wrap sm:flex-nowrap gap-2 lg:gap-4 col-span-2 text-[10px] lg:text-[14px] font-normal text-[#777777]"
+      class=" flex xl:hidden flex-wrap sm:flex-nowrap gap-2 lg:gap-4 col-span-2 items-center lg:text-sm font-normal text-[#777777]"
     >
       <span class="w-full sm:w-auto">Код: {{ item.attributes.Art }}</span>
       <div
-        class="flex gap-2 cursor-pointer"
+        class="flex flex-wrap gap-2 cursor-pointer"
         v-if="item.attributes.biomaterialies.data.length"
       >
         <span
           v-for="bio in item.attributes.biomaterialies.data"
           :key="bio.id"
-          class="font-thin text-[10px]  sm:text-[12px]"
+          class=""
         >
-          {{ bio.attributes.Name }}(+200₽)
+          {{ bio.attributes.Name }}(+{{ bio.attributes.Price }}₽)
         </span>
       </div>
 
       <span
         v-if="parseInt(item.attributes.TimeDone) == 1"
-        class="text-[14px] text-[#9A9A9A] pt-1"
+        class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} день</span
       >
       <span
         v-else-if="parseInt(item.attributes.TimeDone) < 5"
-        class="text-[14px] text-[#9A9A9A] pt-1"
+        class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} дня</span
       >
-      <span v-else class="text-[14px] text-[#9A9A9A] pt-1"
+      <span v-else class="text-sm text-[#9A9A9A] "
         >{{ item.attributes.TimeDone }} дней</span
       >
     </div>
@@ -101,7 +101,7 @@
           d="M5 13l4 4L19 7"
         />
       </svg>
-      <span class="text-[12px]">В корзине</span>
+      <span class="text-xs">В корзине</span>
     </div>
 
     <button

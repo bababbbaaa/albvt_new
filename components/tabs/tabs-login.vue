@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center  gap-[20px] pt-[47px] w-full ">
-    <ul class='flex justify-center gap-[10px] border-b-[0.5px] border-[#343434]/30 pb-4'>
+    <ul class='flex justify-center gap-[10px] border-b-[0.5px] border-[#343434]/30 pb-4 mb-4'>
       <li v-for='(tab, index) in tabs'
         :key='tab.title'
         @click='selectTab(index)'

@@ -5,9 +5,9 @@
         ЗАПРОС НА ВЫВОД СРЕДСТВ
       </div>
       <div
-        class="flex justify-center items-center p-8 border-2 border-[#343434]/30"
+        class="flex justify-center items-center p-8 border-2 border-[#343434]/10"
       >
-        <span class="text-center text-sm"
+        <span class="text-center text-sm font-medium"
           >Вывод средств будет осуществлён в течение 2-х рабочих дней по номеру
           телефона, указанному при Вашей регистрации.</span
         >
@@ -28,15 +28,15 @@
       <span
         v-if="checkZapros"
         class="w-full flex flex-col justify-center items-center text-center"
-        ><img src="~/assets/icons/333331.png" alt="" /> Ваш запрос #{{
+        ><img src="~/assets/icons/333331.png" alt="" /> Ваш запрос № {{
           zaprosId
         }}
         принят. Ожидайте перевода.</span
       >
 
-      <nuxt-link to="/doctor" class="text-center w-full font-semibold"
+      <!-- <nuxt-link to="/doctor" class="text-center w-full "
         >ВЕРНУТЬСЯ К НАЧАЛЬНОЙ СТРАНИЦЕ</nuxt-link
-      >
+      > -->
       <button
         @click="$router.back()"
         class=" flex  justify-start items-center gap-1"

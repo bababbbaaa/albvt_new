@@ -1,17 +1,12 @@
 <template>
-  <div class="w-full ">
+  <div class="w-full flex flex-col justify-center items-center">
     <div class="flex justify-center gap-[20px] items-center w-full ">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         <!-- step == 1 -->
         <div class="flex flex-col gap-1 w-full" v-if="step == 1">
           <div class="mt-1 flex flex-col gap-1 rounded-md shadow-sm">
             <div
-              class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-              :class="[
-                formCreate.email.length <= 6 && !formCreate.email.includes('@')
-                  ? 'border-[#E5E4E8]'
-                  : 'border-main'
-              ]"
+              class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
             >
               <label
                 for=""
@@ -38,26 +33,21 @@
         <!-- phone -->
         <div class="flex flex-col gap-1" v-if="step == 1">
           <div
-            class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-            :class="[
-              formCreate.phone.length !== 17
-                ? 'border-[#E5E4E8]'
-                : 'border-main'
-            ]"
+            class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
           >
             <label
               for=""
               class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
               :class="[
-                formCreate.phone.length !== 17 ? 'text-[#ADACB3]' : 'text-main'
+                formCreate.phone.length !== 18 ? 'text-[#ADACB3]' : 'text-main'
               ]"
               >Телефон*</label
             >
             <input
               v-model="formCreate.phone"
               class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
-              placeholder="+7(___) ___-__-__"
-              v-facade="'+7(###) ###-##-##'"
+              placeholder="+7"
+              v-facade="'+7 (###) ###-##-##'"
             />
           </div>
 
@@ -68,10 +58,7 @@
           <!-- password -->
 
           <div
-            class="relative border-[1px]    rounded-md px-4 py-3  shadow-sm anime"
-            :class="[
-              formCreate.password.length < 8 ? 'text-[#ADACB3]' : 'text-main'
-            ]"
+            class="relative border-[1px]  border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
           >
             <label
               for=""
@@ -92,25 +79,22 @@
           <!-- password end-->
 
           <div class="flex flex-col gap-1 rounded-md shadow-sm relative">
-            <span class="text-[12px] text-[#ADACB3]">Не менее 8 символов </span>
+            <span class="text-[12px] text-[#ADACB3] w-full text-right">Не менее 8 символов </span>
           </div>
         </div>
         <div class="flex flex-col gap-1" v-if="step == 1">
           <div
-            class="relative border-[1px]    rounded-md px-4 py-3  shadow-sm anime"
-            :class="[
-              formCreate.password !== formCreate.ConfPassword
-                ? 'text-[#ADACB3]'
-                : 'text-main'
-            ]"
+            class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3  shadow-sm anime"
+            
           >
             <label
               for=""
               class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
               :class="[
-                formCreate.password !== formCreate.ConfPassword
-                  ? 'text-[#ADACB3]'
-                  : 'text-main'
+                formCreate.password == formCreate.ConfPassword &&
+                formCreate.password.length > 8
+                  ? 'text-main'
+                  : '  text-[#ADACB3]'
               ]"
               >Повторите пароль</label
             >
@@ -127,10 +111,8 @@
 
         <div
           v-if="step == 2"
-          class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-          :class="[
-            formCreate.family.length <= 2 ? 'border-[#E5E4E8]' : 'border-main'
-          ]"
+          class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3  shadow-sm anime"
+          
         >
           <label
             for=""
@@ -284,7 +266,7 @@
           ? 'cursor-pointer'
           : 'cursor-not-allowed opacity-30'
       ]"
-      class="rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+      class="max-w-[300px] rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
     >
       Зарегистрироваться
     </button>
@@ -292,13 +274,13 @@
       v-else-if="step == 1"
       @click="registerUser()"
       :class="[
-        formCreate.phone.length == 17 &&
+        formCreate.phone.length == 18 &&
         formCreate.password.length >= 8 &&
         formCreate.password == formCreate.ConfPassword
           ? 'cursor-pointer'
           : 'cursor-not-allowed opacity-30'
       ]"
-      class="rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+      class="max-w-[300px] rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
     >
       Продолжить
     </button>

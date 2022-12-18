@@ -5,9 +5,9 @@
         <div class="grid grid-cols-1  w-full gap-2">
           <div class="grid grid-cols-3  w-full gap-2">
             <button
-              @click="tabsActive = 1"
+              @click="handlerTab(1)"
               :class="[
-                tabsActive == 1
+                TABDOCTOR == 1
                   ? 'border-main border-[2px] text-main'
                   : 'border-[#343434]/30 border-[1px]'
               ]"
@@ -16,9 +16,9 @@
               Пациенты
             </button>
             <button
-              @click="tabsActive = 2"
+              @click="handlerTab(2)"
               :class="[
-                tabsActive == 2
+                TABDOCTOR == 2
                   ? 'border-main border-[2px] text-main'
                   : 'border-[#343434]/30 border-[1px]'
               ]"
@@ -27,9 +27,9 @@
               Доступно
             </button>
             <button
-              @click="tabsActive = 3"
+              @click="handlerTab(3)"
               :class="[
-                tabsActive == 3
+                TABDOCTOR == 3
                   ? 'border-main border-[2px] text-main'
                   : 'border-[#343434]/30 border-[1px]'
               ]"
@@ -88,7 +88,7 @@
         </div>
         <!-- Пациенты -->
         <Transition name="fade">
-          <section v-if="tabsActive == 1 && getAllUsers.length">
+          <section v-if="TABDOCTOR == 1 && getAllUsers.length">
             <div class="flex flex-col gap-2">
               <a-user-view
                 v-for="user in getAllUsers"
@@ -98,12 +98,13 @@
               />
             </div>
           </section>
+          <span v-else-if="TABDOCTOR == 1 && !getAllVivod.length" class="text-center text-sm">У вас пока что нет активных пациентов</span>
         </Transition>
         <!-- Доступно -->
         <Transition name="fade">
           <!-- доступно -->
           <section
-            v-if="tabsActive == 2 && getAllDostupno.length"
+            v-if="TABDOCTOR == 2 && getAllDostupno.length"
             class="flex flex-col gap-4"
           >
             <div class="flex flex-col gap-2">
@@ -117,10 +118,11 @@
               />
             </div>
           </section>
+          <span v-else-if="TABDOCTOR == 2 && !getAllDostupno.length" class="text-center text-sm">У вас пока что нет доступных заказов к выводу</span>
         </Transition>
         <Transition name="fade">
           <section
-            v-if="tabsActive == 2"
+            v-if="TABDOCTOR == 2"
             class="flex flex-col gap-4 items-center"
           >
             <!-- <span class="text-main text-right w-full"
@@ -140,21 +142,25 @@
                     zakaz: checkZakazies
                   }
                 }"
-                class="bg-main text-white flex gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
+                class="bg-main text-white flex flex-col gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
               >
-                Вывести средства
-                <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+              <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+                Отправить запрос на вывод
+                
               </nuxt-link>
               
-              <span v-else-if="checkSummVidod < 500" class="text-xs w-full text-center text-[#343434]/70"
+              <span v-else-if="checkSummVidod < 500 && getAllDostupno.length" class="text-xs w-full text-center text-[#343434]/70"
                 >Минимальная сумма вывода 500₽</span
               >
               <span
                 v-else
-                class="bg-main/50 text-white flex gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
+                class="bg-main/50 text-white flex flex-col gap-1 justify-center items-center py-3 px-2 rounded-[3px] w-full"
               >
-                Вывести средства
-                <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+              <b>
+                  {{ checkSummVidod.toLocaleString('ru-RU') }}₽
+                  </b>
+                Отправить запрос на вывод
+                
               </span>
             </div>
           </section>
@@ -162,7 +168,7 @@
         <!-- Выведено -->
         <Transition name="fade">
           <section
-            v-if="tabsActive == 3 && getAllVivod.length"
+            v-if="TABDOCTOR == 3 && getAllVivod.length"
             class="flex flex-col gap-2"
           >
             <a-vivod-list
@@ -184,6 +190,7 @@ import aUserView from '~/components/doctor/a-user-view.vue'
 import DOCTOR_PACIENTS from '~/graphql/doctor/doctor-pacients.gql'
 import ADostupnoView from '~/components/doctor/a-dostupno-view.vue'
 import AVivodList from '~/components/doctor/a-vivod-list.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: { aUserView, ADostupnoView, AVivodList },
@@ -201,7 +208,7 @@ export default {
   },
   data () {
     return {
-      tabsActive: 1,
+      tabsActive: this.TABDOCTOR,
       userActive: null,
       vivodActive: null,
       searchInput: '',
@@ -229,9 +236,16 @@ export default {
       )
       this.searchResult = dataP
       console.log(dataP)
-    }
+    },
+    handlerTab(id){
+      this.tabsActive = id
+      this.SET_TAB_DOCTOR(id)
+      console.log(id);
+    },
+    ...mapActions(['SET_TAB_DOCTOR']),
   },
   computed: {
+    ...mapGetters(['TABDOCTOR']),
     getAllUsers () {
       return this.usersPermissionsUser.data.attributes.Pacientis.data
     },
