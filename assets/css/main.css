@@ -4,29 +4,28 @@
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('@/assets/fonts/gilroy-light.woff2') format('woff2');
-  font-style: normal;
-   font-weight: 300;
+  src: url('~/assets/fonts/gilroy-light.woff2') format('woff2');
+  font-weight: 300;
 
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('@/assets/fonts/gilroy-bold.woff2') format('woff2');
+  src: url('~/assets/fonts/gilroy-bold.woff2') format('woff2');
 
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('@/assets/fonts/gilroy-medium.woff2') format('woff2');
+  src: url('~/assets/fonts/gilroy-medium.woff2') format('woff2');
 
   font-weight: medium;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('@/assets/fonts/gilroy-semibold.woff2') format('woff2');
+  src: url('~/assets/fonts/gilroy-semibold.woff2') format('woff2');
 
   font-weight: semibold;
 }
@@ -88,15 +87,5 @@ input {
 
 
 a.nuxt-link-active {
-  color: rgb(110 154 239 / var(--tw-bg-opacity));
+  color: rgb(110 154 239 / 1);
 }
-
-
-/* .layout-enter-active,
-.layout-leave-active {
-  transition: opacity 0.3s;
-}
-.layout-enter,
-.layout-leave-active {
-  opacity: 0;
-} */

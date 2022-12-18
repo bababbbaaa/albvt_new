@@ -42,7 +42,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxt/postcss8', '@nuxtjs/google-fonts'],
+  buildModules: ['@nuxt/postcss8'],
   auth: {
     strategies: {
       graphql: {
