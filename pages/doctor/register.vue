@@ -618,7 +618,7 @@ export default {
           console.log(results)
         }
       } catch (err) {
-        this.errors = err
+        
       }
     },
     createDoctor () {

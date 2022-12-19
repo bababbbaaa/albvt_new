@@ -1,27 +1,33 @@
+@import '~assets/fonts/stylesheet.css';
+
 @font-face {
   font-family: 'Gilroy';
-  src: url('~assets/fonts/gilroy-light.woff2') format('woff2');
-  font-weight: 300;
+  src: url('~assets/fonts/gilroy-regular-webfont.woff2') format('woff2'),
+       url('~assets/fonts/gilroy-regular-webfont.woff') format('woff');
+  font-weight: normal;
 
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('~assets/fonts/gilroy-bold.woff2') format('woff2');
+  src: url('~assets/fonts/gilroy-bold-webfont.woff2') format('woff2'),
+       url('~assets/fonts/gilroy-bold-webfont.woff') format('woff');
 
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('~assets/fonts/gilroy-medium.woff2') format('woff2');
+  src: url('~assets/fonts/gilroy-medium-webfont.woff2') format('woff2'),
+       url('~assets/fonts/gilroy-medium-webfont.woff') format('woff');
 
   font-weight: medium;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('~assets/fonts/gilroy-semibold.woff2') format('woff2');
+  src: url('~assets/fonts/gilroy-semibold-webfont.woff2') format('woff2'),
+       url('~assets/fonts/gilroy-semibold-webfont.woff') format('woff');
 
   font-weight: semibold;
 }
