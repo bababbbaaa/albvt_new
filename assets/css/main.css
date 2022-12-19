@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    font-family: 'Gilroy', sans-serif;
+    font-family: Gilroy;
     line-height: auto;
     font-style: normal;
     font-weight: 300;

@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-[#fcfcfc]" >
+  <div class=" bg-[#fcfcfc]">
     <div
       v-if="speczialnosts && gorodaInvitros"
       class="container pt-[47px] mt-[47px] sm:mt-0 w-full max-w-[620px] h-full  flex flex-col justify-center items-center"
@@ -9,7 +9,7 @@
         class="w-full container  text-center flex flex-col justify-center items-center"
       >
         <img src="~/assets/icons/333331.png" alt="" />
-        Вы успешно зарегистрировались!<br><br>
+        Вы успешно зарегистрировались!<br /><br />
         Для продолжения войдите в личный кабинет.
       </div>
       <span v-else-if="registerActive == false" class="font-medium text-xl"
@@ -442,14 +442,29 @@
             >
           </div>
         </div>
-
         <button
+          v-if="
+            speczialnostsSelectName !== 'Выберите' &&
+              gorodaInvitrosSelectName !== 'Выберите' &&
+              dataDoctor.Family.length >= 1 &&
+              dataDoctor.Name.length >= 1 &&
+              dataDoctor.DataRozgdeniya.length == 10
+          "
           class="w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
           :disabled="formBusy"
           @click="updateUser()"
         >
           <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
         </button>
+        <button
+          v-else
+          class="opacity-50 w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
+          :disabled="formBusy"
+          @click="valideForm()"
+        >
+          <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
+        </button>
+        <span v-if="valideFormData == true" class="text-xs text-tem/70">Введите корректные данные</span>
       </div>
       <div v-if="step == 3"></div>
     </div>
@@ -475,7 +490,7 @@ export default {
   data () {
     return {
       step: 1,
-      errors: '',
+      errors: null,
       idUser: '',
       speczialnostsSelect: '1',
       speczialnostsSelectView: false,
@@ -484,6 +499,7 @@ export default {
       gorodaInvitrosSelectView: false,
       gorodaInvitrosSelectName: 'Выберите',
       usernameUser: '',
+      valideFormData: false,
       registerData: {
         sity: '',
         adress: '',
@@ -507,7 +523,9 @@ export default {
     }
   },
   methods: {
-
+    valideForm () {
+      this.valideFormData = true
+    },
     speczialnostsSelectHandler (item) {
       this.speczialnostsSelect = item.id
       this.speczialnostsSelectName = item.attributes.Name
@@ -595,6 +613,7 @@ export default {
           const results = res.data
           this.succesRegister = true
           this.registerActive = true
+          this.valideFormData = false
           this.step = 3
           console.log(results)
         }
@@ -605,7 +624,7 @@ export default {
     createDoctor () {
       console.log('отлично')
     }
-  }
+  },
 }
 </script>
 

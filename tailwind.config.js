@@ -35,7 +35,7 @@ module.exports = {
       'main': '#6E9AEF',
       'blue': '#227FD6',
       'danger': '#A75F4F',
-      'black': '#343434'
+      'tem': '#343434'
     }
   },
   plugins: []
