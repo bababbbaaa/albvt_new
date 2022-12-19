@@ -142,7 +142,7 @@
           Продолжить
         </button>
 
-        <span class="mt-4 text-sm" v-if="errors == 'Введите корректный Email'"
+        <span class="mt-4 text-sm" v-if="errorsValidate == 'Введите корректный Email'"
           >Введите корректные данные</span
         >
       </div>
@@ -490,7 +490,7 @@ export default {
   data () {
     return {
       step: 1,
-      errors: null,
+      errorsValidate: null,
       idUser: '',
       speczialnostsSelect: '1',
       speczialnostsSelectView: false,
@@ -570,7 +570,7 @@ export default {
         }
       } catch (err) {
         if (err) {
-          this.errors = 'Введите корректный Email'
+          this.errorsValidate = 'Введите корректный Email'
           console.log(err)
         }
       }

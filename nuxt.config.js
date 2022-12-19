@@ -19,7 +19,14 @@ export default {
         content: 'Доступные анализы в Ростове-на-Дону'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap'
+      }
+    ]
   },
   static: {
     prefix: false
@@ -43,6 +50,14 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['@nuxt/postcss8'],
+  // googleFonts: {
+  //   display: 'swap',
+  //   preconnect: true,
+  //   families: {
+  //     Manrope: [400, 600, 500, 700],
+      
+  //   }
+  // },
   auth: {
     strategies: {
       graphql: {
@@ -69,15 +84,15 @@ export default {
     }
   },
   axios: {},
-  googleFonts: {
-    display: 'swap',
-    preconnect: true,
-    families: {
-      Inter: {
-        wght: [300, 600, 400, 500, 700]
-      }
-    }
-  },
+  // googleFonts: {
+  //   display: 'swap',
+  //   preconnect: true,
+  //   families: {
+  //     Inter: {
+  //       wght: [300, 600, 400, 500, 700]
+  //     }
+  //   }
+  // },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // [
