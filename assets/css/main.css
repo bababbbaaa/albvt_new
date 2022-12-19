@@ -7,12 +7,12 @@
 
 @layer base {
   html {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: auto;
     font-style: normal;
     font-weight: normal;
     color: #343434;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.025em;
   }
 }
 .anime {
