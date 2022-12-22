@@ -125,12 +125,6 @@
             v-if="TABDOCTOR == 2"
             class="flex flex-col gap-4 items-center"
           >
-            <!-- <span class="text-main text-right w-full"
-              >Всего доступно
-              <span class="text-[#343434]"
-                >+{{ checkSummVidod.toLocaleString('ru-RU') }}₽</span
-              >
-            </span> -->
             <div class="flex flex-col gap-2 w-full">
               <nuxt-link
                 v-if="checkSummVidod >= 500"

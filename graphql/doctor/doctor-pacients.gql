@@ -45,7 +45,7 @@ query DOCTOR_PACIENTS($ID: ID) {
                   attributes {
                     Status
                     createdAt
-                    user {
+                    users {
                       data {
                         attributes {
                           FIO_user

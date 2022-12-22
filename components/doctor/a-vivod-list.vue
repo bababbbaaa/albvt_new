@@ -57,7 +57,7 @@
           >
             <div class="w-2/5  flex flex-col gap-1">
             <span class="text-sm font-medium">{{
-                item.attributes.user.data.attributes.FIO_user.replace(
+                item.attributes.users.data[0].attributes.FIO_user.replace(
                   /(\S+) (\S)\S* (\S)\S*/,
                   '$1 $2. $3.'
                 )
