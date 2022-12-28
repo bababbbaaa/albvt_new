@@ -10,6 +10,7 @@ query SEARCH_ANALIZES($S_VALUE : String!) {
           Price
           Complecs
           Active
+          Tags
           DopAnalizes{
           data{
             id

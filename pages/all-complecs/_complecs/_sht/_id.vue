@@ -75,7 +75,7 @@
               <span class="text-center w-full font-medium text-[16px]"
                 >Состав комплекса:</span
               >
-              <div class="flex flex-col gap-2 mt-4">
+              <div class="flex flex-col gap-4 mt-4">
                 <div
                   v-for="(item, i) in analizy.attributes.complecsAnaliz.data"
                   :key="i"
@@ -126,7 +126,7 @@ import ANALIZ_ID from '~/graphql/analiz/ANALIZ_ID.gql'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { CartItemAnaliz, TabAnaliz, TabsAnaliz },
-  layout: 'AnalizWrapper',
+  layout: 'ComplecsWrapper',
   head () {
     return {
       // title: this.analizy.data.attributes.Name,

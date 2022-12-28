@@ -52,7 +52,7 @@
                           item.node.databaseId
                       "
                     >
-                      <span @click="preFetchDataCat(item.node.name)">
+                      <span >
                         {{
                           item.node.name
                         }}
@@ -87,7 +87,7 @@
                           item.node.databaseId
                       "
                     >
-                      <span @click="preFetchDataCat(item.node.name)">
+                      <span >
                         {{
                           item.node.name
                         }}

@@ -34,7 +34,7 @@ module.exports = {
       'white': '#FFFFFF',
       'main': '#6E9AEF',
       'blue': '#227FD6',
-      'danger': '#A75F4F',
+      'danger': '#EF4444',
       'tem': '#343434'
     }
   },

@@ -15,7 +15,7 @@ query ANALIZ_ID ($ID: ID){
             id
           }
         }
-        complecsAnaliz {
+        complecsAnaliz(pagination: { limit: 100 }) {
           data {
             id
             attributes {

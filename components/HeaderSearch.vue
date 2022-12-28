@@ -42,7 +42,7 @@
           v-for="item in sortedArray"
           :key="item.id"
           @click="closeSearch()"
-          class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[9fr,4fr] sm:grid-cols-[10fr,3fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
+          class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[8fr,2fr] sm:grid-cols-[10fr,3fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
         >
           <div class="flex flex-col gap-1">
             <!-- item.attributes.sub_cat.data.attributes.CatIdURL +
@@ -52,7 +52,7 @@
                   item.id -->
             <nuxt-link
               v-if="item.attributes.Complecs == true"
-              :to="'/all-complecs' + '/'"
+              :to="'/all-complecs/category/id/' + item.id"
               class=" text-[#777777] hover:text-[#343434] anime font-semibold text-[12px] sm:text-sm"
               :title="item.attributes.Name"
               >{{ item.attributes.Name }}</nuxt-link
@@ -60,13 +60,13 @@
 
             <nuxt-link
               v-else
-              :to="'/all-analyzes' + '/'"
+              :to="'/all-analyzes/category/id/' + item.id"
               class="text-[#777777] hover:text-[#343434] font-semibold anime text-[12px] sm:text-sm"
               :title="item.attributes.Name"
               >{{ item.attributes.Name }}</nuxt-link
             >
 
-            <div class="flex gap-3 items-center flex-wrap sm:flex-nowrap">
+            <div class="flex gap-5 items-center flex-wrap sm:flex-nowrap">
               <span class="text-sm text-[#9A9A9A] "
                 >код: {{ item.attributes.Art }}</span
               >
@@ -117,12 +117,12 @@
             v-else-if="item.attributes.Active !== true"
             class="w-full flex justify-center items-center"
           >
-            <span class="text-[12px] text-danger">Временно недоступен</span>
+            <span class="text-[12px] text-danger text-center">Временно недоступен</span>
           </div>
           <button
             v-else
             @click="productInCart(item)"
-            class="bg-main/20   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
+            class="bg-main/20 sm:max-w-[140px]   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
           >
             <img src="/img/icons/add-to-cart.svg" alt="" />
             <span class="text-[12px] sm:text-[16px]"
@@ -139,7 +139,7 @@
           >Идет поиск...</span
         >
         <span
-          v-if="searchResults.length < 1 && loading == false"
+          v-else-if="sortedArray.length == 0"
           class=" w-full flex justify-center items-center py-4 text-[#343434] hover:bg-[#CBCBCB] anime bg-[#E2E2E2]"
           >К сожалению ничего не найдено</span
         >
@@ -169,35 +169,8 @@ export default {
   },
   computed: {
     ...mapGetters(['CART', 'CART_IDS']),
-    sortedArray: function () {
-      const inputSearhValue = this.searchInput.toLowerCase()
-      const inputSearhValueEn = this.EnSearch.toLowerCase()
-
-      const filteredResult = this.searchResults.filter(
-        item =>
-          item.attributes.Name.toLowerCase().includes(inputSearhValue) ||
-          item.attributes.Name.toLowerCase().includes(inputSearhValueEn) ||
-          item.attributes.Art.toLowerCase().includes(inputSearhValue) ||
-          item.attributes.Art.toLowerCase().includes(inputSearhValueEn)
-      )
-
-      const mapped = filteredResult.map(item => item)
-      // длинна строки
-      function compareTwo (a, b) {
-        var nameA = a.attributes.Name.toLowerCase()
-        var nameB = b.attributes.Name.toLowerCase()
-
-        return nameA.split(' ').includes(inputSearhValue) ||
-          nameA.split(' ').includes(inputSearhValueEn) <
-            nameB.split(' ').includes(inputSearhValue) ||
-          nameB.split(' ').includes(inputSearhValueEn)
-          ? 1
-          : -1
-      }
-
-      const resultMap = mapped.sort(compareTwo).splice(0, 10)
-
-      return resultMap
+    sortedArray () {
+      return this.searchResults.splice(0, 20)
     }
   },
   methods: {
@@ -371,14 +344,5 @@ export default {
 input::-webkit-input-placeholder {
   color: #8a8a8a;
 }
-/* .test-text2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -moz-box;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    line-clamp: 2;
-    box-orient: vertical;
-} */
+
 </style>

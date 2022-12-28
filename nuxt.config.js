@@ -42,7 +42,8 @@ export default {
     '@plugins/v-tooltip.js',
     '@plugins/vue-input-facade.js',
     { src: '~/plugins/vue-datepicker', ssr: false },
-    { src: '~/plugins/vue-agile.js', ssr: false }
+    { src: '~/plugins/vue-agile.js', ssr: false },
+    { src: "~/plugins/vClickOutside", ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,14 +51,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['@nuxt/postcss8'],
-  // googleFonts: {
-  //   display: 'swap',
-  //   preconnect: true,
-  //   families: {
-  //     Manrope: [400, 600, 500, 700],
-      
-  //   }
-  // },
   auth: {
     strategies: {
       graphql: {
@@ -84,28 +77,7 @@ export default {
     }
   },
   axios: {},
-  // googleFonts: {
-  //   display: 'swap',
-  //   preconnect: true,
-  //   families: {
-  //     Inter: {
-  //       wght: [300, 600, 400, 500, 700]
-  //     }
-  //   }
-  // },
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // [
-    //   '@nuxtjs/yandex-metrika',
-    //   {
-    //     id: '89944791',
-    //     webvisor: true,
-    //     clickmap: true,
-    //     // useCDN: false,
-    //     trackLinks: true
-    //     // accurateTrackBounce: true,
-    //   }
-    // ],
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
     '@nuxtjs/auth-next',
@@ -114,7 +86,6 @@ export default {
     }]
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {
       plugins: {

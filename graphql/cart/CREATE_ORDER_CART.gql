@@ -1,9 +1,9 @@
-mutation CREATE_ORDER_CART($UID: String, $ANALIZES: [ID], $USER: ID, $SUMM: Long, $OFFICE: [ID]) {
+mutation CREATE_ORDER_CART($UID: String, $ANALIZES: [ID], $USER: [ID], $SUMM: Long, $OFFICE: [ID]) {
   createOrder(
     data: { 
       UID: $UID, 
       analizies: $ANALIZES, 
-      user: $USER, 
+       users: $USER, 
       SummOrder: $SUMM, 
       Status: false,
       ofisies: $OFFICE }

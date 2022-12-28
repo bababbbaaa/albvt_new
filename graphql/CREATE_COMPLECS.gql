@@ -1,0 +1,33 @@
+mutation CREATE_COMPLECS(
+  $NAME: String
+  $DESC: String
+  $SUBDESC: String
+  $UID: String
+  $PRICE: Long
+  $SUB_CAT: ID
+  $ART: String
+  $TIME: Long
+  $BIO: [ID]
+  $COMPLECS: [ID]
+) {
+  createAnalizy(
+    data: {
+      Name: $NAME
+      Desc: $DESC
+      SubDesc: $SUBDESC
+      UID: $UID
+      Price: $PRICE
+      Active: true
+      sub_cat: $SUB_CAT
+      Art: $ART
+      Complecs: true
+      TimeDone: $TIME
+      biomaterialies: $BIO
+      complecsAnaliz: $COMPLECS
+    }
+  ) {
+    data {
+      id
+    }
+  }
+}

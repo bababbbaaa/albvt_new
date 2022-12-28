@@ -49,12 +49,7 @@
         </div>
       </div>
       <div class="w-full flex justify-center">
-        <!-- <button
-          @click="getProductToParams()"
-          v-if="limit !== null && products.length > 7"
-        >
-          Показать еще
-        </button> -->
+
       </div>
     </div>
   </div>
@@ -70,7 +65,7 @@ import GET_ANALIZES_CAT from '~/graphql/analiz-cat-id.gql'
 
 export default {
   components: { PopAddToCart, SidebarAnaliz, MedProduct },
-  layout: 'AnalizWrapper',
+  layout: 'ComplecsWrapper',
   data () {
     return {
       title: '',

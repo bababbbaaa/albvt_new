@@ -60,10 +60,9 @@
             </div>
           </div>
         </div>
-        <div class="pyrder-2 lg:col-span-1 col-span-2">
-          <!-- карта!! -->
+        <!-- <div class="pyrder-2 lg:col-span-1 col-span-2">
          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adaf7dfa6bc4d1d3631e0e20b828484c5faf7118d65f939ad39ec025cbae30557&amp;source=constructor" width="100%" height="350" frameborder="0"></iframe>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- mobile bottom-bar -->

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="data" class="" v-show="isActive">
-      <p class="text-sm pt-4">{{ replaceDAta }}</p>
+      <div v-html="replaceDAta" class="text-sm pt-4"></div>
     </div>
     
   </div>

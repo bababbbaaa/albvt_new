@@ -2,16 +2,16 @@
   <div class="bg-[#F9F9F9] min-h-screen">
     <div class="pt-2" v-if="usersPermissionsUser">
       <div class="container flex flex-col h-full justify-between gap-8">
-        <div class="grid grid-cols-1  w-full gap-2">
-          <div class="grid grid-cols-3  w-full gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2  w-full gap-2">
+          <div class="grid grid-cols-3  w-full">
             <button
               @click="handlerTab(1)"
               :class="[
                 TABDOCTOR == 1
-                  ? 'border-main border-[2px] text-main'
-                  : 'border-[#343434]/30 border-[1px]'
+                  ? 'border-b-main border-b-[2px] text-main'
+                  : 'border-b-[#343434]/20 border-b-[1px] text-tem/50'
               ]"
-              class="flex justify-center py-3 rounded-[3px]"
+              class="flex justify-center items-center py-3"
             >
               Пациенты
             </button>
@@ -19,10 +19,10 @@
               @click="handlerTab(2)"
               :class="[
                 TABDOCTOR == 2
-                  ? 'border-main border-[2px] text-main'
-                  : 'border-[#343434]/30 border-[1px]'
+                  ? 'border-b-main border-b-[2px] text-main'
+                  : 'border-b-[#343434]/20 border-b-[1px] text-tem/50'
               ]"
-              class="flex justify-center py-3 rounded-[3px]"
+              class="flex justify-center items-center py-3"
             >
               Доступно
             </button>
@@ -30,10 +30,10 @@
               @click="handlerTab(3)"
               :class="[
                 TABDOCTOR == 3
-                  ? 'border-main border-[2px] text-main'
-                  : 'border-[#343434]/30 border-[1px]'
+                  ? 'border-b-main border-b-[2px] text-main'
+                  : 'border-b-[#343434]/20 border-b-[1px] text-tem/50'
               ]"
-              class="flex justify-center py-3 rounded-[3px]"
+              class="flex justify-center items-center py-3"
             >
               Выведено
             </button>
@@ -89,7 +89,7 @@
         <!-- Пациенты -->
         <Transition name="fade">
           <section v-if="TABDOCTOR == 1 && getAllUsers.length">
-            <div class="flex flex-col gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
               <a-user-view
                 v-for="user in getAllUsers"
                 :key="user.id"
@@ -107,7 +107,7 @@
             v-if="TABDOCTOR == 2 && getAllDostupno.length"
             class="flex flex-col gap-4"
           >
-            <div class="flex flex-col gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
               <a-dostupno-view
                 v-for="user in getAllDostupno"
                 :key="user.id"
@@ -125,7 +125,7 @@
             v-if="TABDOCTOR == 2"
             class="flex flex-col gap-4 items-center"
           >
-            <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-col gap-2 w-full items-center justify-center">
               <nuxt-link
                 v-if="checkSummVidod >= 500"
                 :to="{
@@ -136,7 +136,7 @@
                     zakaz: checkZakazies
                   }
                 }"
-                class="bg-main text-white flex flex-col gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full"
+                class="bg-main text-white flex flex-col gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full max-w-[300px]"
               >
               <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
                 Отправить запрос на вывод
@@ -163,7 +163,7 @@
         <Transition name="fade">
           <section
             v-if="TABDOCTOR == 3 && getAllVivod.length"
-            class="flex flex-col gap-2"
+            class="flex flex-col gap-6"
           >
             <a-vivod-list
               v-for="item in getAllVivod"

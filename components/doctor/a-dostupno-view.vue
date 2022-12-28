@@ -13,18 +13,11 @@
         v-else
         class="flex text-base font-medium     justify-start   items-center w-4/5 rounded-[3px] anime"
         :class="[active == user_data.id ? '' : 'truncate']"
-        >{{
-          user_data.attributes.FIO_user.replace(
-            /(\S+) (\S)\S* (\S)\S*/,
-            '$1 $2. $3.'
-          )
-        }}</span
+        >{{ FIO_USER }}</span
       >
 
       <div class="flex flex-col justify-center h-full  items-end w-1/5 ">
-        <span
-          class="text-base flex items-center gap-2 font-semibold text-main"
-        >
+        <span class="text-base flex items-center gap-2 font-semibold text-main">
           +{{ summUser.toLocaleString('ru-RU') }}₽</span
         >
         <span class="text-xs text-[#343434]/70 font-normal"
@@ -49,19 +42,20 @@
                 )
               }}</span>
             </div>
-           <nuxt-link :to="`/doctor/order/` + order.id" class="text-sm">Подробнее</nuxt-link>
+            <nuxt-link :to="`/doctor/order/` + order.id" class="text-sm"
+              >Подробнее</nuxt-link
+            >
             <span
               v-if="order.attributes.Status == true"
               class="text-xs  font-semibold"
               >+{{
-                ((order.attributes.SummOrder / 100) * $auth.user.Stavka).toLocaleString(
-                  'ru-RU'
-                )
+                (
+                  (order.attributes.SummOrder / 100) *
+                  $auth.user.Stavka
+                ).toLocaleString('ru-RU')
               }}₽</span
             >
-            <span v-else class="text-xs  font-semibold"
-              >Заказ не оплачен</span
-            >
+            <span v-else class="text-xs  font-semibold">Заказ не оплачен</span>
           </div>
         </div>
       </div>
@@ -78,7 +72,7 @@ export default {
     options: {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
       // weekday: 'long'
     }
   },
@@ -89,6 +83,11 @@ export default {
   },
 
   computed: {
+    FIO_USER () {
+      const fio = this.user_data.attributes.FIO_user.replaceAll('  ', ' ')
+      return fio.replace(/(\S+) (\S)\S* (\S)\S*/, '$1 $2. $3.')
+    },
+
     summUser () {
       const Competed = this.user_data.attributes.zakazies.data.filter(
         x => x.attributes.Status == true && x.attributes.ZaprosVivod == false
