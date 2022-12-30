@@ -145,7 +145,9 @@
                     </svg>
                   </div>
                 </div>
-                <div class="col-span-2 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="col-span-2 flex flex-col items-center justify-center gap-2"
+                >
                   <button
                     type="submit"
                     class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
@@ -199,8 +201,6 @@
                     <input
                       v-model="credentials2.identifier"
                       class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
-
-
                     />
                   </div>
                 </div>
@@ -263,7 +263,9 @@
                     </svg>
                   </div>
                 </div>
-                <div class="col-span-2 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="col-span-2 flex flex-col items-center justify-center gap-2"
+                >
                   <button
                     type="submit"
                     class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
@@ -608,8 +610,15 @@
                 <handler-promocode @setPromocode="getPromocode" />
                 <div class="flex flex-col gap-[20px]">
                   <button
+                    v-if="promocode"
                     @click="createOrder()"
                     class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                  >
+                    Отправить заявку
+                  </button>
+                  <button
+                    v-else
+                    class="opacity-50 cursor-not-allowed rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
                   >
                     Отправить заявку
                   </button>
@@ -979,9 +988,6 @@ export default {
     async onLogout () {
       await this.$apolloHelpers.onLogout()
       this.isAuthenticated = false
-    },
-    closeLogin () {
-      this.$emit('loginView')
     },
     closeLogin () {
       this.$emit('loginView')

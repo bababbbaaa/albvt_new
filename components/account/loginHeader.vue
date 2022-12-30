@@ -15,29 +15,46 @@
             @submit.prevent="handleLoginSubmit()"
             class="flex flex-col gap-4"
           >
-            <div class="flex flex-col items-start justify-start gap-2 w-full">
-              <!-- <label for="login" class="text-[14px]">Логин</label> -->
-              <input
-                type="text"
-                value="ofis_my"
-                placeholder="+7(___)___−__−__*"
-                v-facade="'+7(###)###-##-##'"
-                v-model="credentials.identifier"
-                class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
-                id="login"
-              />
+            <div class="flex flex-col gap-1">
+              <div
+                class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
+              >
+                <label
+                  for=""
+                  class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                  :class="[
+                    credentials.identifier.length !== 18
+                      ? 'text-[#89888F]'
+                      : 'text-main font-medium'
+                  ]"
+                  >Телефон*</label
+                >
+                <input
+                  v-model="credentials.identifier"
+                  class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+                  placeholder="+7"
+                  v-facade="'+7 (###) ###-##-##'"
+                />
+              </div>
             </div>
+
             <div
-              class="flex flex-col items-start justify-start gap-2 w-full relative"
+              class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
             >
-              <!-- <label for="pass" class="text-[14px]">Пароль</label> -->
+              <label
+                for=""
+                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                :class="[
+                  credentials.password.length < 8
+                    ? 'text-[#89888F]'
+                    : 'text-main font-medium'
+                ]"
+                >Пароль*</label
+              >
               <input
                 :type="typePassword"
-                placeholder="Пароль"
-                value="ofis_my"
                 v-model="credentials.password"
-                class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-md  password-area"
-                id="passHeader"
+                class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
               />
               <div
                 @click="show_hide_password()"
@@ -87,6 +104,9 @@
               >
                 Войти
               </button>
+              <button @click="getResetPass" class="text-tem/70 text-xs pb-2">
+                Забыли пароль?
+              </button>
               <div
                 v-if="loginError == true"
                 class="flex justify-center gap-1 items-center"
@@ -126,26 +146,44 @@
             @submit.prevent="handleLoginSubmit2()"
             class="flex flex-col gap-4"
           >
-            <div class="flex flex-col items-start justify-start gap-2 w-full">
-              <!-- <label for="login" class="text-[14px]">Логин</label> -->
-              <input
-                type="text"
-                placeholder="email"
-                v-model="credentials2.identifier"
-                class="w-full bg-white p-2 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
-                id="login2"
-              />
+            <div class="flex flex-col gap-1">
+              <div
+                class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
+              >
+                <label
+                  for=""
+                  class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                  :class="[
+                    credentials2.identifier.length <= 2
+                      ? 'text-[#89888F]'
+                      : 'text-main font-medium'
+                  ]"
+                  >Email*</label
+                >
+                <input
+                  v-model="credentials2.identifier"
+                  class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+                />
+              </div>
             </div>
+
             <div
-              class="flex flex-col items-start justify-start gap-2 w-full relative"
+              class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
             >
-              <!-- <label for="pass" class="text-[14px]">Пароль</label> -->
+              <label
+                for=""
+                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
+                :class="[
+                  credentials2.password.length < 8
+                    ? 'text-[#89888F]'
+                    : 'text-main font-medium'
+                ]"
+                >Пароль*</label
+              >
               <input
                 :type="typePassword"
-                placeholder="Пароль"
                 v-model="credentials2.password"
-                class="w-full bg-white p-3 border-[1px] border-[#AEAEAE] rounded-[5px] focus:outline-[#8a8a8a]"
-                id="pass2"
+                class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
               />
               <div
                 @click="show_hide_password()"
@@ -194,6 +232,9 @@
                 class="rounded-[5px] border border-main h-[49px] hover:bg-main anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
               >
                 Войти
+              </button>
+              <button @click="getResetPass" class="text-tem/70 text-xs pb-2">
+                Забыли пароль?
               </button>
               <div
                 v-if="loginError == true"
@@ -265,9 +306,14 @@ export default {
         this.typePassword = 'password'
       }
     },
+    getResetPass () {
+      this.closeLogin()
+      this.$nuxt.$router.replace({ path: '/reset-pass' })
+    },
     async handleLoginSubmit () {
       const getPhone = this.credentials.identifier
         .replaceAll('-', '')
+        .replaceAll(' ', '')
         .replace('(', '')
         .replace(')', '')
       console.log(getPhone)

@@ -1,0 +1,12 @@
+mutation RESET_PASS($PASS: String!, $PASS_CONF: String!, $CODE: String!) {
+  resetPassword(
+    password: $PASS
+    passwordConfirmation: $PASS_CONF
+    code: $CODE
+  ) {
+    user {
+      id
+      FIO_user
+    }
+  }
+}

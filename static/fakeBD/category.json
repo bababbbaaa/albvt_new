@@ -494,6 +494,69 @@
                             "databaseId": 2992,
                             "slug": "9-47-parakoklyush-bordetella-parapertussis"
                           }
+                        },
+                        {
+                          "node": {
+                            "name": "Шигеллез, шигеллы",
+                            "databaseId": 10001,
+                            "slug": "9-48-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Эшерихиоз (кишечная палочка)",
+                            "databaseId": 10002,
+                            "slug": "9-49-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Кампилобактериоз",
+                            "databaseId": 10003,
+                            "slug": "9-50-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Клостридиоз",
+                            "databaseId": 10004,
+                            "slug": "9-51-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Иерсиниоз (псевдотуберкулез)",
+                            "databaseId": 10005,
+                            "slug": "9-52-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Легионеллёз",
+                            "databaseId": 10006,
+                            "slug": "9-53-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Столбняк",
+                            "databaseId": 10007,
+                            "slug": "9-54-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Риккетсиоз, тиф сыпной",
+                            "databaseId": 10008,
+                            "slug": "9-55-parakoklyush-bordetella-parapertussis"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Микробиоценоз урогенитального тракта",
+                            "databaseId": 10010,
+                            "slug": "9-56-parakoklyush-bordetella-parapertussis"
+                          }
                         }
                       ]
                     }
@@ -511,6 +574,13 @@
                             "name": "ВИЧ-инфекция",
                             "databaseId": 2946,
                             "slug": "9-1-vich-infekcziya-virus-immunodeficzita-ch"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Герпес-вирусы человека 1 и 2 типов",
+                            "databaseId": 20007,
+                            "slug": "111-06"
                           }
                         },
                         {
@@ -644,6 +714,48 @@
                             "name": "Коронавирусная инфекция (COVID-19)",
                             "databaseId": 2972,
                             "slug": "9-27-koronavirusnaya-infekcziya-covid-19"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит A",
+                            "databaseId": 20001,
+                            "slug": "111-00"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит B",
+                            "databaseId": 20002,
+                            "slug": "111-01"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит С",
+                            "databaseId": 20003,
+                            "slug": "111-02"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит D",
+                            "databaseId": 20004,
+                            "slug": "111-03"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит Е",
+                            "databaseId": 20005,
+                            "slug": "111-04"
+                          }
+                        },
+                        {
+                          "node": {
+                            "name": "Гепатит G",
+                            "databaseId": 20006,
+                            "slug": "111-05"
                           }
                         }
                       ]

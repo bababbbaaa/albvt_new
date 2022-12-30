@@ -82,15 +82,26 @@
               @click="cartView = true"
               class="flex gap-2 items-center relative order-4 sm:order-1"
             >
-              <img
-                src="/img/icons/Shoppingbag.svg"
-                alt=""
-                class="w-8 xl:w-[2.5rem] h-8 xl:h-[2.5rem]"
-              />
-              <span
-                class="bg-white w-5 h-5  rounded-full text-[10px] absolute -top-2 left-[1.2rem]  xl:left-[1.5rem] p-2 flex justify-center items-center"
-                >{{ CART.length }}</span
-              >
+              <div class="rounded-full bg-white p-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 text-main"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                  />
+                </svg>
+                <span
+                  class="bg-white w-5 h-5  rounded-full text-[10px] absolute -top-2 left-[1.2rem]  xl:left-[1.5rem] p-2 flex justify-center items-center"
+                  >{{ CART.length }}</span
+                >
+              </div>
             </button>
             <!-- icon user not loggin -->
             <nuxt-link
@@ -99,14 +110,26 @@
               v-if="$auth.loggedIn && $auth.user.RoleUser == 'Vrach'"
               class="order-3 sm:order-last relative"
             >
-              <img
-                src="/img/icons/Addaccount.svg"
-                alt=""
-                class="w-8 xl:w-[2.5rem] h-8 xl:h-[2.5rem] "
-              />
-              <span
-                class="w-3 h-3 rounded-full flex justify-center items-center bg-[#5cf07c] absolute -top-[0.3rem] left-[1.3rem]  xl:left-[1.6rem]"
-              ></span>
+              <div class="rounded-full bg-white p-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 text-main"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+
+                <span
+                  class="w-3 h-3 rounded-full flex justify-center items-center bg-[#5cf07c] absolute -top-[0.3rem] left-[1.3rem]  xl:left-[1.6rem]"
+                ></span>
+              </div>
             </nuxt-link>
             <nuxt-link
               prefetch
@@ -114,14 +137,27 @@
               v-else-if="$auth.loggedIn && $auth.user.RoleUser !== 'Vrach'"
               class="order-3 sm:order-last relative"
             >
-              <img
-                src="/img/icons/Addaccount.svg"
-                alt=""
-                class="w-8 xl:w-[2.5rem] h-8 xl:h-[2.5rem] "
-              />
-              <span
+              <div class="rounded-full bg-white p-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 text-main"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+
+                <span
                 class="w-3 h-3 rounded-full flex justify-center items-center bg-[#5cf07c] absolute -top-[0.3rem] left-[1.3rem]  xl:left-[1.6rem]"
               ></span>
+              </div>
+              
             </nuxt-link>
             <!-- icon user  loggin -->
             <button
@@ -129,11 +165,24 @@
               class="order-3 sm:order-last relative"
               @click="loginView = true"
             >
-              <img
-                src="/img/icons/Addaccount.svg"
-                alt=""
-                class="w-8 xl:w-[2.5rem] h-8 xl:h-[2.5rem] "
-              />
+             <div class="rounded-full bg-white p-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 text-main"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+
+              
+              </div>
             </button>
             <!-- icon menu -->
             <button

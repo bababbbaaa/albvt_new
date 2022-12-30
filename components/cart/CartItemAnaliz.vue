@@ -13,7 +13,7 @@
     <div class="flex flex-col gap-[4px]">
       <div class="flex justify-between items-center">
         <span class="text-[16px]">Цена:</span>
-        <span class="text-[#838383] text-[16px]"
+        <span class="text-[16px]"
           >{{ parseInt(data.attributes.Price).toLocaleString('ru-RU') }} ₽</span
         >
       </div>
