@@ -77,13 +77,15 @@ export default {
       }
     }
   },
-  axios: {},
+  axios: {
+    baseURL: 'https://albvt.ru'
+  },
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
     '@nuxtjs/auth-next',
     ['nuxt-validate', {
-      lang: 'ru'
+      lang: 'ru' 
     }],
     ['nuxt-mail'],
   ],
