@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col sm:flex-row   gap-[20px]" v-if="analizy">
+  <div class="flex w-full flex-col sm:flex-row   gap-[20px]">
     <button
       @click="$router.back()"
       class=" flex sm:hidden justify-start items-center"
@@ -40,18 +40,20 @@
             />
           </svg>
         </button>
-        <div class="flex flex-col gap-[8px] ">
+        <div class="flex flex-col gap-[8px] " v-if="analizy">
           <h1 class="font-medium pb-[8px] text-sm  block overflow-hidden">
             {{ analizy.attributes.sub_cat.data.attributes.Name }}:
           </h1>
-          <h3 class="font-medium pb-4 text-2xl  ">{{ analizy.attributes.Name }}</h3>
+          <h3 class="font-medium pb-4 text-2xl  ">
+            {{ analizy.attributes.Name }}
+          </h3>
         </div>
       </div>
 
       <div class=" flex flex-col gap-[20px] ">
         <div class="flex flex-col gap-[20px]">
           <div class="w-full ">
-            <tabs-analiz class="w-full ">
+            <tabs-analiz class="w-full " v-if="analizy">
               <tab-analiz
                 title="Описание"
                 class="cursor-pointer"
@@ -67,7 +69,10 @@
                 class="text-[14px] pt-4 cursor-pointer"
                 v-if="analizy.attributes.SubDesc.length"
               >
-                <p v-html="analizy.attributes.SubDesc" class="text-[14px] pt-4"></p>
+                <p
+                  v-html="analizy.attributes.SubDesc"
+                  class="text-[14px] pt-4"
+                ></p>
               </tab-analiz>
             </tabs-analiz>
           </div>
@@ -76,8 +81,9 @@
       </div>
     </div>
 
-    <div class="w-full sm:w-1/3 order-1 sm:order-2" id="scroll-toAnaliz">
+    <div class="w-full sm:w-1/3 order-1 sm:order-2" id="scroll-toComplex">
       <cart-item-analiz
+        v-if="analizy"
         :data="analizy"
         :bio="GET_ALL_BIOMATERIALS"
         @addToCart="addToCart"
@@ -109,27 +115,35 @@ export default {
   },
   methods: {
     scrollToAnaliz () {
-      var scrollDiv = document.getElementById('scroll-toAnaliz').offsetTop - 90
-      window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+      setTimeout(() => {
+        let scrollDiv =
+          document.getElementById('scroll-toComplex').offsetTop - 90
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+        console.log('scrollToAnaliz +')
+      }, 500)
     },
     ...mapActions(['ADD_TO_CART', 'GET_BIOMATERIALS_FROM_API']),
     addToCart (data) {
-      console.log(data);
+      console.log(data)
       this.ADD_TO_CART(data)
-    },
+    }
   },
   mounted () {
     this.GET_BIOMATERIALS_FROM_API()
     if (window.screen.width <= 600) {
       this.scrollToAnaliz()
-      console.log('mobile eto');
+      console.log('mobile eto sht1')
+    } else {
+      console.log('ne mobile')
     }
     this.$router.replace({ query: null })
   },
   updated () {
     if (window.screen.width <= 600) {
       this.scrollToAnaliz()
-      console.log('mobile eto');
+      console.log('ne mobile eto sht2')
+    } else {
+      console.log('ne mobile')
     }
   },
   watch: {
@@ -140,8 +154,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['GET_ALL_BIOMATERIALS', 'CART_IDS']),
-    
+    ...mapGetters(['GET_ALL_BIOMATERIALS', 'CART_IDS'])
   },
   async asyncData ({ app, params }) {
     const client = app.apolloProvider.defaultClient

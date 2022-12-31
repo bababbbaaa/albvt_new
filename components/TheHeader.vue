@@ -10,7 +10,7 @@
           @click="mobileMenu = false"
         >
           <div
-            class="p-4 bg-white w-full max-h-[260px]  flex flex-col gap-4 rounded-md shadow-md "
+            class="p-4 bg-white w-full max-h-[280px]  flex flex-col gap-4 rounded-md shadow-md "
           >
             <nuxt-link @click="mobileMenu = false" to="/o-nas">О нас</nuxt-link>
             <nuxt-link @click="mobileMenu = false" to="/reis">Услуги</nuxt-link>

@@ -9,14 +9,14 @@
     <div
       class="row-span-1 col-span-4 xl:col-span-1 flex  flex-col font-medium text-sm     py-2 xl:py-[20px] "
     >
-      <nuxt-link prefetch :to="this.$route.fullPath + '/' + item.id">
+      <span @click="linkMed(item)">
         <p
           class="test-text2 anime cursor-pointer  h-full text-[#343434] xl:text-[#777777] hover:text-[#343434]"
           :title="item.attributes.Name"
         >
           {{ item.attributes.Name }}
         </p>
-      </nuxt-link>
+      </span>
     </div>
 
     <div class="hidden xl:flex flex-col col-span-1">
@@ -51,9 +51,24 @@
     <div
       class=" flex xl:hidden flex-wrap sm:flex-nowrap gap-2 lg:gap-4 col-span-2 items-center lg:text-sm font-normal text-[#777777]"
     >
-      <span class="w-full sm:w-auto">Код: {{ item.attributes.Art }}</span>
+      <span class="text-xs sm:text-sm w-full sm:w-auto"
+        >Код: {{ item.attributes.Art }}</span
+      >
+      <span
+        v-if="parseInt(item.attributes.TimeDone) == 1"
+        class=" text-[#9A9A9A] text-xs sm:text-sm"
+        >{{ item.attributes.TimeDone }} день</span
+      >
+      <span
+        v-else-if="parseInt(item.attributes.TimeDone) < 5"
+        class=" text-[#9A9A9A] text-xs sm:text-sm"
+        >{{ item.attributes.TimeDone }} дня</span
+      >
+      <span v-else class=" text-[#9A9A9A] text-xs sm:text-sm"
+        >{{ item.attributes.TimeDone }} дней</span
+      >
       <div
-        class="flex flex-wrap gap-2 cursor-pointer"
+        class="flex flex-wrap gap-2 cursor-pointer text-xs sm:text-sm"
         v-if="item.attributes.biomaterialies.data.length"
       >
         <span
@@ -64,20 +79,6 @@
           {{ bio.attributes.Name }}(+{{ bio.attributes.Price }}₽)
         </span>
       </div>
-
-      <span
-        v-if="parseInt(item.attributes.TimeDone) == 1"
-        class="text-sm text-[#9A9A9A] "
-        >{{ item.attributes.TimeDone }} день</span
-      >
-      <span
-        v-else-if="parseInt(item.attributes.TimeDone) < 5"
-        class="text-sm text-[#9A9A9A] "
-        >{{ item.attributes.TimeDone }} дня</span
-      >
-      <span v-else class="text-sm text-[#9A9A9A] "
-        >{{ item.attributes.TimeDone }} дней</span
-      >
     </div>
 
     <!-- end modile -->
@@ -142,7 +143,6 @@
         />
       </svg>
 
-    
       <span class="hidden xl:block"> В корзину</span>
     </button>
   </div>
@@ -161,6 +161,11 @@ export default {
   methods: {
     addToCart (item) {
       this.$emit('addToCart', item)
+    },
+    linkMed(item){
+      this.$router.replace(this.$route.fullPath + '/' + item.id).catch(()=>{
+        console.log('error router 167');
+      });
     }
   }
 }

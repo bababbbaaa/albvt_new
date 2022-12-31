@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col sm:flex-row   gap-[20px]" v-if="analizy">
+  <div class="flex w-full flex-col sm:flex-row   gap-[20px]">
     <button
       @click="$router.back()"
       class=" flex sm:hidden justify-start items-center"
@@ -40,7 +40,7 @@
             />
           </svg>
         </button>
-        <div class="flex flex-col gap-[8px] ">
+        <div class="flex flex-col gap-[8px] " v-if="analizy">
           <h1 class="font-medium pb-[8px] text-sm  block overflow-hidden">
             {{ analizy.attributes.sub_cat.data.attributes.Name }}:
           </h1>
@@ -52,7 +52,7 @@
 
       <div class=" flex flex-col gap-[20px] ">
         <div class="flex flex-col gap-[20px]">
-          <div class="w-full ">
+          <div class="w-full " v-if="analizy">
             <tabs-analiz class="w-full ">
               <tab-analiz
                 title="Описание"
@@ -85,7 +85,7 @@
                     class="h-full flex flex-col gap-2 col-span-5 sm:col-span-4"
                   >
                     <nuxt-link
-                      :to="`/all-analyzes/in-complecs/` + item.id"
+                      :to="`/all-analyzes/in-complecs/id/` + item.id"
                       class="text-sm text-[#343434]]/70 hover:text-main anime"
                       >{{ item.attributes.Name }}</nuxt-link
                     >
@@ -109,6 +109,7 @@
 
     <div class="w-full sm:w-1/3 order-1 sm:order-2" id="scroll-toAnaliz">
       <cart-item-analiz
+        v-if="analizy"
         :data="analizy"
         :bio="GET_ALL_BIOMATERIALS"
         @addToCart="addToCart"
@@ -140,19 +141,25 @@ export default {
   },
   methods: {
     scrollToAnaliz () {
-      var scrollDiv = document.getElementById('scroll-toAnaliz').offsetTop - 90
-      window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+      setTimeout(() => {
+        let scrollDiv =
+          document.getElementById('scroll-toAnaliz').offsetTop - 90
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+        console.log('scrollToAnaliz +')
+      }, 500)
     },
     ...mapActions(['ADD_TO_CART', 'GET_BIOMATERIALS_FROM_API']),
     addToCart (data) {
-      console.log(data)
       this.ADD_TO_CART(data)
     }
   },
   mounted () {
     this.GET_BIOMATERIALS_FROM_API()
     if (window.screen.width <= 600) {
+      console.log('da')
       this.scrollToAnaliz()
+    } else {
+      console.log('no')
     }
     this.$router.replace({ query: null })
   },

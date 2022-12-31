@@ -111,7 +111,6 @@ import categoryAnaliz from '~/static/fakeBD/category.json'
 import categoryComplecs from '~/static/fakeBD/categoryComplecs.json'
 import TabsComplecs from '../tabs/tabs-complecs.vue'
 import TabComplecs from '../tabs/tab-complecs.vue'
-import { mapActions } from 'vuex'
 
 export default {
   components: { TabsComplecs, TabComplecs },
@@ -138,7 +137,6 @@ export default {
   methods: {
      onResize () {
       this.isMobile = window.innerWidth < 600
-      console.log(this.$route.path);
     },
 
     viewSubMenu (item) {

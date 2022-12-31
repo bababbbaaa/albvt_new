@@ -305,12 +305,7 @@
                     <!-- с подкатегориями -->
                     <div v-else>
                       <nuxt-link
-                        :to="
-                          '/all-analyzes/' +
-                            item.node.slug +
-                            '/' +
-                            subitem.node.databaseId
-                        "
+                        :to="'/all-analyzes/' + subitem.node.databaseId"
                         class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span
@@ -407,6 +402,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -43,7 +43,8 @@ export default {
     '@plugins/vue-input-facade.js',
     { src: '~/plugins/vue-datepicker', ssr: false },
     { src: '~/plugins/vue-agile.js', ssr: false },
-    { src: "~/plugins/vClickOutside", ssr: false }
+    { src: "~/plugins/vClickOutside", ssr: false },
+    { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,8 +84,23 @@ export default {
     '@nuxtjs/auth-next',
     ['nuxt-validate', {
       lang: 'ru'
-    }]
+    }],
+    ['nuxt-mail'],
   ],
+
+  mail: {
+    message: {
+      to: 'albavita2019@yandex.ru',
+    },
+    smtp: {
+      host: 'smtp.yandex.ru',
+      port: 465,
+      auth: {
+        user: 'albavita2019@yandex.ru',
+        pass: 'blqsbsmwdoqayyoa'
+      },
+    },
+  },
 
   build: {
     postcss: {
@@ -93,6 +109,6 @@ export default {
         autoprefixer: {}
       }
     },
-    transpile: ['vue-agile']
+    transpile: ['vue-agile', 'defu']
   }
 }

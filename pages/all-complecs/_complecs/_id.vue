@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <div class="flex flex-col gap-[20px] ">
-      <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+      <div id="scroll-to-complex" class="flex flex-col sm:flex-row gap-2 sm:justify-between">
         <h1
-        v-if="subCats"
+          v-if="subCats"
           class="text-[24px] font-medium flex gap-2 items-center scroll-to"
-          id="scroll-to"
+          
         >
           <button
             @click="$router.back()"
@@ -26,7 +26,7 @@
               />
             </svg>
           </button>
-           {{ subCats.data[0].attributes.Name }}
+          {{ subCats.data[0].attributes.Name }}
         </h1>
       </div>
       <div class="bg-white shadow-md rounded-[5px] ">
@@ -48,9 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full flex justify-center">
-
-      </div>
+      <div class="w-full flex justify-center"></div>
     </div>
   </div>
 </template>
@@ -73,13 +71,13 @@ export default {
       limit: null,
       products: [],
       posts: [],
-      pageName: '',
+      pageName: ''
     }
   },
   apollo: {
     subCats: {
       query: GET_CAT_NAME,
-      variables(){
+      variables () {
         return {
           ID: this.$route.params.id
         }
@@ -87,7 +85,7 @@ export default {
     },
     analizies: {
       query: GET_ANALIZES_CAT,
-      variables(){
+      variables () {
         return {
           ID_CAT: this.$route.params.id
         }
@@ -101,22 +99,21 @@ export default {
       this.ADD_TO_CART(item)
     },
     scrollToAnaliz () {
-      var scrollDiv = document.getElementById('scroll-to').offsetTop - 90
+      var scrollDiv = document.getElementById('scroll-to-complex').offsetTop - 90
       window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
     }
   },
   computed: {
-    ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS']),
-
+    ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS'])
   },
   mounted () {
-    if (window.screen.width <= 600 && this.dalee == false) {
+    if (window.screen.width <= 600) {
       this.scrollToAnaliz()
     }
     this.$router.replace({ query: null })
   },
   updated () {
-    if (window.screen.width <= 600 && this.dalee == false) {
+    if (window.screen.width <= 600) {
       this.scrollToAnaliz()
     }
   },
@@ -131,6 +128,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

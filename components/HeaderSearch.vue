@@ -125,7 +125,7 @@
             class="bg-main/20 sm:max-w-[140px]   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
           >
             <img src="/img/icons/add-to-cart.svg" alt="" />
-            <span class="text-[12px] sm:text-[16px]"
+            <span class="text-[12px] sm:text-sm"
               >{{
                 parseInt(item.attributes.Price).toLocaleString('ru-RU')
               }}

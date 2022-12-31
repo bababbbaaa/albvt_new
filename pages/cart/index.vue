@@ -54,7 +54,7 @@
       </div>
       <div
         v-if="register == false && !$auth.loggedIn"
-        class="capitalize remove-bg p-[24px] flex w-full mb-[24px]  flex-col justify-center items-center gap-4 mt-24px"
+        class="remove-bg flex w-full mb-[24px] flex-col justify-center items-center gap-4 mt-24px"
       >
         <span class="text-2xl font-medium">Авторизация</span>
         <div class="w-full">
@@ -150,7 +150,7 @@
                 >
                   <button
                     type="submit"
-                    class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="max-w-[300px] rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-sm"
                   >
                     Войти
                   </button>
@@ -268,7 +268,7 @@
                 >
                   <button
                     type="submit"
-                    class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="max-w-[300px] rounded-md border border-main h-[49px] mt-6 hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-sm"
                   >
                     Войти
                   </button>
@@ -324,9 +324,9 @@
       </div>
 
       <div class=" flex flex-col gap-[20px] mt-[24px] px-[20px] w-full">
-        <form @submit.prevent="oplata()" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4">
           <div class="flex flex-col">
-            <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
+            <div class=" py-[16px] flex flex-col gap-4 text-sm">
               <div class="grid grid-cols-2 grid-rows-2 gap-4 ">
                 <div
                   class="col-span-2 flex items-center justify-center gap-4  w-full overflow-hidden   p-3 rounded cursor-pointer"
@@ -354,12 +354,12 @@
             </div>
             <div v-if="sityesInvitros">
               <div v-if="formZakaz.mesto == 'ofis_my'">
-                <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
+                <div class=" py-[16px] flex flex-col gap-4 text-sm">
                   <gb-list />
                 </div>
               </div>
               <div v-if="formZakaz.mesto == 'ofic'" class="flex flex-col gap-4">
-                <div class=" py-[16px] flex flex-col gap-4 text-[16px]">
+                <div class=" py-[16px] flex flex-col gap-4 text-sm">
                   <div class="flex flex-col gap-2">
                     <span class="text-sm text-[#343434]/50"
                       >Выберите город</span
@@ -390,7 +390,7 @@
 
                   <div
                     v-if="sityIdSelect == true"
-                    class=" py-[16px] flex flex-wrap gap-4 text-[16px]"
+                    class=" py-[16px] flex flex-wrap gap-4 text-sm"
                   >
                     <div
                       v-for="sity in sityesInvitros.data"
@@ -441,7 +441,7 @@
                 <div
                   v-if="sityesInvitro && clinicIdSelect == true"
                   id="scroll-to-area"
-                  class="flex flex-col gap-4"
+                  class="flex flex-col gap-1"
                 >
                   <div
                     v-for="item in getAllClinics"
@@ -455,7 +455,7 @@
                     <div
                       v-for="clinic in item.attributes.goroda_invitros.data"
                       :key="clinic.id"
-                      class="flex flex-col gap-4"
+                      class="flex flex-col gap-1"
                       ref="Refclinic"
                     >
                       <div
@@ -484,9 +484,23 @@
                             {{ clinic.attributes.Name }}</span
                           >
                         </div>
-                        <button class="text-xs text-[#343434]/70">
-                          На карте
+                        <button
+                          @click="handlerClinicMap(clinic.id)"
+                          class="text-xs text-[#343434]/70"
+                        >
+                          <span v-if="activeClinicMap == clinic.id"
+                            >Скрыть</span
+                          >
+                          <span v-else> На карте</span>
                         </button>
+                      </div>
+                      <div
+                        class="w-full rounded-md overflow-hidden drop-shadow-lg"
+                      >
+                        <y-a-map
+                          v-if="activeClinicMap == clinic.id"
+                          :data_map="clinic.attributes"
+                        />
                       </div>
                     </div>
                   </div>
@@ -531,7 +545,7 @@
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <!-- корзина шаг 4 -->
@@ -544,7 +558,7 @@
           <div class="w-full  bg-white    shadow-md rounded-md ">
             <div
               v-if="CART.length >= 1"
-              class="w-full justify-center  text-[16px] bg-[#EDEDED] h-[48px] flex items-center uppercase"
+              class="w-full justify-center  text-sm bg-[#EDEDED] h-[48px] flex items-center uppercase"
             >
               <span>корзина</span>
             </div>
@@ -576,7 +590,7 @@
                   <span class="text-[14px]">ИТОГОВАЯ СТОИМОСТЬ: </span>
                   <span
                     v-if="totalpriceInCART && priceNotDiscounted"
-                    class="flex flex-col gap-1 justify-end items-end text-[16px] font-bold"
+                    class="flex flex-col gap-1 justify-end items-end text-sm font-bold"
                   >
                     <span
                       v-if="priceNotDiscounted != totalpriceInCART"
@@ -612,20 +626,20 @@
                   <button
                     v-if="promocode"
                     @click="createOrder()"
-                    class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-sm"
                   >
                     Отправить заявку
                   </button>
                   <button
                     v-else
-                    class="opacity-50 cursor-not-allowed rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="opacity-50 cursor-not-allowed rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-sm"
                   >
                     Отправить заявку
                   </button>
 
                   <button
                     @click="addConsult()"
-                    class="rounded-md border bg-main h-[49px] hover:bg-main/70  anime  text-white w-full flex justify-center items-center py-2 text-[16px]"
+                    class="rounded-md border bg-main h-[49px] hover:bg-main/70  anime  text-white w-full flex justify-center items-center py-2 text-sm"
                   >
                     Получить консультацию
                   </button>
@@ -645,7 +659,7 @@
 
             <div v-else class="bg-white p-[24px] flex flex-col gap-[24px]">
               <span
-                class="text-[#A55B4A] text-[16px] font-medium w-full text-center"
+                class="text-[#A55B4A] text-sm font-medium w-full text-center"
               >
                 Ваша корзина пуста.
               </span>
@@ -656,7 +670,7 @@
               <button>
                 <nuxt-link
                   to="/all-analyzes"
-                  class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                  class="rounded-md border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-sm"
                   >Анализы</nuxt-link
                 >
               </button>
@@ -738,7 +752,7 @@
               status == false
           "
           @click="ConsultZayavka()"
-          class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full max-w-[250px] flex justify-center items-center py-2 text-[16px]"
+          class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full max-w-[250px] flex justify-center items-center py-2 text-sm"
         >
           Отправить
         </button>
@@ -778,6 +792,7 @@ import SET_USER_TO_VRACH from '~/graphql/cart/SET_USER_TO_VRACH.gql'
 import CREATE_ORDER_CART from '~/graphql/cart/CREATE_ORDER_CART.gql'
 import GbList from '~/components/cart/gb-list.vue'
 import CreateUser from '~/components/cart/create-user.vue'
+import YAMap from '../../components/y-a-map.vue'
 
 export default {
   layout: 'MainLayout',
@@ -787,7 +802,8 @@ export default {
     TabLogin,
     HandlerPromocode,
     GbList,
-    CreateUser
+    CreateUser,
+    YAMap
   },
   apollo: {
     sityesInvitros: {
@@ -809,7 +825,7 @@ export default {
       typePassword: 'password',
       start: 0,
       step: 0,
-
+      activeClinicMap: null,
       sityIdActive: 1,
       sityNameActive: 'Ростов-н/Д',
       sityIdSelect: false,
@@ -854,6 +870,13 @@ export default {
     }
   },
   methods: {
+    handlerClinicMap (id) {
+      if (this.activeClinicMap !== id) {
+        this.activeClinicMap = id
+      } else {
+        this.activeClinicMap = null
+      }
+    },
     async handleLoginSubmit () {
       const getPhone = this.credentials.identifier
         .replaceAll('-', '')

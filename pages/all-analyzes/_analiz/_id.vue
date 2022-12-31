@@ -115,14 +115,14 @@ export default {
 
   },
   mounted () {
-    if (window.screen.width <= 600 && this.dalee == false) {
+    if (window.screen.width <= 600 ) {
       console.log('mobile eto');
       this.scrollToAnaliz()
     }
     this.$router.replace({ query: null })
   },
   updated () {
-    if (window.screen.width <= 600 && this.dalee == false) {
+    if (window.screen.width <= 600 ) {
       console.log('mobile eto');
       this.scrollToAnaliz()
     }

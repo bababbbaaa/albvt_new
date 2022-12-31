@@ -557,6 +557,13 @@
                             "databaseId": 10010,
                             "slug": "9-56-parakoklyush-bordetella-parapertussis"
                           }
+                        },
+                        {
+                          "node": {
+                            "name": "Сальмонеллез, тиф брюшной",
+                            "databaseId": 10011,
+                            "slug": "9-57-parakoklyush-bordetella-parapertussis"
+                          }
                         }
                       ]
                     }
