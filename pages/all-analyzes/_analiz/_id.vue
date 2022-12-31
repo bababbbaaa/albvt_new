@@ -1,11 +1,13 @@
 <template>
   <div class="">
     <div class="flex flex-col gap-[20px] ">
-      <div id="scroll-to" class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+      <div
+        id="scroll-to"
+        class="flex flex-col sm:flex-row gap-2 sm:justify-between"
+      >
         <h1
-        v-if="subCats"
+          v-if="subCats"
           class="text-[24px] font-medium flex gap-2 items-center scroll-to"
-          
         >
           <button
             @click="$router.back()"
@@ -26,7 +28,10 @@
               />
             </svg>
           </button>
-           {{ subCats.data[0].attributes.Name }}
+          <!-- <span>
+            {{ subCats.data[0].attributes.Name }}
+          </span> -->
+          
         </h1>
       </div>
       <div class="bg-white shadow-md rounded-[5px] ">
@@ -78,21 +83,21 @@ export default {
       limit: null,
       products: [],
       posts: [],
-      pageName: '',
+      pageName: ''
     }
   },
   apollo: {
     subCats: {
       query: GET_CAT_NAME,
-      variables(){
+      variables () {
         return {
-          ID: this.$route.params.id
+          ID: this.$route.params.analiz
         }
       }
     },
     analizies: {
       query: GET_ANALIZES_CAT,
-      variables(){
+      variables () {
         return {
           ID_CAT: this.$route.params.id
         }
@@ -111,19 +116,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS']),
-
+    ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS'])
   },
   mounted () {
-    if (window.screen.width <= 600 ) {
-      console.log('mobile eto');
+    if (window.screen.width <= 600) {
       this.scrollToAnaliz()
     }
     this.$router.replace({ query: null })
   },
   updated () {
-    if (window.screen.width <= 600 ) {
-      console.log('mobile eto');
+    if (window.screen.width <= 600) {
       this.scrollToAnaliz()
     }
   },
@@ -138,6 +140,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

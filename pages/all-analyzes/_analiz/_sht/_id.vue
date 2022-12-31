@@ -132,18 +132,14 @@ export default {
     this.GET_BIOMATERIALS_FROM_API()
     if (window.screen.width <= 600) {
       this.scrollToAnaliz()
-      console.log('mobile eto sht1')
-    } else {
-      console.log('ne mobile')
+      console.log('analiz/sht')
     }
     this.$router.replace({ query: null })
   },
   updated () {
     if (window.screen.width <= 600) {
       this.scrollToAnaliz()
-      console.log('ne mobile eto sht2')
-    } else {
-      console.log('ne mobile')
+      console.log('analiz/sht')
     }
   },
   watch: {

@@ -2,7 +2,7 @@
   <div class="container mt-[47px] sm:mt-0">
     <div v-if="usersPermissionsUser">
       <tabs-vk>
-        <tab-vk title="Результаты исследований">
+        <tab-vk title="Мои заказы">
           <div
             class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] my-[47px] gap-[20px]"
           >

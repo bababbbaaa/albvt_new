@@ -15,41 +15,51 @@
         />
       </span>
       <input
-        @input="DownloadResult()"
+        @input="searchResult($event.target.value)"
+        v-bind:value="searchInput"
         type="text"
-        v-model="resultInput"
         id="default-search2"
         class="block w-full pr-20 rounded-[5px] text-center   pl-4 border-[2px] border-[#343434]/20   h-[60px] focus:outline-none text-[#979797]"
         placeholder="Введите номер заказа"
         autocomplete="off"
       />
     </label>
-     <span v-if="pdf.length == 0 && errors !== 2 && resultInput.length === 5"
-        >Заказ не готов, попробуйте позже</span
-      >
-      <span v-if="errors == 2 && pdf.length == 0">Заказ не найден, проверьте правильность введенных данных</span>
-      <span v-if="resultInput.length !== 5 && errors !== 2"
-        >Введите 5 цифр полученных при оформлении заказа</span
-      >
-    <div class="flex flex-col gap-4">
-      <div
-        v-for="(item, i) in pdf"
-        :key="i"
-        class="bg-white p-4 rounded-[5px] shadow-md"
-      >
-        <a
-          :href="item.guid.rendered"
-          target="_blank"
-          class="underline underline-offset-2"
-          >Скачать результаты-{{ item.slug.substr(0, 5) }}-{{ i + 1 }}</a
+
+    <div v-if="searchResults !== null">
+      <div class="flex flex-col gap-4" v-if="searchResults.orders.data.length">
+        <div
+          v-for="(item, i) in searchResults.orders.data[0].attributes.Result
+            .data"
+          :key="i"
+          class="bg-white p-4 rounded-[5px] shadow-md"
         >
+          <a
+            :href="`https://api.albvt.ru` + item.attributes.url"
+            target="_blank"
+            class="flex justify-start gap-2 items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            <span  class="underline underline-offset-2">Скачать результаты-{{ item.attributes.name }}</span>
+            </a
+          >
+        </div>
       </div>
     </div>
+
     <!-- предупреждения -->
-    
-     
-    
-    
 
     <!-- результаты -->
   </div>
@@ -57,48 +67,39 @@
 
 <script>
 import HeadingH3 from '~/components/HeadingH3.vue'
+import RESULTS from '~/graphql/RESULTS.gql'
 export default {
   components: { HeadingH3 },
   data () {
     return {
-      resultInput: '',
+      searchInput: '',
       pdf: [],
       error: '',
-      orderReally: [],
-      errors: null
+      searchResults: null,
+      errors: null,
+      loading: false
     }
   },
   layout: 'MainLayout',
   methods: {
-    async DownloadResult () {
-      if (this.resultInput.length == 5) {
-        const requestSearh = this.resultInput
-        const url =
-          'https://foxsis.ru/alvd/wp-json/wp/v2/media?search=' + requestSearh
-        const pdf = await this.$axios.$get(url)
-        this.DownloadOrder()
-        this.pdf = pdf
+    async searchResult (value) {
+      this.searchInput = value
+      try {
+        const res = await this.$apollo.query({
+          query: RESULTS,
+          variables: {
+            UID: value
+          }
+        })
+        if (res) {
+          this.loading = false
+          this.searchResults = res.data
+        }
+      } catch (err) {
+        this.searchResults = []
       }
-      //
     },
-    DownloadOrder () {
-      const requestSearh = this.resultInput
-      this.$axios
-        .get('https://foxsis.ru/alvd/wp-json/wc/v3/orders/' + requestSearh)
-        .then(({ response }) => {
-              this.alertResponse (1)  
-        })
-        .catch(({ response }) => {
-          console.log(response)
-          if (response.status == 404) {
-              this.alertResponse (2)
 
-              
-          } 
-          
-           
-        })
-    },
     alertResponse (id) {
       this.errors = id
     }

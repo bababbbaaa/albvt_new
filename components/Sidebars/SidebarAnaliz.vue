@@ -1,4 +1,6 @@
 <template>
+  <!-- стреллки  на категории -->
+  <!-- скролл попробовать -->
   <div>
     <div class="flex flex-col gap-[20px]">
       <!-- left sidebar -->
@@ -47,7 +49,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -55,7 +57,7 @@
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
               >
                 <nuxt-link
                   :to="
@@ -64,7 +66,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class="w-full hover:text-main anime  cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
                   >{{ item.node.name }}
                 </nuxt-link>
               </h4>
@@ -76,7 +78,7 @@
                   <li
                     v-for="subitem in item.node.children.edges"
                     :key="subitem.node.databaseId"
-                    class="text-[14px] "
+                    class="text-sm "
                   >
                     <!-- с подкатегориями -->
                     <div v-if="subitem.node.children">
@@ -140,7 +142,7 @@
                                 '/' +
                                 itemSubSub.node.databaseId
                             "
-                            class="text-left flex gap-2 justify-start text-[14px] hover:text-main anime cursor-pointer"
+                            class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
                           >
                             <span
                               class="text-left flex gap-2 justify-start"
@@ -193,7 +195,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -201,7 +203,7 @@
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
               >
                 <nuxt-link
                   :to="
@@ -210,7 +212,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class=" w-full hover:text-main anime cursor-pointer text-[14px] sm:text-[16px] pb-[12px]"
+                  class=" w-full hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px]"
                   >{{ item.node.name }}</nuxt-link
                 >
               </h4>
@@ -222,7 +224,7 @@
                   <li
                     v-for="subitem in item.node.children.edges"
                     :key="subitem.node.databaseId"
-                    class="text-[14px] "
+                    class="text-sm "
                   >
                     <!-- с подкатегориями -->
                     <div v-if="subitem.node.children">
@@ -282,27 +284,30 @@
                           :key="itemSubSub.node.databaseId"
                           class=""
                         >
+                        <!-- починить ссылки на 3 уровень -->
                           <nuxt-link
+                          
                             :to="
                               '/all-analyzes/' +
                                 itemSubSub.node.slug +
                                 '/' +
                                 itemSubSub.node.databaseId
                             "
-                            class="text-left flex gap-2 justify-start text-[14px] hover:text-main anime cursor-pointer"
+                            class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
                           >
                             <span
                               class="text-left flex gap-2 justify-start"
                               @click="preFetchDataSubCat(itemSubSub.node)"
                             >
                               <span>-</span>
-                              {{ itemSubSub.node.name }}
+                              {{ itemSubSub.node.name }} ввв
                             </span>
                           </nuxt-link>
+                           <!-- починить ссылки на 3 уровень -->
                         </li>
                       </ul>
                     </div>
-                    <!-- с подкатегориями -->
+                    <!-- с подкатегориями 2 уровня -->
                     <div v-else>
                       <nuxt-link
                         :to="'/all-analyzes/' + subitem.node.databaseId"
@@ -313,7 +318,7 @@
                           @click="preFetchDataCat(subitem.node)"
                         >
                           <span>-</span>
-                          {{ subitem.node.name }}
+                          {{ subitem.node.name }} 2 уровня
                         </span>
                       </nuxt-link>
                     </div>

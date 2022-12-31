@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-col gap-2 p-3 bg-white drop-shadow-md rounded-md w-full relative"
+    class="flex flex-col gap-2  pt-3 bg-white drop-shadow-md rounded-md w-full relative overflow-hidden"
   >
-    <div class="w-full flex items-stretch justify-between h-full">
+    <div class="px-3 w-full flex items-stretch justify-between h-full">
       <div class="flex flex-col gap-1 items-start justify-between w-1/2">
         <div class=" text-xs font-medium flex gap-1">
           <span v-if="data_vivod.attributes.Done == true" class="text-[#2CC746]"
@@ -27,83 +27,111 @@
         <span class="text-xs font-normal text-tem/50"
           >{{ data_vivod.attributes.zakazies.data.length }} заказа</span
         >
-        <button
-          @click="openVivod"
-          class="button-doctor-arrow absolute -bottom-3 cursor-pointer"
-        >
-          <img v-if="active == null" src="~/assets/icons/doctor-arrow.svg" alt="" class="w-8 h-8"/>
-           <img v-else src="~/assets/icons/doctor-arrow.svg" alt="" class="w-8 h-8 rotate-180"/>
-        </button>
       </div>
+      
     </div>
     <Transition name="fade">
       <div
         v-if="active == data_vivod.id"
-        class=" border-t border-dashed  border-[#343434]/50 mt-2"
+        class="px-3 border-t border-dashed  border-[#343434]/50 mt-2"
       >
         <section class="w-full divide-y divide-[#343434]/70">
           <div
             v-for="item in data_vivod.attributes.zakazies.data"
             :key="item.id"
-            class="flex items-center w-full gap-1 py-2"
+            class="flex items-center w-full gap-1 py-2 justify-between"
           >
-            <div class="w-2/5  flex flex-col gap-1">
+            <div class="w-3/6  flex flex-col gap-1">
               <span class="text-sm font-medium">{{
                 item.attributes.users.data[0].attributes.FIO_user.replace(
                   '  ',
                   ' '
                 ).replace(/(\S+) (\S)\S* (\S)\S*/, '$1 $2. $3.')
               }}</span>
-              <span class="text-xs font-normal text-black/70">{{
+              <span class="text-xs font-normal text-tem/50">{{
                 new Date(item.attributes.createdAt).toLocaleString(
                   'ru',
                   options
                 )
               }}</span>
             </div>
-            <nuxt-link
-              class="w-2/5 text-sm flex gap-1 items-center"
-              :to="`/doctor/order/` + item.id"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4 text-main"
+            <div class="flex gap-2 items-center">
+              <span class="font-semibold text-main text-right"
+                >{{
+                  (
+                    (item.attributes.SummOrder / 100) *
+                    $auth.user.Stavka
+                  ).toFixed(2)
+                }}₽</span
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-              В заказ</nuxt-link
-            >
-            <span class="w-1/5 font-semibold text-main text-right"
-              >{{
-                ((item.attributes.SummOrder / 100) * $auth.user.Stavka).toFixed(
-                  2
-                )
-              }}₽</span
-            >
+              <nuxt-link
+                class="text-xs flex gap-1 items-center justify-end"
+                :to="`/doctor/order/` + item.id"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-tem/50"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+                  />
+                </svg>
+              </nuxt-link>
+            </div>
           </div>
         </section>
-         <Transition name="fade">
-        <span
-          v-if="data_vivod.attributes.Done == true"
-          class="cursor-pointer w-full flex items-center justify-center gap-1 text-sm mt-2 py-2 rounded bg-main text-white"
-          ><img src="~/assets/icons/download.svg" alt="" /> Скачать чек</span
-        >
-        <span
-          v-else
-          class="w-full flex items-center justify-center gap-1 text-sm py-2 rounded  text-[#343434]/70"
-          >Ожидайте перевод</span
-        >
+        <Transition name="fade">
+          <span
+            v-if="data_vivod.attributes.Done == true"
+            class="cursor-pointer w-full flex items-center justify-center gap-1 text-sm mt-2 py-2 rounded bg-main text-white"
+            ><img src="~/assets/icons/download.svg" alt="" /> Скачать чек</span
+          >
+          <span
+            v-else
+            class="w-full flex items-center justify-center gap-1 text-sm py-2 rounded  text-[#343434]/70"
+            >Ожидайте перевод</span
+          >
         </Transition>
       </div>
     </Transition>
+    <button @click="openVivod" class="w-full bg-[#FAFAFA] py-1 cursor-pointer flex items-center justify-center">
+        <svg
+          v-if="active == null"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 text-tem/70"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+        <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 rotate-180 text-tem/70"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </button>
   </div>
 </template>
 
@@ -156,7 +184,7 @@ export default {
 
 <style>
 .button-doctor-arrow {
-    left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

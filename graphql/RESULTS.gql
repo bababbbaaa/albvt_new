@@ -1,0 +1,17 @@
+query RESULTS($UID: String) {
+  orders(filters: { UID: { eq: $UID } }) {
+    data {
+      attributes {
+        Result {
+          data {
+            id
+            attributes {
+              url
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 <template>
+<!-- консультация -->
   <div
     class="container w-full pt-[47px] mt-[47px] sm:mt-0 flex flex-col gap-8 justify-center items-center h-full max-w-[620px]"
   >
@@ -192,7 +193,7 @@
                       for=""
                       class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
                       :class="[
-                        credentials2.identifier.length !== 18
+                        !confirmEmail
                           ? 'text-[#89888F]'
                           : 'text-main font-medium'
                       ]"
@@ -319,11 +320,11 @@
       class="flex flex-col justify-center gap-[20px] items-center w-full"
       v-if="step == 1"
     >
-      <div class="flex justify-center w-full px-[20px]">
+      <div class="flex justify-center w-full">
         Выберите место сдачи анализов
       </div>
 
-      <div class=" flex flex-col gap-[20px] mt-[24px] px-[20px] w-full">
+      <div class=" flex flex-col gap-[20px] mt-[24px] w-full">
         <div class="flex flex-col gap-4">
           <div class="flex flex-col">
             <div class=" py-[16px] flex flex-col gap-4 text-sm">
@@ -348,14 +349,14 @@
                       : 'border-[1px] border-[#343434]/30  bg-white'
                   ]"
                 >
-                  <span class="w-full text-center">В больнице</span>
+                  <span class="w-full text-center">В больнице (Ростов-на-Дону)</span>
                 </div>
               </div>
             </div>
             <div v-if="sityesInvitros">
               <div v-if="formZakaz.mesto == 'ofis_my'">
                 <div class=" py-[16px] flex flex-col gap-4 text-sm">
-                  <gb-list />
+                  <gb-list @handlerOfic="handlerOfic"/>
                 </div>
               </div>
               <div v-if="formZakaz.mesto == 'ofic'" class="flex flex-col gap-4">
@@ -416,7 +417,7 @@
                   >
                   <div
                     @click="clinicIdSelect = !clinicIdSelect"
-                    class="flex p-4 rounded-md border justify-between items-center cursor-pointer"
+                    class="flex p-4 text-sm rounded-md border justify-between items-center cursor-pointer"
                   >
                     <span v-if="activeClinicInfo == null">Выберите офис</span>
                     <span v-else>{{ activeClinicInfo.Name }}</span>
@@ -526,7 +527,7 @@
                     class="border p-4 rounded-md border-[#343434]/20 flex flex-col gap-4"
                   >
                     <span
-                      >г. {{ sityNameActive }},
+                      >г. {{ sityNameActive }},<br>
                       {{ activeClinicInfo.Name }}</span
                     >
                     <div class="text-[#343434]">
@@ -605,11 +606,13 @@
                 </div>
                 <div class="flex flex-col justify-start items-start gap-1">
                   <span class="text-[14px]">Место сдачи анализа: </span>
-                  <span
+                  <div
                     v-if="formZakaz.mesto == 'ofis_my'"
-                    class="text-[14px] font-bold text-[#A55B4A] underline underline-offset-2"
+                    class="text-xs text-tem/70"
                   >
-                    В больнице</span
+                    <span>В больнице:</span><br>
+                    <span>{{activeOficInfo.attributes.Name}}</span> 
+                    </div
                   >
                   <span
                     v-if="formZakaz.mesto == 'ofic'"
@@ -832,6 +835,7 @@ export default {
       selectClinicId: null,
       clinicIdSelect: false,
       activeClinicInfo: null,
+      activeOficInfo: null,
       promocode: null,
       pacientsForDoctor: null,
       DoctorID: null,
@@ -844,7 +848,7 @@ export default {
       formZakaz: {
         mesto: 'ofic'
       },
-
+      confirmEmail: false,
       dopTest: [],
       totalCartPrice: null,
       prePrice: null,
@@ -876,6 +880,9 @@ export default {
       } else {
         this.activeClinicMap = null
       }
+    },
+    handlerOfic(id){
+      this.activeOficInfo = id
     },
     async handleLoginSubmit () {
       const getPhone = this.credentials.identifier
@@ -1116,6 +1123,13 @@ export default {
   watch: {
     promocode () {
       return this.reTotalPrice()
+    },
+    'credentials2.identifier' () {
+      if (this.credentials2.identifier.includes('@')) {
+        this.confirmEmail = true
+      } else {
+        this.confirmEmail = false
+      }
     }
   }
 }

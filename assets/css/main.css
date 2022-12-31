@@ -22,7 +22,7 @@
   @apply bg-white w-full p-2 border-[2px]  rounded-[5px]  focus:outline-none;
 }
 .input-new {
-  @apply w-full  bg-transparent px-2 py-3 border-[1px] text-sm border-main rounded-md  focus:border-[#8a8a8a];
+  @apply w-full  bg-transparent px-2 py-3 border-[1px] text-sm border-tem/30 rounded-md  focus:border-[#8a8a8a];
 }
 
 .label-new {
@@ -61,7 +61,7 @@ input {
 
 .fade-enter-from,
 .fade-leave-to {
-  transform: translateY(10px);
+  /* transform: translateY(10px); */
   opacity: 0;
 }
 

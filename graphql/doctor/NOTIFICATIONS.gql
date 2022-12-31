@@ -1,0 +1,11 @@
+query NOTIFICATIONS {
+  notifications {
+    data {
+        id
+      attributes {
+        Text
+        createdAt
+      }
+    }
+  }
+}

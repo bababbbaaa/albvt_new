@@ -1,7 +1,7 @@
 <template>
   <div class="bg-[#F9F9F9]">
     <div
-      class="pt-2 container flex flex-col gap-4"
+      class="pt-2 container flex flex-col gap-8"
       v-if="usersPermissionsUser"
     >
       <div class="w-full flex items-center justify-between ">
@@ -17,24 +17,25 @@
       <span class="text-2xl font-bold">{{
         usersPermissionsUser.data.attributes.FIO_user
       }}</span>
-      <div class="grid grid-cols-2 gap-4 text-sm">
-        <div class="flex flex-col gap-1">
-          <span class="font-bold">Телефон</span>
+      <div class="grid grid-cols-1 gap-4 text-sm">
+        <div class="flex gap-3">
+          <span class="font-bold">Телефон:</span>
           <span class="">{{ usersPermissionsUser.data.attributes.Phone }}</span>
         </div>
-        <div class="flex flex-col gap-1">
+        <div class="flex gap-4">
           <span class="font-bold">Дата рождения:</span>
           <span class="">{{
             usersPermissionsUser.data.attributes.DataRozgdeniya
           }}</span>
         </div>
-        <div class="flex flex-col gap-1">
+        <div class="flex gap-4">
           <span class="font-bold">E-mail:</span>
           <span class="">{{ usersPermissionsUser.data.attributes.email }}</span>
         </div>
       </div>
-      <div class="w-full">Заказы: <b>{{usersPermissionsUser.data.attributes.zakazies.data.length}}</b> шт.</div>
-      <div>
+      
+      <div class="flex flex-col gap-1">
+        <div class="w-full">Заказы: <b>{{usersPermissionsUser.data.attributes.zakazies.data.length}}</b> шт.</div>
         <a-user-list-orders
           :stavka="20"
           :data_orders="usersPermissionsUser.data.attributes.zakazies.data"

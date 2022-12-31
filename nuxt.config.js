@@ -86,23 +86,10 @@ export default {
     '@nuxtjs/auth-next',
     ['nuxt-validate', {
       lang: 'ru' 
-    }],
-    ['nuxt-mail'],
+    }]
   ],
 
-  mail: {
-    message: {
-      to: 'albavita2019@yandex.ru',
-    },
-    smtp: {
-      host: 'smtp.yandex.ru',
-      port: 465,
-      auth: {
-        user: 'albavita2019@yandex.ru',
-        pass: 'blqsbsmwdoqayyoa'
-      },
-    },
-  },
+
 
   build: {
     postcss: {
@@ -111,6 +98,6 @@ export default {
         autoprefixer: {}
       }
     },
-    transpile: ['vue-agile', 'defu']
+    transpile: ['vue-agile']
   }
 }

@@ -42,20 +42,41 @@
                 )
               }}</span>
             </div>
-            <nuxt-link :to="`/doctor/order/` + order.id" class="text-sm"
-              >Подробнее</nuxt-link
-            >
-            <span
-              v-if="order.attributes.Status == true"
-              class="text-xs  font-semibold"
-              >+{{
-                (
-                  (order.attributes.SummOrder / 100) *
-                  $auth.user.Stavka
-                ).toLocaleString('ru-RU')
-              }}₽</span
-            >
-            <span v-else class="text-xs  font-semibold">Заказ не оплачен</span>
+
+            <div class="flex gap-2 items-center">
+              <span
+                v-if="order.attributes.Status == true"
+                class="text-xs  font-semibold"
+                >+{{
+                  (
+                    (order.attributes.SummOrder / 100) *
+                    $auth.user.Stavka
+                  ).toLocaleString('ru-RU')
+                }}₽</span
+              >
+              <span v-else class="text-xs text-tem/50  font-semibold">Не оплачен</span>
+              <nuxt-link
+                class="text-xs flex gap-1 items-center justify-end"
+                :to="`/doctor/order/` + order.id"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-tem/50"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+                  />
+                </svg>
+              </nuxt-link>
+            </div>
+
+           
           </div>
         </div>
       </div>

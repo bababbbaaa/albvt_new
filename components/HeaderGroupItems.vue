@@ -66,7 +66,11 @@
       </div>
     </div>
     <div class="w-full flex justify-center sm:hidden container">
-      <nuxt-link to="/result" type="" class=" border-[1px] border-[#746F6F] w-full  flex justify-center items-center h-[48px] rounded-[5px] bg-white">
+      <nuxt-link
+        to="/result"
+        type=""
+        class=" border-[1px] border-[#746F6F] w-full  flex justify-center items-center h-[48px] rounded-[5px] bg-white"
+      >
         Результаты анализов
       </nuxt-link>
     </div>
@@ -81,22 +85,26 @@ export default {
         {
           img: '/img/icons/Group950.svg',
           name: 'Анализы по группам',
-          link: '/all-analyzes/gematologicheskie-issledovaniya/2849'
+          link: '/all-analyzes/gematologicheskie-issledovaniya/2849',
+          mobile: '/all-analyzes'
         },
         {
           img: '/img/icons/Group951.svg',
           name: 'Комплексы анализов',
-          link: '/all-complecs/1-dlya-zhenshhin/2797'
+          link: '/all-complecs/1-dlya-zhenshhin/2797',
+          mobile: '/all-complecs'
         },
         {
           img: '/img/icons/Group952.svg',
           name: 'Анализы на дому',
-          link: '/viezd'
+          link: '/viezd',
+          mobile: '/viezd'
         },
         {
           img: '/img/icons/Group953.svg',
           name: 'Подготовка к анализам',
-          link: '/podgotovka'
+          link: '/podgotovka',
+          mobile: '/podgotovka'
         }
       ]
     }
