@@ -13,28 +13,10 @@
 
             <!-- мобильная -->
 
-            <!-- <div
-              class="sm:hidden grid grid-cols-1 gap-[20px]"
-              v-if="
-                dataOrders.orders.edges.length > 0 &&
-                  dataOrders.orders.edges !== null
-              "
-            >
-              <span class="text-[14px] font-medium">Мои заказы</span>
-              <lk-zakaz
-                v-for="(order, i) in dataOrders.orders.edges"
-                :key="i"
-                :order_data="order.node"
-                @openItemInfo="openItemInfo(order.node.databaseId)"
-                @oplata="oplata(order.node.total)"
-                :itemID="itemID"
-              />
-            </div> -->
-
             <!-- десктоп -->
 
             <div
-              class="hidden sm:grid grid-cols-1 gap-[20px]"
+              class="grid grid-cols-1 gap-[20px]"
               v-if="usersPermissionsUser.data.attributes.zakazies.data"
             >
               <span class="text-[20px] font-medium">Мои заказы</span>
@@ -60,7 +42,7 @@
             <!-- <span v-else>Вы еще не сделали заказ</span> -->
           </div>
         </tab-vk>
-        <tab-vk title="Выгодные предложения">
+        <tab-vk title="Акции">
           <div class="container relative my-[47px]">
             <client-only placeholder="Загрузка...">
               <agile
@@ -108,8 +90,8 @@
           </div>
         </tab-vk>
 
-        <tab-vk title="Личные данные">
-          <!-- <div
+        <tab-vk title="Аккаунт">
+          <div
             class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] my-[47px] gap-[20px]"
           >
             <lk-user-info
@@ -119,106 +101,56 @@
             <div
               class="bg-white rounded-[5px] shadow-md p-4 flex flex-col gap-4"
             >
-              
               <span class="text-[30px]">Личные данные</span>
-              <form
-                v-if="dataMe.user.client_data !== null"
-                @submit.prevent="updateUserInfo()"
-                class="flex flex-col gap-[20px]"
-              >
-                <div class="flex flex-col gap-[20px]">
-                  <div
-                    class="flex w-full flex-col sm:flex-row justify-between gap-[20px]"
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">Email</span>
+                  <span>{{ this.$auth.user.email }}</span>
+                </div>
+                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">ФИО</span>
+                  <span>{{ this.$auth.user.FIO_user }}</span>
+                </div>
+                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">Дата рождения</span>
+                  <span>{{ this.$auth.user.DataRozgdeniya }}</span>
+                </div>
+                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                <div
+                  class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
+                >
+                  <label
+                    for=""
+                    class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+                    :class="[
+                      dataUserUpdate.phone.length !== 18
+                        ? 'text-[#ADACB3]'
+                        : 'text-main'
+                    ]"
+                    >Телефон*</label
                   >
-                    <input
-                      class="input-med w-full sm:w-1/2 "
-                      type="text"
-                      v-model="dataMe.user.client_data.nomerTelefona"
-                      placeholder="+7 (___) ___−__−__*"
-                      v-facade="'+7 (###) ###-##-##'"
-                    />
-                    <input
-                      class="input-med w-full sm:w-1/2 "
-                      type="text"
-                      v-model="dataMe.user.email"
-                      placeholder="e-mail"
-                    />
-                  </div>
-                 
+                  <input
+                    v-model="dataUserUpdate.phone"
+                    class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+                    :placeholder="this.$auth.user.username"
+                    v-facade="'+7 (###) ###-##-##'"
+                  />
                 </div>
-                <div
-                  class="flex justify-between gap-[20px] flex-col sm:flex-row"
+               
+                <button
+                  @click="updateUserMe()"
+                  class="sm:max-w-[300px] rounded-md border border-main h-[49px]  hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
                 >
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    v-model="pass"
-                    placeholder="пароль"
-                  />
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    v-model="passDetect"
-                    placeholder="повторите пароль"
-                  />
-                </div>
-                <div
-                  class="flex justify-between gap-[20px] flex-col sm:flex-row"
-                >
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    placeholder="Ростов на дону"
-                  />
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    placeholder="улица"
-                  />
-                </div>
-                <div
-                  class="flex justify-between gap-[20px] flex-col sm:flex-row"
-                >
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    v-model="dataMe.user.client_data.nomerDoma"
-                    placeholder="дом"
-                  />
-                  <input
-                    class="input-med w-full"
-                    type="text"
-                    v-model="dataMe.user.client_data.kvartira"
-                    placeholder="квартира"
-                  />
-                </div>
-                <div
-                  class="flex justify-between gap-[20px] w-full text-[#343434]/50"
-                >
-                  <span class="w-full sm:w-1/2"
-                    >Информация для врача консультанта</span
-                  >
-                </div>
-                <div class="flex justify-between gap-[20px] w-full">
-                  <div class="w-full sm:w-1/2 flex flex-col gap-[20px]">
-                    <textarea
-                      rows="5"
-                      class="input-med w-full"
-                      placeholder="Мои пожелания..."
-                    ></textarea>
-                    <div class="flex flex-col sm:flex-row gap-[20px] ">
-                      <button
-                        type="submit"
-                        class="rounded-[5px]  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
-                      >
-                        Сохранить изменения
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
+                  Сохранить
+                </button>
+                 <nuxt-link to="/reset-pass" class="w-full text-center text-sm">
+                  Сбросить пароль
+                </nuxt-link>
+              </div>
             </div>
-          </div> -->
+          </div>
         </tab-vk>
       </tabs-vk>
     </div>
@@ -272,6 +204,7 @@ import { VueAgile } from 'vue-agile'
 import LkUserInfo from '~/components/lk-user/lk-user-info.vue'
 
 import GET_ME from '~/graphql/pacient/get-me.gql'
+import RESET_PHONE_USER from '~/graphql/RESET_PHONE_USER.gql'
 
 export default {
   components: {
@@ -310,6 +243,15 @@ export default {
       userID: null,
       itemID: 0,
       orders: [],
+      succesUpdate: false,
+      errors: null,
+      dataUserUpdate: {
+        username: '',
+        phone: '',
+        name: '',
+        family: '',
+        otchestvo: ''
+      },
       allLK: {
         navButtons: false,
         dots: true,
@@ -321,17 +263,49 @@ export default {
   },
 
   methods: {
+    async updateUserMe () {
+      const phone = this.dataUserUpdate.phone
+        .replaceAll('-', '')
+        .replace('(', '')
+        .replace(')', '')
+        .replaceAll(' ', '')
 
-// DEV0AkTIRfqbepb4v404
+      try {
+        const res = await this.$apollo.mutate({
+          mutation: RESET_PHONE_USER,
+          variables: {
+            ID: this.$auth.user.id,
+            PHONE: phone
+          }
+        })
+        if (res) {
+          const results = res.data
+          this.succesUpdate = true
+          console.log(results)
+          this.handleLogout()
+        }
+      } catch (err) {
+        this.errors = err
+      }
+    },
 
-// guxNAyiYhi4WpjQ2m660
+    // DEV0AkTIRfqbepb4v404
+
+    // guxNAyiYhi4WpjQ2m660
     oplata (total, id) {
       console.log(total)
       const sum = total.attributes.SummOrder.toString()
       const invIDValue = id
       // const test = 'MerchantLogin:OutSum:InvId:Пароль#1'
-      var value = ('albvt:' + sum + ':' + invIDValue + ':' + 'DEV0AkTIRfqbepb4v404').toString()
-      
+      var value = (
+        'albvt:' +
+        sum +
+        ':' +
+        invIDValue +
+        ':' +
+        'DEV0AkTIRfqbepb4v404'
+      ).toString()
+
       var result = CryptoJS.MD5(value)
       Robokassa.StartPayment({
         MerchantLogin: 'albvt',
@@ -343,8 +317,8 @@ export default {
         SignatureValue: result
       })
     },
-    DownloadResult(id){
-      console.log();
+    DownloadResult (id) {
+      console.log()
     },
     async handleLogout () {
       this.$nuxt.$loading.start()
@@ -362,7 +336,7 @@ export default {
     },
     handleReload () {
       location.reload()
-    },
+    }
   }
 }
 </script>

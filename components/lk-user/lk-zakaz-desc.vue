@@ -2,7 +2,7 @@
   <div
     class="bg-white shadow-md rounded-[5px] p-[20px] flex flex-col gap-[20px]"
   >
-    <div class="grid grid-cols-3 items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-3 items-center">
       <!-- {{ order_data }} -->
       <span class="text-main text-sm font-semibold col-span-1"
         >№ {{ order_data.attributes.UID }}
@@ -12,11 +12,11 @@
         <span class="text-sm text-[#8B8B8B]">{{ getDate }}</span>
       </div>
     </div>
-    <div class="grid grid-cols-3 grid-rows-1 gap-y-4">
+    <div class="grid grid-cols-1 sm:grid-cols-3 grid-rows-1 gap-y-4">
       <div class="col-span-1 flex flex-col justify-center items-start gap-2">
         <span class="w-full  text-sm font-semibold">Результаты анализов</span>
         <button
-        @click="$emit('DownloadResult')"
+          @click="$emit('DownloadResult')"
           v-if="order_data.attributes.Result.data.length"
           class="flex items-center gap-2 text-sm text-main uppercase"
         >
@@ -40,13 +40,13 @@
           <span v-if="sortedDataDay >= 20 && sortedDataDay < 25">дня</span>
         </div>
       </div>
-      <div class="col-span-1 w-full flex justify-end">
+      <div class="col-span-1 w-full flex justify-center sm:justify-end">
         <span
           v-if="
             order_data.attributes.Status == false &&
               order_data.attributes.StatusOplata !== true
           "
-          class="text-sm text-white bg-[#5A5A5A] font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
+          class="text-center text-sm text-white bg-[#5A5A5A] font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
           >Обработка</span
         >
         <button
@@ -55,7 +55,7 @@
             order_data.attributes.StatusOplata == true &&
               order_data.attributes.Status == false
           "
-          class="text-sm text-white bg-main hover:text-main hover:bg-white font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
+          class="text-center text-sm text-white bg-main hover:text-main hover:bg-white font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
         >
           Оплатить
           {{ order_data.attributes.SummOrder.toLocaleString('ru-RU') }}
@@ -63,7 +63,7 @@
         </button>
         <span
           v-else
-          class="text-sm text-white bg-[#1EA750] font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
+          class="text-center text-sm text-white bg-[#2BC765] font-light px-[14px] py-[14px]  w-full max-w-[220px]  sm:flex sm:items-center sm:justify-center  border-[0.5px] border-main rounded-[5px]"
           >Оплачен</span
         >
       </div>

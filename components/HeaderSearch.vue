@@ -42,7 +42,7 @@
           v-for="item in sortedArray"
           :key="item.id"
           @click="closeSearch()"
-          class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[8fr,2fr] sm:grid-cols-[10fr,3fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
+          class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[8fr,3fr] sm:grid-cols-[10fr,4fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
         >
           <div class="flex flex-col gap-1">
             <!-- item.attributes.sub_cat.data.attributes.CatIdURL +
@@ -122,7 +122,7 @@
           <button
             v-else
             @click="productInCart(item)"
-            class="bg-main/20 sm:max-w-[140px]   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
+            class="bg-main/20 sm:max-w-[160px]   text-[#343434] rounded-[5px] flex justify-center items-center gap-2 p-2"
           >
             <img src="/img/icons/add-to-cart.svg" alt="" />
             <span class="text-[12px] sm:text-sm"

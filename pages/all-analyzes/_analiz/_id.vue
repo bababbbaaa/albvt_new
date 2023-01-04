@@ -6,7 +6,7 @@
         class="flex flex-col sm:flex-row gap-2 sm:justify-between"
       >
         <h1
-          v-if="subCats"
+          v-if="analizies"
           class="text-[24px] font-medium flex gap-2 items-center scroll-to"
         >
           <button
@@ -28,9 +28,9 @@
               />
             </svg>
           </button>
-          <!-- <span>
-            {{ subCats.data[0].attributes.Name }}
-          </span> -->
+          <span class="leading-7">
+            {{ analizies.data[0].attributes.sub_cat.data.attributes.Name }}
+          </span>
           
         </h1>
       </div>

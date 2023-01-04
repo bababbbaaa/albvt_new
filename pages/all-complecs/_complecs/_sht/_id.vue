@@ -86,7 +86,7 @@
                   >
                     <nuxt-link
                       :to="`/all-analyzes/in-complecs/id/` + item.id"
-                      class="text-sm text-[#343434]]/70 hover:text-main anime"
+                      class="text-sm font-medium text-[#343434]]/70 hover:text-main anime"
                       >{{ item.attributes.Name }}</nuxt-link
                     >
                     <span class="text-xs text-[#343434]/70">

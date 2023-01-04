@@ -9,12 +9,12 @@
         <div v-if="isMobile == true" class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/"
-            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[14px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/"
-            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[14px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -22,42 +22,59 @@
         <div v-else class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/gematologicheskie-issledovaniya/2849"
-            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[14px] w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/1-dlya-zhenshhin/2797"
-            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[16px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[14px] w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
 
         <!-- mobile -->
 
-        <!-- v-if="isMobile == true && this.$route.path == '/all-analyzes/'" -->
-
         <div
           v-if="isMobile == true"
           class="bg-white shadow-md rounded-[5px] p-[10px] "
           :class="[viewAll ? 'h-full' : 'h-full']"
         >
-          <ul class="flex flex-col">
+          <ul class="flex flex-col divide-y divide-tem/10">
             <li
               v-for="item in testCat.data.productCategories.edges"
-              class="pt-[12px]"
+              class="pt-[12px] "
               :key="item.node.databaseId"
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] flex items-center justify-between gap-1 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="min-w-4 min-h-4 max-w-4 max-h-4 text-main "
+                  :class="[
+                    viewItem == item.node.databaseId
+                      ? 'rotate-[-270deg]'
+                      : 'rotate-[-90deg]'
+                  ]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
               </h4>
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] "
               >
                 <nuxt-link
                   :to="
@@ -66,7 +83,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-[14px] pb-[12px] "
                   >{{ item.node.name }}
                 </nuxt-link>
               </h4>
@@ -187,7 +204,7 @@
           class="bg-white shadow-md rounded-[5px] p-[10px] "
           :class="[viewAll ? 'h-full' : 'h-full']"
         >
-          <ul class="flex flex-col">
+          <ul class="flex flex-col divide-y divide-tem/10">
             <li
               v-for="item in testCat.data.productCategories.edges"
               class="pt-[12px]"
@@ -195,15 +212,34 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] flex items-center justify-between gap-1"
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="min-w-4 min-h-4 max-w-4 max-h-4 text-main "
+                  :class="[
+                    viewItem == item.node.databaseId
+                      ? 'rotate-[-270deg]'
+                      : 'rotate-[-90deg]'
+                  ]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
               </h4>
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px]"
               >
                 <nuxt-link
                   :to="
@@ -212,7 +248,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class=" w-full hover:text-main anime cursor-pointer text-sm sm:text-[16px] pb-[12px]"
+                  class=" w-full hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px]"
                   >{{ item.node.name }}</nuxt-link
                 >
               </h4>
@@ -284,9 +320,8 @@
                           :key="itemSubSub.node.databaseId"
                           class=""
                         >
-                        <!-- починить ссылки на 3 уровень -->
+                          <!-- починить ссылки на 3 уровень -->
                           <nuxt-link
-                          
                             :to="
                               '/all-analyzes/' +
                                 itemSubSub.node.slug +
@@ -300,10 +335,10 @@
                               @click="preFetchDataSubCat(itemSubSub.node)"
                             >
                               <span>-</span>
-                              {{ itemSubSub.node.name }} ввв
+                              {{ itemSubSub.node.name }}
                             </span>
                           </nuxt-link>
-                           <!-- починить ссылки на 3 уровень -->
+                          <!-- починить ссылки на 3 уровень -->
                         </li>
                       </ul>
                     </div>

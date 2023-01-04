@@ -73,7 +73,7 @@
               class="absolute right-[14px] top-[15px]"
             >
               <svg
-                v-if="typePassword == 'password'"
+                v-if="typePassword !== 'password'"
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-4 w-4 text-[#343434]/70"
                 fill="none"
@@ -127,7 +127,7 @@
               class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
               :class="[
                 formCreate.password == formCreate.ConfPassword &&
-                formCreate.password.length > 8
+                formCreate.password.length >= 8
                   ? 'text-main'
                   : '  text-[#ADACB3]'
               ]"
@@ -144,7 +144,7 @@
               class="absolute right-[14px] top-[15px]"
             >
               <svg
-                v-if="typePassword == 'password'"
+                v-if="typePassword !== 'password'"
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-4 w-4 text-[#343434]/70"
                 fill="none"
@@ -204,10 +204,8 @@
 
         <div
           v-if="step == 2"
-          class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-          :class="[
-            formCreate.name.length <= 2 ? 'border-[#E5E4E8]' : 'border-main'
-          ]"
+          class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3  shadow-sm anime"
+          
         >
           <label
             for=""
@@ -225,12 +223,8 @@
 
         <div
           v-if="step == 2"
-          class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-          :class="[
-            formCreate.otchestvo.length <= 2
-              ? 'border-[#E5E4E8]'
-              : 'border-main'
-          ]"
+          class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
+          
         >
           <label
             for=""
@@ -247,12 +241,8 @@
         </div>
         <div class="grid grid-cols-2 gap-3" v-if="step == 2">
           <div
-            class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-            :class="[
-              formCreate.dataRozgdeniya.length !== 10
-                ? 'border-[#E5E4E8]'
-                : 'border-main'
-            ]"
+            class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3  shadow-sm anime"
+            
           >
             <label
               for=""
@@ -301,32 +291,6 @@
           </div>
         </div>
 
-        <div
-          v-if="step == 2"
-          class="relative border-[1px]   rounded-md px-4 py-3  shadow-sm anime"
-          :class="[
-            formCreate.passportSeriya.length !== 12
-              ? 'border-[#E5E4E8]'
-              : 'border-main'
-          ]"
-        >
-          <label
-            for=""
-            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
-            :class="[
-              formCreate.passportSeriya.length !== 12
-                ? 'text-[#ADACB3]'
-                : 'text-main'
-            ]"
-            >Паспорт (серия/номер)</label
-          >
-          <input
-            v-model="formCreate.passportSeriya"
-            class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
-            placeholder="__ __ ______"
-            v-facade="'## ## ######'"
-          />
-        </div>
       </div>
     </div>
     <button
@@ -335,8 +299,7 @@
       :class="[
         formCreate.family.length >= 2 &&
         formCreate.name.length >= 2 &&
-        formCreate.dataRozgdeniya.length == 10 &&
-        formCreate.passportSeriya.length == 12
+        formCreate.dataRozgdeniya.length == 10 
           ? 'cursor-pointer'
           : 'cursor-not-allowed opacity-30'
       ]"
@@ -363,8 +326,7 @@
       v-if="
         formCreate.family.length >= 2 &&
           formCreate.name.length >= 2 &&
-          formCreate.dataRozgdeniya.length == 10 &&
-          formCreate.passportSeriya.length == 12
+          formCreate.dataRozgdeniya.length == 10 
       "
     ></span>
     <span class="text-[green]" v-else-if="succesRegister == true"
@@ -390,7 +352,6 @@ export default {
         family: '',
         name: '',
         otchestvo: ' ',
-        passportSeriya: '',
         email: '',
         phone: '',
         password: '',
@@ -456,7 +417,7 @@ export default {
             PHONE: phone,
             DATA: this.formCreate.dataRozgdeniya,
             GEN: this.formCreate.gender,
-            PASSPORT: this.formCreate.passportSeriya
+            
           }
         })
         if (res) {

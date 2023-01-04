@@ -1,7 +1,8 @@
 <template>
-<!-- консультация -->
+  <!-- консультация -->
   <div
-    class="container w-full pt-[47px] mt-[47px] sm:mt-0 flex flex-col gap-8 justify-center items-center h-full max-w-[620px]"
+    class="container w-full pt-[47px] mt-[47px] sm:mt-0 flex flex-col gap-8 justify-center items-center h-full max-w-[620px] "
+    id="scroll-toCart"
   >
     <!-- <span class="w-full text-center text-[24px]" v-if="step == 0">Авторизация</span> -->
     <span class="w-full text-center text-[24px]" v-if="step == 1"
@@ -110,7 +111,7 @@
                     class="absolute right-[14px] top-[15px]"
                   >
                     <svg
-                      v-if="typePassword == 'password'"
+                      v-if="typePassword !== 'password'"
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 text-[#343434]/70"
                       fill="none"
@@ -228,7 +229,7 @@
                     class="absolute right-[14px] top-[15px]"
                   >
                     <svg
-                      v-if="typePassword == 'password'"
+                      v-if="typePassword !== 'password'"
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 text-[#343434]/70"
                       fill="none"
@@ -349,14 +350,16 @@
                       : 'border-[1px] border-[#343434]/30  bg-white'
                   ]"
                 >
-                  <span class="w-full text-center">В больнице (Ростов-на-Дону)</span>
+                  <span class="w-full text-center"
+                    >В больнице (Ростов-на-Дону)</span
+                  >
                 </div>
               </div>
             </div>
             <div v-if="sityesInvitros">
               <div v-if="formZakaz.mesto == 'ofis_my'">
                 <div class=" py-[16px] flex flex-col gap-4 text-sm">
-                  <gb-list @handlerOfic="handlerOfic"/>
+                  <gb-list @handlerOfic="handlerOfic" />
                 </div>
               </div>
               <div v-if="formZakaz.mesto == 'ofic'" class="flex flex-col gap-4">
@@ -527,7 +530,7 @@
                     class="border p-4 rounded-md border-[#343434]/20 flex flex-col gap-4"
                   >
                     <span
-                      >г. {{ sityNameActive }},<br>
+                      >г. {{ sityNameActive }},<br />
                       {{ activeClinicInfo.Name }}</span
                     >
                     <div class="text-[#343434]">
@@ -610,10 +613,9 @@
                     v-if="formZakaz.mesto == 'ofis_my'"
                     class="text-xs text-tem/70"
                   >
-                    <span>В больнице:</span><br>
-                    <span>{{activeOficInfo.attributes.Name}}</span> 
-                    </div
-                  >
+                    <span>В больнице:</span><br />
+                    <span>{{ activeOficInfo.attributes.Name }}</span>
+                  </div>
                   <span
                     v-if="formZakaz.mesto == 'ofic'"
                     class="text-xs text-[#343434]/50 "
@@ -874,6 +876,13 @@ export default {
     }
   },
   methods: {
+    scrollToCart () {
+      setTimeout(() => {
+        let scrollDiv = document.getElementById('scroll-toCart').offsetTop - 90
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+        console.log('scrollToAnaliz +')
+      }, 500)
+    },
     handlerClinicMap (id) {
       if (this.activeClinicMap !== id) {
         this.activeClinicMap = id
@@ -881,7 +890,7 @@ export default {
         this.activeClinicMap = null
       }
     },
-    handlerOfic(id){
+    handlerOfic (id) {
       this.activeOficInfo = id
     },
     async handleLoginSubmit () {
@@ -1116,6 +1125,7 @@ export default {
   },
   mounted () {
     this.validUserCheck()
+    this.scrollToCart()
   },
   created () {
     this.reTotalPrice()

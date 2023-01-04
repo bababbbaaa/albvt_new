@@ -6,9 +6,10 @@
           <span class="font-semibold text-[17px]">Пациентам</span>
           <ul class="flex flex-col gap-[14px]">
             <li v-for="(item, i) in footermenu" :key="i">
+              <nuxt-link class="visible sm:hidden text-xs" :to="item.mobileLink"> {{ item.name }}</nuxt-link>
               <NuxtLink
                 :to="item.link"
-                class="cursor-pointer text-[13px] !text-[#343434] hover:!text-main"
+                class="sm:visible hidden cursor-pointer text-xs !text-tem hover:!text-main"
               >
                 {{ item.name }}
               </NuxtLink>
@@ -21,7 +22,7 @@
             <li>
               <nuxt-link
                 to="/o-nas"
-                class="cursor-pointer text-[13px] !text-[#343434] hover:!text-main"
+                class="cursor-pointer text-[13px] !text-tem hover:!text-main"
               >
                 Нормативные документы
               </nuxt-link>
@@ -71,21 +72,21 @@
     >
       <div class="grid grid-cols-4 w-full text-[10px]">
         <nuxt-link to="/" 
-        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-[#343434]/20 !text-[#343434]">
+        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-tem/20 !text-tem">
           <img class="" src="/img/icons/mob-to-main.svg" alt="" />
           <span>
             Главная
           </span>
         </nuxt-link>
         <nuxt-link to="/all-analyzes" 
-        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-[#343434]/20">
+        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-tem/20">
          <img class="" src="/img/icons/mob-foo-2.svg" alt="" />
           <span>
             Анализы
           </span>
         </nuxt-link>
         <nuxt-link to="/result" 
-        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-[#343434]/20">
+        class="flex flex-col gap-2 justify-center items-center border-r-[1px] border-tem/20">
          <img class="" src="/img/icons/mob-foo-3.svg" alt="" />
           <span>
             Результаты
@@ -111,35 +112,43 @@ export default {
       footermenu: [
         {
           name: 'Анализы и цены',
-          link: '/all-analyzes/gematologicheskie-issledovaniya/2849/'
+          link: '/all-analyzes/gematologicheskie-issledovaniya/2849/',
+          mobileLink:'/all-analyzes'
         },
         {
           name: 'Результаты анализов',
-          link: '/result'
+          link: '/result',
+          mobileLink:'/result'
         },
         {
           name: 'Анализы на дому',
-          link: '/viezd'
+          link: '/viezd',
+          mobileLink:'/viezd'
         },
         {
           name: 'Комплексы анализов',
-          link: '/all-complecs/1-dlya-zhenshhin/2797'
+          link: '/all-complecs/1-dlya-zhenshhin/2797',
+          mobileLink:'/all-complecs'
         },
         {
           name: 'Часто задаваемые вопросы',
-          link: '/test-pages/one'
+          link: '/test-pages/one',
+          mobileLink:'/test-pages/one'
         },
         {
           name: 'Политика обработки персональных данных',
-          link: '/politic'
+          link: '/politic',
+          mobileLink:'/politic'
         },
         {
           name: 'Пользовательское соглашение',
-          link: '/soglashenie'
+          link: '/soglashenie',
+          mobileLink:'/soglashenie'
         },
         {
           name: 'Оплата и возврат',
-          link: '/oplata'
+          link: '/oplata',
+          mobileLink:'/oplata'
         }
       ]
     }

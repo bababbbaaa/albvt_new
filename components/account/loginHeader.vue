@@ -61,7 +61,7 @@
                 class="absolute right-[14px] top-[15px]"
               >
                 <svg
-                  v-if="typePassword == 'password'"
+                  v-if="typePassword !== 'password'"
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-[#343434]/70"
                   fill="none"
@@ -164,7 +164,6 @@
                   v-model="credentials2.identifier"
                   class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
                 />
-                <span class="border text-xs p-2">{{credentials2.identifier}} - {{confirmEmail}}</span>
               </div>
             </div>
 

@@ -3,8 +3,7 @@ mutation UPDATE_USER_FIRST(
     $FIO: String,
     $PHONE: String,
     $DATA: String,
-    $GEN: Boolean,
-    $PASSPORT: String,
+    $GEN: Boolean
 ) {
   updateUsersPermissionsUser(
     id: $ID
@@ -13,8 +12,7 @@ mutation UPDATE_USER_FIRST(
       RoleUser: "Pacient",
       Phone: $PHONE,
       DataRozgdeniya: $DATA,
-      Gender: $GEN,
-      Passport: $PASSPORT
+      Gender: $GEN
     }
   ) {
     data {

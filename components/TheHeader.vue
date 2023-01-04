@@ -16,12 +16,12 @@
             <nuxt-link @click="mobileMenu = false" to="/reis">Услуги</nuxt-link>
             <nuxt-link
               @click="mobileMenu = false"
-              to="/all-analyzes/gematologicheskie-issledovaniya/2849"
+              to="/all-analyzes"
               >Анализы</nuxt-link
             >
             <nuxt-link
               @click="mobileMenu = false"
-              to="/all-complecs/1-dlya-zhenshhin/2797"
+              to="/all-complecs"
               >Комплексы анализов</nuxt-link
             >
             <nuxt-link @click="mobileMenu = false" to="/contacts"
@@ -69,12 +69,12 @@
           >
             <!-- icon search -->
             <button class="block sm:hidden" @click="reOpenmobSearch()">
-              <img src="/img/icons/mob-search.svg" alt="" class="w-8  h-8 " />
+              <img src="/img/icons/mob-search.svg" alt="" class="w-9  h-9 " />
             </button>
             <!-- icon call -->
             <button class="block sm:hidden">
               <a href="tel:88632418555"
-                ><img src="/img/icons/mob-call.svg" alt="" class="w-8 h-8 "
+                ><img src="/img/icons/mob-call.svg" alt="" class="w-9 h-9 "
               /></a>
             </button>
             <!-- icon cart -->

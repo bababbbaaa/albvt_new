@@ -25,6 +25,7 @@ export const USER_DETAILS_QUERY = gql`
       email
       Stavka
       RoleUser
+      DataRozgdeniya
     }
   }
 `

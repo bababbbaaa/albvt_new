@@ -1,0 +1,13 @@
+mutation RESET_PHONE_USER($ID: ID!, $PHONE: String) {
+  updateUsersPermissionsUser(
+    id: $ID
+    data: { username: $PHONE, Phone: $PHONE }
+  ) {
+    data {
+      attributes {
+        Phone
+        username
+      }
+    }
+  }
+}

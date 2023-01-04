@@ -35,14 +35,14 @@
          title="Комплексы" class="cursor-pointer">
           <div class="">
             <div class="bg-white shadow-md rounded-[5px] p-[10px]">
-              <ul class="flex flex-col">
+              <ul class="flex flex-col divide-y divide-tem/10">
                 <li
                   v-for="item in testCatCom.data.productCategories.edges"
                   class="pt-[12px]"
                   :key="item.node.databaseId"
                 >
                   <h4
-                    class="hover:text-main anime cursor-pointer text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                    class="hover:text-main anime cursor-pointer text-[16px] pb-[12px] "
                   >
                     <nuxt-link
                       :to="
@@ -70,14 +70,14 @@
           title="Комплексы" class="cursor-pointer">
           <div class="">
             <div class="bg-white shadow-md rounded-[5px] p-[10px]">
-              <ul class="flex flex-col">
+              <ul class="flex flex-col divide-y divide-tem/10">
                 <li
                   v-for="item in testCatCom.data.productCategories.edges"
                   class="pt-[12px]"
                   :key="item.node.databaseId"
                 >
                   <h4
-                    class="hover:text-main anime cursor-pointer text-[16px] pb-[12px] border-b-[0.5px] border-b-[#343434]/10 "
+                    class="hover:text-main anime cursor-pointer text-[16px] pb-[12px]  "
                   >
                     <nuxt-link
                       :to="
