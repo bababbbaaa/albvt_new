@@ -154,7 +154,7 @@
                   for=""
                   class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
                   :class="[
-                    credentials2.identifier.length <= 2
+                    confirmEmail == false
                       ? 'text-[#89888F]'
                       : 'text-main font-medium'
                   ]"
@@ -292,7 +292,8 @@ export default {
       successfulData: null,
       loginError: false,
       dataErrors: '',
-      typePassword: 'password'
+      typePassword: 'password',
+      confirmEmail: false
     }
   },
   mounted () {
@@ -373,6 +374,15 @@ export default {
     },
     closeLogin () {
       this.$emit('loginView')
+    }
+  },
+  watch: {
+    'credentials2.identifier' () {
+      if (this.credentials2.identifier.includes('@')) {
+        this.confirmEmail = true
+      } else {
+        this.confirmEmail = false
+      }
     }
   }
 }
