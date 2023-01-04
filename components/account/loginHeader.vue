@@ -164,6 +164,7 @@
                   v-model="credentials2.identifier"
                   class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
                 />
+                <span class="border text-xs p-2">{{credentials2.identifier}} - {{confirmEmail}}</span>
               </div>
             </div>
 
