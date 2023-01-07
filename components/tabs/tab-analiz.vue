@@ -28,7 +28,8 @@ export default {
   },
   computed: {
     replaceDAta () {
-      return this.data.replace(regex, '')
+      // return this.data.replace(regex, '')
+      return this.data
     }
   }
 }

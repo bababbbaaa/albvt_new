@@ -1,17 +1,17 @@
 <template>
-  <div class="">
+  <div class="" >
     <div class="flex flex-col gap-[20px] ">
       <div
-        id="scroll-to"
-        class="flex flex-col sm:flex-row gap-2 sm:justify-between"
+        class="flex flex-col sm:flex-row gap-2 sm:justify-between "
+        ref="elScroll2"
       >
         <h1
-          v-if="analizies"
+          v-if="subCats"
           class="text-xl sm:text-2xl font-medium flex gap-2 items-center scroll-to"
         >
           <button
             @click="$router.back()"
-            class=" sm:flex justify-center items-center hidden "
+            class="hidden sm:lex justify-center items-center "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,14 +28,11 @@
               />
             </svg>
           </button>
-          <span class="leading-7">
-            {{ analizies.data[0].attributes.sub_cat.data.attributes.Name }}
-          </span>
-          
+          {{ subCats.data[0].attributes.Name }}
         </h1>
       </div>
       <div class="bg-white shadow-md rounded-[5px] ">
-        <div>
+        <div >
           <div
             class="hidden xl:grid lg:grid-cols-[3fr,3fr,2fr,1fr]   xl:grid-cols-[2fr,13fr,2fr,3fr] w-full border-b border-b-[#C3C3C3] gap-[20px] py-[12px] p-[10px]"
           >
@@ -43,24 +40,18 @@
             <span class="">Наименование исследования</span>
             <span class="">Цена</span>
           </div>
-          <div class="flex flex-col w-full  xl:mt-[12px]" v-if="analizies">
+          <div class="flex flex-col w-full  xl:mt-[12px]" v-if="analizies" >
             <med-product
               v-for="item in analizies.data"
               :key="item.id"
               :item="item"
               @addToCart="addToCart(item)"
+              
             />
           </div>
         </div>
       </div>
-      <div class="w-full flex justify-center">
-        <!-- <button
-          @click="getProductToParams()"
-          v-if="limit !== null && products.length > 7"
-        >
-          Показать еще
-        </button> -->
-      </div>
+      <div class="w-full flex justify-center"></div>
     </div>
   </div>
 </template>
@@ -75,7 +66,7 @@ import GET_ANALIZES_CAT from '~/graphql/analiz-cat-id.gql'
 
 export default {
   components: { PopAddToCart, SidebarAnaliz, MedProduct },
-  layout: 'AnalizWrapper',
+  layout: 'ComplecsWrapper',
   data () {
     return {
       title: '',
@@ -91,7 +82,7 @@ export default {
       query: GET_CAT_NAME,
       variables () {
         return {
-          ID: this.$route.params.analiz
+          ID: this.$route.params.id
         }
       }
     },
@@ -109,34 +100,12 @@ export default {
     ...mapActions(['ADD_TO_CART']),
     addToCart (item) {
       this.ADD_TO_CART(item)
-    },
-    // scrollToAnaliz () {
-    //   var scrollDiv = document.getElementById('scroll-to').offsetTop - 90
-    //   window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-    // }
+    }
   },
   computed: {
     ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS'])
   },
-  // mounted () {
-  //   if (window.screen.width <= 600) {
-  //     this.scrollToAnaliz()
-  //   }
-  //   this.$router.replace({ query: null })
-  // },
-  // updated () {
-  //   if (window.screen.width <= 600) {
-  //     this.scrollToAnaliz()
-  //   }
-  // },
-
-  // watch: {
-  //   $route () {
-  //     if (window.screen.width <= 600) {
-  //       this.scrollToAnaliz()
-  //     }
-  //   }
-  // }
+ 
 }
 </script>
 

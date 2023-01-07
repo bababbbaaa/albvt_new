@@ -13,6 +13,20 @@ query ANALIZ_ID ($ID: ID){
         DopAnalizes{
           data{
             id
+            attributes {
+              Name
+              Price
+              Art
+              biomaterialies{
+          data{
+            id
+            attributes{
+              Name
+              Price
+            }
+          }
+        }
+            }
           }
         }
         complecsAnaliz(pagination: { limit: 100 }) {

@@ -3,13 +3,13 @@
     <div class="container mt-[100px]">
       <div class="grid grid-cols-[1fr,1fr] grid-rows-2 lg:grid-rows-1 lg:grid-cols-[1fr,1fr,2fr] py-[44px] gap-[20px]">
         <div class="flex col-span-1 flex-col gap-[11px]">
-          <span class="font-semibold text-[17px]">Пациентам</span>
+          <span class="font-semibold text-base ">Пациентам</span>
           <ul class="flex flex-col gap-[14px]">
             <li v-for="(item, i) in footermenu" :key="i">
               <nuxt-link class="visible sm:hidden text-xs" :to="item.mobileLink"> {{ item.name }}</nuxt-link>
               <NuxtLink
                 :to="item.link"
-                class="sm:visible hidden cursor-pointer text-xs !text-tem hover:!text-main"
+                class="sm:block hidden cursor-pointer text-xs !text-tem hover:!text-main"
               >
                 {{ item.name }}
               </NuxtLink>
@@ -17,7 +17,7 @@
           </ul>
         </div>
         <div class="flex col-span-1 flex-col gap-[11px]">
-          <span class="font-semibold text-[17px]">О нас</span>
+          <span class="font-semibold text-base ">О нас</span>
           <ul class="flex flex-col gap-[14px]">
             <li>
               <nuxt-link
@@ -30,7 +30,7 @@
             </li>
           </ul>
           <br>
-          <span class="font-semibold text-[17px]">Контакты</span> 
+          <span class="font-semibold text-base ">Контакты</span> 
           <div class="flex flex-col gap-[14px]">
             <div class="flex gap-[22px]">
               <img
@@ -61,9 +61,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pyrder-2 lg:col-span-1 col-span-2">
+        <div class="pyrder-2 lg:col-span-1 col-span-2">
          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adaf7dfa6bc4d1d3631e0e20b828484c5faf7118d65f939ad39ec025cbae30557&amp;source=constructor" width="100%" height="350" frameborder="0"></iframe>
-        </div> -->
+        </div>
       </div>
     </div>
     <!-- mobile bottom-bar -->

@@ -16,22 +16,24 @@
           v-bind:value="searchInput"
           type="text"
           id="default-search"
-          class="block w-full pr-20 rounded-tl-[5px] rounded-bl-[5px] bg-white pl-4   h-[47px] focus:outline-none text-[#979797] z-[4]"
+          class="block w-full pr-20 rounded-md bg-white p-3    focus:outline-none text-[#979797] z-[4] relative"
           placeholder="Поиск анализов"
           autocomplete="off"
         />
-        <nuxt-link
-          :to="{ path: '/search-result', query: { search: searchInput } }"
-          @click="showSearch = false"
-          class="flex justify-center items-center px-[16px]  z-[1] bg-white  anime rounded-tr-[5px] rounded-br-[5px]"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 text-tem/70 absolute z-[4] top-[15px] right-2"
         >
-          <img
-            @click="closeSearch()"
-            src="/img/icons/search.svg"
-            alt=""
-            class="block w-full h-auto hover:scale-110 anime"
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
           />
-        </nuxt-link>
+        </svg>
       </div>
 
       <ul
@@ -117,7 +119,9 @@
             v-else-if="item.attributes.Active !== true"
             class="w-full flex justify-center items-center"
           >
-            <span class="text-[12px] text-danger text-center">Временно недоступен</span>
+            <span class="text-[12px] text-danger text-center"
+              >Временно недоступен</span
+            >
           </div>
           <button
             v-else
@@ -344,5 +348,4 @@ export default {
 input::-webkit-input-placeholder {
   color: #8a8a8a;
 }
-
 </style>

@@ -14,6 +14,20 @@ query SEARCH_ANALIZES($S_VALUE : String!) {
           DopAnalizes{
           data{
             id
+            attributes {
+              Name
+              Price
+              Art
+              biomaterialies{
+          data{
+            id
+            attributes{
+              Name
+              Price
+            }
+          }
+        }
+            }
           }
         }
         biomaterialies{

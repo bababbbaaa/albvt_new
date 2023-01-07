@@ -1,5 +1,5 @@
 <template>
-  <!-- стреллки  на категории -->
+  <!-- стреллки  на категории +++ -->
   <!-- скролл попробовать -->
   <div>
     <div class="flex flex-col gap-[20px]">
@@ -9,12 +9,12 @@
         <div v-if="isMobile == true" class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/"
-            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[14px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/"
-            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[14px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
@@ -22,22 +22,61 @@
         <div v-else class="flex  justify-between w-full gap-4">
           <nuxt-link
             to="/all-analyzes/gematologicheskie-issledovaniya/2849"
-            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-[14px] w-1/2"
+            class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
             to="/all-complecs/1-dlya-zhenshhin/2797"
-            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-[14px] w-1/2"
+            class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Комплексы</nuxt-link
           >
         </div>
 
         <!-- mobile -->
+        <div
+          @click="openSelect"
+          class="p-3 bg-white rounded-md border-[1px] border-main w-full flex sm:hidden justify-between items-center "
+        >
+          <span class="w-11/12 text-sm"
+            ><span v-if="completName4 !== ''">{{ completName4 }} > </span>
+            {{ activeCatName }}
+          </span>
+
+          <svg
+            v-if="activeCat == false"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 text-main"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 text-main rotate-180"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </div>
 
         <div
-          v-if="isMobile == true"
-          class="bg-white shadow-md rounded-[5px] p-[10px] "
-          :class="[viewAll ? 'h-full' : 'h-full']"
+          v-if="activeCat"
+          class="bg-white shadow-md rounded-[5px] p-[10px] flex sm:hidden h-full"
         >
           <ul class="flex flex-col divide-y divide-tem/10">
             <li
@@ -47,7 +86,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] flex items-center justify-between gap-1 "
+                class="hover:text-main anime cursor-pointer text-sm sm:text-sm  pb-[12px] flex items-center justify-between gap-1 "
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -73,19 +112,20 @@
               </h4>
               <h4
                 v-else
-                @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] "
+                @click="pushComplecs2(item)"
+                class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-sm  pb-[12px] "
               >
-                <nuxt-link
+                {{ item.node.name }} 2+
+                <!-- <nuxt-link
                   :to="
                     '/all-analyzes/' +
                       item.node.slug +
                       '/' +
                       item.node.databaseId
                   "
-                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-[14px] pb-[12px] "
-                  >{{ item.node.name }}
-                </nuxt-link>
+                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-sm  pb-[12px] "
+                  >{{ item.node.name }} 2
+                </nuxt-link> -->
               </h4>
               <transition name="fade">
                 <ul
@@ -137,7 +177,7 @@
                               d="M12 4v16m8-8H4"
                             />
                           </svg>
-                          {{ subitem.node.name }}
+                          {{ subitem.node.name }} 3
                         </span>
                       </div>
                       <ul
@@ -150,9 +190,8 @@
                         <li
                           v-for="itemSubSub in subitem.node.children.edges"
                           :key="itemSubSub.node.databaseId"
-                          class=""
                         >
-                          <nuxt-link
+                          <!-- <nuxt-link
                             :to="
                               '/all-analyzes/' +
                                 itemSubSub.node.slug +
@@ -160,21 +199,21 @@
                                 itemSubSub.node.databaseId
                             "
                             class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
+                          > -->
+                          <span
+                            class="text-left flex gap-2 justify-start"
+                            @click="pushComplecs4(itemSubSub)"
                           >
-                            <span
-                              class="text-left flex gap-2 justify-start"
-                              @click="preFetchDataSubCat(itemSubSub.node)"
-                            >
-                              <span>-</span>
-                              {{ itemSubSub.node.name }}
-                            </span>
-                          </nuxt-link>
+                            <span>-</span>
+                            {{ itemSubSub.node.name }} 4-
+                          </span>
+                          <!-- </nuxt-link> -->
                         </li>
                       </ul>
                     </div>
                     <!-- с подкатегориями -->
-                    <div v-else>
-                      <nuxt-link
+                    <div v-else @click="pushComplecs5(subitem)">
+                      <!-- <nuxt-link
                         :to="
                           '/all-analyzes/' +
                             item.node.slug +
@@ -182,15 +221,13 @@
                             subitem.node.databaseId
                         "
                         class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
-                      >
-                        <span
-                          class="text-left flex gap-2 justify-start"
-                          @click="preFetchDataCat(subitem.node)"
-                        >
-                          <span>-</span>
-                          {{ subitem.node.name }}
-                        </span>
-                      </nuxt-link>
+                         @click="preFetchDataCat(subitem.node)"
+                      > -->
+                      <span class="text-left flex gap-2 justify-start">
+                        <span>-</span>
+                        {{ subitem.node.name }} 5+
+                      </span>
+                      <!-- </nuxt-link> -->
                     </div>
                   </li>
                 </ul>
@@ -200,8 +237,7 @@
         </div>
         <!-- desctop -->
         <div
-          v-else-if="isMobile == false"
-          class="bg-white shadow-md rounded-[5px] p-[10px] "
+          class="bg-white shadow-md rounded-[5px] p-[10px] hidden sm:flex"
           :class="[viewAll ? 'h-full' : 'h-full']"
         >
           <ul class="flex flex-col divide-y divide-tem/10">
@@ -212,7 +248,7 @@
             >
               <h4
                 v-if="item.node.children.edges.length"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px] flex items-center justify-between gap-1"
+                class="hover:text-main anime cursor-pointer text-sm sm:text-sm  pb-[12px] flex items-center justify-between gap-1"
                 @click="clickCategory(item.node.databaseId)"
               >
                 {{ item.node.name }}
@@ -239,7 +275,7 @@
               <h4
                 v-else
                 @click="viewItem = null"
-                class="hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px]"
+                class="hover:text-main anime cursor-pointer text-sm sm:text-sm  pb-[12px]"
               >
                 <nuxt-link
                   :to="
@@ -248,7 +284,7 @@
                       '/' +
                       item.node.databaseId
                   "
-                  class=" w-full hover:text-main anime cursor-pointer text-sm sm:text-[14px] pb-[12px]"
+                  class=" w-full hover:text-main anime cursor-pointer text-sm sm:text-sm  pb-[12px]"
                   >{{ item.node.name }}</nuxt-link
                 >
               </h4>
@@ -315,31 +351,27 @@
                             subitem.node.databaseId == viewSubItem
                         "
                       >
-                        <li
+                        <nuxt-link
                           v-for="itemSubSub in subitem.node.children.edges"
                           :key="itemSubSub.node.databaseId"
-                          class=""
+                          :to="
+                            '/all-analyzes/' +
+                              itemSubSub.node.slug +
+                              '/' +
+                              itemSubSub.node.databaseId
+                          "
+                          class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
                         >
                           <!-- починить ссылки на 3 уровень -->
-                          <nuxt-link
-                            :to="
-                              '/all-analyzes/' +
-                                itemSubSub.node.slug +
-                                '/' +
-                                itemSubSub.node.databaseId
-                            "
-                            class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
+                          <span
+                            class="text-left flex gap-2 justify-start"
+                            @click="preFetchDataSubCat(itemSubSub.node)"
                           >
-                            <span
-                              class="text-left flex gap-2 justify-start"
-                              @click="preFetchDataSubCat(itemSubSub.node)"
-                            >
-                              <span>-</span>
-                              {{ itemSubSub.node.name }}
-                            </span>
-                          </nuxt-link>
+                            <span>-</span>
+                            {{ itemSubSub.node.name }} 33
+                          </span>
                           <!-- починить ссылки на 3 уровень -->
-                        </li>
+                        </nuxt-link>
                       </ul>
                     </div>
                     <!-- с подкатегориями 2 уровня -->
@@ -350,10 +382,10 @@
                       >
                         <span
                           class="text-left flex gap-2 justify-start"
-                          @click="preFetchDataCat(subitem.node)"
+                         
                         >
                           <span>-</span>
-                          {{ subitem.node.name }} 2 уровня
+                          {{ subitem.node.name }}
                         </span>
                       </nuxt-link>
                     </div>
@@ -383,7 +415,6 @@ export default {
       testCat: categoryAnaliz,
       testCatCom: categoryComplecs,
       viewAllAnalizes: true,
-      // viewItem: 2824,
       viewItem: null,
       viewSubItem: null,
       mouseItem: null,
@@ -393,24 +424,56 @@ export default {
       subAnalizesData: [],
       preSubAnalizesData: [],
       viewAll: false,
-      isMobile: false
+      isMobile: false,
+      activeCatName: 'Выберите категорию:',
+      activeCat: false,
+      viewSubItemName: '',
+      completName4: ''
     }
   },
-  beforeDestroy () {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-    }
-  },
-  methods: {
-    onResize () {
-      this.isMobile = window.innerWidth < 600
-    },
 
-    viewAllAnalizesTrue () {
-      this.viewAll = !this.viewAll
+  methods: {
+    openSelect () {
+      if (this.activeCat == true) {
+        this.activeCat = false
+      } else {
+        this.activeCat = true
+      }
     },
-    viewSubMenu (item) {
-      this.viewItem = !this.viewItem
+    pushComplecs2 (item) {
+      this.activeCatName = item.node.name
+      this.activeCat = false
+      this.completName4 = ''
+      this.viewItem = null
+      console.log(item.node)
+      this.$router.push({
+        path: '/all-analyzes/' + item.node.databaseId
+      })
+    },
+    pushComplecs3 (item) {
+      this.activeCatName = item.node.name
+      this.activeCat = false
+      this.completName4 = ''
+      this.$router.push({
+        path: '/all-analyzes/' + item.node.databaseId
+      })
+    },
+    pushComplecs4 (itemSubSub) {
+      this.activeCatName = itemSubSub.node.name
+      this.activeCat = false
+      this.completName4 = this.viewSubItemName
+      console.log(itemSubSub)
+      this.$router.push({
+        path: '/all-analyzes/' + itemSubSub.node.databaseId
+      })
+    },
+    pushComplecs5 (subitem) {
+      this.activeCatName = subitem.node.name
+      this.activeCat = false
+      this.completName4 = ''
+      this.$router.push({
+        path: '/all-analyzes/' + subitem.node.databaseId
+      })
     },
     clickCategory (subcategory) {
       if (this.viewItem == null) {
@@ -421,23 +484,19 @@ export default {
         this.viewItem = null
       }
     },
-    preFetchDataCat (item) {
-      console.log(item)
-    },
     preFetchDataSubCat (item) {
+      console.log(item)
       if (this.viewSubItem == null) {
         this.viewSubItem = item.databaseId
+        this.viewSubItemName = item.name
       } else if (this.viewSubItem !== item.databaseId) {
         this.viewSubItem = item.databaseId
+        this.viewSubItemName = item.name
       } else {
         this.viewSubItem = null
+        this.viewSubItemName = ''
       }
     }
-  },
-
-  mounted () {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
   }
 }
 </script>

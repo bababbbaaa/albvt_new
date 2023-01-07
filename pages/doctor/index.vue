@@ -173,6 +173,7 @@
               @openVivod="openVivod(item.id)"
             />
           </section>
+          <span v-else-if="TABDOCTOR == 3 && !getAllVivod.length" class="text-center text-sm">У вас пока что не было выводов</span>
         </Transition>
       </div>
     </div>

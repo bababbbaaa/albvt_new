@@ -1,11 +1,13 @@
 <template>
-  <div class="">
+  <div class="" >
     <div class="flex flex-col gap-[20px] ">
-      <div id="scroll-to-complex" class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+      <div
+        class="flex flex-col sm:flex-row gap-2 sm:justify-between"
+        ref="elScroll"
+      >
         <h1
           v-if="subCats"
           class="text-[24px] font-medium flex gap-2 items-center scroll-to"
-          
         >
           <button
             @click="$router.back()"
@@ -98,9 +100,13 @@ export default {
     addToCart (item) {
       this.ADD_TO_CART(item)
     },
-    scrollToAnaliz () {
-      var scrollDiv = document.getElementById('scroll-to-complex').offsetTop - 90
-      window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+    scrollToElement () {
+      const scrollDiv = this.$refs.elScroll.offsetTop - 90
+      
+      if (scrollDiv) {
+        console.log('scrollToElement' , scrollDiv, window.screen.width);
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+      }
     }
   },
   computed: {
@@ -108,23 +114,24 @@ export default {
   },
   mounted () {
     if (window.screen.width <= 600) {
-      this.scrollToAnaliz()
-    }
-    this.$router.replace({ query: null })
-  },
-  updated () {
-    if (window.screen.width <= 600) {
-      this.scrollToAnaliz()
+      console.log('update mounted');
+      this.scrollToElement()
     }
   },
-
-  watch: {
-    $route () {
-      if (window.screen.width <= 600) {
-        this.scrollToAnaliz()
-      }
-    }
-  }
+  // updated () {
+  //   if (window.screen.width <= 600) {
+  //     this.scrollToElement()
+  //   }
+  // },
+  // watch: {
+  //   $route (to, from) {
+  //     console.log('update link1',to, from);
+  //     if (window.screen.width <= 600) {
+  //       this.scrollToElement()
+  //       console.log('update link');
+  //     }
+  //   }
+  // }
 }
 </script>
 

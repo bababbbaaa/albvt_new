@@ -1,21 +1,20 @@
 <template>
   <div class="bg-[#F9F9F9] flex flex-col justify-center">
-     <span class="pt-6 text-xl text-center w-full px-4">Личные данные</span>
+    <span class="pt-6 text-xl text-center w-full px-4">Личные данные</span>
     <div
-      class="pt-8 mt-2 container flex flex-col gap-4"
+      class="py-8 mt-2 container flex flex-col gap-4"
       v-if="usersPermissionsUser"
     >
       <div class="w-full flex items-center justify-between">
         <button
-        @click="$router.back()"
-        class=" flex  justify-start items-center gap-1"
-      >
-        <img src="~/assets/icons/arrow-back.svg" alt="" />
-        Назад
-      </button>
-       
+          @click="$router.back()"
+          class=" flex  justify-start items-center gap-1"
+        >
+          <img src="~/assets/icons/arrow-back.svg" alt="" />
+          Назад
+        </button>
       </div>
-      <div class="flex justify-between items-start w-full">
+      <div class="flex justify-between items-center w-full">
         <span>Мой промокод:</span>
         <div class="flex flex-col items-end gap-2">
           <div class="flex items-center">
@@ -24,7 +23,7 @@
               ref="clone"
               readonly
               :value="usersPermissionsUser.data.attributes.Promo"
-              class="bg-transparent text-xl font-bold p-1 border-1 border-main max-w-[100px]"
+              class="bg-transparent text-xl font-bold p-1 border-1 border-main max-w-[100px] tracking-wider"
             />
             <button @click="copy">
               <svg
@@ -85,13 +84,13 @@
             class="input-new"
           />
         </div>
-        <nuxt-link to="/reset-pass" class="w-full text-center">
-          Сбросить пароль
-        </nuxt-link>
-        
+
         <button class="w-full p-3 rounded-md bg-main text-white">
           Сохранить
         </button>
+        <nuxt-link to="/reset-pass" class="w-full text-center text-sm">
+          Сбросить пароль
+        </nuxt-link>
       </div>
     </div>
     <span v-else>Загрузка...</span>
@@ -139,7 +138,7 @@ export default {
       this.$refs.clone.focus()
       document.execCommand('copy')
       this.me.cloneDone = true
-      console.log('copy');
+      console.log('copy')
       setTimeout(() => {
         this.me.cloneDone = false
       }, 1000)

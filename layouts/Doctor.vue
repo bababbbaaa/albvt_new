@@ -37,13 +37,13 @@
       </div>
       <div
         v-if="modal == true"
-        class="fixed bg-tem/50 w-screen h-screen flex justify-center items-center z-[99999]"
+        class="fixed bg-tem/50 w-screen h-screen flex justify-center items-start py-20 z-[99999]"
       >
         <div
-          class="flex flex-col gap-4 justify-center items-center bg-white rounded-md p-4"
+          class="flex flex-col gap-8 justify-center items-center bg-white rounded-md p-4"
         >
-          <span>Вы уверенны что хотите выйти?</span>
-          <div class="flex gap-2 items-center justify-between w-full">
+          <span class="w-full text-center">Выйти из кабинета врача?</span>
+          <div class="flex gap-4 items-center justify-between  w-full">
             <button
               class="py-3 px-4 rounded-md text-white bg-[#54D283] text-sm"
               @click="handleLogout()"

@@ -4,15 +4,7 @@
       v-if="speczialnosts && gorodaInvitros"
       class="container pt-[47px] mt-[47px] sm:mt-0 w-full max-w-[620px] h-full  flex flex-col justify-center items-center"
     >
-      <div
-        v-if="registerActive == true"
-        class="w-full container  text-center flex flex-col justify-center items-center"
-      >
-        <img src="~/assets/icons/333331.png" alt="" />
-        Вы успешно зарегистрировались!<br /><br />
-        Для продолжения войдите в личный кабинет.
-      </div>
-      <span v-else-if="registerActive == false" class="font-medium text-xl"
+      <span v-if="registerActive == false" class="font-medium text-xl"
         >Регистрация</span
       >
 
@@ -23,19 +15,13 @@
             <div class=" flex flex-col gap-1 rounded-md shadow-sm">
               <div
                 class="relative border-[1px] border-[#E5E4E8]    rounded-md px-4 py-3  shadow-sm anime"
-                :class="[
-                  dataDoctor.email.length <= 6 &&
-                  !dataDoctor.email.includes('@')
-                    ? 'border-[#E5E4E8]'
-                    : 'border-main'
-                ]"
+                :class="[confirm !== true ? 'border-[#E5E4E8]' : 'border-main']"
               >
                 <label
                   for=""
                   class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
                   :class="[
-                    dataDoctor.email.length <= 6 &&
-                    !dataDoctor.email.includes('@')
+                    confirm !== true
                       ? 'text-[#89888F]'
                       : 'text-main font-medium'
                   ]"
@@ -105,7 +91,7 @@
                 class="absolute right-[14px] top-[15px]"
               >
                 <svg
-                  v-if="typePassword == 'password'"
+                  v-if="typePassword !== 'password'"
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-[#343434]/70"
                   fill="none"
@@ -159,7 +145,7 @@
                 class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs  anime"
                 :class="[
                   dataDoctor.password == dataDoctor.ConfPassword &&
-                  dataDoctor.password.length > 8
+                  dataDoctor.password.length >= 8
                     ? 'text-main'
                     : 'text-[#89888F]'
                 ]"
@@ -176,7 +162,7 @@
                 class="absolute right-[14px] top-[15px]"
               >
                 <svg
-                  v-if="typePassword == 'password'"
+                  v-if="typePassword !== 'password'"
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-[#343434]/70"
                   fill="none"
@@ -214,13 +200,24 @@
             </div>
           </div>
         </div>
+
         <button
           class="w-full bg-main text-white rounded-md py-3  max-w-[300px]"
-          :disabled="formBusy"
           @click="registerUser()"
+          v-if="
+            dataDoctor.password == dataDoctor.ConfPassword &&
+              dataDoctor.Phone.length == 18 &&
+              confirm == true
+          "
         >
           Продолжить
         </button>
+        <div
+          v-else
+          class="opacity-50 w-full bg-main text-white rounded-md py-3  max-w-[300px] flex justify-center"
+        >
+          Продолжить
+        </div>
 
         <span
           class="mt-4 text-sm"
@@ -399,12 +396,7 @@
 
           <div class="flex flex-col gap-1">
             <div
-              class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
-              :class="[
-                dataDoctor.Family.length <= 1
-                  ? 'border-[#E5E4E8]'
-                  : 'border-main'
-              ]"
+              class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3 shadow-sm anime"
             >
               <label
                 for=""
@@ -426,10 +418,7 @@
 
           <div class="flex flex-col gap-1">
             <div
-              class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
-              :class="[
-                dataDoctor.Name.length <= 1 ? 'border-[#E5E4E8]' : 'border-main'
-              ]"
+              class="relative border-[1px] border-[#E5E4E8]   rounded-md px-4 py-3 shadow-sm anime"
             >
               <label
                 for=""
@@ -451,12 +440,7 @@
 
           <div class="flex flex-col gap-1">
             <div
-              class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
-              :class="[
-                dataDoctor.Otchestvo.length <= 1
-                  ? 'border-[#E5E4E8]'
-                  : 'border-main'
-              ]"
+              class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
             >
               <label
                 for=""
@@ -479,12 +463,7 @@
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-1">
               <div
-                class="relative border-[1px]   rounded-md px-4 py-3 shadow-sm anime"
-                :class="[
-                  dataDoctor.DataRozgdeniya.length !== 10
-                    ? 'border-[#E5E4E8]'
-                    : 'border-main'
-                ]"
+                class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
               >
                 <label
                   for=""
@@ -534,32 +513,31 @@
         </div>
         <div class="flex justify-center">
           <button
-          v-if="
-            speczialnostsSelectName !== 'Выберите' &&
-              gorodaInvitrosSelectName !== 'Выберите' &&
-              dataDoctor.Family.length >= 1 &&
-              dataDoctor.Name.length >= 1 &&
-              dataDoctor.DataRozgdeniya.length == 10
-          "
-          class="w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
-          :disabled="formBusy"
-          @click="updateUser()"
-        >
-          <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
-        </button>
-        <button
-          v-else
-          class="opacity-50 w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
-          :disabled="formBusy"
-          @click="valideForm()"
-        >
-          <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
-        </button>
-        <span v-if="valideFormData == true" class="text-xs text-tem/70"
-          >Введите корректные данные</span
-        >
+            v-if="
+              speczialnostsSelectName !== 'Выберите' &&
+                gorodaInvitrosSelectName !== 'Выберите' &&
+                dataDoctor.Family.length >= 1 &&
+                dataDoctor.Name.length >= 1 &&
+                dataDoctor.DataRozgdeniya.length == 10
+            "
+            class="w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
+            :disabled="formBusy"
+            @click="updateUser()"
+          >
+            <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
+          </button>
+          <button
+            v-else
+            class="opacity-50 w-full bg-main text-white rounded-md py-3  max-w-[300px] sm:col-span-2"
+            :disabled="formBusy"
+            @click="valideForm()"
+          >
+            <span v-if="formBusy" small class="mr-2" /> Зарегистрироваться
+          </button>
+          <span v-if="valideFormData == true" class="text-xs text-tem/70"
+            >Введите корректные данные</span
+          >
         </div>
-        
       </div>
 
       <div v-if="step == 3"></div>
@@ -617,7 +595,17 @@ export default {
       },
       formBusy: false,
       registerActive: false,
-      typePassword: 'password'
+      typePassword: 'password',
+      confirm: false
+    }
+  },
+  watch: {
+    'dataDoctor.email' () {
+      if (this.dataDoctor.email.includes('@')) {
+        this.confirm = true
+      } else {
+        this.confirm = false
+      }
     }
   },
   directives: {
@@ -728,7 +716,15 @@ export default {
           this.succesRegister = true
           this.registerActive = true
           this.valideFormData = false
-          this.step = 3
+
+          await this.$auth.loginWith('graphql', {
+            identifier: phone,
+            password: this.dataDoctor.password
+          })
+
+          setTimeout(() => {
+            this.$nuxt.$router.replace({ path: '/doctor' })
+          }, 1000)
           console.log(results)
         }
       } catch (err) {}
