@@ -41,6 +41,9 @@ input {
 *:focus {
   outline: none !important;
 }
+*{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 .page-enter-active,
 .page-leave-active {

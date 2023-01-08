@@ -2,37 +2,18 @@
   <div class="" >
     <div class="flex flex-col gap-[20px] ">
       <div
-        class="flex flex-col sm:flex-row gap-2 sm:justify-between"
-        ref="elScroll"
+        class="flex flex-col sm:flex-row gap-2 sm:justify-between "
+        ref="elScroll2"
       >
         <h1
-          v-if="subCats"
-          class="text-[24px] font-medium flex gap-2 items-center scroll-to"
+          v-if="analizies"
+          class="text-xl sm:text-2xl font-medium flex gap-2 items-center scroll-to"
         >
-          <button
-            @click="$router.back()"
-            class=" flex justify-center items-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-main"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
           {{ subCats.data[0].attributes.Name }}
         </h1>
       </div>
       <div class="bg-white shadow-md rounded-[5px] ">
-        <div>
+        <div >
           <div
             class="hidden xl:grid lg:grid-cols-[3fr,3fr,2fr,1fr]   xl:grid-cols-[2fr,13fr,2fr,3fr] w-full border-b border-b-[#C3C3C3] gap-[20px] py-[12px] p-[10px]"
           >
@@ -40,12 +21,13 @@
             <span class="">Наименование исследования</span>
             <span class="">Цена</span>
           </div>
-          <div class="flex flex-col w-full  xl:mt-[12px]" v-if="analizies">
+          <div class="flex flex-col w-full  xl:mt-[12px]" v-if="analizies" >
             <med-product
               v-for="item in analizies.data"
               :key="item.id"
               :item="item"
               @addToCart="addToCart(item)"
+              
             />
           </div>
         </div>
@@ -99,39 +81,12 @@ export default {
     ...mapActions(['ADD_TO_CART']),
     addToCart (item) {
       this.ADD_TO_CART(item)
-    },
-    scrollToElement () {
-      const scrollDiv = this.$refs.elScroll.offsetTop - 90
-      
-      if (scrollDiv) {
-        console.log('scrollToElement' , scrollDiv, window.screen.width);
-        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-      }
     }
   },
   computed: {
     ...mapGetters(['CART', 'CART_IDS', 'GET_ALL_BIOMATERIALS'])
   },
-  mounted () {
-    if (window.screen.width <= 600) {
-      console.log('update mounted');
-      this.scrollToElement()
-    }
-  },
-  // updated () {
-  //   if (window.screen.width <= 600) {
-  //     this.scrollToElement()
-  //   }
-  // },
-  // watch: {
-  //   $route (to, from) {
-  //     console.log('update link1',to, from);
-  //     if (window.screen.width <= 600) {
-  //       this.scrollToElement()
-  //       console.log('update link');
-  //     }
-  //   }
-  // }
+ 
 }
 </script>
 

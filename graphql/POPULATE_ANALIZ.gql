@@ -1,0 +1,56 @@
+query POPULATE_ANALIZ {
+  analizies(pagination: { pageSize: 25 }, filters: { Populate: { eq: true } }) {
+    meta {
+      pagination {
+        page
+        pageCount
+        pageSize
+        total
+      }
+    }
+    data {
+      id
+      attributes {
+        Name
+        Art
+        Price
+        TimeDone
+        Complecs
+        Active
+        complecsAnaliz {
+          data {
+            id
+            attributes {
+              Name
+              Price
+              Art
+            }
+          }
+        }
+        DopAnalizes {
+          data {
+            id
+          }
+        }
+        sub_cat {
+          data {
+            attributes {
+              Name
+              URL
+              CatIdURL
+            }
+          }
+        }
+        biomaterialies {
+          data {
+            id
+            attributes {
+              Price
+              Name
+            }
+          }
+        }
+      }
+    }
+  }
+}

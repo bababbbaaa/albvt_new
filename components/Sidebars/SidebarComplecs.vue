@@ -19,12 +19,12 @@
         <!-- desctop -->
         <div class="hidden sm:flex  justify-between w-full gap-4">
           <nuxt-link
-            to="/all-analyzes/gematologicheskie-issledovaniya/2849"
+            to="/all-analyzes"
             class="flex  justify-center cursor-pointer items-center border border-main rounded-md h-[40px]  text-base  w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
-            to="/all-complecs/1-dlya-zhenshhin/2797"
+            to="/all-complecs"
             class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-md h-[40px]  text-base  w-1/2"
             >Комплексы</nuxt-link
           >
@@ -86,7 +86,7 @@
                     @click="pushComplecs(item)"
                     class="hover:text-main anime cursor-pointer text-base  pb-[12px] "
                   >
-                    {{ item.node.name }}+
+                    {{ item.node.name }}
                   </h4>
                 </li>
               </ul>
@@ -168,7 +168,7 @@ export default {
       this.activeCatName = item.node.name
       this.activeCat = false
       this.$router.push({
-        path: '/all-complecs2/' + item.node.slug + '/' + item.node.databaseId
+        path: '/all-complecs/' + item.node.slug + '/' + item.node.databaseId
       })
     }
   }

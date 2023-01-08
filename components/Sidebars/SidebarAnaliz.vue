@@ -8,12 +8,12 @@
         <!-- mobile -->
         <div v-if="isMobile == true" class="flex  justify-between w-full gap-4">
           <nuxt-link
-            to="/all-analyzes/"
+            to="/all-analyzes"
             class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
-            to="/all-complecs/"
+            to="/all-complecs"
             class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Комплексы</nuxt-link
           >
@@ -21,12 +21,12 @@
         <!-- desctop -->
         <div v-else class="flex  justify-between w-full gap-4">
           <nuxt-link
-            to="/all-analyzes/gematologicheskie-issledovaniya/2849"
+            to="/all-analyzes"
             class="flex bg-main !text-white  justify-center cursor-pointer items-center border  rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Анализы</nuxt-link
           >
           <nuxt-link
-            to="/all-complecs/1-dlya-zhenshhin/2797"
+            to="/all-complecs"
             class="flex  justify-center cursor-pointer items-center border border-main rounded-[5px] h-[40px]  text-sm  w-1/2"
             >Комплексы</nuxt-link
           >
@@ -113,9 +113,10 @@
               <h4
                 v-else
                 @click="pushComplecs2(item)"
-                class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-sm  pb-[12px] "
+                class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-sm  pb-[12px]"
+                :class="[item.node.name == activeCatName ? 'text-main' : '']"
               >
-                {{ item.node.name }} 2+
+                {{ item.node.name }}
                 <!-- <nuxt-link
                   :to="
                     '/all-analyzes/' +
@@ -145,6 +146,9 @@
                         <span
                           class="text-left flex gap-2 justify-start items-center"
                           @click="preFetchDataSubCat(subitem.node)"
+                          :class="[
+                            subitem.node.name == completName4 ? 'text-main' : ''
+                          ]"
                         >
                           <svg
                             v-if="subitem.node.databaseId == viewSubItem"
@@ -177,7 +181,7 @@
                               d="M12 4v16m8-8H4"
                             />
                           </svg>
-                          {{ subitem.node.name }} 3
+                          {{ subitem.node.name }}
                         </span>
                       </div>
                       <ul
@@ -203,16 +207,27 @@
                           <span
                             class="text-left flex gap-2 justify-start"
                             @click="pushComplecs4(itemSubSub)"
+                            :class="[
+                              itemSubSub.node.name == activeCatName
+                                ? 'text-main'
+                                : ''
+                            ]"
                           >
                             <span>-</span>
-                            {{ itemSubSub.node.name }} 4-
+                            {{ itemSubSub.node.name }}
                           </span>
                           <!-- </nuxt-link> -->
                         </li>
                       </ul>
                     </div>
                     <!-- с подкатегориями -->
-                    <div v-else @click="pushComplecs5(subitem)">
+                    <div
+                      v-else
+                      @click="pushComplecs5(subitem)"
+                      :class="[
+                        subitem.node.name == activeCatName ? 'text-main' : ''
+                      ]"
+                    >
                       <!-- <nuxt-link
                         :to="
                           '/all-analyzes/' +
@@ -225,7 +240,7 @@
                       > -->
                       <span class="text-left flex gap-2 justify-start">
                         <span>-</span>
-                        {{ subitem.node.name }} 5+
+                        {{ subitem.node.name }}
                       </span>
                       <!-- </nuxt-link> -->
                     </div>
@@ -380,10 +395,7 @@
                         :to="'/all-analyzes/' + subitem.node.databaseId"
                         class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
-                        <span
-                          class="text-left flex gap-2 justify-start"
-                         
-                        >
+                        <span class="text-left flex gap-2 justify-start">
                           <span>-</span>
                           {{ subitem.node.name }}
                         </span>

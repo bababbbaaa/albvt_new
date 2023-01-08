@@ -1,45 +1,7 @@
 <template>
   <div class="flex w-full flex-col sm:flex-row   gap-[20px]">
-    <button
-      @click="$router.back()"
-      class=" flex sm:hidden justify-start items-center"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8 text-main"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
-    </button>
     <div class="w-full sm:w-2/3  order-2 sm:order-1 gap-[20px]">
       <div class="flex flex-row items-start gap-[8px] ">
-        <button
-          @click="$router.back()"
-          class=" hidden sm:flex justify-center items-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8 text-main"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
         <div class="flex flex-col gap-[8px] " v-if="analizy">
           <h1 class="font-medium pb-[8px] text-sm  block overflow-hidden">
             {{ analizy.attributes.sub_cat.data.attributes.Name }}:
