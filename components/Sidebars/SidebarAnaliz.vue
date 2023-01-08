@@ -117,16 +117,6 @@
                 :class="[item.node.name == activeCatName ? 'text-main' : '']"
               >
                 {{ item.node.name }}
-                <!-- <nuxt-link
-                  :to="
-                    '/all-analyzes/' +
-                      item.node.slug +
-                      '/' +
-                      item.node.databaseId
-                  "
-                  class="w-full hover:text-main anime  cursor-pointer text-sm sm:text-sm  pb-[12px] "
-                  >{{ item.node.name }} 2
-                </nuxt-link> -->
               </h4>
               <transition name="fade">
                 <ul
@@ -195,15 +185,6 @@
                           v-for="itemSubSub in subitem.node.children.edges"
                           :key="itemSubSub.node.databaseId"
                         >
-                          <!-- <nuxt-link
-                            :to="
-                              '/all-analyzes/' +
-                                itemSubSub.node.slug +
-                                '/' +
-                                itemSubSub.node.databaseId
-                            "
-                            class="text-left flex gap-2 justify-start text-sm hover:text-main anime cursor-pointer"
-                          > -->
                           <span
                             class="text-left flex gap-2 justify-start"
                             @click="pushComplecs4(itemSubSub)"
@@ -216,7 +197,6 @@
                             <span>-</span>
                             {{ itemSubSub.node.name }}
                           </span>
-                          <!-- </nuxt-link> -->
                         </li>
                       </ul>
                     </div>
@@ -228,21 +208,10 @@
                         subitem.node.name == activeCatName ? 'text-main' : ''
                       ]"
                     >
-                      <!-- <nuxt-link
-                        :to="
-                          '/all-analyzes/' +
-                            item.node.slug +
-                            '/' +
-                            subitem.node.databaseId
-                        "
-                        class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
-                         @click="preFetchDataCat(subitem.node)"
-                      > -->
                       <span class="text-left flex gap-2 justify-start">
                         <span>-</span>
                         {{ subitem.node.name }}
                       </span>
-                      <!-- </nuxt-link> -->
                     </div>
                   </li>
                 </ul>
@@ -252,8 +221,8 @@
         </div>
         <!-- desctop -->
         <div
-          class="bg-white shadow-md rounded-[5px] p-[10px] hidden sm:flex"
-          :class="[viewAll ? 'h-full' : 'h-full']"
+          class="bg-white shadow-md rounded-[5px] p-[10px] hidden sm:flex h-full"
+         
         >
           <ul class="flex flex-col divide-y divide-tem/10">
             <li
@@ -266,7 +235,7 @@
                 class="hover:text-main anime cursor-pointer text-sm sm:text-sm  pb-[12px] flex items-center justify-between gap-1"
                 @click="clickCategory(item.node.databaseId)"
               >
-                {{ item.node.name }}
+                {{ item.node.name }} 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="min-w-4 min-h-4 max-w-4 max-h-4 text-main "
@@ -356,8 +325,7 @@
                           {{ subitem.node.name }}
                         </span>
 
-                        <!-- .replace(/[0-9]/g, '')
-                              .replace(/\./g, '') -->
+                        
                       </div>
                       <ul
                         class="pt-4 pl-4  flex flex-col gap-[10px]"
@@ -383,7 +351,7 @@
                             @click="preFetchDataSubCat(itemSubSub.node)"
                           >
                             <span>-</span>
-                            {{ itemSubSub.node.name }} 33
+                            {{ itemSubSub.node.name }} 
                           </span>
                           <!-- починить ссылки на 3 уровень -->
                         </nuxt-link>
@@ -392,7 +360,7 @@
                     <!-- с подкатегориями 2 уровня -->
                     <div v-else>
                       <nuxt-link
-                        :to="'/all-analyzes/' + subitem.node.databaseId"
+                        :to="'/all-analyzes/id/' + subitem.node.databaseId"
                         class="text-left flex gap-2 justify-start hover:text-main anime cursor-pointer"
                       >
                         <span class="text-left flex gap-2 justify-start">
@@ -459,7 +427,7 @@ export default {
       this.viewItem = null
       console.log(item.node)
       this.$router.push({
-        path: '/all-analyzes/' + item.node.databaseId
+        path: '/all-analyzes/id/' + item.node.databaseId
       })
     },
     pushComplecs3 (item) {
@@ -467,7 +435,7 @@ export default {
       this.activeCat = false
       this.completName4 = ''
       this.$router.push({
-        path: '/all-analyzes/' + item.node.databaseId
+        path: '/all-analyzes/id/' + item.node.databaseId
       })
     },
     pushComplecs4 (itemSubSub) {
@@ -476,7 +444,7 @@ export default {
       this.completName4 = this.viewSubItemName
       console.log(itemSubSub)
       this.$router.push({
-        path: '/all-analyzes/' + itemSubSub.node.databaseId
+        path: '/all-analyzes/id/' + itemSubSub.node.databaseId
       })
     },
     pushComplecs5 (subitem) {
@@ -484,7 +452,7 @@ export default {
       this.activeCat = false
       this.completName4 = ''
       this.$router.push({
-        path: '/all-analyzes/' + subitem.node.databaseId
+        path: '/all-analyzes/id/' + subitem.node.databaseId
       })
     },
     clickCategory (subcategory) {

@@ -1,10 +1,10 @@
 <template>
   <div class="container mt-[47px] sm:mt-0">
-    <div v-if="usersPermissionsUser">
+    <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4">
       <tabs-vk>
         <tab-vk title="Мои заказы">
           <div
-            class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] my-[47px] gap-[20px]"
+            class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-[47px] gap-[20px]"
           >
             <lk-user-info
               @handleReload="handleReload"
@@ -19,7 +19,7 @@
               class="grid grid-cols-1 gap-[20px]"
               v-if="usersPermissionsUser.data.attributes.zakazies.data"
             >
-              <span class="text-[20px] font-medium">Мои заказы</span>
+              <span class="text-xl text-xl font-medium">Мои заказы</span>
               <lk-zakaz-desc
                 v-for="order in usersPermissionsUser.data.attributes.zakazies
                   .data"
@@ -30,83 +30,27 @@
                 @oplata="oplata(order, order.id)"
                 :itemID="itemID"
               />
-              <!-- <lk-zakaz-desc
-                v-for="(order, i) in dataOrders.orders.edges"
-                :key="i"
-                :order_data="order.node"
-                @openItemInfo="openItemInfo(order.node.databaseId)"
-                @oplata="oplata(order.node.total)"
-                :itemID="itemID"
-              /> -->
             </div>
-            <!-- <span v-else>Вы еще не сделали заказ</span> -->
-          </div>
-        </tab-vk>
-        <tab-vk title="Акции">
-          <div class="container relative my-[47px]">
-            <client-only placeholder="Загрузка...">
-              <agile
-                :options="allLK"
-                class="flex flex-col items-center justify-center gap-[20px]"
-              >
-                <div class="slide">
-                  <img
-                    src="/img/slide1.jpg"
-                    alt=""
-                    class="w-full object-cover rounded-[5px]"
-                  />
-                  <div
-                    class="cursor-pointer border-[1px] border-white text-white font-medium text-[14px] rounded-full px-8 py-4 absolute bottom-10 left-10"
-                  >
-                    Подробнее
-                  </div>
-                </div>
-                <div class="slide">
-                  <img
-                    src="/img/slide2.jpg"
-                    alt=""
-                    class="w-full object-cover rounded-[5px]"
-                  />
-                  <div
-                    class="cursor-pointer border-[1px] border-white text-white font-medium text-[14px] rounded-full px-8 py-4 absolute bottom-10 left-10"
-                  >
-                    Подробнее
-                  </div>
-                </div>
-                <div class="slide">
-                  <img
-                    src="/img/slide3.jpg"
-                    alt=""
-                    class="w-full  object-cover rounded-[5px]"
-                  />
-                  <div
-                    class="cursor-pointer border-[1px] border-white text-white font-medium text-[14px] rounded-full px-8 py-4 absolute bottom-10 left-10"
-                  >
-                    Подробнее
-                  </div>
-                </div>
-              </agile>
-            </client-only>
+            <span v-else>Вы еще не сделали заказ</span>
           </div>
         </tab-vk>
 
         <tab-vk title="Аккаунт">
           <div
-            class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] my-[47px] gap-[20px]"
+            class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-[47px] gap-[20px]"
           >
             <lk-user-info
               @handleReload="handleReload"
               @handleLogout="handleLogout"
             />
             <div
-              class="bg-white rounded-[5px] shadow-md p-4 flex justify-between gap-4"
+              class="bg-white rounded-[5px] shadow-md p-4 flex justify-between gap-4 flex-col-reverse sm:flex-row"
             >
-              
               <!-- left -->
               <div class="flex flex-col gap-4 items-start">
                 <span class="text-[30px]">Личные данные</span>
                 <div
-                  class="col-span-1 sm:col-span-2 relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center"
+                  class="w-full col-span-1 sm:col-span-2 relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center"
                 >
                   <label
                     for=""
@@ -160,11 +104,33 @@
                   <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
                 </div>
               </div>
-              
             </div>
           </div>
         </tab-vk>
       </tabs-vk>
+      <span class="w-full text-center text-2xl">Акции</span>
+      <client-only placeholder="Загрузка...">
+        <agile :options="allLK" class="" id="lkClient">
+          <div class="slide " v-for="(item, i) in sliders.data" :key="i">
+            <div class="flex flex-col w-full gap-2">
+              <img
+                :src="
+                  `https://api.albvt.ru` +
+                    item.attributes.Photo.data.attributes.url
+                "
+                alt=""
+                class="rounded-md"
+              />
+              <nuxt-link
+                :to="item.attributes.Link"
+                class="w-full sm:max-w-[220px] cursor-pointer border-[1px] border-tem text-tem font-medium text-sm rounded-full flex justify-center items-center py-3 "
+              >
+                {{ item.attributes.Name }}
+              </nuxt-link>
+            </div>
+          </div>
+        </agile>
+      </client-only>
     </div>
     <div
       v-if="pdfView == true"
@@ -174,20 +140,7 @@
         class="w-[400px] h-auto z-[8] bg-[#FCFCFC] p-4 rounded-[5px] shadow-md flex flex-col gap-4 justify-center items-center fixed"
       >
         <span class="w-full text-center text-[24px]">Скачать результаты</span>
-        <div class="flex flex-col gap-4">
-          <!-- <div
-            v-for="(item, i) in pdf"
-            :key="i"
-            class="bg-white p-4 rounded-[5px] shadow-md"
-          >
-            <a
-              :href="item.guid.rendered"
-              target="_blank"
-              class="underline underline-offset-2"
-              >Скачать результаты-{{ item.slug.substr(0, 5) }}-{{ i + 1 }}</a
-            >
-          </div> -->
-        </div>
+        <div class="flex flex-col gap-4"></div>
 
         <span
           @click="pdfView = false"
@@ -212,10 +165,10 @@ import tabsVk from '~/components/tabs/tabs-vk.vue'
 import TabVk from '~/components/tabs/tab-vk.vue'
 import LkZakaz from '~/components/lk-user/lk-zakaz.vue'
 import LkZakazDesc from '~/components/lk-user/lk-zakaz-desc.vue'
-import { VueAgile } from 'vue-agile'
 import LkUserInfo from '~/components/lk-user/lk-user-info.vue'
 
 import GET_ME from '~/graphql/pacient/get-me.gql'
+import SLIDER_ALL from '~/graphql/pacient/SLIDER_ALL.gql'
 import RESET_PHONE_USER from '~/graphql/RESET_PHONE_USER.gql'
 
 export default {
@@ -224,7 +177,6 @@ export default {
     TabVk,
     LkZakaz,
     LkZakazDesc,
-    agile: VueAgile,
     LkUserInfo
   },
   layout: 'MainLayout',
@@ -237,6 +189,9 @@ export default {
           ID: this.$auth.user.id
         }
       }
+    },
+    sliders: {
+      query: SLIDER_ALL
     }
   },
 
@@ -265,10 +220,11 @@ export default {
         otchestvo: ''
       },
       allLK: {
-        navButtons: false,
-        dots: true,
+        navButtons: true,
         centerMode: true,
         pauseOnHover: true,
+        infinite: true,
+        dots: true,
         slidesToShow: 1
       }
     }
@@ -354,6 +310,58 @@ export default {
 </script>
 
 <style>
+#lkClient .agile {
+  width: 100%;
+}
+#lkClient .agile__actions {
+  margin-top: 20px;
+}
+#lkClient .agile__nav-button {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 24px;
+  transition-duration: 0.3s;
+}
+#lkClient .agile__nav-button:hover {
+  color: #888;
+}
+#lkClient .agile__dot {
+  margin: 0 10px;
+}
+#lkClient .agile__dot button {
+  background-color: #eee;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.3s;
+  width: 10px;
+}
+#lkClient .agile__dot--current button,
+#lkClient .agile__dot:hover button {
+  background-color: #888;
+}
+
+@media only screen and (max-width: 600px) {
+  #lkClient .slide {
+    height: 300px !important;
+  }
+}
+
+#lkClient .slide {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  height: 660px;
+  justify-content: center;
+}
 .cartAll {
   transition: all 0.5s;
 }

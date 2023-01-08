@@ -6,6 +6,7 @@
       <client-only placeholder="Загрузка...">
         <agile
           :options="allComplecs"
+          id="ComplecsSlider"
           class="flex flex-col items-center justify-center gap-[20px]"
         >
           <div
@@ -39,7 +40,6 @@
 <script>
 
 import HeadingH3 from './HeadingH3.vue'
-import { VueAgile } from 'vue-agile'
 export default {
   data () {
     return {

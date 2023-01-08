@@ -445,12 +445,12 @@
                 <div
                   v-if="sityesInvitro && clinicIdSelect == true"
                   id="scroll-to-area"
-                  class="flex flex-col gap-1"
+                  class="flex flex-col gap-3"
                 >
                   <div
                     v-for="item in getAllClinics"
                     :key="item.id"
-                    class="w-full flex flex-col gap-2"
+                    class="w-full flex flex-col gap-1"
                   >
                     <span class="text-right w-full text-main text-sm">
                       {{ item.attributes.Name }}</span
@@ -720,43 +720,56 @@
       class="fixed flex justify-center items-center bg-[#343434]/40  w-screen h-screen left-0 top-0  z-[1] backdrop-blur-sm"
     >
       <div
-        class="w-[400px] h-auto z-[8] bg-white p-4 rounded-md shadow-md flex flex-col gap-4 justify-center items-center fixed"
+        class="w-[300px] sm:w-[400px]  h-auto z-[8] bg-white p-4 rounded-md shadow-md flex flex-col gap-4 justify-center items-center fixed"
       >
         <span class="w-full text-center text-[24px]"
           >Получить консультацию</span
         >
-        <input
-          type="text"
-          placeholder="Имя"
-          v-model="formZakaz.name"
-          :class="[
-            formZakaz.name.length <= 0
-              ? ' !focus:outline-[#A55B4A] !border-[#A55B4A]'
-              : '!border-[green] !focus:outline-[green]'
-          ]"
-          class=" input-med w-full max-w-[250px]"
-        />
-        <input
-          type="text"
-          placeholder="+7(___)___−__−__*"
-          v-facade="'+7(###)###-##-##'"
-          v-model="formZakaz.phone"
-          :class="[
-            formZakaz.phone.length !== 16
-              ? ' !focus:outline-[#A55B4A] !border-[#A55B4A]'
-              : '!border-[green] !focus:outline-[green]'
-          ]"
-          class=" input-med w-full max-w-[250px]"
-        />
+        <div
+          class="w-full relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center"
+        >
+          <label
+            for=""
+            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+            :class="[consult.name.length <= 2 ? 'text-[#ADACB3]' : 'text-main']"
+            >Имя*</label
+          >
+          <input
+            v-model="consult.name"
+            class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+          />
+        </div>
+        <div
+          class="w-full relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center"
+        >
+          <label
+            for=""
+            class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+            :class="[
+              consult.phone.length !== 18 ? 'text-[#ADACB3]' : 'text-main'
+            ]"
+            >Телефон*</label
+          >
+          <input
+            v-model="consult.phone"
+            class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+            placeholder="+7"
+            v-facade="'+7 (###) ###-##-##'"
+          />
+        </div>
+        <span class="w-full text-center text-[#768C9F]/60 text-xs">
+          Отправив заявку, Вы принимаете условия
+          <nuxt-link
+            to="/soglashenie"
+            class="underline underline-offset-2 text-[#768C9F]/90 text-xs"
+            >Соглашения</nuxt-link
+          >
+          об обработке персональных данных
+        </span>
         <span v-if="status == true">Сообщение успешно отправлено</span>
         <span v-else-if="errors.length">{{ status }}</span>
         <button
-          v-show="
-            formZakaz.name.length !== 0 &&
-              formZakaz.phone.length === 16 &&
-              status == false
-          "
-          @click="ConsultZayavka()"
+          @click="getTeelegrammToMain()"
           class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full max-w-[250px] flex justify-center items-center py-2 text-sm"
         >
           Отправить
@@ -860,6 +873,10 @@ export default {
       status: false,
       modalOrderOpen: true,
       password: '',
+      consult: {
+        phone: '',
+        name: ''
+      },
       credentials: {
         identifier: '',
         password: ''
@@ -872,7 +889,8 @@ export default {
       succes: '',
       succesRegister: null,
       dataMe: [],
-      loginError: false
+      loginError: false,
+      succesTG: false
     }
   },
   methods: {
@@ -1005,10 +1023,13 @@ export default {
           this.$router.push({
             path: '/cart/thanks',
             query: { id: data.createOrder.data.attributes.UID }
+            
           })
+          this.getTeelegrammCart()
           this.AddPacientToDoctor()
           this.RESET_CART()
         })
+      
     },
     AddPacientToDoctor () {
       const allPacientsOnDoctor = this.pacientsForDoctor
@@ -1084,6 +1105,114 @@ export default {
           ? totalPriceInCartReduce - (totalPriceInCartReduce / 100) * 10
           : totalPriceInCartReduce
       this.priceNotDiscounted = totalPriceInCartReduce
+    },
+    addConsult () {
+      console.log('consult')
+      this.modalConsul = true
+    },
+    async getTeelegrammToMain () {
+      const fullMessege =
+        'Консультация пациента' +
+        '\n' +
+        'Имя: ' +
+        this.consult.name +
+        '\n' +
+        'Телефон: ' +
+        this.consult.phone
+
+      await this.$axios
+        .post(
+          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-812623612',
+          {
+            text: fullMessege
+          }
+        )
+        .then(response => {
+          this.succesTG = true
+          this.status = true
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+    async getTeelegrammCart () {
+      const bioMateriales = []
+      this.bioMaterialsComplete.forEach(x => {
+        bioMateriales.push(
+          x.name + ' - ' + x.price + '₽' + '\n' + '--------------------' + '\n'
+        )
+      })
+
+      const analizes = []
+      this.CART.forEach(x => {
+        analizes.push(
+          'Арт ' +
+            x.attributes.Art +
+            '\n' +
+            x.attributes.Name +
+            '\n' +
+            'Цена - ' +
+            x.attributes.Price +
+            '₽' +
+            '\n' +
+            '--------------------' +
+            '\n'
+        )
+      })
+
+      const fullMessege =
+        'Заказ корзина' +
+        '\n' +
+        'Пациент:  ' +
+        '\n' +
+        'Имя: ' +
+        this.$auth.user.FIO_user +
+        '\n' +
+        'Телефон:  ' +
+        this.$auth.user.username +
+        '\n' +
+        'Email:  ' +
+        this.$auth.user.email +
+        '\n' +
+        'Дата рождения:  ' +
+        this.$auth.user.DataRozgdeniya +
+        '\n' +
+        '\n' +
+        'Офис: ' +
+        this.activeClinicInfo.Name +
+        '\n' +
+        '\n' +
+        'Доктор: ' +
+        this.promocode.data[0].attributes.FIO_user +
+        '\n' +
+        '\n' +
+        'Анализы: ' +
+        '\n' +
+        analizes +
+        '\n' +
+        '\n' +
+        'Биоматериалы: ' +
+        '\n' +
+        bioMateriales +
+        '\n' +
+        '\n' +
+        'Итого: ' +
+        this.totalpriceInCART +
+        '₽'
+
+      await this.$axios
+        .post(
+          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-1001839102746',
+          {
+            text: fullMessege
+          }
+        )
+        .then(response => {
+          this.succesTGCart = true
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
   },
   layout: 'MainLayout',

@@ -76,7 +76,7 @@
           :key="bio.id"
           class=""
         >
-          {{ bio.attributes.Name }}(+{{ bio.attributes.Price }}₽)
+          {{ bio.attributes.Name }} (+{{ bio.attributes.Price }}₽)
         </span>
       </div>
     </div>
@@ -162,10 +162,14 @@ export default {
     addToCart (item) {
       this.$emit('addToCart', item)
     },
-    linkMed(item){
-      this.$router.replace(this.$route.fullPath + '/' + item.id).catch(()=>{
-        console.log('error router 167');
-      });
+    linkMed (item) {
+      if (this.$route.fullPath == '/all-analyzes' || this.$route.fullPath == '/all-complecs' ) {
+        this.$router
+          .replace(this.$route.fullPath + '/populate/id/' + item.id)
+          .catch(() => {})
+      } else {
+        this.$router.replace(this.$route.fullPath + '/' + item.id).catch(() => {})
+      }
     }
   }
 }

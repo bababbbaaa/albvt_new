@@ -1,0 +1,17 @@
+query SLIDER_ALL {
+  sliders{
+    data{
+      attributes{
+        Link
+        Name
+        Photo{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
