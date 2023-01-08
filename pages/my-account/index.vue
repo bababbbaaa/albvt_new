@@ -99,27 +99,14 @@
               @handleLogout="handleLogout"
             />
             <div
-              class="bg-white rounded-[5px] shadow-md p-4 flex flex-col gap-4"
+              class="bg-white rounded-[5px] shadow-md p-4 flex justify-between gap-4"
             >
-              <span class="text-[30px]">Личные данные</span>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="flex flex-col gap-1">
-                  <span class="text-tem/50 text-xs">Email</span>
-                  <span>{{ this.$auth.user.email }}</span>
-                </div>
-                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
-                <div class="flex flex-col gap-1">
-                  <span class="text-tem/50 text-xs">ФИО</span>
-                  <span>{{ this.$auth.user.FIO_user }}</span>
-                </div>
-                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
-                <div class="flex flex-col gap-1">
-                  <span class="text-tem/50 text-xs">Дата рождения</span>
-                  <span>{{ this.$auth.user.DataRozgdeniya }}</span>
-                </div>
-                <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+              
+              <!-- left -->
+              <div class="flex flex-col gap-4 items-start">
+                <span class="text-[30px]">Личные данные</span>
                 <div
-                  class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime"
+                  class="col-span-1 sm:col-span-2 relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center"
                 >
                   <label
                     for=""
@@ -138,17 +125,42 @@
                     v-facade="'+7 (###) ###-##-##'"
                   />
                 </div>
-               
-                <button
-                  @click="updateUserMe()"
-                  class="sm:max-w-[300px] rounded-md border border-main h-[49px]  hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                <div
+                  class="col-span-1 sm:col-span-6 w-full flex flex-col gap-2 justify-center items-center"
                 >
-                  Сохранить
-                </button>
-                 <nuxt-link to="/reset-pass" class="w-full text-center text-sm">
-                  Сбросить пароль
-                </nuxt-link>
+                  <button
+                    @click="updateUserMe()"
+                    class="sm:max-w-[300px] rounded-md border border-main h-[49px]  hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+                  >
+                    Сохранить
+                  </button>
+                  <nuxt-link
+                    to="/reset-pass"
+                    class="w-full text-center text-sm text-tem/50"
+                  >
+                    Сбросить пароль
+                  </nuxt-link>
+                </div>
               </div>
+              <!-- left -->
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">ФИО</span>
+                  <span>{{ this.$auth.user.FIO_user }}</span>
+                  <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">Email</span>
+                  <span>{{ this.$auth.user.email }}</span>
+                  <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-tem/50 text-xs">Дата рождения</span>
+                  <span>{{ this.$auth.user.DataRozgdeniya }}</span>
+                  <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+                </div>
+              </div>
+              
             </div>
           </div>
         </tab-vk>

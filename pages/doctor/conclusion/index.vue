@@ -28,15 +28,13 @@
       <span
         v-if="checkZapros"
         class="w-full flex flex-col justify-center items-center text-center"
-        ><img src="~/assets/icons/333331.png" alt="" /> Ваш запрос № {{
-          zaprosId
-        }}
-        принят. Ожидайте перевода.</span
+        ><img src="~/assets/icons/333331.png" alt="" /> Ваш запрос №
+        {{ zaprosId }} принят. Ожидайте перевода.</span
       >
 
-      <!-- <nuxt-link to="/doctor" class="text-center w-full "
+      <nuxt-link to="/doctor" class="text-center w-full "
         >ВЕРНУТЬСЯ К НАЧАЛЬНОЙ СТРАНИЦЕ</nuxt-link
-      > -->
+      >
       <button
         @click="$router.back()"
         class=" flex  justify-start items-center gap-1"
@@ -64,6 +62,7 @@ export default {
   methods: {
     createZapros () {
       const zakaz2 = []
+
       this.data.zakaz.forEach(x => {
         Object.values(x)
         zakaz2.push(Number(x))
@@ -84,14 +83,14 @@ export default {
         })
         .then(data => {
           this.checkZapros = true
-          this.zaprosId = data.data.createZaprosyVrachej.data.id
+          this.zaprosId = data.data.createZaprosyVrachej.data.attributes.UID
           this.$router.replace({ query: null })
           this.handlerStatusZapros()
         })
         .catch(error => {
           console.error(error)
         })
-      this.handlerStatusZapros()
+      
     },
     handlerStatusZapros () {
       const Zaprosies = []
@@ -109,7 +108,7 @@ export default {
             }
           })
           .then(data => {
-            console.log(data)
+            console.log('handlerStatusZapros ok' ,data)
           })
           .catch(error => {
             console.error(error)

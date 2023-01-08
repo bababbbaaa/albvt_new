@@ -20,7 +20,7 @@ query PACIENT_DOCTOR($ID: ID){
               Status
               SummOrder
               createdAt
-             
+             UID
               Result{
                 data{
                   id

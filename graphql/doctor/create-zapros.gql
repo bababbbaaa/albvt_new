@@ -10,6 +10,9 @@ mutation CREATE_ZAPROS($SUMM: Float, $UID: String, $DOCTOR_ID: ID, $ZAKAZIES: [I
   ) {
     data {
       id
+      attributes {
+        UID
+      }
     }
   }
 }

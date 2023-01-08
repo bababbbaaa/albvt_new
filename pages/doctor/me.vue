@@ -47,50 +47,73 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-6">
-        <div class="relative">
-          <label class="label-new">ФИО</label>
-          <input
-            type="text"
-            :placeholder="usersPermissionsUser.data.attributes.FIO_user"
-            v-model="me.fio"
-            class="input-new"
-          />
+      <div
+        class="bg-white rounded-[5px] shadow-md p-4 flex flex-col-reverse sm:flex-row justify-between gap-4"
+      >
+        <!-- left -->
+        <div class="flex flex-col gap-4 items-start">
+          <div
+            class="col-span-1 sm:col-span-2 relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3  shadow-sm anime flex items-center w-full"
+          >
+            <label
+              for=""
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium anime"
+              :class="[
+                me.phone.length !== 18
+                  ? 'text-[#ADACB3]'
+                  : 'text-main'
+              ]"
+              >Телефон*</label
+            >
+            <input
+              v-model="me.phone"
+              class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
+              :placeholder="usersPermissionsUser.data.attributes.Phone"
+              v-facade="'+7 (###) ###-##-##'"
+            />
+          </div>
+          <div
+            class="col-span-1 sm:col-span-6 w-full flex flex-col gap-2 justify-center items-center"
+          >
+            <button
+              v-if="me.phone.length !== 18"
+              class="opacity-50 sm:max-w-[300px] rounded-md border border-main h-[49px]  hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+            >
+              Сохранить
+            </button>
+            <button
+            v-else
+              @click="updateUserMe()"
+              class="sm:max-w-[300px] rounded-md border border-main h-[49px]  hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
+            >
+              Сохранить
+            </button>
+            <nuxt-link
+              to="/reset-pass"
+              class="w-full text-center text-sm text-tem/50"
+            >
+              Сбросить пароль
+            </nuxt-link>
+          </div>
         </div>
-        <div class="relative">
-          <label class="label-new">Телефон</label>
-          <input
-            type="text"
-            :placeholder="usersPermissionsUser.data.attributes.Phone"
-            v-model="me.phone"
-            class="input-new"
-          />
+        <!-- left -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-tem/50 text-xs">ФИО</span>
+            <span>{{ this.$auth.user.FIO_user }}</span>
+            <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-tem/50 text-xs">Email</span>
+            <span>{{ usersPermissionsUser.data.attributes.email }}</span>
+            <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-tem/50 text-xs">Дата рождения</span>
+            <span>{{ this.$auth.user.DataRozgdeniya }}</span>
+            <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+          </div>
         </div>
-        <div class="relative">
-          <label class="label-new">Дата рождения</label>
-          <input
-            type="text"
-            :placeholder="usersPermissionsUser.data.attributes.DataRozgdeniya"
-            v-model="me.data"
-            class="input-new"
-          />
-        </div>
-        <div class="relative">
-          <label class="label-new">Email</label>
-          <input
-            type="text"
-            :placeholder="usersPermissionsUser.data.attributes.email"
-            v-model="me.email"
-            class="input-new"
-          />
-        </div>
-
-        <button class="w-full p-3 rounded-md bg-main text-white">
-          Сохранить
-        </button>
-        <nuxt-link to="/reset-pass" class="w-full text-center text-sm">
-          Сбросить пароль
-        </nuxt-link>
       </div>
     </div>
     <span v-else>Загрузка...</span>
@@ -99,6 +122,7 @@
 
 <script>
 import ME_DOCTOR from '~/graphql/doctor/me-doctor.gql'
+import RESET_PHONE_USER from '~/graphql/RESET_PHONE_USER.gql'
 
 export default {
   layout: 'Doctor',
@@ -128,12 +152,41 @@ export default {
   mounted () {
     if (this.usersPermissionsUser) {
       this.me.email = this.usersPermissionsUser.data.attributes.email
-      this.me.phone = this.usersPermissionsUser.data.attributes.Phone
+     
       this.me.fio = this.usersPermissionsUser.data.attributes.FIO_user
       this.me.data = this.usersPermissionsUser.data.attributes.DataRozgdeniya
     }
   },
   methods: {
+     async updateUserMe () {
+      const phone = this.me.phone
+        .replaceAll('-', '')
+        .replace('(', '')
+        .replace(')', '')
+        .replaceAll(' ', '')
+
+      try {
+        const res = await this.$apollo.mutate({
+          mutation: RESET_PHONE_USER,
+          variables: {
+            ID: this.$auth.user.id,
+            PHONE: phone
+          }
+        })
+        if (res) {
+          const results = res.data
+          this.succesUpdate = true
+          console.log(results)
+          this.handleLogout()
+        }
+      } catch (err) {
+        this.errors = err
+      }
+    },
+    async handleLogout () {
+      this.$nuxt.$loading.start()
+      await this.$auth.logout()
+    },
     copy () {
       this.$refs.clone.focus()
       document.execCommand('copy')

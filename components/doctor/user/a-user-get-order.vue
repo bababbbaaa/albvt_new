@@ -1,8 +1,8 @@
 <template>
-  <div class="p-2 rounded-md bg-white drop-shadow-md">
+  <div class="p-2 rounded-md bg-white drop-shadow-sm border-[1px] border-[#E5E8F1]">
     <div class="flex justify-between items-start">
       <div class="flex flex-col gap-1">
-        <span class="font-bold text-lg">№ {{ data_order.id }}</span>
+        <span class="font-bold text-lg">№ {{ data_order.attributes.UID }}</span>
         <span class="text-[#343434]/70">{{ getDate }}</span>
       </div>
       <div class="flex flex-col gap-1">
@@ -24,10 +24,6 @@
             >
             <span v-else>Результаты</span>
           </div>
-          <span v-if="data_order.attributes.Result.data">
-            ({{ data_order.attributes.Result.data.length }})</span
-          >
-          <span v-else>(0)</span>
         </button>
         <button
           @click="$emit('openOrderAnalizes')"
@@ -35,9 +31,9 @@
         >
           <div>
             <span v-if="activeAnalizes == data_order.id"
-              >Скрыть ({{data_order.attributes.analizies.data.length}})</span
+              >Скрыть</span
             >
-            <span v-else>Состав заказа ({{data_order.attributes.analizies.data.length}})</span>
+            <span v-else>Состав заказа</span>
           </div>
         </button>
       </div>
@@ -48,7 +44,7 @@
       >
         <div
           v-if="data_order.attributes.Result.data"
-          class="flex flex-col gap-2"
+          class="flex flex-col gap-2 mt-4"
         >
           <button
             v-for="result in data_order.attributes.Result.data"
@@ -56,9 +52,7 @@
             class="flex gap-2 items center"
           >
             <img src="~/assets/icons/pdf.svg" class="w-[20px] h-auto" />
-            <a :href="'https://api.albvt.ru' + result.attributes.url" download target="_blank" class="underline underline-offset-2">{{
-              result.attributes.name
-            }}</a>
+            <a :href="'https://api.albvt.ru' + result.attributes.url" download target="_blank" class="underline underline-offset-2">Скачать</a>
           </button>
         </div>
       </div>
@@ -66,19 +60,22 @@
         class="w-full flex flex-col gap-2"
         v-if="activeAnalizes == data_order.id"
       >
-        <div class="grid grid-cols-[1fr,4fr,1fr] gap-1 w-full text-sm font-semibold">
-          <span>Арт</span>
+        <div class="grid grid-cols-[4fr,1fr] gap-1 w-full text-sm font-semibold mt-4">
+          
           <span>Наименование</span>
           <span class="text-right w-full">Цена</span>
         </div>
-        <div class="w-full flex flex-col gap-2">
+        <div class="w-full flex flex-col gap-2 divide-y divide-[#343434]/30">
           <div
             v-for="item in data_order.attributes.analizies.data"
             :key="item.id"
-            class="grid grid-cols-[1fr,4fr,1fr] gap-1 pb-3 text-sm w-full border-b border-b-[#343434]/30"
+            class="grid grid-cols-[4fr,1fr] gap-1 py-2 text-sm w-full "
           >
-            <span>{{item.attributes.Art}}</span>
-            <span class="line-clamp overflow-hidden" >{{item.attributes.Name}}</span>
+            
+            <div class="overflow-hidden flex flex-col gap-2" >
+              <span class="text-xs text-tem/70">Арт: {{item.attributes.Art}}</span>
+            <span> {{item.attributes.Name}}</span>  
+           </div>
             <span class="text-right w-full">{{item.attributes.Price.toLocaleString('ru-RU')}}₽</span>
           </div>
         </div>

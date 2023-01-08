@@ -1,17 +1,17 @@
 <template>
   <div
-    class="flex flex-col  gap-4 w-full bg-white drop-shadow-md py-3   rounded-[3px] anime cursor-pointer"
+    class="flex flex-col  gap-4 w-full bg-white drop-shadow-sm border-[1px] border-[#E5E8F1] py-3   rounded-md anime cursor-pointer"
   >
     <div @click="openUser" class=" flex gap-2 justify-between px-2">
       <span
         v-if="active == user_data.id"
-        class="flex text-base font-medium    justify-start   items-center w-4/5 rounded-[3px] anime"
+        class="flex text-base font-medium    justify-start   items-center w-4/5 rounded-md anime"
         :class="[active == user_data.id ? '' : 'truncate']"
         >{{ user_data.attributes.FIO_user }}</span
       >
       <span
         v-else
-        class="flex text-base font-medium     justify-start   items-center w-4/5 rounded-[3px] anime"
+        class="flex text-base font-medium     justify-start   items-center w-4/5 rounded-md anime"
         :class="[active == user_data.id ? '' : 'truncate']"
         >{{ FIO_USER }}</span
       >
@@ -21,7 +21,7 @@
           +{{ summUser.toLocaleString('ru-RU') }}₽</span
         >
         <span class="text-xs text-[#343434]/70 font-normal"
-          >{{ dostupnoVivod.length }} заказа</span
+          > Заказы: {{ dostupnoVivod.length }}</span
         >
       </div>
     </div>
@@ -34,7 +34,7 @@
             class="flex justify-between items-center  px-2 py-2"
           >
             <div class="flex flex-col items-start justify-center">
-              <span class="text-sm font-semibold">№ {{ order.id }} </span>
+              <span class="text-sm font-semibold">№ {{ order.attributes.UID }} </span>
               <span class="text-xs font-normal">{{
                 new Date(order.attributes.createdAt).toLocaleString(
                   'ru',

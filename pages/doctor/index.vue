@@ -38,58 +38,30 @@
               Выведено
             </button>
           </div>
-          <div
-            class="w-full border relative border-[#343434]/30 rounded-[3px] bg-white flex justify-between items-center"
-          >
-            <input
-              type="text"
-              class="relative w-full"
-              @input="searchPaciens($event.target.value)"
-              v-bind:value="search"
-              placeholder="Поиск по пациентам"
-            />
-            <img
-              src="/img/icons/search-doctor.svg"
-              alt=""
-              class="w-6 h-6 m-4"
-            />
-            <div
-              v-if="searchResult.length && search.length >= 1"
-              class="absolute  z-[4] top-[58px] left-0 right-0 bg-white drop-shadow-xl rounded-md p-3"
-            >
-              <div class="flex flex-col gap-2">
-                <div v-for="item in searchResult" :key="item.id" class="">
-                  <nuxt-link
-                    :to="'/doctor/pacient/' + item.id"
-                    class="flex py-3 justify-between items-center border-b border-[#343434]/30"
-                  >
-                    <span>
-                      {{ item.attributes.FIO_user }}
-                    </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-4 h-4 text-main"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 4.5l15 15m0 0V8.25m0 11.25H8.25"
-                      />
-                    </svg>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- Пациенты -->
         <Transition name="fade">
-          <section v-if="TABDOCTOR == 1 && getAllUsers.length">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+          <section
+            v-if="TABDOCTOR == 1 && getAllUsers.length"
+            class="flex w-full"
+          >
+            <div class="grid grid-cols-1  gap-2 sm:gap-4 w-full">
+              <div
+                class="w-full border relative border-[#343434]/30 rounded-md bg-white flex justify-between items-center"
+              >
+                <input
+                  type="text"
+                  class="relative w-full"
+                  @input="searchPaciens($event.target.value)"
+                  v-bind:value="search"
+                  placeholder="Поиск по пациентам"
+                />
+                <img
+                  src="/img/icons/search-doctor.svg"
+                  alt=""
+                  class="w-6 h-6 m-4"
+                />
+              </div>
               <a-user-view
                 v-for="user in getAllUsers"
                 :key="user.id"
@@ -98,7 +70,11 @@
               />
             </div>
           </section>
-          <span v-else-if="TABDOCTOR == 1 && !getAllVivod.length" class="text-center text-sm">У вас пока что нет активных пациентов</span>
+          <span
+            v-else-if="TABDOCTOR == 1 && !getAllVivod.length"
+            class="text-center text-sm"
+            >У вас пока что нет активных пациентов</span
+          >
         </Transition>
         <!-- Доступно -->
         <Transition name="fade">
@@ -118,7 +94,11 @@
               />
             </div>
           </section>
-          <span v-else-if="TABDOCTOR == 2 && !getAllDostupno.length" class="text-center text-sm">У вас пока что нет доступных заказов к выводу</span>
+          <span
+            v-else-if="TABDOCTOR == 2 && !getAllDostupno.length"
+            class="text-center text-sm"
+            >У вас пока что нет доступных заказов к выводу</span
+          >
         </Transition>
         <Transition name="fade">
           <section
@@ -136,25 +116,23 @@
                     zakaz: checkZakazies
                   }
                 }"
-                class="bg-main text-white flex flex-col gap-1 justify-center items-center py-3 px-6 rounded-[3px] w-full max-w-[300px]"
+                class="bg-main text-white flex flex-col gap-1 justify-center items-center py-3 px-6 rounded-md w-full max-w-[300px]"
               >
-              <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
+                <b>{{ checkSummVidod.toLocaleString('ru-RU') }}₽</b>
                 Отправить запрос на вывод
-                
               </nuxt-link>
-              
-              <span v-else-if="checkSummVidod < 500 && getAllDostupno.length" class="text-xs w-full text-center text-[#343434]/70"
+
+              <span
+                v-else-if="checkSummVidod < 500 && getAllDostupno.length"
+                class="text-xs w-full text-center text-[#343434]/70"
                 >Минимальная сумма вывода 500₽</span
               >
               <span
                 v-else
-                class="bg-main/50 text-white flex flex-col gap-1 justify-center items-center py-3 px-2 rounded-[3px] w-full"
+                class="bg-main/50 text-white flex flex-col gap-1 justify-center items-center py-3 px-2 rounded-md w-full"
               >
-              <b>
-                  {{ checkSummVidod.toLocaleString('ru-RU') }}₽
-                  </b>
+                <b> {{ checkSummVidod.toLocaleString('ru-RU') }}₽ </b>
                 Отправить запрос на вывод
-                
               </span>
             </div>
           </section>
@@ -173,7 +151,11 @@
               @openVivod="openVivod(item.id)"
             />
           </section>
-          <span v-else-if="TABDOCTOR == 3 && !getAllVivod.length" class="text-center text-sm">У вас пока что не было выводов</span>
+          <span
+            v-else-if="TABDOCTOR == 3 && !getAllVivod.length"
+            class="text-center text-sm"
+            >У вас пока что не было выводов</span
+          >
         </Transition>
       </div>
     </div>
@@ -232,18 +214,23 @@ export default {
       this.searchResult = dataP
       console.log(dataP)
     },
-    handlerTab(id){
+    handlerTab (id) {
       this.tabsActive = id
       this.SET_TAB_DOCTOR(id)
-      console.log(id);
+      console.log(id)
     },
-    ...mapActions(['SET_TAB_DOCTOR']),
+    ...mapActions(['SET_TAB_DOCTOR'])
   },
   computed: {
     ...mapGetters(['TABDOCTOR']),
     getAllUsers () {
-      return this.usersPermissionsUser.data.attributes.Pacientis.data
+      if (this.searchResult.length) {
+        return this.searchResult
+      } else {
+        return this.usersPermissionsUser.data.attributes.Pacientis.data
+      }
     },
+
     getAllDostupno () {
       const x = this.usersPermissionsUser.data.attributes.Pacientis.data
       const x2 = x.filter(item =>

@@ -12,6 +12,7 @@ query DOCTOR_PACIENTS($ID: ID) {
                 data {
                   id
                   attributes {
+                    UID
                     SummOrder
                     Status
                     ZaprosVivod

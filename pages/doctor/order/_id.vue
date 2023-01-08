@@ -24,15 +24,9 @@
         </div>
       </div>
       <span class="w-full text-center">Состав заказа:</span>
-      <table class="w-full divide-y divide-[#343434]/10">
-        <thead class="bg-gray-50 border-b border-[#343434]/10">
+      <table class="w-full divide-y divide-[#343434]/30">
+        <thead class="bg-gray-50 ">
           <tr>
-            <th
-              scope="col"
-              class="px-4 py-3 text-left text-sm align-top font-bold text-gray-600  tracking-wider"
-            >
-              Артикул
-            </th>
             <th
               scope="col"
               class="px-4 py-3 text-left text-sm align-top font-medium text-gray-600  tracking-wider"
@@ -47,17 +41,17 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-[#343434]/30">
           <tr
-            class=" border-b border-[#343434]/20   group  anime cursor-pointer bg-white"
+            class="   group  anime cursor-pointer bg-white"
             v-for="item in order.data.attributes.analizies.data"
             :key="item.id"
           >
-            <td class="px-4 py-4 whitespace-nowrap text-sm font-bold">
-              {{ item.attributes.Art }}
-            </td>
-            <td class="px-4 py-4  text-xs text-gray-600 ">
-              {{ item.attributes.Name }}
+           
+            <td class="px-4 py-4  text-xs text-gray-600 flex flex-col gap-1">
+              <span class="text-tem/70">Арт: {{ item.attributes.Art }}</span>
+              <span>{{ item.attributes.Name }}</span>
+              
             </td>
             <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-600">
               {{ item.attributes.Price }} ₽
