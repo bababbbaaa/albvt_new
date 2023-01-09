@@ -1,18 +1,26 @@
-query DOCTOR_ID_ORDER($ID: ID){
-  order(id: $ID){
-    data{
+query DOCTOR_ID_ORDER($ID: ID) {
+  order(id: $ID) {
+    data {
       id
-      attributes{
+      attributes {
         createdAt
         SummOrder
         UID
-        analizies{
-          data{
-            attributes{
+        analizies {
+          data {
+            attributes {
               Name
-              
               Art
               Price
+              biomaterialies {
+                data {
+                  id
+                  attributes {
+                    Name
+                    Price
+                  }
+                }
+              }
             }
           }
         }

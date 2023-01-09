@@ -1122,7 +1122,7 @@ export default {
 
       await this.$axios
         .post(
-          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-812623612',
+          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-1001839102746',
           {
             text: fullMessege
           }

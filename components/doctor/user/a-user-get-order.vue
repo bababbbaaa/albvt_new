@@ -1,5 +1,7 @@
 <template>
-  <div class="p-2 rounded-md bg-white drop-shadow-sm border-[1px] border-[#E5E8F1]">
+  <div
+    class="p-2 rounded-md bg-white drop-shadow-sm border-[1px] border-[#E5E8F1]"
+  >
     <div class="flex justify-between items-start">
       <div class="flex flex-col gap-1">
         <span class="font-bold text-lg">№ {{ data_order.attributes.UID }}</span>
@@ -19,23 +21,16 @@
           class="bg-main text-white flex gap-2 px-4 py-3 rounded-md text-sm"
         >
           <div>
-            <span v-if="activeResult == data_order.id"
-              >Скрыть</span
-            >
+            <span v-if="activeResult == data_order.id">Скрыть</span>
             <span v-else>Результаты</span>
           </div>
         </button>
-        <button
-          @click="$emit('openOrderAnalizes')"
+        <nuxt-link
+          :to="'/doctor/order/' + data_order.id"
           class="bg-[#343434]/10 text-[#343434] px-4 py-3 rounded-md text-sm"
         >
-          <div>
-            <span v-if="activeAnalizes == data_order.id"
-              >Скрыть</span
-            >
-            <span v-else>Состав заказа</span>
-          </div>
-        </button>
+          <span>Состав заказа</span>
+        </nuxt-link>
       </div>
 
       <div
@@ -52,7 +47,13 @@
             class="flex gap-2 items center"
           >
             <img src="~/assets/icons/pdf.svg" class="w-[20px] h-auto" />
-            <a :href="'https://api.albvt.ru' + result.attributes.url" download target="_blank" class="underline underline-offset-2">Скачать</a>
+            <a
+              :href="'https://api.albvt.ru' + result.attributes.url"
+              download
+              target="_blank"
+              class="underline underline-offset-2"
+              >Скачать</a
+            >
           </button>
         </div>
       </div>
@@ -60,8 +61,9 @@
         class="w-full flex flex-col gap-2"
         v-if="activeAnalizes == data_order.id"
       >
-        <div class="grid grid-cols-[4fr,1fr] gap-1 w-full text-sm font-semibold mt-4">
-          
+        <div
+          class="grid grid-cols-[4fr,1fr] gap-1 w-full text-sm font-semibold mt-4"
+        >
           <span>Наименование</span>
           <span class="text-right w-full">Цена</span>
         </div>
@@ -71,12 +73,15 @@
             :key="item.id"
             class="grid grid-cols-[4fr,1fr] gap-1 py-2 text-sm w-full "
           >
-            
-            <div class="overflow-hidden flex flex-col gap-2" >
-              <span class="text-xs text-tem/70">Арт: {{item.attributes.Art}}</span>
-            <span> {{item.attributes.Name}}</span>  
-           </div>
-            <span class="text-right w-full">{{item.attributes.Price.toLocaleString('ru-RU')}}₽</span>
+            <div class="overflow-hidden flex flex-col gap-2">
+              <span class="text-xs text-tem/70"
+                >Арт: {{ item.attributes.Art }}</span
+              >
+              <span> {{ item.attributes.Name }}</span>
+            </div>
+            <span class="text-right w-full"
+              >{{ item.attributes.Price.toLocaleString('ru-RU') }}₽</span
+            >
           </div>
         </div>
       </div>
@@ -90,7 +95,7 @@ export default {
     data_order: Object,
     stavka: Number,
     activeResult: Number,
-    activeAnalizes: Number,
+    activeAnalizes: Number
   },
   data () {
     return {
@@ -105,8 +110,7 @@ export default {
       openZakaz: false
     }
   },
-  methods: {
-  },
+  methods: {},
   computed: {
     getDate () {
       return new Date(this.data_order.attributes.createdAt).toLocaleString(
@@ -122,7 +126,6 @@ export default {
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
 }
-
 </style>
