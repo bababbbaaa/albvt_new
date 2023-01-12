@@ -1,5 +1,4 @@
 <template>
-  <!-- консультация -->
   <div
     class="container w-full pt-[47px] mt-[47px] sm:mt-0 flex flex-col gap-8 justify-center items-center h-full max-w-[620px] "
     id="scroll-toCart"
@@ -313,10 +312,6 @@
     </div>
 
     <!-- шан 1 -->
-
-    <!-- шан 2 -->
-
-    <!-- шан 3 -->
     <div
       class="flex flex-col justify-center gap-[20px] items-center w-full"
       v-if="step == 1"
@@ -720,7 +715,7 @@
       class="fixed flex justify-center items-center bg-[#343434]/40  w-screen h-screen left-0 top-0  z-[1] backdrop-blur-sm"
     >
       <div
-        class="w-[300px] sm:w-[400px]  h-auto z-[8] bg-white p-4 rounded-md shadow-md flex flex-col gap-4 justify-center items-center fixed"
+        class="w-[300px]  h-auto z-[8] bg-white p-4 rounded-md shadow-md flex flex-col gap-4 justify-center items-center fixed"
       >
         <span class="w-full text-center text-[24px]"
           >Получить консультацию</span
@@ -766,29 +761,27 @@
           >
           об обработке персональных данных
         </span>
-        <span v-if="status == true">Сообщение успешно отправлено</span>
-        <span v-else-if="errors.length">{{ status }}</span>
+
         <button
+          v-if="consult.phone.length == 18 && consult.name.length >= 2"
           @click="getTeelegrammToMain()"
           class="rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full max-w-[250px] flex justify-center items-center py-2 text-sm"
         >
           Отправить
         </button>
-        <svg
-          v-show="status == true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-          class="h-6 w-6"
+        <button
+          v-else
+          class="opacity-50 rounded-md  border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full max-w-[250px] flex justify-center items-center py-2 text-sm"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M5 13l4 4L19 7"
-          ></path>
-        </svg>
+          Отправить
+        </button>
+        <span
+          v-if="status == true"
+          class="flex justify-center text-center text-xs"
+        >
+          Сообщение успешно отправлено</span
+        >
+        <span v-else-if="errors.length">{{ errors }}</span>
         <span @click="modalConsul = !modalConsul" class="cursor-pointer"
           >Закрыть</span
         >
@@ -894,11 +887,40 @@ export default {
     }
   },
   methods: {
+    addConsult () {
+      this.modalConsul = true
+    },
+    async getTeelegrammToMain () {
+      const fullMessege =
+        'Консультация пациента' +
+        '\n' +
+        'Имя: ' +
+        this.consult.name +
+        '\n' +
+        'Телефон: ' +
+        this.consult.phone
+
+      await this.$axios
+        .post(
+          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-1001839102746',
+          {
+            text: fullMessege
+          }
+        )
+        .then(response => {
+          this.status = true
+          this.consult.name = ''
+          this.consult.phone = ''
+          setTimeout(() => (this.modalConsul = false), 1000)
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
     scrollToCart () {
       setTimeout(() => {
         let scrollDiv = document.getElementById('scroll-toCart').offsetTop - 90
         window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-        console.log('scrollToAnaliz +')
       }, 500)
     },
     handlerClinicMap (id) {
@@ -1023,13 +1045,11 @@ export default {
           this.$router.push({
             path: '/cart/thanks',
             query: { id: data.createOrder.data.attributes.UID }
-            
           })
           this.getTeelegrammCart()
           this.AddPacientToDoctor()
           this.RESET_CART()
         })
-      
     },
     AddPacientToDoctor () {
       const allPacientsOnDoctor = this.pacientsForDoctor
@@ -1106,35 +1126,7 @@ export default {
           : totalPriceInCartReduce
       this.priceNotDiscounted = totalPriceInCartReduce
     },
-    addConsult () {
-      console.log('consult')
-      this.modalConsul = true
-    },
-    async getTeelegrammToMain () {
-      const fullMessege =
-        'Консультация пациента' +
-        '\n' +
-        'Имя: ' +
-        this.consult.name +
-        '\n' +
-        'Телефон: ' +
-        this.consult.phone
 
-      await this.$axios
-        .post(
-          'https://api.telegram.org/bot5927311160:AAHoYNDPHxqWE4y7qqOyIiyY3LTHybfyeJI/sendMessage?chat_id=-1001839102746',
-          {
-            text: fullMessege
-          }
-        )
-        .then(response => {
-          this.succesTG = true
-          this.status = true
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
     async getTeelegrammCart () {
       const bioMateriales = []
       this.bioMaterialsComplete.forEach(x => {

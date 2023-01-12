@@ -45,7 +45,7 @@
             v-if="TABDOCTOR == 1 && getAllUsers.length"
             class="flex w-full"
           >
-            <div class="grid grid-cols-1  gap-2 sm:gap-4 w-full">
+            <div class="grid grid-cols-1  gap-6  w-full">
               <div
                 class="w-full border relative border-[#343434]/30 rounded-md bg-white flex justify-between items-center"
               >
@@ -62,12 +62,15 @@
                   class="w-6 h-6 m-4"
                 />
               </div>
-              <a-user-view
+              <div class="grid grid-cols-1  gap-2 sm:gap-4  w-full">
+                <a-user-view
                 v-for="user in getAllUsers"
                 :key="user.id"
                 :user_data="user"
                 :type="'allPacient'"
               />
+              </div>
+              
             </div>
           </section>
           <span

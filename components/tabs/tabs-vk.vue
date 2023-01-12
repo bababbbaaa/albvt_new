@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[47px] w-full ">
+  <div class="pt-4 w-full ">
     <ul class='grid grid-cols-2 gap-[10px] border-[#343434]/30 border-b-[1px]'>
       <li v-for='(tab, index) in tabs'
         :key='index'

@@ -11,9 +11,10 @@
           class="sm:hidden fixed bg-[#343434]/40  w-screen h-screen left-0 top-0 pt-[13px] z-[1] "
           @click="mobSearchClose()"
         ></div>
+        <!-- @input="search($event.target.value)" -->
+        <!-- v-bind:value="searchInput" -->
         <input
-          @input="search($event.target.value)"
-          v-bind:value="searchInput"
+          v-model="searchInput"
           type="text"
           id="default-search"
           class="block w-full pr-20 rounded-md bg-white p-3    focus:outline-none text-[#979797] z-[4] relative"
@@ -47,11 +48,6 @@
           class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[8fr,3fr] sm:grid-cols-[10fr,4fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
         >
           <div class="flex flex-col gap-1">
-            <!-- item.attributes.sub_cat.data.attributes.CatIdURL +
-                  '/' +
-                  item.attributes.sub_cat.data.attributes.URL +
-                  '/' +
-                  item.id -->
             <nuxt-link
               v-if="item.attributes.Complecs == true"
               :to="'/all-complecs/category/id/' + item.id"
@@ -59,7 +55,6 @@
               :title="item.attributes.Name"
               >{{ item.attributes.Name }}</nuxt-link
             >
-
             <nuxt-link
               v-else
               :to="'/all-analyzes/category/id/' + item.id"
@@ -174,7 +169,13 @@ export default {
   computed: {
     ...mapGetters(['CART', 'CART_IDS']),
     sortedArray () {
-      return this.searchResults.splice(0, 20)
+      return this.searchResults
+    }
+  },
+  watch: {
+    searchInput () {
+      this.search(this.searchInput)
+      console.log('watch', this.searchInput)
     }
   },
   methods: {
@@ -184,15 +185,14 @@ export default {
       this.$emit('mobSearchClose')
     },
     closeSearch () {
-      this.searchInputFake = this.searchInputFake.replace(
-        this.searchInputFake,
-        ''
-      )
+      this.searchInputFake = ''
+
       this.mobSearchClose()
       this.showSearch = false
     },
     async search (value) {
-      this.searchInput = value
+      console.log('search +', value)
+      // this.searchInput = value
       this.searchInputFake = value
       this.showSearch = true
       this.loadSearch = true
@@ -200,10 +200,10 @@ export default {
       const string = value.toString()
       const lowerCase = string.toLowerCase()
       this.autoKeyboardLang(lowerCase)
-
       try {
         const res = await this.$apollo.query({
           query: SEARCH_ANALIZES,
+          fetchPolicy: 'network-only',
           variables: {
             S_VALUE: lowerCase
           }
@@ -212,10 +212,12 @@ export default {
           this.loading = false
           this.loadSearch = false
           const results = res.data.search.analizies.data
+          console.log('search + ru', value)
           this.searchResults = results
           if (results.length == 0) {
             this.loading = true
             this.searchToEn(value)
+            console.log('search + en', value)
           }
         }
       } catch (err) {
@@ -228,6 +230,7 @@ export default {
       try {
         const res = await this.$apollo.query({
           query: SEARCH_ANALIZES,
+          fetchPolicy: 'network-only',
           variables: {
             S_VALUE: this.EnSearch
           }

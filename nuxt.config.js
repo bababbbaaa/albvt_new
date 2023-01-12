@@ -68,17 +68,18 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
+        // httpEndpoint: 'http://localhost:1337/graphql'
         httpEndpoint: 'https://api.albvt.ru/graphql'
       }
     },
     defaultOptions: {
-      $query: {
-        fetchPolicy: 'cache-and-network'
-      }
+      // $query: {
+      //   fetchPolicy: 'cache-and-network'
+      // }
     }
   },
   axios: {
-    baseURL: 'https://albvt.ru'
+    baseURL: 'https://api.albvt.ru'
   },
   modules: [
     '@nuxtjs/axios',

@@ -40,6 +40,13 @@ query DOCTOR_PACIENTS($ID: ID) {
               UID
               Done
               createdAt
+              oplataCheck{
+                data{
+                  attributes{
+                    url
+                  }
+                }
+              }
               zakazies {
                 data {
                   id

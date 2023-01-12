@@ -1,10 +1,30 @@
 <template>
   <div class="container mt-[47px] sm:mt-0">
     <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4">
+      <!-- <span class="w-full text-center text-2xl pt-6">Акции</span> -->
+      <client-only placeholder="Загрузка...">
+        <agile :options="allLK" class="mt-6" id="lkClient">
+          <div class="slide " v-for="(item, i) in sliders.data" :key="i">
+            <nuxt-link
+              :to="item.attributes.Link"
+              class="flex flex-col w-full gap-2"
+            >
+              <img
+                :src="
+                  `https://api.albvt.ru` +
+                    item.attributes.Photo.data.attributes.url
+                "
+                alt=""
+                class="rounded-md"
+              />
+            </nuxt-link>
+          </div>
+        </agile>
+      </client-only>
       <tabs-vk>
         <tab-vk title="Мои заказы">
           <div
-            class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-[47px] gap-[20px]"
+            class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]"
           >
             <lk-user-info
               @handleReload="handleReload"
@@ -19,7 +39,7 @@
               class="grid grid-cols-1 gap-[20px]"
               v-if="usersPermissionsUser.data.attributes.zakazies.data"
             >
-              <span class="text-xl text-xl font-medium">Мои заказы</span>
+              <span class="text-xl  font-medium">Мои заказы</span>
               <lk-zakaz-desc
                 v-for="order in usersPermissionsUser.data.attributes.zakazies
                   .data"
@@ -37,7 +57,7 @@
 
         <tab-vk title="Аккаунт">
           <div
-            class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-[47px] gap-[20px]"
+            class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]"
           >
             <lk-user-info
               @handleReload="handleReload"
@@ -108,29 +128,6 @@
           </div>
         </tab-vk>
       </tabs-vk>
-      <span class="w-full text-center text-2xl">Акции</span>
-      <client-only placeholder="Загрузка...">
-        <agile :options="allLK" class="" id="lkClient">
-          <div class="slide " v-for="(item, i) in sliders.data" :key="i">
-            <div class="flex flex-col w-full gap-2">
-              <img
-                :src="
-                  `https://api.albvt.ru` +
-                    item.attributes.Photo.data.attributes.url
-                "
-                alt=""
-                class="rounded-md"
-              />
-              <nuxt-link
-                :to="item.attributes.Link"
-                class="w-full sm:max-w-[220px] cursor-pointer border-[1px] border-tem text-tem font-medium text-sm rounded-full flex justify-center items-center py-3 "
-              >
-                {{ item.attributes.Name }}
-              </nuxt-link>
-            </div>
-          </div>
-        </agile>
-      </client-only>
     </div>
     <div
       v-if="pdfView == true"
@@ -314,7 +311,7 @@ export default {
   width: 100%;
 }
 #lkClient .agile__actions {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 #lkClient .agile__nav-button {
   background: transparent;
@@ -351,7 +348,7 @@ export default {
 
 @media only screen and (max-width: 600px) {
   #lkClient .slide {
-    height: 300px !important;
+    height: 200px !important;
   }
 }
 
@@ -359,7 +356,7 @@ export default {
   align-items: center;
   color: #fff;
   display: flex;
-  height: 660px;
+  height: 340px;
   justify-content: center;
 }
 .cartAll {

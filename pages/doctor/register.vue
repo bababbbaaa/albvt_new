@@ -256,7 +256,7 @@
               >
               <span v-else>{{ speczialnostsSelectName }}</span>
               <div
-                class=" p-3 bg-white flex flex-col gap-3 absolute  w-[300px] h-[300px] overflow-y-auto top-2 left-0 z-[10] rounded-md drop-shadow-xl"
+                class="bg-white flex flex-col  absolute  w-[300px] h-[300px] overflow-y-auto top-2 left-0 z-[10] rounded-md drop-shadow-xl"
                 v-if="speczialnostsSelectView"
               >
                 <div
@@ -265,7 +265,9 @@
                   @click="speczialnostsSelectHandler(item)"
                   class="bg-white text-sm cursor-pointer text-[#343434]"
                 >
-                  {{ item.attributes.Name }}
+                 <div class="bg-white  p-2 text-xs cursor-pointer text-[#343434] hover:bg-[#343434]/10">
+                   {{ item.attributes.Name }}
+                 </div> 
                 </div>
               </div>
               <svg

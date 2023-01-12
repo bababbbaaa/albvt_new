@@ -28,7 +28,6 @@
           >{{ data_vivod.attributes.zakazies.data.length }} заказа</span
         >
       </div>
-      
     </div>
     <Transition name="fade">
       <div
@@ -89,6 +88,7 @@
         <Transition name="fade">
           <span
             v-if="data_vivod.attributes.Done == true"
+            @click="downloadFile"
             class="cursor-pointer w-full flex items-center justify-center gap-1 text-sm mt-2 py-2 rounded bg-main text-white"
             ><img src="~/assets/icons/download.svg" alt="" /> Скачать чек</span
           >
@@ -100,38 +100,41 @@
         </Transition>
       </div>
     </Transition>
-    <button @click="openVivod" class="w-full bg-[#FAFAFA] py-1 cursor-pointer flex items-center justify-center">
-        <svg
-          v-if="active == null"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6 text-tem/70"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-          />
-        </svg>
-        <svg
-          v-else
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6 rotate-180 text-tem/70"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-          />
-        </svg>
-      </button>
+    <button
+      @click="openVivod"
+      class="w-full bg-[#FAFAFA] py-1 cursor-pointer flex items-center justify-center"
+    >
+      <svg
+        v-if="active == data_vivod.id"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 text-tem/70 rotate-180"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+        />
+      </svg>
+      <svg
+        v-else
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6  text-tem/70"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+        />
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -151,6 +154,24 @@ export default {
     }
   },
   methods: {
+    downloadFile () {
+      const urlCheck = this.data_vivod.attributes.oplataCheck.data[0].attributes
+        .url
+      this.$axios({
+        url: urlCheck,
+        method: 'GET',
+        responseType: 'blob'
+      }).then(response => {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]))
+        var fURL = document.createElement('a')
+
+        fURL.href = fileURL
+        fURL.setAttribute('download', 'file.pdf')
+        document.body.appendChild(fURL)
+
+        fURL.click()
+      })
+    },
     openVivod () {
       this.$emit('openVivod')
     }

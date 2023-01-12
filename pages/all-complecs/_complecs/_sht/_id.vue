@@ -3,7 +3,26 @@
     <div class="w-full sm:w-2/3  order-2 sm:order-1 gap-[20px]">
       <div class="flex flex-row items-start gap-[8px] ">
         <div class="flex flex-col gap-[8px] " v-if="analizy">
-          <h1 class="font-medium pb-[8px] text-sm  block overflow-hidden">
+          <h1 class="font-medium pb-[8px] text-sm  overflow-hidden flex items-center gap-2">
+            <button
+              @click="$router.back()"
+              class=" sm:flex justify-center items-center hidden "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-main"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
             {{ analizy.attributes.sub_cat.data.attributes.Name }}:
           </h1>
           <h3 class="font-medium pb-4 text-2xl  ">
