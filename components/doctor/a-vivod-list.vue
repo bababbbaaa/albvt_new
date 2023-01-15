@@ -65,7 +65,7 @@
               >
               <nuxt-link
                 class="text-xs flex gap-1 items-center justify-end"
-                :to="`/doctor/order/` + item.id"
+                :to="`/doctor/vivod/order/` + item.id"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

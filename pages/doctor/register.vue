@@ -28,7 +28,7 @@
                   >Email*</label
                 >
                 <input
-                  v-model="dataDoctor.email"
+                  v-model.trim="dataDoctor.email"
                   class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
                 />
               </div>
@@ -412,7 +412,7 @@
               >
               <input
                 placeholder=""
-                v-model="dataDoctor.Family"
+                v-model.trim="dataDoctor.Family"
                 class="block w-full border-0 p-0 focus:outline-none sm:text-sm"
               />
             </div>

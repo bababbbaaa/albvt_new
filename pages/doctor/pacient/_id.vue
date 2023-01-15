@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#F9F9F9]">
-    <div class="pt-2 container flex flex-col gap-8" v-if="usersPermissionsUser">
+    <div class="pt-2 container flex flex-col gap-4" v-if="usersPermissionsUser">
       <div class="w-full flex items-center justify-between ">
         <button
           @click="$router.back()"
@@ -31,28 +31,30 @@
         </div>
         <div class="flex flex-col gap-1">
           <span class="text-tem/50 text-xs">Дата рождения</span>
-          <span>{{  usersPermissionsUser.data.attributes.DataRozgdeniya }}</span>
+          <span>{{ usersPermissionsUser.data.attributes.DataRozgdeniya }}</span>
           <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
         </div>
       </div>
 
       <!-- -------- -->
 
-
-      <div class="flex flex-col gap-1">
-        <div class="w-full">
-          <b>Заказы:</b>
-          {{ usersPermissionsUser.data.attributes.zakazies.data.length }}
-          шт
+      <div class="flex flex-col gap-4">
+        <div class="p-2 flex justify-between rounded-md bg-white drop-shadow-sm border-[1px] border-[#E5E8F1]">
+          <div class="flex justify-between w-full">
+            <div class="">
+            <b>Заказы:</b>
+            {{ usersPermissionsUser.data.attributes.zakazies.data.length }}
+            шт
+          </div>
+          <span class=""><b>Сумма:</b> {{ totalPagePrice.toLocaleString('ru-RU') }} ₽</span>
+          </div>
+          
         </div>
+        <!-- <span class="font-semibold text-2xl">Заказы</span> -->
         <a-user-list-orders
           :stavka="this.$auth.user.Stavka"
           :data_orders="usersPermissionsUser.data.attributes.zakazies.data"
         />
-      </div>
-      <div class="flex justify-between items-center my-6">
-        <span>Сумма всех заказов:</span>
-        <span class=""> {{ totalPagePrice }} ₽</span>
       </div>
     </div>
     <div v-else class="w-full h-full flex bg-white justify-center items-center">

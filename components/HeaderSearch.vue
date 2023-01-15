@@ -14,10 +14,12 @@
         <!-- @input="search($event.target.value)" -->
         <!-- v-bind:value="searchInput" -->
         <input
-          v-model="searchInput"
+          @input="search($event.target.value)"
+          v-bind:value="searchInput"
           type="text"
           id="default-search"
-          class="block w-full pr-20 rounded-md bg-white p-3    focus:outline-none text-[#979797] z-[4] relative"
+          class="block w-full pr-20 rounded-md
+        bg-white p-3 focus:outline-none text-[#979797] z-[4] relative"
           placeholder="Поиск анализов"
           autocomplete="off"
         />
@@ -175,7 +177,6 @@ export default {
   watch: {
     searchInput () {
       this.search(this.searchInput)
-      console.log('watch', this.searchInput)
     }
   },
   methods: {
@@ -192,7 +193,7 @@ export default {
     },
     async search (value) {
       console.log('search +', value)
-      // this.searchInput = value
+      this.searchInput = value
       this.searchInputFake = value
       this.showSearch = true
       this.loadSearch = true

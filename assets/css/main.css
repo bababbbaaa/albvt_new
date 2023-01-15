@@ -81,6 +81,13 @@ input {
 
 
 
+#tabs-doctor a.nuxt-link-active {
+  @apply border-b-main border-b-2 text-main;
+}
+#tabs-doctor a {
+  @apply border-b-tem/20 border-b-2 text-tem;
+}
+
 a.nuxt-link-active {
   color: rgb(110 154 239 / 1);
 }

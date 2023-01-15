@@ -4,14 +4,28 @@
   >
     <div class="flex justify-between items-start">
       <div class="flex flex-col gap-1">
-        <span class="font-bold text-lg">№ {{ data_order.attributes.UID }}</span>
-        <span class="text-[#343434]/70">{{ getDate }}</span>
+        <span class="font-bold text-base"
+          >№ {{ data_order.attributes.UID }}</span
+        >
+        <span class=" text-xs text-tem/50">{{ getDate }}</span>
       </div>
-      <div class="flex flex-col gap-1">
-        <span class="font-bold text-lg text-main"
+      <div class="flex flex-col gap-1 items-end">
+        <span class="font-bold text-base text-main"
           >{{ data_order.attributes.SummOrder.toLocaleString('ru-RU') }}₽</span
         >
-        <span class="text-right">{{ $auth.user.Stavka }}%</span>
+        <!-- <span class="text-right text-xs text-tem/50"
+          >{{ $auth.user.Stavka }}%</span
+        > -->
+        <span
+          class=" text-xs text-[#2CC746]"
+          v-if="data_order.attributes.Status == true"
+          >Оплачен</span
+        >
+        <span
+          class=" text-xs text-[#E72A2A]"
+          v-else-if="data_order.attributes.Status == false"
+          >Не оплачен</span
+        >
       </div>
     </div>
     <div class="flex flex-col gap-2 mt-2">
@@ -26,7 +40,7 @@
           </div>
         </button>
         <nuxt-link
-          :to="'/doctor/order/' + data_order.id"
+          :to="'/doctor/pacient/order/' + data_order.id"
           class="bg-[#343434]/10 text-[#343434] px-4 py-3 rounded-md text-sm"
         >
           <span>Состав заказа</span>

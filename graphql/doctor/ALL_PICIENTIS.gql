@@ -1,0 +1,21 @@
+query ALL_PICIENTIS($ID: ID) {
+  usersPermissionsUser(id: $ID) {
+    data {
+      attributes {
+        Pacientis(pagination: { pageSize: 100}) {
+          data {
+            id
+            attributes {
+              FIO_user
+              zakazies {
+                data {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

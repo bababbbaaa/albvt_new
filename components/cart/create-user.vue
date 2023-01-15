@@ -15,7 +15,7 @@
                 >Email*</label
               >
               <input
-                v-model="formCreate.email"
+                v-model.trim="formCreate.email"
                 class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
               />
             </div>
@@ -197,7 +197,7 @@
             >Фамилия*</label
           >
           <input
-            v-model="formCreate.family"
+            v-model.trim="formCreate.family"
             class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
           />
         </div>
@@ -216,7 +216,7 @@
             >Имя*</label
           >
           <input
-            v-model="formCreate.name"
+            v-model.trim="formCreate.name"
             class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
           />
         </div>
@@ -235,7 +235,7 @@
             >Отчество</label
           >
           <input
-            v-model="formCreate.otchestvo"
+            v-model.trim="formCreate.otchestvo"
             class="block w-full border-0 p-0  focus:outline-none  sm:text-sm"
           />
         </div>
