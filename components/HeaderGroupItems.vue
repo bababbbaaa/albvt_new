@@ -85,13 +85,13 @@ export default {
         {
           img: '/img/icons/Group950.svg',
           name: 'Анализы по группам',
-          link: '/all-analyzes/gematologicheskie-issledovaniya/2849',
+          link: '/all-analyzes',
           mobile: '/all-analyzes'
         },
         {
           img: '/img/icons/Group951.svg',
           name: 'Комплексы анализов',
-          link: '/all-complecs/1-dlya-zhenshhin/2797',
+          link: '/all-complecs',
           mobile: '/all-complecs'
         },
         {

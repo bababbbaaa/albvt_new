@@ -25,6 +25,7 @@ query PRODUCTS_CAT($ID_CAT: String) {
               Name
               Price
               Art
+              Active
             }
           }
         }

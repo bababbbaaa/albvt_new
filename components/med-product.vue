@@ -104,7 +104,26 @@
       </svg>
       <span class="text-xs">В корзине</span>
     </div>
-
+    <div
+      v-else-if="item.attributes.Active == false || getConplectsActive == 1"
+      class="w-full flex items-center justify-center gap-1"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-danger"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+        />
+      </svg>
+      <span class=" text-center text-danger text-sm">Временно недоступен</span>
+    </div>
     <button
       @click="addToCart(item)"
       v-else
@@ -145,6 +164,7 @@
 
       <span class="hidden xl:block"> В корзину</span>
     </button>
+    
   </div>
 </template>
 
@@ -156,19 +176,36 @@ export default {
     item: Object
   },
   computed: {
-    ...mapGetters(['CART', 'CART_IDS'])
+    ...mapGetters(['CART', 'CART_IDS']),
+    getConplectsActive () {
+      if (this.item.attributes.Complecs == true) {
+        const data = this.item.attributes.complecsAnaliz.data.map(
+          x => x.attributes.Active
+        )
+        if (data.includes(false)) {
+          return 1
+        } else {
+          return 2
+        }
+      }
+    }
   },
   methods: {
     addToCart (item) {
       this.$emit('addToCart', item)
     },
     linkMed (item) {
-      if (this.$route.fullPath == '/all-analyzes' || this.$route.fullPath == '/all-complecs' ) {
+      if (
+        this.$route.fullPath == '/all-analyzes' ||
+        this.$route.fullPath == '/all-complecs'
+      ) {
         this.$router
           .replace(this.$route.fullPath + '/populate/id/' + item.id)
           .catch(() => {})
       } else {
-        this.$router.replace(this.$route.fullPath + '/' + item.id).catch(() => {})
+        this.$router
+          .replace(this.$route.fullPath + '/' + item.id)
+          .catch(() => {})
       }
     }
   }

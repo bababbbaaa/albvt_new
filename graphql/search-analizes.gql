@@ -30,6 +30,17 @@ query SEARCH_ANALIZES($S_VALUE : String!) {
             }
           }
         }
+        complecsAnaliz(pagination: { limit: 100 }) {
+          data {
+            id
+            attributes {
+              Name
+              Price
+              Art
+              Active
+            }
+          }
+        }
         biomaterialies{
           data{
             id

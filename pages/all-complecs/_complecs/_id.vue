@@ -6,7 +6,7 @@
         ref="elScroll2"
       >
         <h1
-          v-if="analizies"
+          v-if="analizies && subCats"
           class="text-xl sm:text-2xl font-medium flex gap-2 items-center scroll-to"
         >
           {{ subCats.data[0].attributes.Name }}

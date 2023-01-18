@@ -36,7 +36,6 @@
       <span class="text-[20px] text-main">
         {{ getTotalPrice.toLocaleString('ru-RU') }} ₽</span
       >
-     
 
       <span
         class="text-[#838383] text-[12px]"
@@ -73,7 +72,10 @@
         /></svg
       ><span class="text-[12px]">В корзине</span>
     </div>
-    <div  v-else-if="data.attributes.Active == false" class="w-full flex items-center justify-center gap-1">
+    <div
+      v-else-if="data.attributes.Active == false || getConplectsActive == 1"
+      class="w-full flex items-center justify-center gap-1"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6 text-danger"
@@ -111,16 +113,30 @@ export default {
   methods: {
     addToCart () {
       this.$emit('addToCart', this.data)
-    },
-    
+    }
   },
   computed: {
     ...mapGetters(['CART', 'CART_IDS']),
+    getConplectsActive () {
+      if (this.data.attributes.Complecs == true) {
+        const data = this.data.attributes.complecsAnaliz.data.map(
+          x => x.attributes.Active
+        )
+        if (data.includes(false)) {
+          return 1
+        } else {
+          return 2
+        }
+      }
+    },
     getTotalPrice () {
-      const priceAnaliz =  this.data.attributes.Price
-      let priceBiomateriales = this.data.attributes.biomaterialies.data.reduce((prev, item) => {
-        return prev + parseInt(item.attributes.Price)
-      }, priceAnaliz)
+      const priceAnaliz = this.data.attributes.Price
+      let priceBiomateriales = this.data.attributes.biomaterialies.data.reduce(
+        (prev, item) => {
+          return prev + parseInt(item.attributes.Price)
+        },
+        priceAnaliz
+      )
 
       return priceBiomateriales
     }

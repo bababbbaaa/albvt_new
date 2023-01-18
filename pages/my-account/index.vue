@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-[47px] sm:mt-0">
-    <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4">
+    <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4" id="start-lk">
       <!-- <span class="w-full text-center text-2xl pt-6">Акции</span> -->
       <client-only placeholder="Загрузка...">
         <agile :options="allLK" class="mt-6" id="lkClient">
@@ -23,9 +23,7 @@
       </client-only>
       <tabs-vk>
         <tab-vk title="Мои заказы">
-          <div
-            class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]"
-          >
+          <div class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]">
             <lk-user-info
               @handleReload="handleReload"
               @handleLogout="handleLogout"
@@ -56,9 +54,7 @@
         </tab-vk>
 
         <tab-vk title="Аккаунт">
-          <div
-            class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]"
-          >
+          <div class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]">
             <lk-user-info
               @handleReload="handleReload"
               @handleLogout="handleLogout"
@@ -226,7 +222,15 @@ export default {
       }
     }
   },
+  mounted() {
 
+      setTimeout(() => {
+        let scrollDiv =
+          document.getElementById('start-lk').offsetTop - 110
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+        console.log('scrollToAnaliz +')
+      }, 500)
+  },
   methods: {
     async updateUserMe () {
       const phone = this.dataUserUpdate.phone
@@ -268,7 +272,7 @@ export default {
         ':' +
         invIDValue +
         ':' +
-        'DEV0AkTIRfqbepb4v404'
+        'K60wo3AlUcHmHmqi9P6P'
       ).toString()
 
       var result = CryptoJS.MD5(value)

@@ -36,6 +36,7 @@ query ANALIZ_ID ($ID: ID){
               Name
               Price
               Art
+              Active
             }
           }
         }

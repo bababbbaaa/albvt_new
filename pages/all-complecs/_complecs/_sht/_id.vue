@@ -3,7 +3,9 @@
     <div class="w-full sm:w-2/3  order-2 sm:order-1 gap-[20px]">
       <div class="flex flex-row items-start gap-[8px] ">
         <div class="flex flex-col gap-[8px] " v-if="analizy">
-          <h1 class="font-medium pb-[8px] text-sm  overflow-hidden flex items-center gap-2">
+          <h1
+            class="font-medium pb-[8px] text-sm  overflow-hidden flex items-center gap-2"
+          >
             <button
               @click="$router.back()"
               class=" sm:flex justify-center items-center hidden "
@@ -138,18 +140,10 @@ export default {
   mounted () {
     this.GET_BIOMATERIALS_FROM_API()
     if (window.screen.width <= 600) {
-      console.log('da')
       this.scrollToAnaliz()
-    } else {
-      console.log('no')
     }
-    // this.$router.replace({ query: null })
   },
-  // updated () {
-  //   if (window.screen.width <= 600) {
-  //     this.scrollToAnaliz()
-  //   }
-  // },
+
   watch: {
     $route () {
       if (window.screen.width <= 600) {
