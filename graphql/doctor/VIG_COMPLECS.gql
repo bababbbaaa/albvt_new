@@ -1,0 +1,19 @@
+query VIG_COMPLECS {
+  vigComplecs {
+    data {
+      id
+      attributes {
+        analizy {
+          data {
+            attributes {
+              Name
+              Art
+            }
+          }
+        }
+        Link
+        Price
+      }
+    }
+  }
+}

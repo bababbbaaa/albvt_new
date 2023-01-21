@@ -1,0 +1,13 @@
+query PROMOTIONS {
+  promotions{
+    data{
+      id
+      attributes{
+        Name
+        OldStavka
+        NewStavka
+        Period
+      }
+    }
+  }
+}

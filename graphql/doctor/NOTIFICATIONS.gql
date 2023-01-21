@@ -1,7 +1,7 @@
 query NOTIFICATIONS {
   notifications {
     data {
-        id
+      id
       attributes {
         Text
         createdAt

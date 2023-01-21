@@ -82,10 +82,10 @@ input {
 
 
 #tabs-doctor a.nuxt-link-active {
-  @apply border-b-main border-b-2 text-main;
+  @apply  text-main;
 }
 #tabs-doctor a {
-  @apply border-b-tem/20 border-b-2 text-tem;
+  @apply  text-tem;
 }
 
 a.nuxt-link-active {

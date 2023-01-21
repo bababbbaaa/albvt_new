@@ -1263,6 +1263,9 @@ export default {
       } else {
         this.confirmEmail = false
       }
+    },
+    sityIdActive(){
+      this.activeClinicInfo = null
     }
   }
 }
