@@ -1,5 +1,5 @@
 query VIG_ANALIZ {
-  vigAnalizs {
+  vigAnalizs(pagination: {pageSize: 100}) {
     data {
       id
       attributes {

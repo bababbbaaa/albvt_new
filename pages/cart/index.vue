@@ -1027,7 +1027,8 @@ export default {
         UID: UID3,
         analizies: allAnalizies,
         user: this.$auth.user.id,
-        office: this.selectClinicId
+        office: this.selectClinicId,
+        promo: this.promocode.data[0].attributes.Promo
       }
 
       this.$apollo
@@ -1038,7 +1039,8 @@ export default {
             ANALIZES: order.analizies,
             USER: order.user,
             SUMM: order.SummOrder,
-            OFFICE: order.office
+            OFFICE: order.office,
+            PROMO: order.promo
           }
         })
         .then(({ data }) => {

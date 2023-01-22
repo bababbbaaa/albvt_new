@@ -43,7 +43,7 @@
         v-show="searchInputFake.length >= 1 && showSearch == true"
         class="absolute top-[4rem] left-0 flex flex-col bg-white z-[4] pt-4 shadow-md sm:px-0 [px-16px] sm:rounded-[5px] w-full overflow-y-auto sm:h-auto  max-h-[320px]"
       >
-        <search-item v-for="item in sortedArray" :key="item.id" :item="item" />
+        <search-item v-for="item in sortedArray" :key="item.id" :item="item" @productInCart="productInCart" @closeSearch="closeSearch"/>
         <span
           v-if="loading == true"
           class=" w-full flex justify-center items-center py-4 text-[#343434] hover:bg-[#CBCBCB] anime bg-[#E2E2E2]"
@@ -83,13 +83,13 @@ export default {
   computed: {
     ...mapGetters(['CART', 'CART_IDS']),
     sortedArray () {
-      const dataFilter = []
-      const testData = this.searchResults
-      this.searchResults.forEach(x => {
-        if (x.attributes.Name.includes(this.searchInput)) {
-          dataFilter.push(x)
-        }
-      })
+      // const dataFilter = []
+      // const testData = this.searchResults
+      // this.searchResults.forEach(x => {
+      //   if (x.attributes.Name.includes(this.searchInput)) {
+      //     dataFilter.push(x)
+      //   }
+      // })
       return this.searchResults
     }
   },
@@ -111,7 +111,6 @@ export default {
       this.showSearch = false
     },
     async search (value) {
-      console.log('search +', value)
       this.searchInput = value
       this.searchInputFake = value
       this.showSearch = true
@@ -132,12 +131,10 @@ export default {
           this.loading = false
           this.loadSearch = false
           const results = res.data.search.analizies.data
-
+          
           this.searchResults = results
-          if (results.length == 0) {
-            this.loading = true
-            this.searchToEn(value)
-          }
+          // this.searchToEn(value)
+          
         }
       } catch (err) {
         this.searchToEn()

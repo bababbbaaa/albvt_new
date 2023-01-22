@@ -36,14 +36,14 @@
         </li>
         <li class="group">
           <nuxt-link
-            to="/all-analyzes/gematologicheskie-issledovaniya/2849"
+            to="/all-analyzes"
             class="!text-white hover:underline hover:underline-offset-2 anime"
             >Анализы</nuxt-link
           >
         </li>
         <li class="group">
           <nuxt-link
-            to="/all-complecs/1-dlya-zhenshhin/2797"
+            to="/all-complecs"
             class="!text-white hover:underline hover:underline-offset-2 anime"
             >Комплексы анализов</nuxt-link
           >

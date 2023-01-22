@@ -9,12 +9,13 @@
             :data="item"
           />
         </section>
+        
+        <section v-if="promotions && promotions.data.length" class="w-full gap-4 flex flex-col">
         <span class="w-full text-center text-2xl font-semibold">Акции</span>
-        <section v-if="promotions">
           <client-only placeholder="Загрузка...">
             <agile
               :options="slidersDoctor"
-              class="flex flex-col items-center justify-center  rounded-md  gap-4"
+              class="flex flex-col items-center justify-center  rounded-md  gap-4 dot-change"
             >
               <div class="slide" v-for="item in promotions.data" :key="item.id">
                 <a-akchita :data="item" />
@@ -25,20 +26,20 @@
         <span class="w-full text-center text-2xl font-semibold"
           >Выгодные предложения</span
         >
-        <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-10">
+        <div class="grid grid-cols-1  sm:gap-10">
           <section v-if="vigComplecs" class="flex flex-col gap-2">
             <span class="text-sm sm:text-base text-tem/70">Комплексные исследования:</span>
             <client-only placeholder="Загрузка...">
               <agile
                 :options="slidersDoctor"
-                class="flex flex-col items-center justify-center  rounded-md drop-shadow-lg gap-4"
+                class="flex flex-col items-center justify-center  rounded-md drop-shadow-lg gap-4 dot-change"
               >
                 <div
-                  class="slide"
+                  class="slide flex gap-4"
                   v-for="item in vigComplecs.data"
                   :key="item.id"
                 >
-                  <a-vigodnie-complecs :data="item" />
+                  <a-vigodnie-complecs :data="item" class=""/>
                 </div>
               </agile>
             </client-only>
@@ -48,7 +49,8 @@
             <client-only placeholder="Загрузка...">
               <agile
                 :options="slidersDoctor"
-                class="flex flex-col items-center justify-center  rounded-md drop-shadow-lg gap-4"
+                class="flex flex-col items-center justify-center  rounded-md drop-shadow-lg gap-4 dot-change"
+                
               >
                 <div
                   class="slide"
@@ -106,7 +108,7 @@ export default {
     return {
       modal: false,
       slidersDoctor: {
-        navButtons: false,
+        navButtons: true,
         dots: true,
         centerMode: true,
         pauseOnHover: true,
@@ -115,6 +117,12 @@ export default {
             breakpoint: 320,
             settings: {
               slidesToShow: 1
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 3
             }
           }
         ]
@@ -133,4 +141,31 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.dot-change .agile__dot {
+  margin: 0 6px;
+}
+
+.agile__nav-button {
+  width: 60px;
+}
+
+ .agile__dot button {
+  background-color: rgb(187, 187, 187);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.3s;
+  width: 10px;
+}
+ .agile__dot--current button,
+ .agile__dot:hover button {
+  background-color: #6E9AEF;
+}
+</style>

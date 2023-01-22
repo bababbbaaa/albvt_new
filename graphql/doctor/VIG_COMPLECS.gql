@@ -1,5 +1,5 @@
 query VIG_COMPLECS {
-  vigComplecs {
+  vigComplecs(pagination: {pageSize: 100}) {
     data {
       id
       attributes {

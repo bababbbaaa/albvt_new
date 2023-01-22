@@ -1,5 +1,5 @@
 query PROMOTIONS {
-  promotions{
+  promotions(pagination: {pageSize: 100}){
     data{
       id
       attributes{

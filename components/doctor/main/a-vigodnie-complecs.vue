@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-2xl  p-4 flex flex-col gap-4 justify-between w-full">
+  <div class="bg-white rounded-2xl  p-4 flex flex-col gap-4 justify-between  mx-2">
     <span class="text-main font-bold text-3xl w-full text-center">+{{ data.attributes.Price.toLocaleString('ru-RU')}} ₽</span>
     <p class="text-sm min-h-[70px]">
       {{data.attributes.analizy.data.attributes.Name}}

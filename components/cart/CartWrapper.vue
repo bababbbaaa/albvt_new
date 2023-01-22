@@ -47,7 +47,7 @@
         >
         <button @click="closeCart()">
           <nuxt-link
-            to="/all-analyzes/gematologicheskie-issledovaniya/2849"
+            to="/all-analyzes"
             class="rounded-[5px] border border-main h-[49px] hover:bg-main  anime text-main hover:text-white w-full flex justify-center items-center py-2 text-[16px]"
             >Анализы</nuxt-link
           >

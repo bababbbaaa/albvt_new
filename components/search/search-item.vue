@@ -1,9 +1,9 @@
 <template>
   <li
-    @click="closeSearch()"
+    
     class="border-b-[0.5px] border-b-[#D9D9D9]/50 px-4 py-3  grid grid-cols-[8fr,4fr] lg:grid-cols-[8fr,3fr] sm:grid-cols-[10fr,4fr] gap-2 items-center hover:bg-[#F5F5F5] anime"
   >
-    <div class="flex flex-col gap-1">
+    <div @click="closeSearch()" class="flex flex-col gap-1">
       <nuxt-link
         v-if="item.attributes.Complecs == true"
         :to="'/all-complecs/category/id/' + item.id"
@@ -89,6 +89,14 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     item: Object
+  },
+  methods: {
+    productInCart (item) {
+      this.$emit('productInCart', item)
+    },
+    closeSearch(){
+      this.$emit('closeSearch')
+    }
   },
   computed: {
     ...mapGetters(['CART', 'CART_IDS']),

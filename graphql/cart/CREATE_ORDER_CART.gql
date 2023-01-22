@@ -1,12 +1,13 @@
-mutation CREATE_ORDER_CART($UID: String, $ANALIZES: [ID], $USER: [ID], $SUMM: Long, $OFFICE: [ID]) {
+mutation CREATE_ORDER_CART($UID: String, $ANALIZES: [ID], $USER: [ID], $SUMM: Long, $OFFICE: [ID], $PROMO: String) {
   createOrder(
     data: { 
       UID: $UID, 
       analizies: $ANALIZES, 
-       users: $USER, 
+      users: $USER, 
       SummOrder: $SUMM, 
       Status: false,
-      ofisies: $OFFICE }
+      ofisies: $OFFICE,
+      PromoVrach: $PROMO }
   ) {
     data {
       id

@@ -64,7 +64,7 @@ export default {
   data () {
     return {
       allInfo: {
-        navButtons: false,
+        navButtons: true,
         dots: true,
         centerMode: true,
         pauseOnHover: true,

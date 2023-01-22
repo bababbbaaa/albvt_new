@@ -44,7 +44,7 @@ export default {
   data () {
     return {
       allComplecs: {
-        navButtons: false,
+        navButtons: true,
         dots: true,
         centerMode: true,
         // swipeDistance: 20,
