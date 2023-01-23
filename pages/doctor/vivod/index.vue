@@ -1,8 +1,8 @@
 <template>
   <div class="container bg-[#F9F9F9] min-h-screen pt-2">
-    <div v-if="usersPermissionsUser">
+    <div v-if="usersPermissionsUser" class="w-full flex justify-center">
       <Transition name="fade">
-        <section v-if="getAllVivod.length" class="flex flex-col gap-6">
+        <section v-if="getAllVivod.length" class="flex flex-col gap-6 w-full">
           <a-vivod-list
             v-for="item in getAllVivod"
             :key="item.id"
@@ -11,11 +11,12 @@
             @openVivod="openVivod(item.id)"
           />
         </section>
-        <span v-else-if="!getAllVivod.length" class="text-center text-sm"
-          >У вас пока что не было выводов</span
-        >
       </Transition>
+      <span v-if="!getAllVivod.length" class="text-center w-full text-sm"
+      >У вас пока что не было выводов</span
+    >
     </div>
+    
   </div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
       this.vivodActive == id
         ? (this.vivodActive = null)
         : (this.vivodActive = id)
-    },
+    }
   },
   computed: {
     getAllUsers () {

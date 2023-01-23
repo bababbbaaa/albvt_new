@@ -28,7 +28,7 @@
         >
         <div class="grid grid-cols-1  sm:gap-10">
           <section v-if="vigComplecs" class="flex flex-col gap-2">
-            <span class="text-sm sm:text-base text-tem/70">Комплексные исследования:</span>
+            <span class="text-sm sm:text-base text-tem/70 px-2">Комплексные исследования:</span>
             <client-only placeholder="Загрузка...">
               <agile
                 :options="slidersDoctor"
@@ -45,7 +45,7 @@
             </client-only>
           </section>
           <section v-if="vigAnalizs" class="flex flex-col gap-2">
-            <span class="text-sm sm:text-base text-tem/70">Анализы:</span>
+            <span class="text-sm sm:text-base text-tem/70 px-2">Анализы:</span>
             <client-only placeholder="Загрузка...">
               <agile
                 :options="slidersDoctor"

@@ -1,6 +1,6 @@
 <template>
   <div class="container bg-[#F9F9F9] min-h-screen pt-2">
-    <div v-if="usersPermissionsUser">
+    <div v-if="usersPermissionsUser" class="flex justify-center w-full">
       <section v-if="getAllUsers.length" class="flex w-full">
         <div class="grid grid-cols-1  gap-6  w-full">
           <div
@@ -29,7 +29,7 @@
           </div>
         </div>
       </section>
-      <span v-else-if="!getAllVivod.length" class="text-center text-sm"
+      <span v-else-if="!getAllUsers.length" class="text-center text-sm"
         >У вас пока что нет активных пациентов</span
       >
     </div>

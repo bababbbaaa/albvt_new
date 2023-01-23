@@ -1,6 +1,13 @@
 <template>
   <div class="bg-[#F9F9F9] min-h-screen">
     <div class="pt-[47px] container grid grid-cols-1 gap-8">
+      <button
+        @click="$router.back()"
+        class=" flex  justify-start items-center gap-1"
+      >
+        <img src="~/assets/icons/arrow-back.svg" alt="" />
+        Назад
+      </button>
       <div class="w-full py-8 text-center  font-medium">
         ЗАПРОС НА ВЫВОД СРЕДСТВ
       </div>
@@ -35,13 +42,7 @@
       <nuxt-link to="/doctor" class="text-center w-full "
         >ВЕРНУТЬСЯ К НАЧАЛЬНОЙ СТРАНИЦЕ</nuxt-link
       >
-      <button
-        @click="$router.back()"
-        class=" flex  justify-start items-center gap-1"
-      >
-        <img src="~/assets/icons/arrow-back.svg" alt="" />
-        Назад
-      </button>
+      
     </div>
   </div>
 </template>
