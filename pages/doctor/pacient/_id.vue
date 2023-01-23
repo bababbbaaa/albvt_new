@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#F9F9F9]">
-    <div class="pt-2 container flex flex-col gap-4" v-if="usersPermissionsUser">
+    <div class="pt-2 container flex flex-col gap-4 pb-6" v-if="usersPermissionsUser">
       <div class="w-full flex items-center justify-between ">
         <button
           @click="$router.back()"
