@@ -20,7 +20,7 @@
         </div>
         <div class="flex flex-col items-end gap-1">
           <span class="text-main font-medium"
-            >{{ order.data.attributes.SummOrder }} ₽</span
+            >{{ order.data.attributes.SummOrder.toLocaleString('ru-RU') }} ₽</span
           >
           <span class="text-xs">{{ $auth.user.Stavka }} %</span>
         </div>
@@ -54,7 +54,7 @@
               <span>{{ item.attributes.Name }}</span>
             </td>
             <td class="px-4 py-2 whitespace-nowrap text-xs text-right text-tem">
-              {{ item.attributes.Price }} ₽
+              {{ item.attributes.Price.toLocaleString('ru-RU') }} ₽
             </td>
           </tr>
           <!-- bio -->
@@ -68,7 +68,7 @@
               <span>{{ bioItem.Name }}</span>
             </td>
             <td class="px-4 py-2 whitespace-nowrap text-xs text-right text-tem">
-              {{ bioItem.Price }} ₽
+              {{ bioItem.Price.toLocaleString('ru-RU') }} ₽
             </td>
           </tr>
           <!-- itogo -->
@@ -79,7 +79,7 @@
             <td
               class="px-4 pt-2 pb-2  whitespace-nowrap text-xs text-right text-tem"
             >
-              {{ price.itogoDiscont }} ₽
+              {{ price.itogoDiscont.toLocaleString('ru-RU') }} ₽
             </td>
           </tr>
           <!-- itogo -->
@@ -88,7 +88,7 @@
               <span>Итого с учетом скидки 10%:</span>
             </td>
             <td class="px-4 py-2 whitespace-nowrap text-xs text-right text-tem">
-              {{ order.data.attributes.SummOrder }} ₽
+              {{ order.data.attributes.SummOrder.toLocaleString('ru-RU') }} ₽
             </td>
           </tr>
           <!-- itogo -->
@@ -97,7 +97,7 @@
               <span>Вознаграждение:</span>
             </td>
             <td class="px-4 py-2 whitespace-nowrap text-xs text-right text-tem">
-              {{ price.pros }} ₽
+              {{ price.pros.toLocaleString('ru-RU') }} ₽
             </td>
           </tr>
         </tbody>
@@ -111,6 +111,7 @@
 import DOCTOR_ID_ORDER from '~/graphql/doctor/DOCTOR_ID_ORDER.gql'
 export default {
   layout: 'Doctor',
+    middleware: ['isAuth'],
   apollo: {
     order: {
       query: DOCTOR_ID_ORDER,

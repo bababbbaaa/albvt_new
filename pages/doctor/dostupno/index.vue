@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-[#F9F9F9] min-h-screen pt-2">
+  <div class="container bg-[#F9F9F9] min-h-screen pt-2 pb-10">
       <div v-if="usersPermissionsUser " class="flex flex-col gap-6">
        <section v-if="getAllDostupno.length" class="flex flex-col gap-4">
       <div class="grid grid-cols-1  gap-2 sm:gap-4">
@@ -64,6 +64,7 @@ import AVivodList from '~/components/doctor/a-vivod-list.vue'
 export default {
   components: { aUserView, ADostupnoView, AVivodList },
   layout: 'Doctor',
+    middleware: ['isAuth'],
   apollo: {
     usersPermissionsUser: {
       query: DOCTOR_PACIENTS,

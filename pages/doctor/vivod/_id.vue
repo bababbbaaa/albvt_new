@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-2 flex flex-col justify-between">
+  <div class="container py-2 flex flex-col justify-between pb-10">
     <div>tut</div>
     <div>
       <button

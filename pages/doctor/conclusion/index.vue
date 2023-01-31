@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9] min-h-screen">
+  <div class="bg-[#F9F9F9] min-h-screen pb-10">
     <div class="pt-[47px] container grid grid-cols-1 gap-8">
       <button
         @click="$router.back()"
@@ -53,6 +53,7 @@ import UPDATE_ZAPROS_ID from '~/graphql/doctor/UPDATE_ZAPROS_ID.gql'
 
 export default {
   layout: 'Doctor',
+    middleware: ['isAuth'],
   data () {
     return {
       data: '',

@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-[#fcfcfc]">
+  <div class=" bg-[#fcfcfc] pb-10">
     <div
       v-if="speczialnosts && gorodaInvitros"
       class="container pt-[47px] mt-[47px] sm:mt-0 w-full max-w-[620px] h-full  flex flex-col justify-center items-center"
@@ -265,9 +265,11 @@
                   @click="speczialnostsSelectHandler(item)"
                   class="bg-white text-sm cursor-pointer text-[#343434]"
                 >
-                 <div class="bg-white  p-2 text-xs cursor-pointer text-[#343434] hover:bg-[#343434]/10">
-                   {{ item.attributes.Name }}
-                 </div> 
+                  <div
+                    class="bg-white  p-2 text-xs cursor-pointer text-[#343434] hover:bg-[#343434]/10"
+                  >
+                    {{ item.attributes.Name }}
+                  </div>
                 </div>
               </div>
               <svg
@@ -342,15 +344,26 @@
                   class="bg-white  p-3 text-xs cursor-pointer text-[#343434] hover:bg-[#343434]/10"
                 >
                   <span
-                    class="font-semibold"
-                    v-if="item.attributes.area_invitro.data !== null"
-                    >{{
-                      item.attributes.area_invitro.data.attributes
-                        .sityes_invitros.data[0].attributes.Name
-                    }}</span
+                    class=""
+                    v-if="
+                      item.attributes.area_invitro.data !== null &&
+                        item.attributes.area_invitro.data.attributes.sityes_invitros.data[0].attributes.Name !== 'Не нашел'
+                        
+                    "
+                    ><b>{{
+                      item.attributes.area_invitro.data.attributes.sityes_invitros.data[0].attributes.Name
+                    }}</b> - {{item.attributes.Name}}</span
                   >
-                  <span class="font-semibold" v-else>Ростов-Н/д</span>
-                  - {{ item.attributes.Name }}
+                  <span
+                    v-else-if="
+                    item.attributes.area_invitro.data == null && item.attributes.Name == 'Не нашел'
+                    "
+                    class="font-semibold"
+                    >Не нашел </span
+                  >
+                  <span v-else><b> Ростов н/Д </b>- {{item.attributes.Name}}</span>
+                  
+                  
                 </div>
               </div>
             </div>
@@ -462,7 +475,7 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 gap-4">
             <div class="flex flex-col gap-1">
               <div
                 class="relative border-[1px] border-[#E5E4E8]  rounded-md px-4 py-3 shadow-sm anime"
@@ -486,7 +499,7 @@
               </div>
             </div>
 
-            <div class="flex items-center flex-wrap sm:flex-nowrap">
+            <!-- <div  class=" flex items-center flex-wrap sm:flex-nowrap">
               <span
                 @click="dataDoctor.gender = true"
                 for="gender1"
@@ -510,7 +523,7 @@
                 ]"
                 >Ж</span
               >
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="flex justify-center">
@@ -641,7 +654,7 @@ export default {
     handleLoginSubmit () {
       var promo = ''
       var possible =
-        'ABCDEFGHJKMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789'
+        'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz123456789'
 
       for (var i = 0; i < 6; i++)
         promo += possible.charAt(Math.floor(Math.random() * possible.length))

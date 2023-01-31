@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-[#F9F9F9] min-h-screen pt-2">
+  <div class="container bg-[#F9F9F9] min-h-screen pt-2 pb-10">
     <div v-if="usersPermissionsUser" class="flex justify-center w-full">
       <section v-if="getAllUsers.length" class="flex w-full">
         <div class="grid grid-cols-1  gap-6  w-full">
@@ -43,6 +43,7 @@ import ALL_PICIENTIS from '~/graphql/doctor/ALL_PICIENTIS.gql'
 export default {
   components: { aUserView },
   layout: 'Doctor',
+    middleware: ['isAuth'],
   apollo: {
     usersPermissionsUser: {
       query: ALL_PICIENTIS,

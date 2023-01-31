@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9] flex flex-col justify-center">
+  <div class="bg-[#F9F9F9] flex flex-col pb-10 justify-center">
     <span class="pt-6 text-xl text-center w-full px-4">Личные данные</span>
     <div
       class="py-8 mt-2 container flex flex-col gap-4"
@@ -104,15 +104,16 @@
             <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
           </div>
           <div class="flex flex-col gap-1">
-            <span class="text-tem/50 text-xs">Email</span>
-            <span>{{ usersPermissionsUser.data.attributes.email }}</span>
-            <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
-          </div>
-          <div class="flex flex-col gap-1">
             <span class="text-tem/50 text-xs">Дата рождения</span>
             <span>{{ this.$auth.user.DataRozgdeniya }}</span>
             <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
           </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-tem/50 text-xs">Email</span>
+            <span>{{ usersPermissionsUser.data.attributes.email }}</span>
+            <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -126,6 +127,7 @@ import RESET_PHONE_USER from '~/graphql/RESET_PHONE_USER.gql'
 
 export default {
   layout: 'Doctor',
+    middleware: ['isAuth'],
   data () {
     return {
       me: {

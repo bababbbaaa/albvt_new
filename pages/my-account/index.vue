@@ -56,7 +56,6 @@
         <tab-vk title="Аккаунт">
           <div class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]">
             <lk-user-info
-              @handleReload="handleReload"
               @handleLogout="handleLogout"
             />
             <div
@@ -110,13 +109,13 @@
                   <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <span class="text-tem/50 text-xs">Email</span>
-                  <span>{{ this.$auth.user.email }}</span>
+                  <span class="text-tem/50 text-xs">Дата рождения</span>
+                  <span>{{ this.$auth.user.DataRozgdeniya }}</span>
                   <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <span class="text-tem/50 text-xs">Дата рождения</span>
-                  <span>{{ this.$auth.user.DataRozgdeniya }}</span>
+                  <span class="text-tem/50 text-xs">Email</span>
+                  <span>{{ this.$auth.user.email }}</span>
                   <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
                 </div>
               </div>
@@ -181,7 +180,8 @@ export default {
         return {
           ID: this.$auth.user.id
         }
-      }
+      },
+      pollInterval: 1000
     },
     sliders: {
       query: SLIDER_ALL

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9]">
+  <div class="bg-[#F9F9F9] ">
     <div class="pt-2 container flex flex-col gap-4 pb-6" v-if="usersPermissionsUser">
       <div class="w-full flex items-center justify-between ">
         <button
@@ -25,15 +25,16 @@
           <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
         </div>
         <div class="flex flex-col gap-1">
-          <span class="text-tem/50 text-xs">Email</span>
-          <span>{{ usersPermissionsUser.data.attributes.email }}</span>
-          <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
-        </div>
-        <div class="flex flex-col gap-1">
           <span class="text-tem/50 text-xs">Дата рождения</span>
           <span>{{ usersPermissionsUser.data.attributes.DataRozgdeniya }}</span>
           <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
         </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-tem/50 text-xs">Email</span>
+          <span>{{ usersPermissionsUser.data.attributes.email }}</span>
+          <span class="w-full h-[1px] bg-[#E5E4E8] my-1"></span>
+        </div>
+        
       </div>
 
       <!-- -------- -->
@@ -44,7 +45,7 @@
             <div class="">
             <b>Заказы:</b>
             {{ usersPermissionsUser.data.attributes.zakazies.data.length }}
-            шт
+            
           </div>
           <span class=""><b>Сумма:</b> {{ totalPagePrice.toLocaleString('ru-RU') }} ₽</span>
           </div>
@@ -70,6 +71,7 @@ import aUserListOrders from '~/components/doctor/user/a-user-list-orders.vue'
 export default {
   components: { aUserListOrders },
   layout: 'Doctor',
+    middleware: ['isAuth'],
   data () {
     return {}
   },

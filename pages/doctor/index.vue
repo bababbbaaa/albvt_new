@@ -90,6 +90,7 @@ export default {
     AVigodnieAnaliz
   },
   layout: 'Doctor',
+    middleware: ['isAuth'],
   apollo: {
     notifications: {
       query: NOTIFICATIONS

@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-[#F9F9F9] min-h-screen pt-2">
+  <div class="container bg-[#F9F9F9] min-h-screen pt-2 pb-10">
     <div v-if="usersPermissionsUser" class="w-full flex justify-center">
       <Transition name="fade">
         <section v-if="getAllVivod.length" class="flex flex-col gap-6 w-full">

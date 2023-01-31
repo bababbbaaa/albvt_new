@@ -200,11 +200,11 @@ export default {
         this.$route.fullPath == '/all-complecs'
       ) {
         this.$router
-          .replace(this.$route.fullPath + '/populate/id/' + item.id)
+          .push(this.$route.fullPath + '/populate/id/' + item.id)
           .catch(() => {})
       } else {
         this.$router
-          .replace(this.$route.fullPath + '/' + item.id)
+          .push(this.$route.fullPath + '/' + item.id)
           .catch(() => {})
       }
     }
