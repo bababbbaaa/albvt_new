@@ -28,7 +28,7 @@
             </svg>
             <span class="hidden sm:block">+7 (863) 241-85-55</span>
           </a>
-          <div @click="show = !show">
+          <div @click="show = !show" class="cursor-pointer">
             <Transition name="fade">
               <svg
                 v-if="show == false"

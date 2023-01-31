@@ -220,7 +220,7 @@
         </div>
 
         <span
-          class="mt-4 text-sm"
+          class="mt-4 text-sm text-[#A75F4F]"
           v-if="errorsValidate == 'Введите корректный Email'"
           >Введите корректные данные</span
         >
@@ -309,6 +309,7 @@
               </svg>
             </div>
           </div>
+
           <div
             v-click-outside="externalClickgorodaInvitros"
             class="relative rounded-md shadow-sm anime w-full cursor-pointer"
@@ -337,6 +338,19 @@
                 class=" bg-white flex flex-col  absolute  w-[300px] h-[300px] overflow-y-auto top-2 left-0 z-[10] rounded-md drop-shadow-xl"
                 v-if="gorodaInvitrosSelectView"
               >
+                <!-- <div>
+                  <div>Выберите город</div>
+                  <div>
+                    <div
+                      v-for="item in gorodaInvitros.data"
+                      :key="item.id"
+                      @click="gorodaInvitrosHandler(item)"
+                      class="bg-white  p-3 text-xs cursor-pointer text-[#343434] hover:bg-[#343434]/10"
+                    >
+                      qq
+                    </div>
+                  </div>
+                </div> -->
                 <div
                   v-for="item in gorodaInvitros.data"
                   :key="item.id"
@@ -347,23 +361,27 @@
                     class=""
                     v-if="
                       item.attributes.area_invitro.data !== null &&
-                        item.attributes.area_invitro.data.attributes.sityes_invitros.data[0].attributes.Name !== 'Не нашел'
-                        
+                        item.attributes.area_invitro.data.attributes
+                          .sityes_invitros.data[0].attributes.Name !==
+                          'Не нашел'
                     "
                     ><b>{{
-                      item.attributes.area_invitro.data.attributes.sityes_invitros.data[0].attributes.Name
-                    }}</b> - {{item.attributes.Name}}</span
+                      item.attributes.area_invitro.data.attributes
+                        .sityes_invitros.data[0].attributes.Name
+                    }}</b>
+                    - {{ item.attributes.Name }}</span
                   >
                   <span
                     v-else-if="
-                    item.attributes.area_invitro.data == null && item.attributes.Name == 'Не нашел'
+                      item.attributes.area_invitro.data == null &&
+                        item.attributes.Name == 'Не нашел'
                     "
                     class="font-semibold"
-                    >Не нашел </span
+                    >Не нашел
+                  </span>
+                  <span v-else
+                    ><b> Ростов н/Д </b>- {{ item.attributes.Name }}</span
                   >
-                  <span v-else><b> Ростов н/Д </b>- {{item.attributes.Name}}</span>
-                  
-                  
                 </div>
               </div>
             </div>
@@ -653,8 +671,7 @@ export default {
     },
     handleLoginSubmit () {
       var promo = ''
-      var possible =
-        'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz123456789'
+      var possible = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz123456789'
 
       for (var i = 0; i < 6; i++)
         promo += possible.charAt(Math.floor(Math.random() * possible.length))

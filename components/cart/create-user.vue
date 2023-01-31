@@ -335,8 +335,8 @@
     <span class="text-[#A75F4F]" v-else-if="succesRegister == false"
       >Попробуйте еще раз!</span
     >
-    <span class="mt-4 text-sm" v-else-if="errors == 'Введите корректный Email'"
-      >Введите корректный Email</span
+    <span class="mt-4 text-sm text-[#A75F4F]" v-else-if="errors == 'Введите корректный Email'"
+      >Введите корректные данные</span
     >
   </div>
 </template>

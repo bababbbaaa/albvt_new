@@ -2,7 +2,7 @@
   <div class="bg-[#F9F9F9] min-h-screen pb-10">
     <div class="pt-2">
       <div class="container flex flex-col h-full justify-between gap-6 mt-6">
-        <section v-if="notifications">
+        <section v-if="notifications" class="flex flex-col gap-4">
           <a-notific
             v-for="item in notifications.data"
             :key="item.id"

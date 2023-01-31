@@ -43,8 +43,12 @@ export default {
     '@plugins/vue-input-facade.js',
     { src: '~/plugins/vue-datepicker', mode: 'client' },
     { src: '~/plugins/vue-agile.js', mode: 'client' },
-    { src: "~/plugins/vClickOutside", mode: 'client' },
-    { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
+    { src: '~/plugins/vClickOutside', mode: 'client' },
+    { src: '~/plugins/ymapPlugin.js', mode: 'client' },
+    {
+      src: '~/plugins/vue-js-modal.js',
+      mode: 'client'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -85,12 +89,13 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
     '@nuxtjs/auth-next',
-    ['nuxt-validate', {
-      lang: 'ru' 
-    }]
+    [
+      'nuxt-validate',
+      {
+        lang: 'ru'
+      }
+    ]
   ],
-
-
 
   build: {
     postcss: {

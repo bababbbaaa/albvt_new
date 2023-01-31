@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-[47px] sm:mt-0">
-    <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4" id="start-lk">
+    <div v-if="usersPermissionsUser && sliders" class="flex flex-col gap-4">
       <!-- <span class="w-full text-center text-2xl pt-6">Акции</span> -->
       <client-only placeholder="Загрузка...">
         <agile :options="allLK" class="mt-6" id="lkClient">
@@ -21,6 +21,7 @@
           </div>
         </agile>
       </client-only>
+      <div id="start-lk"></div>
       <tabs-vk>
         <tab-vk title="Мои заказы">
           <div class="grid grid-cols-1  sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]">
@@ -55,9 +56,7 @@
 
         <tab-vk title="Аккаунт">
           <div class="grid grid-cols-1 sm:grid-cols-[3fr,9fr] mt-4 gap-[20px]">
-            <lk-user-info
-              @handleLogout="handleLogout"
-            />
+            <lk-user-info @handleLogout="handleLogout" />
             <div
               class="bg-white rounded-[5px] shadow-md p-4 flex justify-between gap-4 flex-col-reverse sm:flex-row"
             >
@@ -222,14 +221,12 @@ export default {
       }
     }
   },
-  mounted() {
-
-      setTimeout(() => {
-        let scrollDiv =
-          document.getElementById('start-lk').offsetTop - 110
-        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-        console.log('scrollToAnaliz +')
-      }, 500)
+  mounted () {
+    setTimeout(() => {
+      let scrollDiv = document.getElementById('start-lk').offsetTop - 90
+      window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+  
+    }, 500)
   },
   methods: {
     async updateUserMe () {
@@ -250,7 +247,7 @@ export default {
         if (res) {
           const results = res.data
           this.succesUpdate = true
-          console.log(results)
+         
           this.handleLogout()
         }
       } catch (err) {
@@ -262,7 +259,7 @@ export default {
 
     // guxNAyiYhi4WpjQ2m660
     oplata (total, id) {
-      console.log(total)
+
       const sum = total.attributes.SummOrder.toString()
       const invIDValue = id
       // const test = 'MerchantLogin:OutSum:InvId:Пароль#1'
@@ -287,14 +284,14 @@ export default {
       })
     },
     DownloadResult (id) {
-      console.log()
+
     },
     async handleLogout () {
       this.$nuxt.$loading.start()
       await this.$auth.logout()
     },
     openItemInfo (id) {
-      console.log(id)
+
       if (this.itemID == id) {
         this.itemID = 0
       } else if (this.itemID != id || this.itemID == 0) {

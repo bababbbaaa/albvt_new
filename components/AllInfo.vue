@@ -137,6 +137,6 @@ export default {
   width: 10px;
 }
 .agile__dot--current button, .agile__dot:hover button {
-  background-color: #54ACD2;
+  background-color: rgb(110 154 239 / var(--tw-bg-opacity));
 }
 </style>
